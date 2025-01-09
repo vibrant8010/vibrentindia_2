@@ -18,10 +18,25 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        return view('auth.register');
+        return view('Auth.register');
     }
     public function registerSave(Request $request)
     {
+         $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'mobileno' => 'required|regex:/^[6-9][0-9]{9}$/',
+            'name' => 'required|string|max:255',
+            'password' => 'required|min:6',
+        ], [
+            'email.unique' => 'The email ID already exists.',
+            'email.required' => 'The email field is required.',
+            'mobileno.regex' => 'The mobile number must start with 6, 7, 8, or 9 and contain 10 digits.',
+            'name.required' => 'The name field is required.',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 6 characters.',
+        ]);
+
+
         $otp =rand(1000000,9999999);
         $expiry=time()+10*60;
            $user = new User();
@@ -33,7 +48,7 @@ class AuthController extends Controller
           $user->password=bcrypt($request->password);
            $user->save();
          Session::put('user_id',$user->id);
-          Mail::to($request->email)->send(new OtpEmail($otp));  
+          Mail::to($request->email)->send(new OtpEmail($otp));
           return redirect()->route('user.email.validate')->with('success','Otp Has be sent on email');
     }
     public function otpValidate()
@@ -60,7 +75,7 @@ class AuthController extends Controller
             {
                 return redirect()->back()->with('error','Invalid otp');
             }
-    }        
+    }
     public function showLoginForm()
     {
         return view('Auth.login');
@@ -71,38 +86,39 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
-    
+
         // Get credentials from the request
         $credentials = $request->only('email', 'password');
-    
+
         // Check if the user exists and is verified
         $user = User::where('email', $request->email)->first();
-        
+
         if ($user && $user->is_otp_verified != 1) {
             // OTP not verified, prevent login
             return back()->with('error', 'Your OTP is not verified. Please verify your account to log in.');
         }
-    
+
         // Attempt to log in
         if (Auth::attempt($credentials)) {
             // Authentication successful
             return redirect()->route('user.home')->with('success', 'Login successful!');
         }
-    
+
         // Authentication failed
-        return back()->with('error', 'Invalid email or password');
+        return back()->with('error', 'Invalid  password');
     }
     public function home()
     {
         return view('home'); // Home view file
     }
-    
+
     public function logout()
     {
         Auth::logout();
+        Session::flush(); // Clears all session data
         return redirect()->route('login')->with('success', 'Logged out successfully');
     }
-    public function otpblade()
+        public function otpblade()
     {
         return view('otp');
     }
@@ -136,7 +152,7 @@ class AuthController extends Controller
 
    public function showForgotPasswordForm()
 {
-    return view('auth.forgot-password');
+    return view('Auth.forgot-password');
 }
 
 
@@ -157,7 +173,7 @@ public function sendResetLink(Request $request)
         $user->password_reset_token = $token;
         $user->password_reset_expiry = time() + 60 * 30; // Store Unix timestamp (expires in 30 minutes)
         $user->save();
-        
+
         // Send the reset link
         $resetLink = route('password.reset', ['token' => $token]);
 
@@ -175,7 +191,7 @@ public function sendResetLink(Request $request)
 
 public function showResetForm(Request $request, $token = null)
 {
-    return view('auth.reset-password')->with(
+    return view('Auth.reset-password')->with(
         ['token' => $token, 'email' => $request->email]
     );
 }

@@ -37,13 +37,4 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
-    // In app/Providers/RouteServiceProvider.php
-
-protected function map()
-{
-    return Route::get('/email/verify', function () {
-        return redirect('/home');
-    });
-}
-
 }

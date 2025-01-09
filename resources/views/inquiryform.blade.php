@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <section class="admin-login">
+    <section class="admin-login inqury-form-view">
         <div class="login-container">
             @if(session('success'))
             <div class="alert alert-success">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="input-icon">
                     <span class="form-icon-container"><i class="fas fa-company"></i></span>
-                    <input type="text" name="companyname" placeholder="Company Name" >
+                    <input type="text" name="companyname" placeholder="Your Company Name" >
                 </div>
                 <div class="input-icon">
                     <span class="form-icon-container"><i class="fas fa-user"></i></span>

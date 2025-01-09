@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Inquiry;
 use Illuminate\Http\Request;
-
+use App\Mail\InquiryMail;
+use Illuminate\Support\Facades\Mail;
 class InquiryController extends Controller
 {
     // Method to handle the inquiry form submission
@@ -35,6 +36,7 @@ class InquiryController extends Controller
 
         // Save the inquiry to the database
         $inquiry->save();
+         Mail::to('info@vibrantindiatrade.in')->send(new InquiryMail($validated));
 
         // Redirect back with a success message
         return redirect()->route('user.home')->with('success', 'INQUIRY SUBMIT  successful!');

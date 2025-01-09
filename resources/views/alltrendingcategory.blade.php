@@ -4,7 +4,7 @@
     <x-head/>
 </head>
 <body>
-    <x-innerheader  />
+    <x-header  />
     <section class="top-category section-margin" id="TopCategory">
         <div class="container">
             <div class="heading-section">
@@ -23,13 +23,26 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="logo-container" >
+                                @if ($product->company && $product->company->logo_url)
+                                <img src="{{ asset($product->company->logo_url) }}"  class="logo-image" alt="{{ $product->company->name }}">
+                            @else
+                                <span>No Logo</span>
+                            @endif
+                            </div>
     
                             <div class="text-wrapper">
-                                <p class="tranding-card-description content-txt">
-                                    {{ $product->description }}
-                                </p>
+                                 <h6 class="tranding-product-name">
+                                    <span class="title">Product:</span>
+                                    <span class="trnding-pro-name">{{ $product->name }}</span>
+                                </h6>
+                               
                             </div>
                             <div class="card-bottom">
+                                <h6 class="tranding-product-name">
+                                    <span class="title">Company Name:</span>
+                                    <span class="tranding-pro-name">{{ $product->company->name }}</span>
+                                </h6>
                                 <h6 class="tranding-product-name">
                                     <span class="title">Category:</span>
                                     <span class="tranding-pro-name">{{ $product->category->name }}</span>
@@ -46,6 +59,13 @@
                                     <span class="tranding-size-title">Size:</span>
                                     <span class="tranding-sz-name">{{ $product->size }}</span>
                                 </h6>
+                                 <p class="card-description content-txt" id="description-{{ $product->id }}">
+                                        
+                                        <span class="visible-text">
+                                            {{ Str::limit($product->description, 20) }}
+                                        </span>
+                                     
+                                    </p>
                                 <div class="d-flex justify-content-start mx-2 bottom-btn">
                                     @auth
                                         <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}" class="cta">

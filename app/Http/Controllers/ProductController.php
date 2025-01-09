@@ -7,12 +7,15 @@ use App\Models\CompanyDetail;
 use App\Models\Subcategory;
 use App\Models\Blog;
 use Illuminate\Http\Request;
-
+use App\Events\ProductClicked;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 class ProductController extends Controller
 {
 
-   public function create(Request $request)
-    {
+
+  public function create(Request $request)
+            {
         $companies = CompanyDetail::select('id', 'name')->get(); // Only fetch id and name
     $subcategories = Subcategory::select('id', 'name')->get(); // Only fetch id and name
     $categories = Category::select('id', 'name')->get(); // Only fetch id and name
@@ -20,8 +23,9 @@ class ProductController extends Controller
     // Pass the data to the view
     return view('adminpanel.products.create', compact('subcategories', 'categories', 'companies'));
     }
+
     public function store(Request $request)
-    {
+            {
         $request->validate([
             'name' => 'required|string|max:255',
             'company_id' => 'required|exists:company_details,id', // Validate company_id exists in company_details table
@@ -32,9 +36,9 @@ class ProductController extends Controller
             'material' => 'nullable|string',
             'size' => 'nullable|string',
         ]);
-    
+
         $imagePath = null;
-    
+
         // Handle `image_url` upload
         if ($request->hasFile('image_url')) {
             $image = $request->file('image_url');
@@ -42,7 +46,7 @@ class ProductController extends Controller
             $imagePath = $image->move(public_path('images'), $imageName); // Store in public/images
             $imagePath = 'images/' . $imageName; // Save the relative path in the database
         }
-    
+
         // Create the product with the company_id
         Product::create(array_merge($request->only([
             'name',
@@ -55,17 +59,19 @@ class ProductController extends Controller
         ]), [
             'image_url' => $imagePath,
         ]));
-    
+
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully');
     }
-   public function index()
-    {
+
+    public function index()
+            {
         $products = Product::all();
-    
+
         return view('adminpanel.products.index', compact('products'));
     }
+
     public function edit($id)
-    {
+            {
         $subcategories = Subcategory::all();
         $product = Product::findOrFail($id);
     $categories = Category::all(); // Retrieve all categories
@@ -73,9 +79,9 @@ class ProductController extends Controller
     return view('adminpanel.products.edit', compact('product', 'categories', 'subcategories'));
     }
     public function update(Request $request, $id)
-    {
+            {
         $product = Product::findOrFail($id);
-    
+
         // Validate incoming request data
         $request->validate([
             'name' => 'required|string|max:255',
@@ -88,119 +94,174 @@ class ProductController extends Controller
             'logo_url' => 'nullable|file|image|max:10240', // Add validation for logo
             'image_url' => 'nullable|file|image|max:10240', // Image is optional during update
         ]);
-    
+
         $updateData = $request->except(['image_url', 'logo_url']); // Exclude file fields from the data array
-    
+
         // Handle image_url update
         if ($request->hasFile('image_url')) {
             // Delete old image if it exists
             if ($product->image_url && file_exists(public_path($product->image_url))) {
                 unlink(public_path($product->image_url));
             }
-    
+
             // Store new image
             $image = $request->file('image_url');
             $imageName = time() . '_' . $image->getClientOriginalName(); // Unique filename
             $image->move(public_path('images'), $imageName); // Save to public/images
             $updateData['image_url'] = 'images/' . $imageName; // Save relative path in the database
         }
-    
+
         // Handle logo_url update
         if ($request->hasFile('logo_url')) {
             // Delete old logo if it exists
             if ($product->logo_url && file_exists(public_path($product->logo_url))) {
                 unlink(public_path($product->logo_url));
             }
-    
+
             // Store new logo
             $logo = $request->file('logo_url');
             $logoName = time() . '_' . $logo->getClientOriginalName(); // Unique filename for logo
             $logo->move(public_path('logos'), $logoName); // Save to public/logos
             $updateData['logo_url'] = 'logos/' . $logoName; // Save relative path in the database
         }
-    
+
         // Update the product with the new data
         $product->update($updateData);
-    
+
         return redirect()->route('admin.products.index')->with('success', 'Product updated successfully');
-       }
+    }
+
+
+    // Delete a product
      public function destroy($id)
-       {
+            {
          $product = Product::findOrFail($id);
           $product->delete();
 
            return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully');
              }
-     public function userHomePage()
-             {
-                 $topCategoryProducts = Product::where('category_type', 'Top')->get();
+
+    public function userHomePage()
+            {
+                 $topCategoryProducts = Product::where('category_type', 'Top')->take(4)->get();
                  $trendingCategoryProducts = Product::where('category_type', 'Trending')->take(4)->get();
-                 $newArrivalCategoryProducts = Product::where('category_type', 'New Arrival')->take(8)->get();
+                 $newArrivalCategoryProducts = Product::where('category_type', 'New Arrival')
+                 ->orderBy('id', 'desc')
+                 ->take(8)->get();
                  $blogs = Blog::all();
                 return view('layouts.welcome', compact('topCategoryProducts', 'trendingCategoryProducts', 'newArrivalCategoryProducts','blogs'));
              }
     public function topCategoryPage()
-             {
+            {
                  $topCategoryProducts = Product::where('category_type', 'Top')->get();
-               
+
                 return view('innertopcategory', compact('topCategoryProducts'));
              }
-   public function trendingCategoryPage()
-             {
+
+    public function trendingCategoryPage()
+            {
                 $trendingCategoryProducts = Product::where('category_type', 'Trending')->get();
-               
+
                 return view('alltrendingcategory', compact('trendingCategoryProducts'));
              }
-   public function newArrivalCategoryPage()
-             {
+
+    public function newArrivalCategoryPage()
+            {
              $newArrivalCategoryProducts = Product::where('category_type', 'New Arrival')->get();
-               
+
                 return view('allnewarrival', compact('newArrivalCategoryProducts'));
              }
+
     public function show($id)
-             {
+            {
                  // Retrieve the product by its ID
                  $product = Product::with(['company', 'category', 'subcategory'])->findOrFail($id);
-             
-                 // Pass the product details to the view
-                 return view('productdetails', compact('product'));
-             }
-    public function getSuggestions(Request $request)
-             {
-                 $query = $request->input('query');
-                 $category = $request->input('category');
-         
-                 $suggestions = [];
-         
-                 if ($category === 'Products') {
-                     // Fetch product suggestions
-                     $suggestions = Product::where('name', 'LIKE', "%{$query}%")
-                         ->limit(10)
-                         ->get(['id', 'name']);
-                 } elseif ($category === 'Companies') {
-                     // Fetch company suggestions
-                     $suggestions = CompanyDetail::where('name', 'LIKE', "%{$query}%")
-                         ->limit(10)
-                         ->get(['id', 'name']);
+                 $user = auth()->user();
+                 if (Auth::check()) {
+                    $clickedProducts = session()->get('clicked_products', []);
+                    $clickedCompany = session()->get('clicked_company', []);
+
+                    $productCompanyid = $product->company->id;
+                    if (!in_array($id, $clickedProducts)) {
+                       if (!in_array($productCompanyid, $clickedCompany)) {
+                         $clickedProducts[] = $id;
+                         $clickedCompany[] = $productCompanyid;
+                         session()->put('clicked_products', $clickedProducts);
+                         session()->put('clicked_company', $clickedCompany);
+                         event(new ProductClicked($product, $user));
+                       }
+                    }
                  }
-         
-                 return response()->json(['suggestions' => $suggestions]);
-             }
-    public function companyProducts($id)
-             {
-                 $company = CompanyDetail::findOrFail($id);
-                 $products = $company->products; // Assuming a relationship exists: Company hasMany Products
-         
-                 return view('company.products', compact('company', 'products'));
-             }
-         
-    public function productDetails($id)
-             {
-                 $product = Product::findOrFail($id);
-         
+
                  return view('productdetails', compact('product'));
-             }
- 
+                }
+                // Pass the product details to the view
+                //  return redirect()->route('user.home')->with('alert', 'Please log in to view product details.');
+            //  }
+
+     public function productDetail($id)
+           {
+
+           $product = Product::with('company')->findOrFail($id);
+          return view('product.detail', ['product' => $product]);
+          }
+ public function companyProducts(Request $request, $id)
+{
+    // Fetch the company using the provided id
+    $company = CompanyDetail::findOrFail($id);
+
+    // Fetch all companies for the filter
+    $companies = CompanyDetail::select('id', 'name')->get();
+
+    // Get selected company IDs from checkbox filters (if any)
+    $selectedCompanyIds = $request->has('company_ids') ? $request->company_ids : [$id]; // Default to the current company if no filter is selected
+
+    // Fetch products for the selected companies
+    $products = Product::whereIn('company_id', $selectedCompanyIds)->get();
+
+    // Pass the company, selected company IDs, companies, and products to the view
+    return view('company.products', compact('company', 'companies', 'products', 'selectedCompanyIds'));
+}
+
+
+public function getSuggestions(Request $request)
+{
+    $query = $request->input('query');
+    $category = $request->input('category');
+
+    $productSuggestions = [];
+    $companySuggestions = [];
+
+    if ($category === 'All' || $category === 'Companies') {
+        // Fetch company suggestions if category is "All" or "Companies"
+        $companySuggestions = CompanyDetail::where('name', 'LIKE', "%{$query}%")
+             ->orWhereRaw("FIND_IN_SET(?, alternate_names)", [$query])
+            ->limit(10)
+            ->get(['id', 'name']);
+    }
+    if ($category === 'All' || $category === 'Products') {
+        // Fetch product suggestions if category is "All" or "Products"
+        $productSuggestions = Product::where('name', 'LIKE', "%{$query}%")
+            ->limit(10)
+            ->get(['id', 'name']);
+    }
+
+
+
+    // Response handling for each category
+    if ($category === 'Products') {
+        return response()->json(['suggestions' => $productSuggestions]);
+    } elseif ($category === 'Companies') {
+        return response()->json(['suggestions' => $companySuggestions]);
+    }
+
+    // If "All" is selected, return both products and companies
+    return response()->json([
+        'products' => $productSuggestions,
+        'companies' => $companySuggestions,
+    ]);
+}
+
 
 
 

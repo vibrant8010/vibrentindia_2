@@ -64,7 +64,7 @@
                             <td>{{ $blog->created_at }}</td>
                             <td>
                                 @if($blog->image_url)
-                                    <img src="{{ asset('storage/' .$blog->image_url) }}" alt="{{ $blog->heading }}" style="width: 150px; height: auto;">
+                                    <img src="{{ asset($blog->image_url) }}" alt="{{ $blog->heading }}" style="width: 150px; height: auto;">
                                 @else
                                     <span>No Image</span>
                                 @endif

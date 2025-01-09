@@ -1,7 +1,9 @@
     <header>
+
+
     <section class="header-top">
         <div class="left-part">
-            <div class="logo-container">
+            <div class="header-logo-container">
                 <a href="/">
                     <img src="{{ asset('images/company-logo.png') }}" alt="company logo">
                 </a>
@@ -40,9 +42,9 @@
                 <li class="nav-item">
                     <a href="{{ route('alltrendingcategory') }}" class="nav-link">Trending Products</a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('innertopcategory') }}" class="nav-link">Blogs</a>
-                </li>
+                <!--<li class="nav-item">-->
+                <!--    <a href="{{ route('innertopcategory') }}" class="nav-link">Blogs</a>-->
+                <!--</li>-->
                 <li class="s-box d-none d-lg-block d-md-block">
                         <form action="" class="search-box">
                             <input type="text" id="search-bar" placeholder="Search here ...">

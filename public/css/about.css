@@ -1,0 +1,174 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "poppins", sans-serif;
+}
+.company-title{
+    color: #005353;
+    font-weight: 600;
+}
+/* ********** Left Part ********** */
+.left-sidebar-main-box{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.sidebar-all-pages{
+    padding: 35px;
+    border-top: 7px solid #DEE2E6;
+    border-right: 4px solid #DEE2E6;
+    position: sticky;
+    top: 0px;
+}
+.sidebar-page-link{
+    text-decoration: none !important;
+    color: #005353;
+    padding: 0;
+    margin: 0;
+}
+.sidebar-page-link:hover{
+    text-decoration:none !important;
+    color:#038282;
+}
+/* ********** End Left Part ********* */
+.right-side-details-main-box{
+    padding: 30px;
+}
+.outer-about-title{
+    width: 100%;
+    text-align: center;
+}
+.about-details-main-heading{
+    font-size: 43px;
+    line-height: 60px;
+    font-weight: 700;
+    color: #005353;
+    position: relative;
+    display: inline-block;
+   text-align: center;
+}
+.about-details-main-heading::before{
+    content: "";
+    position: absolute;
+    width: 60px;
+    top: 50%;
+    height: 3px;
+    right: -60px;
+    background-color: #005353;
+}
+.about-details-main-heading::after{
+    content: "";
+    position: absolute;
+    width: 60px;
+    top: 50%;
+    height: 3px;
+    left: -60px;
+    background-color: #005353;
+}
+
+.about-details-heading{
+    font-size: 15px;
+    font-weight: 700;
+}
+.about-description{
+    padding: 10px;
+}
+.about-paragraph-text{
+    text-align: left;
+    font-size: 14px;
+}
+.about-ourmission-main-section{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+.about-image-main-box{
+  width:100%;
+    height:50%;
+    padding: 20px;
+}
+.about-image-main-box img{
+  width:100%;
+  height:100%;
+  padding: 10px;
+}
+.mission-details-text{
+    text-align: left;
+    padding: 10px;
+    border-radius: 3px;
+}
+.about-contact-details-section{
+    text-align: center;
+    background-color: #f7ffff;
+    padding:5px;
+}
+.about-middle-heading {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    padding: 40px;
+}
+.ourproduct-details-btn{
+    background-color: #005353;
+    padding: 10px;
+    text-decoration: none !important;
+    color: #fff!important;
+    border-radius: 10px;
+    display:inline-block;
+}
+.contact-link-btn{
+    text-decoration: none !important;
+    color: #fff;
+}
+.contact-link-btn:hover{
+    cursor: pointer;
+    color: #c6c0c0;
+    text-decoration:none !important;
+}
+/* Extra Small Devices (up to 480px) */
+@media (max-width: 480px) {
+    .about-details-main-heading{
+        font-size: 32px;
+    }
+    .left-sidebar-sub-box{
+        display: none;
+    }
+    
+    .about-ourmission-main-section{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .about-image-main-box{
+        width: 100%;
+        height: 100%;
+        padding:5px;
+    }
+    .ourproduct-details-btn{
+        font-size: 13px;
+        background-color: #005353;
+        padding: 5px;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 10px;
+    }
+    .about-middle-heading {
+        font-size: 15px;
+        font-weight: 700;
+        text-align: center;
+        padding: 20px;
+    }
+}
+  
+  /* Small Devices (481px to 768px) */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .about-ourmission-main-section{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    }
+  

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+   <x-head/> 
 </head>
 <body>
-    <table cellspacing="0" cellpadding="0" align="center" style="color: rgb(34, 34, 34); font-family: helvetica, &quot;helvetica neue&quot;, arial, verdana, sans-serif; font-size: small; background-color: rgb(244, 245, 255); width: 1119.95px; table-layout: fixed !important;">
-        <tbody>
+   <div class="form-outer admin-login">
+      <section class="">
+
+    <table cellspacing="0" cellpadding="0" align="center" style="padding:10px 0;color: rgb(34, 34, 34); font-family: helvetica, &quot;helvetica neue&quot;, arial, verdana, sans-serif; font-size: small;  width: 1119.95px; table-layout: fixed !important;">
+        <tbody style="padding: 20px; margin: 0;">
            <tr style="border-collapse: collapse;">
               <td align="center" style="margin: 0px;">
-                 <table cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center" style="background-color: rgb(255, 255, 255); width: 600px;">
+                 <table cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center" style="width: 600px;">
                     <tbody>
                        <tr style="border-collapse: collapse;">
                           <td align="left" style="margin: 0px;">
@@ -49,9 +49,10 @@
                                          <table width="100%" cellspacing="0" cellpadding="0" role="presentation">
                                             <tbody>
                                                <tr style="border-collapse: collapse;">
-                                                  <td align="left" style="margin: 0px; padding-top: 5px; font-size: 0px;"><a rel="noreferrer" style="color: rgb(47, 28, 106); text-decoration-line: underline; font-size: 14px;"><img src="https://ci3.googleusercontent.com/meips/ADKq_NaVa_sNSbv9cIFB_yFMG1nN2onqGI8YPjgptPsaKmDwi-zol4yWZ-2tS7yGBwWj9ohZQTiP2nXPTOgo7iJDC92AmHY8jUVHmE5DkG0UiL6Y84MPwVo7E-gNSZ6MdAgq9R-SIbadsAovadYwFPAqfsAxekUb07RJxMyUyAN6R12SZtwfXYg9bRXNT0iXrM5l=s0-d-e1-ft#https://iiizsw.stripocdn.email/content/guids/CABINET_54a8087598d4843b18da83e147c9fc7d/images/hostingerlogotypeprimary.png" alt="" width="159" height="34" class="CToWUd" data-bit="iit" style="display: block; outline: none; text-decoration-line: none;"></a></td>
+                                                  <td align="left" style="margin: 0px; padding-top: 5px; font-size: 0px;"><a rel="noreferrer" style="color: rgb(47, 28, 106); text-decoration-line: underline; font-size: 14px;">
+                                                   <img src="{{ asset('images/company-logo.png') }}" alt="" width="159" height="34" class="CToWUd" data-bit="iit" style="display: block; outline: none; text-decoration-line: none;"></a></td>
                                                </tr>
-                                            </tbody>
+                               </tbody>
                                          </table>
                                       </td>
                                    </tr>
@@ -68,7 +69,7 @@
                                                </tr>
                                                <tr style="border-collapse: collapse;">
                                                   <td align="right" style="margin: 0px;">
-                                                     <p style="margin-bottom: 0px; font-family: -apple-system, blinkmacsystemfont, &quot;segoe ui&quot;, roboto, helvetica, arial, sans-serif, &quot;apple color emoji&quot;, &quot;segoe ui emoji&quot;, &quot;segoe ui symbol&quot;; line-height: 21px; color: rgb(103, 61, 230); font-size: 14px;"><strong>Three. Two. Online</strong></p>
+                                                     <p style="margin-bottom: 0px; font-family: -apple-system, blinkmacsystemfont, &quot;segoe ui&quot;, roboto, helvetica, arial, sans-serif, &quot;apple color emoji&quot;, &quot;segoe ui emoji&quot;, &quot;segoe ui symbol&quot;; line-height: 21px; color: rgb(103, 61, 230); font-size: 14px;"></p>
                                                   </td>
                                                </tr>
                                             </tbody>
@@ -92,7 +93,7 @@
                                                </tr>
                                                <tr style="border-collapse: collapse;">
                                                   <td align="left" style="margin: 0px;">
-                                                     <h1 style="margin-top: 0px; margin-bottom: 0px; line-height: 34px; font-family: -apple-system, blinkmacsystemfont, &quot;segoe ui&quot;, roboto, helvetica, arial, sans-serif, &quot;apple color emoji&quot;, &quot;segoe ui emoji&quot;, &quot;segoe ui symbol&quot;; font-size: 28px; color: rgb(47, 28, 106);"><strong>Email Verification Code</strong></h1>
+                                                     <h1 style="margin-top: 0px; margin-bottom: 0px; line-height: 34px; font-family: -apple-system, blinkmacsystemfont, &quot;segoe ui&quot;, roboto, helvetica, arial, sans-serif, &quot;apple color emoji&quot;, &quot;segoe ui emoji&quot;, &quot;segoe ui symbol&quot;; font-size: 28px; color: rgb(47, 28, 106);"><strong style="color:#209797;">Email Verification Code</strong></h1>
                                                   </td>
                                                </tr>
                                                <tr style="border-collapse: collapse;">
@@ -108,7 +109,7 @@
                                                </tr>
                                                <tr style="border-collapse: collapse;">
                                                   <td align="left" bgcolor="#f4f5ff" style="margin: 0px; padding: 15px;">
-                                                     <p style="margin-bottom: 0px; font-family: -apple-system, blinkmacsystemfont, &quot;segoe ui&quot;, roboto, helvetica, arial, sans-serif, &quot;apple color emoji&quot;, &quot;segoe ui emoji&quot;, &quot;segoe ui symbol&quot;; line-height: 33px; color: rgb(103, 61, 230); font-size: 22px;"><strong>{{$otp}}</strong></p>
+                                                     <p style="margin-bottom: 0px; font-family: -apple-system, blinkmacsystemfont, &quot;segoe ui&quot;, roboto, helvetica, arial, sans-serif, &quot;apple color emoji&quot;, &quot;segoe ui emoji&quot;, &quot;segoe ui symbol&quot;; line-height: 33px; color: rgb(103, 61, 230); font-size: 22px;"><strong style="color:#209797;">{{$otp}}</strong></p>
                                                   </td>
                                                </tr>
                                                <tr style="border-collapse: collapse;">
@@ -171,8 +172,8 @@
            </tr>
         </tbody>
      </table>
-     <table cellpadding="0" cellspacing="0" align="center" style="color: rgb(34, 34, 34); font-family: helvetica, &quot;helvetica neue&quot;, arial, verdana, sans-serif; font-size: small; width: 1119.95px; background-repeat: repeat; background-position: center top; table-layout: fixed !important;">
-        <tbody>
+     {{-- <table cellpadding="0" cellspacing="0" align="center" style="color: rgb(34, 34, 34); font-family: helvetica, &quot;helvetica neue&quot;, arial, verdana, sans-serif; font-size: small; width: 1119.95px; background-repeat: repeat; background-position: center top; table-layout: fixed !important;">
+        <tbody style="padding: 20px 0; margin: 0;">
            <tr style="border-collapse: collapse;">
               <td align="center" style="margin: 0px;">
                  <table cellspacing="0" cellpadding="0" align="center" style="width: 600px;">
@@ -223,6 +224,8 @@
               </td>
            </tr>
         </tbody>
-     </table>
-</body>
+     </table> --}}
+      </section>
+   </div>
+   </body>
 </html>

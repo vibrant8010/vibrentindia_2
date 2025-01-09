@@ -40,7 +40,7 @@
                 <div class="blog-list">
                     @foreach ($blogs as $blog)
                         <div class="blog-item">
-                            <img src="{{ asset('storage/' . $blog->image_url) }}" alt="Blog Thumbnail" class="blog-thumbnail">
+                            <img src="{{ asset($blog->image_url) }}" alt="Blog Thumbnail" class="blog-thumbnail">
                             <div class="blog-info">
                                 <p class="blog-date">{{ $blog->created_at->format('d F Y') }}</p>
                                 <h3 class="blog-title">{{ $blog->heading }}</h3>

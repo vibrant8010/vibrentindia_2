@@ -24,7 +24,7 @@ class OtpEmail extends Mailable
     }
   public function build()
   {
-    return $this->view('auth.email-otp')
+    return $this->view('Auth.email-otp')
         ->subject('OTP Verification')
         ->with(array('otp'=>$this->otp));
   }

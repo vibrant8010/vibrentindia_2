@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Email</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <x-head/>
+
 </head>
 <body>
+    <div class="form-outer admin-login">
+        <section class="form-container">
+  
     <div class="container mt-5">
-        <h1>VERIFY EMAIL</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="login-container login-container mx-lg-3 mx-0 reset-box">
+              
+        <h1 class="register-header">VERIFY EMAIL</h1>
 
         @if(Session::has('success'))
             <div class="alert alert-success">
@@ -25,7 +30,7 @@
         <!-- OTP Form -->
         <form action="{{ route('user.otp.verify') }}" method="POST">
             @csrf
-            <label for="otp">OTP:</label><br>
+            <label for="otp" class="mt-3">OTP:</label><br>
             <input type="text" name="otp" placeholder="Enter your OTP" required><br><br>
 
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -47,6 +52,11 @@
                 {{ session('error') }}
             </div>
         @endif
+    </div>
+            </div>
+</div>
+</div>
+        </section>
     </div>
 </body>
 </html>

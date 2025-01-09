@@ -4,9 +4,7 @@
             <div class="main-heading">
                 Blog
             </div>
-            <div class="btn-view primary-btn">
-                view More
-            </div>
+           
         </div>
 
         <div class="row mt-5">
@@ -29,9 +27,9 @@
                             effectively communicate valuable insights on advertising and attract more visitors to your
                             website.
                         </p>
-                        <div class="logo-container mt-4">
+                        <div class="header-logo-container mt-4">
                             <a href="#">
-                                <img src="http://127.0.0.1:8000/images/company-logo.png" alt="company logo">
+                                <img src="images/company-logo.png" alt="company logo">
                             </a>
                         </div>
                     </div>
@@ -43,7 +41,7 @@
                     @foreach ($blogs as $blog)
                         <div class="blog-item">
                             @if($blog->image_url) 
-                                <img src="{{ asset('storage/' . $blog->image_url) }}" alt="Blog Thumbnail" class="blog-thumbnail" >
+                                <img src="{{ asset($blog->image_url) }}" alt="Blog Thumbnail" class="blog-thumbnail" >
                             @else
                                 <span>No Image</span>
                             @endif

@@ -1,0 +1,124 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "poppins", sans-serif;
+}
+.company-title{
+    color: #005353;
+    font-weight: 600;
+}
+/* ********** Left Part ********** */
+.left-sidebar-main-box{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.sidebar-all-pages{
+    padding: 35px;
+    border-top: 7px solid #DEE2E6;
+    border-right: 4px solid #DEE2E6;
+    position: sticky;
+    top: 0px;
+}
+.sidebar-page-link{
+    text-decoration: none;
+    color: #005353;
+    padding: 0;
+    margin: 0;
+}
+/* ********** End Left Part ********* */
+
+/* ********** Right Part ******** */
+.right-side-details-main-box{
+    padding: 20px 50px;
+}
+
+
+.outer-privacy-title{
+    width: 100%;
+    text-align: center;
+}
+.privacy-details-main-heading{
+    font-size: 43px;
+    font-weight: 700;
+    line-height: 60px;
+    color: #005353;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+.privacy-details-main-heading::before{
+    content: "";
+    position: absolute;
+    width: 60px;
+    right: -60px;
+    top: 50%;
+    height: 3px;
+    background-color: #005353;
+}
+
+.privacy-details-main-heading::after{
+    content: "";
+    position: absolute;
+    width: 60px;
+    left: -60px;
+    top: 50%;
+    height: 3px;
+    background-color: #005353;
+}
+
+.privacy-details-heading{
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.privacy-description{
+    padding: 10px;
+}
+
+.privacy-paragraph-text{
+    text-align: left;
+    font-size: 14px;
+}
+/* ********** End right Part ********* */
+
+
+
+/* Extra Small Devices (up to 480px) */
+@media (max-width: 480px) {
+    .left-sidebar-sub-box{
+        display: none;
+    }
+    .privacy-details-main-heading{
+        font-size: 32px;
+    }
+    
+}
+ 
+  
+  /* Small Devices (481px to 768px) */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .privacy-details-main-heading{
+        font-size: 33px;
+    }
+    .privacy-details-main-heading::before{
+        content: "";
+        position: absolute;
+        width: 60px;
+        right: -60px;
+        top: 50%;
+        height: 3px;
+        background-color: #005353;
+    }
+    
+    .privacy-details-main-heading::after{
+        content: "";
+        position: absolute;
+        width: 60px;
+        left: -60px;
+        top: 50%;
+        height: 3px;
+        background-color: #005353;
+    }
+    
+    }

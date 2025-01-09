@@ -11,21 +11,22 @@ class Product extends Model
 
     // Specify the fields that can be mass-assigned
     protected $fillable = [
-        'name',
+       'name',
+       'company_id',
         'description',
        'material', 
+       'logo_url', 
+       'companyname',
         'size'  ,
         'image_url',
         'subcategory_id',
         'category_type'
         
     ];
-
-    public function company()
+       public function company()
 {
     return $this->belongsTo(CompanyDetail::class, 'company_id');
 }
-
     // Relationship to Subcategory
     public function subcategory()
     {

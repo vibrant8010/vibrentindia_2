@@ -25,6 +25,9 @@
             <label for="name">Product Name:</label>
             <input type="text" name="name" value="{{ old('name', $product->name) }}" required>
         </div>
+        
+       
+
 
         <div class="form-row">
             <label for="description">Description:</label>

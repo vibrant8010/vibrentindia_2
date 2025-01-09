@@ -11,12 +11,12 @@ class AdminController extends Controller
     public function dashboard()
     {
         // Logic for displaying the admin dashboard
-        return view('admin.dashboard'); // Ensure this view exists
+        return view('adminpanel.dashboard'); // Ensure this view exists
     }
 
     public function users()
     {
         // Logic for displaying the users list
-        return view('admin.users'); // Ensure this view exists
+        return view('adminpanel.users'); // Ensure this view exists
     }
 }

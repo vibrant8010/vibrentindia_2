@@ -12,12 +12,13 @@
             <h4 class="sub-content">
                 {{ $blog->detail_subcontent }} <!-- Display dynamic subcontent -->
             </h4>
-
+              
+             
             <div class="img-container">
                <div class="thumbnail_container">
                 <div class="thumbnail">
                 @if($blog->image_url) <!-- Check if image exists -->
-                    <img src="{{ asset('storage/' . $blog->image_url) }}" alt="{{ $blog->heading }}" style="width: 100%; height: auto;"> 
+                    <img src="{{ asset($blog->image_url) }}" alt="{{ $blog->heading }}" style="width: 100%; height: auto;"> 
                 @else
                     <span>No Image</span>
                 @endif
@@ -25,9 +26,13 @@
         </div>
             </div>
 
-            <p class="text-content">
-                {{ $blog->textcontent1 }} <!-- Display dynamic textcontent -->
-            </p>
+               @if($blog->subtitle1 && $blog->textcontent1)
+                <div class="additional-content">
+                    <h4>{{ $blog->subtitle1 }}</h4>
+                    <p>{{ $blog->textcontent1 }}</p>
+                </div>
+            @endif
+       
 
             @if($blog->subtitle2 && $blog->textcontent2)
                 <div class="additional-content">

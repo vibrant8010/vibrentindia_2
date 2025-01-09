@@ -11,9 +11,29 @@ use App\Http\Controllers\Auth\AuthController as AuthController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get('/search-suggestions', [ProductController::class, 'getSuggestions']);
-Route::get('/company/{id}/products', [ProductController::class, 'companyProducts']);
+Route::get('/company/{id}/products', [ProductController::class, 'companyProducts'])->name('company.products');
+
 Route::get('/product/{id}', [ProductController::class, 'productDetails']);
+
+Route::view('/about', 'about');
+
+Route::view('/privacy&policy', 'privacy&policy');
+Route::view('/terms&condition', 'terms&condition');
+
+
+
+
+
+// Route::get('/search', [ProductController::class, 'search'])->name('products.search');
+
+// Route::get('/company/{id}/products', [ProductController::class, 'companyProducts']);
+
+// Route::get('/product/{id}', [ProductController::class, 'productDetail']);
+// Route::get('/search-results', [ProductController::class, 'searchResults']);
+
 
 
 Route::get('/register',[AuthController::class , 'register'])->name('register');
@@ -32,6 +52,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 //     })->name('dashboard');
 // });
 
+// Public Routes
+Route::get('/', [ProductController::class, 'userHomePage'])->name('user.home');
+// Home Route (after login)
+Route::get('/home', [AuthController::class, 'home'])->name('home');
+
 // Forgot Password Routes
 // Route to show the "forgot password" form
 Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
@@ -39,7 +64,7 @@ Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm']
 // Route to send the password reset link
 Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
 Route::get('/forgot-password/success', function () {
-    return view('auth.forgotpassword-success');
+    return view('Auth.forgotpassword-success');
 })->name('password.success');
 // Route to show the password reset form, with the token as a parameter
 Route::get('password/reset/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');

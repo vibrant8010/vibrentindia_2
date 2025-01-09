@@ -51,27 +51,32 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="logo-container" >
+                                    @if ($product->company && $product->company->logo_url)
+                                    <img src="{{ asset($product->company->logo_url) }}"  class="logo-image" alt="{{ $product->company->name }}">
+                                @else
+                                    <span>No Logo</span>
+                                @endif
+                                </div>
 
                                 <div class="text-wrapper">
-                                    <p class="card-description content-txt" id="description-{{ $product->id }}">
-                                        <span class="visible-text">
-                                            {{ Str::limit($product->description, 100) }}
-                                        </span>
-                                        <span class="more-text">
-                                            {{ substr($product->description, 100) }}
-                                        </span>
-                                    </p>
-                                    <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore({{ $product->id }})">Read More</a>
+                                     <h6 class="product-name">
+                                        <span class="title">Product: </span>
+                                        <span class="pro-name">{{ $product->name }}</span>
+                                    </h6>
+                                   
                                 </div>
                                 <div class="card-bottom">
+                                    <h6 class="company-name">
+                                        <span class="title">Company: </span>
+                                        <span class="pro-company">{{ $product->company->name ?? 'N/A' }}</span>
+                                    </h6>
                                     <h6 class="product-name">
                                         <span class="title">Category: </span>
                                         <span class="pro-name">{{ $product->category->name ?? 'N/A' }}</span>
                                     </h6>
-                                    <h6 class="product-name">
-                                        <span class="title">Product: </span>
-                                        <span class="pro-name">{{ $product->name }}</span>
-                                    </h6>
+                                 
+
                                     <h6 class="material-name">
                                         <span class="material-title">Material: </span>
                                         <span class="mt-name">{{ $product->material }}</span>
@@ -80,6 +85,16 @@
                                         <span class="size-title">Size: </span>
                                         <span class="sz-name">{{ $product->size }}</span>
                                     </h6>
+                                      <p class="card-description content-txt" id="description-{{ $product->id }}">
+                                        
+                                        <span class="visible-text">
+                                            {{ Str::limit($product->description, 20) }}
+                                        </span>
+                                        <span class="more-text">
+                                            {{ substr($product->description,50) }}
+                                        </span>
+                                    </p>
+                                    <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore({{ $product->id }})"></a>
 
                                     <!-- CTA button within the card -->
                                     <div class="d-flex justify-content-start mx-2 bottom-btn">
@@ -110,6 +125,9 @@
     </div>
 
     <script>
+    
+    
+   
         // Toggle function
       function toggleReadMore(productId) {
     var description = document.getElementById('description-' + productId);
@@ -137,6 +155,29 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+ var swiper = new Swiper(".mySwiper", {
+           pagination: {
+               el: ".swiper-pagination",
+               clickable: true,
+           },
+           navigation: {
+               nextEl: ".swiper-button-next",
+               prevEl: ".swiper-button-prev",
+           },
+           loop: true,
+           // autoplay: {
+           //     delay: 2000,
+           //     disableOnInteraction: false,
+           // },
+           slidesPerView: 1,
+           spaceBetween: 10,
+           breakpoints: {
+               430: { slidesPerView: 2, spaceBetween: 10 },
+               768: { slidesPerView: 3, spaceBetween: 5 },
+               1024: { slidesPerView: 4, spaceBetween: 15 },
+           },
+       });
 
     </script>
 </section>
