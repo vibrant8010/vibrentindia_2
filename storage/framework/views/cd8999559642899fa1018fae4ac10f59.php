@@ -2,30 +2,30 @@
         <div class="container">
             <div class="heading-section">
                 <div class="main-heading">Trending Products</div>
-                <a href="{{ route('alltrendingcategory') }}" class="btn-view primary-btn">View More</a>
+                <a href="<?php echo e(route('alltrendingcategory')); ?>" class="btn-view primary-btn">View More</a>
             </div>
 
             <div class="row g-1">
-                @foreach ($trendingProducts as $product)
+                <?php $__currentLoopData = $trendingProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 product-col">
                         <div class="card-view">
-                            <a href="{{ route('product.show', $product->id) }}" class="card-link"></a>
+                            <a href="<?php echo e(route('product.show', $product->id)); ?>" class="card-link"></a>
                             <div class="image-container">
                                 <div class="thumbnail_container">
                                     <div class="thumbnail">
-                                        <img src="{{ asset($product->image_url) }}" class="product-image swiper-img"
-                                            alt="{{ $product->name }}" onclick="openPopup(this)">
+                                        <img src="<?php echo e(asset($product->image_url)); ?>" class="product-image swiper-img"
+                                            alt="<?php echo e($product->name); ?>" onclick="openPopup(this)">
                                     </div>
                                 </div>
                             </div>
                             <div class="main-logo-container">
                                 <div class="logo-container">
-                                    @if ($product->company && $product->company->logo_url)
-                                        <img src="{{ asset($product->company->logo_url) }}" class="logo-image"
-                                            alt="{{ $product->company->name }}">
-                                    @else
+                                    <?php if($product->company && $product->company->logo_url): ?>
+                                        <img src="<?php echo e(asset($product->company->logo_url)); ?>" class="logo-image"
+                                            alt="<?php echo e($product->company->name); ?>">
+                                    <?php else: ?>
                                         <span>No Logo</span>
-                                    @endif
+                                    <?php endif; ?>
 
                                 </div>
                                 <div class="image_overlay view-arrow-btn hide">
@@ -33,10 +33,11 @@
                                 </div>
                             </div>
                             <div class="card-body product-card-body">
-                            <p class="card-description content-txt" id="description-{{ $product->id }}">
+                            <p class="card-description content-txt" id="description-<?php echo e($product->id); ?>">
 
                                 <span class="visible-text">
-                                    {{ Str::limit($product->description, 30) }}
+                                    <?php echo e(Str::limit($product->description, 30)); ?>
+
                                 </span>
 
                             </p>
@@ -45,7 +46,7 @@
                                 <div class="text-wrapper">
                                     <h6 class="tranding-product-name">
                                         <span class="title">Product:</span>
-                                        <span class="trnding-pro-name">{{ $product->name }}</span>
+                                        <span class="trnding-pro-name"><?php echo e($product->name); ?></span>
                                     </h6>
 
                                 </div>
@@ -53,42 +54,43 @@
                                 <div class="card-bottom">
                                     <h6 class="tranding-product-name">
                                         <span class="title">Company Name:</span>
-                                        <span class="tranding-pro-name">{{ $product->company->name }}</span>
+                                        <span class="tranding-pro-name"><?php echo e($product->company->name); ?></span>
                                     </h6>
                                     <h6 class="tranding-product-name">
                                         <span class="title">Category:</span>
-                                        <span class="tranding-pro-name">{{ $product->category->name }}</span>
+                                        <span class="tranding-pro-name"><?php echo e($product->category->name); ?></span>
                                     </h6>
 
 
                                     <h6 class="tranding-material-name">
                                         <span class="tranding-material-title">Material:</span>
-                                        <span class="mt-name tranding-mt-name">{{ $product->material }}</span>
+                                        <span class="mt-name tranding-mt-name"><?php echo e($product->material); ?></span>
                                     </h6>
                                     <h6 class="tranding-product-size">
                                         <span class="tranding-size-title">Size:</span>
-                                        <span class="tranding-sz-name">{{ $product->size }}</span>
+                                        <span class="tranding-sz-name"><?php echo e($product->size); ?></span>
                                     </h6>
 
 
                                 </div>
                             </div>
                             <div class="d-flex justify-content-start mx-2 bottom-btn">
-                                @auth
-                                    <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}"
+                                <?php if(auth()->guard()->check()): ?>
+                                    <a href="<?php echo e(route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name])); ?>"
                                         class="inqury-btn mt-2 me-0">
                                         <span>Inquiry</span>
                                     </a>
-                                @else
-                                    <a href="{{ route('login') }}" class="inqury-btn mt-2 me-0">
+                                <?php else: ?>
+                                    <a href="<?php echo e(route('login')); ?>" class="inqury-btn mt-2 me-0">
                                         <span>Sign in to Inquire</span>
                                     </a>
-                                @endauth
+                                <?php endif; ?>
                             </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </section>
+<?php /**PATH C:\xampp\htdocs\vibrant_trade\resources\views/components/tranding-product.blade.php ENDPATH**/ ?>

@@ -3,8 +3,8 @@
         <!-- Left Part: Logo -->
         <div class="left-part">
             <div class="header-logo-container">
-                <a href="{{ route('user.home') }}">
-                    <img src="{{ asset('images/company-logo.png') }}" alt="company logo">
+                <a href="<?php echo e(route('user.home')); ?>">
+                    <img src="<?php echo e(asset('images/company-logo.png')); ?>" alt="company logo">
                 </a>
             </div>
         </div>
@@ -32,19 +32,7 @@
               </div>
 
             <div class="search-container">
-                {{-- <div class="select-box">
-                    <div class="dropdown" id="desktop-dropdown">
-                        <div class="dropdown-button" id="dropdownButton">
-                            Products
-                        </div>
-                        <div class="dropdown-menu" id="dropdownMenu">
-                             <div class="dropdown-item" onclick="selectDropdown('All')">All</div>
-
-                            <div class="dropdown-item" onclick="selectDropdown('Products')">Products</div>
-                            <div class="dropdown-item" onclick="selectDropdown('Companies')">Companies</div>
-                        </div>
-                    </div>
-                </div> --}}
+                
 
                 <div class="search-input-box">
                     <form id="search-form" class="search-box-section" onsubmit="performSearch(event)">
@@ -65,31 +53,31 @@
         <!-- Right Part: Authentication & Contact (Desktop) -->
         <div class="d-lg-block d-md-block d-none">
             <div class="right-part">
-                @if (Auth::check())
-                    <a href="{{ route('logout') }}" class="primary-btn"
+                <?php if(Auth::check()): ?>
+                    <a href="<?php echo e(route('logout')); ?>" class="primary-btn"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
+                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                        <?php echo csrf_field(); ?>
                     </form>
-                @else
-                    <a href="{{ route('login') }}" class="btn-links">
+                <?php else: ?>
+                    <a href="<?php echo e(route('login')); ?>" class="btn-links">
                         <span class="lg-img">
-                            <img src="{{ asset('images/personicon.png') }}" alt="">
+                            <img src="<?php echo e(asset('images/personicon.png')); ?>" alt="">
                         </span>
                         Sign in
                     </a>
-                    <a href="{{ route('login') }}" class="btn-links">
+                    <a href="<?php echo e(route('login')); ?>" class="btn-links">
                         <span class="lg-img">
-                            <img src="{{ asset('images/INQUIRY.png') }}" alt="">
+                            <img src="<?php echo e(asset('images/INQUIRY.png')); ?>" alt="">
                         </span>
                         Inquiry
                     </a>
                     <a href="https://wa.me/+918511684938" class="contact-cheap">
                         +91 8511 6849 38
                     </a>
-                @endif
+                <?php endif; ?>
             </div>
         </div>
     </section>
@@ -118,28 +106,28 @@
             <ul class="nav-view">
                 <li class="nav-item mobile-logo py-4 px-1 d-lg-none d-sm-block d-md-none">
                     <div class="header-logo-container d-md-block d-sm-block d-lg-none">
-                        <a href="{{ route('user.home') }}">
-                            <img src="{{ asset('images/mobile-logo.png') }}" alt="company logo"
+                        <a href="<?php echo e(route('user.home')); ?>">
+                            <img src="<?php echo e(asset('images/mobile-logo.png')); ?>" alt="company logo"
                                 style="height: 100%; width: 187px;">
                         </a>
                     </div>
                 </li>
-                <li class="nav-item"><a href="{{ route('innertopcategory') }}" class="nav-link">Top Category</a></li>
-                <li class="nav-item"><a href="{{ route('newarrival') }}" class="nav-link">New Arrival</a></li>
-                <li class="nav-item"><a href="{{ route('alltrendingcategory') }}" class="nav-link">Trending
+                <li class="nav-item"><a href="<?php echo e(route('innertopcategory')); ?>" class="nav-link">Top Category</a></li>
+                <li class="nav-item"><a href="<?php echo e(route('newarrival')); ?>" class="nav-link">New Arrival</a></li>
+                <li class="nav-item"><a href="<?php echo e(route('alltrendingcategory')); ?>" class="nav-link">Trending
                         Products</a></li>
                 <li class="nav-item"><a href="#Blogs" class="nav-link">Blogs</a></li>
                 <li class="s-box d-lg-none d-md-none d-sm-block">
                     <div class="right-part mt-5">
-                        <a href="{{ route('login') }}" class="btn-links">
+                        <a href="<?php echo e(route('login')); ?>" class="btn-links">
                             <span class="lg-img">
-                                <img src="{{ asset('images/personmobile.png') }}" alt="">
+                                <img src="<?php echo e(asset('images/personmobile.png')); ?>" alt="">
                             </span>
                             Sign in
                         </a>
-                        <a href="{{ route('login') }}" class="btn-links">
+                        <a href="<?php echo e(route('login')); ?>" class="btn-links">
                             <span class="lg-img">
-                                <img src="{{ asset('images/INQUIRYMOBILE.png') }}" alt="">
+                                <img src="<?php echo e(asset('images/INQUIRYMOBILE.png')); ?>" alt="">
                             </span>
                             Inquiry
                         </a>
@@ -202,10 +190,8 @@
             </div>
         </div>
     </div>
-    @if (session('alert'))
-        {{-- <div class="alert alert-warning">
-        {{ session('alert') }}
-    </div> --}}
+    <?php if(session('alert')): ?>
+        
         <script>
             document.addEventListener('DOMContentLoaded', function() {
 
@@ -217,7 +203,7 @@
 
             });
         </script>
-    @endif
+    <?php endif; ?>
 </header>
 
 <script>
@@ -380,3 +366,4 @@
     // Initialize the default category
     selectDropdown("All");
 </script>
+<?php /**PATH C:\xampp\htdocs\vibrant_trade\resources\views/components/header.blade.php ENDPATH**/ ?>

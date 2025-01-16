@@ -35,89 +35,91 @@
     <div class="container">
         <div class="heading-section">
             <div class="main-heading">Top Categories</div>
-            <a href="{{ route('innertopcategory') }}"  class="btn-view primary-btn">View More</a>
+            <a href="<?php echo e(route('innertopcategory')); ?>"  class="btn-view primary-btn">View More</a>
         </div>
         <div class="swiper mySwiper mx-lg-2 mx-md-2 mx-sm-0">
             <div class="swiper-wrapper">
-                @if($topCategoryProducts && $topCategoryProducts->isNotEmpty())
-                    @foreach($topCategoryProducts as $product)
+                <?php if($topCategoryProducts && $topCategoryProducts->isNotEmpty()): ?>
+                    <?php $__currentLoopData = $topCategoryProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="swiper-slide">
                             <div class="card-view">
-                                <a href="{{ route('product.show', $product->id) }}" class="card-link"></a>
+                                <a href="<?php echo e(route('product.show', $product->id)); ?>" class="card-link"></a>
                                 <div class="image-container">
                                     <div class="thumbnail_container">
                                         <div class="thumbnail">
-                                            <img src="{{ asset($product->image_url) }}" class="product-image swiper-img" alt="{{ $product->name }}" onclick="openPopup(this)">
+                                            <img src="<?php echo e(asset($product->image_url)); ?>" class="product-image swiper-img" alt="<?php echo e($product->name); ?>" onclick="openPopup(this)">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="logo-container" >
-                                    @if ($product->company && $product->company->logo_url)
-                                    <img src="{{ asset($product->company->logo_url) }}"  class="logo-image" alt="{{ $product->company->name }}">
-                                @else
+                                    <?php if($product->company && $product->company->logo_url): ?>
+                                    <img src="<?php echo e(asset($product->company->logo_url)); ?>"  class="logo-image" alt="<?php echo e($product->company->name); ?>">
+                                <?php else: ?>
                                     <span>No Logo</span>
-                                @endif
+                                <?php endif; ?>
                                 </div>
 
                                 <div class="text-wrapper">
                                      <h6 class="product-name">
                                         <span class="title">Product: </span>
-                                        <span class="pro-name">{{ $product->name }}</span>
+                                        <span class="pro-name"><?php echo e($product->name); ?></span>
                                     </h6>
 
                                 </div>
                                 <div class="product-description-div">
                                     <h6 class="company-name">
                                         <span class="title">Company: </span>
-                                        <span class="pro-company">{{ $product->company->name ?? 'N/A' }}</span>
+                                        <span class="pro-company"><?php echo e($product->company->name ?? 'N/A'); ?></span>
                                     </h6>
                                     <h6 class="product-name">
                                         <span class="title">Category: </span>
-                                        <span class="pro-name">{{ $product->category->name ?? 'N/A' }}</span>
+                                        <span class="pro-name"><?php echo e($product->category->name ?? 'N/A'); ?></span>
                                     </h6>
 
 
                                     <h6 class="material-name">
                                         <span class="material-title">Material: </span>
-                                        <span class="mt-name">{{ $product->material }}</span>
+                                        <span class="mt-name"><?php echo e($product->material); ?></span>
                                     </h6>
                                     <h6 class="product-size">
                                         <span class="size-title">Size: </span>
-                                        <span class="sz-name">{{ $product->size }}</span>
+                                        <span class="sz-name"><?php echo e($product->size); ?></span>
                                     </h6>
-                                      <p class="card-description content-txt" id="description-{{ $product->id }}">
+                                      <p class="card-description content-txt" id="description-<?php echo e($product->id); ?>">
 
                                         <span class="visible-text">
-                                            {{ Str::limit($product->description, 20) }}
+                                            <?php echo e(Str::limit($product->description, 20)); ?>
+
                                         </span>
                                         <span class="more-text">
-                                            {{ substr($product->description,50) }}
+                                            <?php echo e(substr($product->description,50)); ?>
+
                                         </span>
                                     </p>
-                                    <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore({{ $product->id }})"></a>
+                                    <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(<?php echo e($product->id); ?>)"></a>
 
                                     <!-- CTA button within the card -->
                                     <div class="d-flex justify-content-start mx-2 bottom-btn">
-                                        @auth
-                                            <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}" class="cta">
+                                        <?php if(auth()->guard()->check()): ?>
+                                            <a href="<?php echo e(route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name])); ?>" class="cta">
                                                 <span>Inquiry</span>
                                                 <i class="fa-solid fa-arrow-right"></i>
                                             </a>
-                                        @else
-                                            <a href="{{ route('login') }}" class="cta">
+                                        <?php else: ?>
+                                            <a href="<?php echo e(route('login')); ?>" class="cta">
                                                 <span>Sign in to Inquire</span>
                                                 <i class="fa-solid fa-arrow-right"></i>
                                             </a>
-                                        @endauth
+                                        <?php endif; ?>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                @else
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php else: ?>
                     <p>No top category products available.</p>
-                @endif
+                <?php endif; ?>
             </div>
             <br>
             <div class="swiper-pagination"></div>
@@ -181,3 +183,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     </script>
 </section>
+<?php /**PATH C:\xampp\htdocs\vibrant_trade\resources\views/components/topcategoryy.blade.php ENDPATH**/ ?>
