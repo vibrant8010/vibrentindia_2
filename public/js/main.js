@@ -119,8 +119,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     alert(`Email: ${email}\nPassword: ${password}`);
 });
 
-<<<<<<< HEAD
-=======
 // get user location
 
 window.onload = () => {
@@ -320,4 +318,3 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
->>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
