@@ -222,6 +222,35 @@ class ProductController extends Controller
     // Pass the company, selected company IDs, companies, and products to the view
     return view('company.products', compact('company', 'companies', 'products', 'selectedCompanyIds'));
 }
+ public function search(Request $request)
+    {
+        $searchTerm = $request->input('query');
+
+        // Searching in Products, Categories, Companies, Sub-categories
+        $products = Product::where('name', 'like', "%{$searchTerm}%")
+                           ->orWhere('details', 'like', "%{$searchTerm}%")
+                           ->get();
+
+        $categories = Category::where('name', 'like', "%{$searchTerm}%")
+                             ->get();
+
+        $companies = CompanyDetail::where('name', 'like', "%{$searchTerm}%")
+                            ->orWhere('details', 'like', "%{$searchTerm}%")
+                            ->get();
+
+        $subCategories = SubCategory::where('name', 'like', "%{$searchTerm}%")
+                                     ->get();
+
+        // Combine results into one collection (or you can return them separately)
+        $results = collect([
+            'products' => $products,
+            'categories' => $categories,
+            'companies' => $companies,
+            'subCategories' => $subCategories,
+        ]);
+
+        return view('search.results', compact('results', 'searchTerm'));
+    }
 
 
 public function getSuggestions(Request $request)

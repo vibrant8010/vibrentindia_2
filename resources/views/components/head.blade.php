@@ -9,7 +9,7 @@
     <meta name="keywords" content="Vbrant India Trade Retailer">
     <meta name="author" content="Vibrant India Trade">
     <meta name="keywords" content="Vibrant India Trade is A Premimum B2B Inquiry-Based Model to approach to your business like Kitechenware, Kitchen, Complete Houseware, Houseware, Utensils, Buffing, Home and Decor.">
-    
+
     <!--seo keywords end-->
 
     <!-- Google Tag Manager -->
@@ -53,5 +53,5 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {{-- img zoom effect --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drift-zoom/1.4.0/drift-basic.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/luminous-lightbox/2.3.3/luminous-basic.min.css">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
