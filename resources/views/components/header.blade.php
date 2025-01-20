@@ -10,7 +10,7 @@
         </div>
 
         <!-- Center Part: Search and Dropdown (Desktop) -->
-        <div class="d-lg-block d-md-block d-none">
+        <div class="d-lg-block d-md-block d-block">
         <div class="search-section">
             <div class="search-location-box">
                 <div class="inputgroup_location">
@@ -103,8 +103,8 @@
         <nav class="nav-container">
             <span class="close-btn" id="close-btn">&times;</span>
             <ul class="menu">
-                <li class="dropdown">
-                    <a href="#"><span class="category-img mx-1"><i class="fa-solid fa-list"></i></span>All
+                <li class="dropdown menu-item">
+                    <a href="#"><span class="category-img mx-1 "><i class="fa-solid fa-list"></i></span>All
                         Category</a>
                     <ul class="submenu">
                         <li class="category-menu-item"><a href="#" class="category-menu-link">Option 1</a></li>
@@ -148,7 +148,7 @@
             </ul>
 
             <!-- Mobile Search and Dropdown -->
-            <div class="d-lg-none d-md-none d-block">
+            {{-- <div class="d-lg-none d-md-none d-block">
                 <div class="search-container">
                     <div class="select-box">
                         <div class="dropdown" id="mobile-dropdown">
@@ -175,7 +175,7 @@
                         <div id="suggestions-mobile" class="suggestions-box"></div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </nav>
     </div>
 

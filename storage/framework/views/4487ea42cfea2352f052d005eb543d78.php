@@ -52,7 +52,7 @@
             <div class="row g-1">
                 <?php $__currentLoopData = $topCategoryProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                        <div class="card-view">
+                        <div class="card-view inner-card">
                             <a href="<?php echo e(route('product.show', $product->id)); ?>" class="card-link"></a>
                             <div class="image-container">
                                 <div class="thumbnail_container">
@@ -68,13 +68,13 @@
                                 <span>No Logo</span>
                             <?php endif; ?>
                             </div>
-    
+
                             <div class="text-wrapper">
                                 <h6 class="tranding-product-name">
                                     <span class="title">Product:</span>
                                     <span class="trnding-pro-name"><?php echo e($product->name); ?></span>
                                 </h6>
-                               
+
                             </div>
                             <div class="card-bottom">
                                 <h6 class="tranding-product-name">
@@ -85,7 +85,7 @@
                                     <span class="title">Category:</span>
                                     <span class="tranding-pro-name"><?php echo e($product->category->name); ?></span>
                                 </h6>
-                               
+
                                 <h6 class="tranding-material-name">
                                     <span class="tranding-material-title">Material:</span>
                                     <span class="mt-name tranding-mt-name"><?php echo e($product->material); ?></span>
@@ -95,25 +95,23 @@
                                     <span class="tranding-sz-name"><?php echo e($product->size); ?></span>
                                 </h6>
                                  <p class="card-description content-txt" id="description-<?php echo e($product->id); ?>">
-                                        
+
                                         <span class="visible-text">
                                             <?php echo e(Str::limit($product->description, 20)); ?>
 
                                         </span>
-                                       
+
                                     </p>
                                     <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(<?php echo e($product->id); ?>)"></a>
 
                                 <div class="d-flex justify-content-start mx-2 bottom-btn">
                                     <?php if(auth()->guard()->check()): ?>
-                                        <a href="<?php echo e(route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name])); ?>" class="cta">
+                                        <a href="<?php echo e(route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name])); ?>" class="inqury-btn mt-2">
                                             <span>Inquiry</span>
-                                            <i class="fa-solid fa-arrow-right"></i>
                                         </a>
                                     <?php else: ?>
-                                        <a href="<?php echo e(route('login')); ?>" class="cta">
+                                        <a href="<?php echo e(route('login')); ?>" class="inqury-btn mt-2">
                                             <span>Sign in to Inquire</span>
-                                            <i class="fa-solid fa-arrow-right"></i>
                                         </a>
                                     <?php endif; ?>
                                 </div>
@@ -124,7 +122,7 @@
             </div>
         </div>
     </section>
-    
+
     <?php if (isset($component)) { $__componentOriginal99051027c5120c83a2f9a5ae7c4c3cfa = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal99051027c5120c83a2f9a5ae7c4c3cfa = $attributes; } ?>
 <?php $component = App\View\Components\Footer::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
@@ -168,4 +166,4 @@
 
 </body>
 </html>
-<?php /**PATH C:\xampp\htdocs\tread\resources\views/innertopcategory.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\vibrant_trade\resources\views/innertopcategory.blade.php ENDPATH**/ ?>

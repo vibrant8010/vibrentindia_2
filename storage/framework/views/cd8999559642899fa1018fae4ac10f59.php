@@ -32,15 +32,16 @@
                                     <i class="fas fa-arrow-circle-down"></i>
                                 </div>
                             </div>
+
                             <div class="card-body product-card-body">
-                            <p class="card-description content-txt" id="description-<?php echo e($product->id); ?>">
+                                <p class="card-description content-txt" id="description-<?php echo e($product->id); ?>">
 
-                                <span class="visible-text">
-                                    <?php echo e(Str::limit($product->description, 30)); ?>
+                                    <span class="visible-text">
+                                        <?php echo e(Str::limit($product->description, 30)); ?>
 
-                                </span>
+                                    </span>
 
-                            </p>
+                                </p>
                             <div class="product-description-div">
 
                                 <div class="text-wrapper">

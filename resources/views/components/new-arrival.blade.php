@@ -6,12 +6,12 @@
                 New Arrival Products
             </div>
           <a href="{{ route('newarrival') }}"  class="btn-view primary-btn">View More</a>
-            
+
         </div>
 
         <div class="row g-1">
             @foreach($newArrivalCategoryProducts as $product)
-                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 product-col">
                     <div class="card-view">
                         <a href="{{ route('product.show', $product->id) }}" class="card-link"></a>
                         <div class="image-container">
@@ -21,6 +21,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="main-logo-container">
                         <div class="logo-container" style="">
                             @if ($product->company && $product->company->logo_url)
                             <img src="{{ asset($product->company->logo_url) }}"  class="logo-image" alt="{{ $product->company->name }}">
@@ -28,15 +29,29 @@
                             <span>No Logo</span>
                         @endif
                         </div>
+                        <div class="image_overlay view-arrow-btn hide">
+                            <i class="fas fa-arrow-circle-down"></i>
+                        </div>
+                        </div>
+
+                        <div class="card-body product-card-body">
+
+                        <p class="card-description content-txt" id="description-{{ $product->id }}">
+                            <span class="visible-text">
+                                {{ Str::limit($product->description, 20) }}
+                            </span>
+                        </p>
+                        <div class="product-description-div">
 
                         <div class="text-wrapper">
                              <h6 class="tranding-product-name">
                                 <span class="title">Product:</span>
                                 <span class="trnding-pro-name">{{ $product->name }}</span>
                             </h6>
-                           
+
                         </div>
                         <div class="card-bottom">
+
                             <h6 class="tranding-product-name">
                                 <span class="title">Company Name:</span>
                                 <span class="tranding-pro-name">{{ $product->company->name }}</span>
@@ -49,7 +64,7 @@
                                 <span class="title">Product:</span>
                                 <span class="trnding-pro-name">{{ $product->name }}</span>
                             </h6>
-                          
+
                             <h6 class="tranding-material-name">
                                 <span class="tranding-material-title">Material:</span>
                                 <span class="mt-name tranding-mt-name">{{ $product->material }}</span>
@@ -58,27 +73,22 @@
                                 <span class="tranding-size-title">Size:</span>
                                 <span class="tranding-sz-name">{{ $product->size }}</span>
                             </h6>
-                             <p class="card-description content-txt" id="description-{{ $product->id }}">
-                                        
-                                        <span class="visible-text">
-                                            {{ Str::limit($product->description, 20) }}
-                                        </span>
-                                     
-                                    </p>
-                            <div class="d-flex justify-content-start mx-2 bottom-btn">
-                                @auth
-                                    <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}" class="cta">
-                                        <span>Inquiry</span>
-                                        <i class="fa-solid fa-arrow-right"></i>
-                                    </a>
-                                @else
-                                    <a href="{{ route('login') }}" class="cta">
-                                        <span>Sign in to Inquire</span>
-                                        <i class="fa-solid fa-arrow-right"></i>
-                                    </a>
-                                @endauth
-                            </div>
+
+
                         </div>
+                        </div>
+                        <div class="d-flex justify-content-start mx-2 bottom-btn">
+                            @auth
+                                <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}" class="inqury-btn mt-2">
+                                    <span>Inquiry</span>
+                                </a>
+                            @else
+                                <a href="{{ route('login') }}" class="inqury-btn mt-2">
+                                    <span>Sign in to Inquire</span>
+                                </a>
+                            @endauth
+                        </div>
+                    </div>
                     </div>
                 </div>
             @endforeach

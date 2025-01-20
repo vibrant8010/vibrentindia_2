@@ -32,14 +32,15 @@
                                     <i class="fas fa-arrow-circle-down"></i>
                                 </div>
                             </div>
+
                             <div class="card-body product-card-body">
-                            <p class="card-description content-txt" id="description-{{ $product->id }}">
+                                <p class="card-description content-txt" id="description-{{ $product->id }}">
 
-                                <span class="visible-text">
-                                    {{ Str::limit($product->description, 30) }}
-                                </span>
+                                    <span class="visible-text">
+                                        {{ Str::limit($product->description, 30) }}
+                                    </span>
 
-                            </p>
+                                </p>
                             <div class="product-description-div">
 
                                 <div class="text-wrapper">

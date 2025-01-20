@@ -297,3 +297,24 @@ $("body").on("click", ".view-arrow-btn", function() {
     // Slide up or down the product description for the clicked card only
     currentCard.find(".product-description-div").stop().slideToggle();
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const menuItem = document.querySelector(".menu-item");
+    const dropdown = document.querySelector(".submenu");
+
+    // Toggle dropdown on click for mobile
+    menuItem.addEventListener("click", (e) => {
+      if (window.innerWidth <= 768) { // Mobile screen size check
+        e.preventDefault(); // Prevent default link behavior
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      }
+    });
+
+    // Reset dropdown visibility on window resize
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        dropdown.style.display = ""; // Reset for desktop
+      }
+    });
+  });

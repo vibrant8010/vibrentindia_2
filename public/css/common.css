@@ -124,6 +124,21 @@ input[type="text"]::-webkit-search-cancel-button {
     font-size: 16px;
     background-color: transparent;
   }
+  @media screen and (max-width:1299px) {
+    .search-container input[type="text"] {
+        width: 289px;
+    }
+  }
+  @media screen and (max-width:991px) {
+    .search-section .inputgroup_location {
+        width: 164px;
+    }
+  }
+  @media screen and (max-width:840px) {
+    .search-section .inputgroup_location {
+        width: 152px;
+    }
+  }
   /* .search-container .search-input-box{
     border-left: 1px solid var(--primary-color);
 } */
