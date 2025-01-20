@@ -10,24 +10,33 @@
         </div>
 
         <!-- Center Part: Search and Dropdown (Desktop) -->
-        <div class="d-lg-block d-md-block d-none">
-            <div class="search-container">
-                <div class="select-box">
-                    <div class="dropdown" id="desktop-dropdown">
-                        <div class="dropdown-button" id="dropdownButton">
-                            Products
-                        </div>
-                        <div class="dropdown-menu" id="dropdownMenu">
-                             <div class="dropdown-item" onclick="selectDropdown('All')">All</div>
-
-                            <div class="dropdown-item" onclick="selectDropdown('Products')">Products</div>
-                            <div class="dropdown-item" onclick="selectDropdown('Companies')">Companies</div>
-                        </div>
-                    </div>
+        <div class="d-lg-block d-md-block d-block">
+        <div class="search-section">
+            <div class="search-location-box">
+                <div class="inputgroup_location">
+                  <div class="input_location_box">
+                    <input type="text" autocomplete="off"
+                      class="input_location"
+                      aria-label="City Auto-suggest"
+                      placeholder="Enter Location"
+                      id="city-auto-sug" value="Palanpur">
+                    <ul class="dropdown-list" role="listbox">
+                      <li class="dropdown-item" role="option">Ahmedabad</li>
+                      <li class="dropdown-item" role="option">Mumbai</li>
+                      <li class="dropdown-item" role="option">Palanpur</li>
+                      <li class="dropdown-item" role="option">Surat</li>
+                      <li class="dropdown-item" role="option">Rajkot</li>
+                    </ul>
+                  </div>
                 </div>
+              </div>
+
+            <div class="search-container">
+                
+
                 <div class="search-input-box">
-                    <form id="search-form"  action="<?php echo e(route('search')); ?>"class="search-box-section" onsubmit="performSearch(event)">
-                        <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="">
+                    <form id="search-form" class="search-box-section" onsubmit="performSearch(event)">
+                        <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ...">
                         <div class="search-btn-box">
                             <button type="submit" class="search-btn">
                                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -38,12 +47,14 @@
                 </div>
             </div>
         </div>
+        </div>
 
         <!-- Right Part: Authentication & Contact (Desktop) -->
         <div class="d-lg-block d-md-block d-none">
             <div class="right-part">
                 <?php if(Auth::check()): ?>
-                    <a href="<?php echo e(route('logout')); ?>" class="primary-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="<?php echo e(route('logout')); ?>" class="primary-btn"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout
                     </a>
                     <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
@@ -78,18 +89,32 @@
 
         <nav class="nav-container">
             <span class="close-btn" id="close-btn">&times;</span>
-
+            <ul class="menu">
+                <li class="dropdown menu-item">
+                    <a href="#"><span class="category-img mx-1 "><i class="fa-solid fa-list"></i></span>All
+                        Category</a>
+                    <ul class="submenu">
+                        <li class="category-menu-item"><a href="#" class="category-menu-link">Option 1</a></li>
+                        <li class="category-menu-item"><a href="#" class="category-menu-link">Option 2</a></li>
+                        <li class="category-menu-item"><a href="#" class="category-menu-link">Option 3</a></li>
+                        <li class="category-menu-item"><a href="#" class="category-menu-link">Option 4</a></li>
+                        <li class="category-menu-item"><a href="#" class="category-menu-link">Option 5</a></li>
+                    </ul>
+                </li>
+            </ul>
             <ul class="nav-view">
                 <li class="nav-item mobile-logo py-4 px-1 d-lg-none d-sm-block d-md-none">
                     <div class="header-logo-container d-md-block d-sm-block d-lg-none">
                         <a href="<?php echo e(route('user.home')); ?>">
-                            <img src="<?php echo e(asset('images/mobile-logo.png')); ?>" alt="company logo" style="height: 100%; width: 187px;">
+                            <img src="<?php echo e(asset('images/mobile-logo.png')); ?>" alt="company logo"
+                                style="height: 100%; width: 187px;">
                         </a>
                     </div>
                 </li>
                 <li class="nav-item"><a href="<?php echo e(route('innertopcategory')); ?>" class="nav-link">Top Category</a></li>
                 <li class="nav-item"><a href="<?php echo e(route('newarrival')); ?>" class="nav-link">New Arrival</a></li>
-                <li class="nav-item"><a href="<?php echo e(route('alltrendingcategory')); ?>" class="nav-link">Trending Products</a></li>
+                <li class="nav-item"><a href="<?php echo e(route('alltrendingcategory')); ?>" class="nav-link">Trending
+                        Products</a></li>
                 <li class="nav-item"><a href="#Blogs" class="nav-link">Blogs</a></li>
                 <li class="s-box d-lg-none d-md-none d-sm-block">
                     <div class="right-part mt-5">
@@ -110,32 +135,7 @@
             </ul>
 
             <!-- Mobile Search and Dropdown -->
-            <div class="d-lg-none d-md-none d-block">
-                <div class="search-container">
-                    <div class="select-box">
-                        <div class="dropdown" id="mobile-dropdown">
-                            <div class="dropdown-button" id="dropdownButtonMobile">
-                                Products
-                            </div>
-                            <div class="dropdown-menu" id="dropdownMenuMobile">
-                                <div class="dropdown-item" onclick="selectDropdownMobile('Products')">Products</div>
-                                <div class="dropdown-item" onclick="selectDropdownMobile('Companies')">Companies</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="search-input-box">
-                        <form id="search-form-mobile" class="search-box-section" onsubmit="performSearchMobile(event)">
-                            <input type="text" name="query" id="search-bar-mobile" oninput="fetchSuggestionsMobile()" autocomplete="off" placeholder="Search here ...">
-                            <div class="search-btn-box">
-                                <button type="submit" class="search-btn">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </div>
-                        </form>
-                        <div id="suggestions-mobile" class="suggestions-box"></div>
-                    </div>
-                </div>
-            </div>
+            
         </nav>
     </div>
 
@@ -163,19 +163,19 @@
         </div>
     </div>
     <?php if(session('alert')): ?>
-    
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
 
-            var loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {
-                backdrop: 'static', // Prevent closing by clicking outside
-                keyboard: false // Prevent closing by pressing Esc
+                var loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {
+                    backdrop: 'static', // Prevent closing by clicking outside
+                    keyboard: false // Prevent closing by pressing Esc
+                });
+                loginModal.show();
+
             });
-            loginModal.show();
-
-    });
-  </script>
-<?php endif; ?>
+        </script>
+    <?php endif; ?>
 </header>
 <script>
     // Fetching categories from Blade (passed as JSON)
@@ -261,67 +261,67 @@
     }
 
     // Display search suggestions
-  function displaySuggestions(suggestions, isMobile = false) {
-    const suggestionsBox = document.getElementById(isMobile ? "suggestions-mobile" : "suggestions");
+    function displaySuggestions(suggestions, isMobile = false) {
+        const suggestionsBox = document.getElementById(isMobile ? "suggestions-mobile" : "suggestions");
 
-    // Clear the suggestions box content before appending new suggestions
-    suggestionsBox.style.display = "block";
-    suggestionsBox.innerHTML = ""; // Only clear the contents, not the event listeners
+        // Clear the suggestions box content before appending new suggestions
+        suggestionsBox.style.display = "block";
+        suggestionsBox.innerHTML = ""; // Only clear the contents, not the event listeners
 
-    let hasResults = false;
+        let hasResults = false;
 
-    // Create a container for the suggestions
-    const content = document.createElement('div');
+        // Create a container for the suggestions
+        const content = document.createElement('div');
 
-    // Display companies first if available
-    if (suggestions.companies && suggestions.companies.length > 0) {
-        hasResults = true;
-        const companiesHeader = document.createElement('div');
-        companiesHeader.className = 'suggestion-header';
-        companiesHeader.textContent = 'Companies';
-        content.appendChild(companiesHeader);
+        // Display companies first if available
+        if (suggestions.companies && suggestions.companies.length > 0) {
+            hasResults = true;
+            const companiesHeader = document.createElement('div');
+            companiesHeader.className = 'suggestion-header';
+            companiesHeader.textContent = 'Companies';
+            content.appendChild(companiesHeader);
 
-        suggestions.companies.forEach((company) => {
-            const suggestion = document.createElement('div');
-            suggestion.className = "suggestion-item";
-            suggestion.textContent = company.name;
-            suggestion.onclick = () => {
-                window.location.href = `/company/${company.id}/products`;
-            };
-            content.appendChild(suggestion);
-        });
+            suggestions.companies.forEach((company) => {
+                const suggestion = document.createElement('div');
+                suggestion.className = "suggestion-item";
+                suggestion.textContent = company.name;
+                suggestion.onclick = () => {
+                    window.location.href = `/company/${company.id}/products`;
+                };
+                content.appendChild(suggestion);
+            });
+        }
+
+        // Display products second if available
+        if (suggestions.products && suggestions.products.length > 0) {
+            hasResults = true;
+            const productsHeader = document.createElement('div');
+            productsHeader.className = 'suggestion-header';
+            productsHeader.textContent = 'Products';
+            content.appendChild(productsHeader);
+
+            suggestions.products.forEach((product) => {
+                const suggestion = document.createElement('div');
+                suggestion.className = "suggestion-item";
+                suggestion.textContent = product.name;
+                suggestion.onclick = () => {
+                    window.location.href = `/product/${product.id}`;
+                };
+                content.appendChild(suggestion);
+            });
+        }
+
+        // No results found
+        if (!hasResults) {
+            const noResults = document.createElement('div');
+            noResults.className = 'suggestion-item';
+            noResults.textContent = 'No results found';
+            content.appendChild(noResults);
+        }
+
+        // Append the content to the suggestions box
+        suggestionsBox.appendChild(content);
     }
-
-    // Display products second if available
-    if (suggestions.products && suggestions.products.length > 0) {
-        hasResults = true;
-        const productsHeader = document.createElement('div');
-        productsHeader.className = 'suggestion-header';
-        productsHeader.textContent = 'Products';
-        content.appendChild(productsHeader);
-
-        suggestions.products.forEach((product) => {
-            const suggestion = document.createElement('div');
-            suggestion.className = "suggestion-item";
-            suggestion.textContent = product.name;
-            suggestion.onclick = () => {
-                window.location.href = `/product/${product.id}`;
-            };
-            content.appendChild(suggestion);
-        });
-    }
-
-    // No results found
-    if (!hasResults) {
-        const noResults = document.createElement('div');
-        noResults.className = 'suggestion-item';
-        noResults.textContent = 'No results found';
-        content.appendChild(noResults);
-    }
-
-    // Append the content to the suggestions box
-    suggestionsBox.appendChild(content);
-}
 
 
     // Fetch search suggestions from server
@@ -338,9 +338,13 @@
                             companies: data.companies || []
                         }, isMobile);
                     } else if (selectedCategory === "Products") {
-                        displaySuggestions({ products: data.suggestions || [] }, isMobile);
+                        displaySuggestions({
+                            products: data.suggestions || []
+                        }, isMobile);
                     } else if (selectedCategory === "Companies") {
-                        displaySuggestions({ companies: data.suggestions || [] }, isMobile);
+                        displaySuggestions({
+                            companies: data.suggestions || []
+                        }, isMobile);
                     }
                 })
                 .catch(error => console.error("Error fetching suggestions:", error));
@@ -360,11 +364,13 @@
 
     // Event listeners for desktop and mobile dropdowns
     document.getElementById('dropdownButton').addEventListener('click', () => toggleDropdown('dropdownMenu'));
-    document.getElementById('dropdownButtonMobile').addEventListener('click', () => toggleDropdown('dropdownMenuMobile'));
+    document.getElementById('dropdownButtonMobile').addEventListener('click', () => toggleDropdown(
+        'dropdownMenuMobile'));
 
     // Event listeners for search input
     document.getElementById('search-bar').addEventListener('input', (e) => fetchSuggestions(e.target.value));
-    document.getElementById('search-bar-mobile').addEventListener('input', (e) => fetchSuggestions(e.target.value, true));
+    document.getElementById('search-bar-mobile').addEventListener('input', (e) => fetchSuggestions(e.target.value,
+        true));
 
     // Event listeners for form submission
     document.getElementById('search-form').addEventListener('submit', (e) => performSearch(e));
@@ -373,5 +379,4 @@
     // Initialize the default category
     selectDropdown("All");
 </script>
-
 <?php /**PATH C:\xampp\htdocs\vibrant_trade\resources\views/components/header.blade.php ENDPATH**/ ?>

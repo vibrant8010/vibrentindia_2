@@ -21,6 +21,7 @@
 <?php $component = $__componentOriginal781d22988f835a9692410092c1d21cd6; ?>
 <?php unset($__componentOriginal781d22988f835a9692410092c1d21cd6); ?>
 <?php endif; ?>
+<<<<<<< HEAD
     <style>
       body {
         background-color:#F2F9F6;
@@ -349,6 +350,9 @@
     
   </head>
 
+=======
+  </head>
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
   <body>
       <?php if (isset($component)) { $__componentOriginal2a2e454b2e62574a80c8110e5f128b60 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal2a2e454b2e62574a80c8110e5f128b60 = $attributes; } ?>
@@ -382,7 +386,11 @@
           class="product-details-slides"
           alt="Slide 2"
         />
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
       </div>
 <h1 class="product-detail-heading">Product from:</h1>
 <div class="company-badges">
@@ -391,12 +399,20 @@
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div>
 
+<<<<<<< HEAD
        
+=======
+
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
       <button class="filter-btn" style="background-color:transparent;border:0;">
         <i class="fa-solid fa-filter"></i>
       </button>
       <div class="outer-box-search">
+<<<<<<< HEAD
          
+=======
+
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
         <!--filter section-->
          <!--filter section-->
         <div class="filter-box">
@@ -410,6 +426,7 @@
                   <form method="GET" action="<?php echo e(route('company.products', $company->id)); ?>">
         <?php $__currentLoopData = $companies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $companyFilter): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div>
+<<<<<<< HEAD
                 <label>
                     <input 
                         type="checkbox" 
@@ -421,19 +438,36 @@
                     <?php echo e($companyFilter->name); ?>
 
                 </label>
+=======
+                <div class="company-fliter">
+                    <span><input
+                        type="checkbox"
+                        name="company_ids[]"
+                        value="<?php echo e($companyFilter->id); ?>"
+                        <?php echo e(in_array($companyFilter->id, $selectedCompanyIds) ? 'checked' : ''); ?>
+
+                        onchange="this.form.submit()"></span>
+                    <span class="company-filter-name"><?php echo e($companyFilter->name); ?></span>
+                    </div>
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
             </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <!-- Submit button for the form -->
         <button type="submit" style="display: none;"></button>
     </form>
                 </div>
+<<<<<<< HEAD
                    
+=======
+
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
                 <!-- Brands Filter -->
                 <div class="filter-header">
                   <h3>Category</h3>
                   <span>&#x25BC;</span>
                 </div>
                 <div class="filter-content">
+<<<<<<< HEAD
                   <!--<ul>-->
                   <!--  <li><input type="checkbox" id="brand1"><label for="brand1">Top Category</label></li>-->
                   <!--  <li><input type="checkbox" id="brand2"><label for="brand2">Tranding Products</label></li>-->
@@ -446,6 +480,15 @@
               
               </div>
               
+=======
+
+                </div>
+
+
+
+              </div>
+
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
         </div>
        <div class="product-view-box">
     <div class="product-list-view">
@@ -458,12 +501,17 @@
                             <img src="<?php echo e(asset($product->image_url)); ?>" alt="<?php echo e($product->name); ?>" class="product-image" />
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div class="product-details">
+=======
+                    <div class="product-bottom-details">
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
                         <h3 class="product-detail-name"><?php echo e($product->name); ?></h3>
                         <h3 class="product-detail-name"><?php echo e($product->category->name); ?></h3>
                         <h3 class="product-detail-name"><?php echo e($product->company->name); ?></h3>
                         <h3 class="product-detail-name"><?php echo e($product->subcategory->name); ?></h3>
                         <p class="product-detail-description"><?php echo e(Str::limit($product->description, 50)); ?></p>
+<<<<<<< HEAD
                          
                         <a href="/product/<?php echo e($product->id); ?>" class="product-link">View Product</a>
                         
@@ -471,6 +519,15 @@
                 </div>
             </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+=======
+
+                        <a href="/product/<?php echo e($product->id); ?>" class="product-link">View Product</a>
+
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
         </div>
     </div>
 </div>
@@ -481,16 +538,25 @@
 
 
     <script>
+<<<<<<< HEAD
       
 // Get the button element by its ID
 let filterbox = document.querySelector('.filter-box');
 let filterbtn= document.querySelector('.filter-btn');
 
 // Add an event listener for the 'click' event
+=======
+// Get the button and filter box elements
+let filterbox = document.querySelector('.filter-box');
+let filterbtn = document.querySelector('.filter-btn');
+
+// Add an event listener for the filter button click
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
 filterbtn.addEventListener('click', () => {
   filterbox.classList.toggle('active-box');
 });
 
+<<<<<<< HEAD
 
       let currentSlide = 0;
       const slides = document.querySelectorAll(".product-details-slides");
@@ -556,6 +622,83 @@ filterbtn.addEventListener('click', () => {
     });
   });
 
+=======
+// Add a close button dynamically to the filter box
+const closeButton = document.createElement('span');
+closeButton.classList.add('filter-close');
+closeButton.innerHTML = '&times;'; // Cross icon
+filterbox.appendChild(closeButton);
+
+// Add an event listener to the close button
+closeButton.addEventListener('click', () => {
+  filterbox.classList.remove('active-box');
+});
+
+let currentSlide = 0;
+const slides = document.querySelectorAll(".product-details-slides");
+
+// Function to show the current slide
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove("active"); // Remove active class from all slides
+    if (i === index) {
+      slide.classList.add("active"); // Add active class to the current slide
+    }
+  });
+}
+
+// Function to change the slide
+function changeSlide(step) {
+  currentSlide = (currentSlide + step + slides.length) % slides.length;
+  showSlide(currentSlide);
+}
+
+// Initialize slideshow
+showSlide(currentSlide);
+
+// Automatic slide change every 5 seconds
+setInterval(() => {
+  changeSlide(1);
+}, 5000);
+
+// Toggle filter content with arrow animation
+const filterHeaders = document.querySelectorAll('.filter-header');
+
+filterHeaders.forEach(header => {
+  header.addEventListener('click', () => {
+    const content = header.nextElementSibling;
+    const isActive = content.style.display === 'block';
+
+    // Toggle content visibility
+    content.style.display = isActive ? 'none' : 'block';
+
+    // Rotate arrow
+    const arrow = header.querySelector('span');
+    if (isActive) {
+      arrow.classList.remove('rotate');
+    } else {
+      arrow.classList.add('rotate');
+    }
+  });
+});
+
+// Clear location checkboxes
+function clearLocation() {
+  const checkboxes = document.querySelectorAll('#location-list input[type="checkbox"]');
+  checkboxes.forEach(checkbox => checkbox.checked = false);
+}
+
+// Filter location list
+const locationSearch = document.getElementById('location-search');
+locationSearch.addEventListener('input', () => {
+  const filter = locationSearch.value.toLowerCase();
+  const locations = document.querySelectorAll('#location-list li');
+  locations.forEach(location => {
+    const text = location.textContent.toLowerCase();
+    location.style.display = text.includes(filter) ? 'flex' : 'none';
+  });
+});
+>>>>>>> 28ac5b1b02d5f2483215668b1bcbec33160dda44
 
       </script>
 

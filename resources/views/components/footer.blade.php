@@ -1,5 +1,5 @@
 <footer>
-    <section class="footer-section mt-5">
+    <section class="footer-section">
         <div class="footer-section-alldetails">
             <div class="container">
 

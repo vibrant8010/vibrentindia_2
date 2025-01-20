@@ -6,6 +6,7 @@ body{
    padding:0;
    overflow-x: hidden !important;
    font-family: "Poppins", sans-serif !important;
+   /* font-family: "Montserrat", serif !important; */
 }
 /*common color*/
 :root{
@@ -69,11 +70,9 @@ input[type="text"]::-webkit-search-cancel-button {
     min-width: 0 !important;
 }
 .search-container{
-    display: flex;
     position: relative;
-        align-items: center;
         border: 1px solid var(--ternery-color);
-        border-radius: 7px;
+        border-radius: 4px;
 }
 .search-container .select{
     border: 0;
@@ -99,26 +98,50 @@ input[type="text"]::-webkit-search-cancel-button {
     font-size: 14px;
 }
 .search-btn-box{
-    background-color: var(--ternery-color);
+    /* background-color: var(--ternery-color);
     padding: 0 6px;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0; */
+    background-color: var(--ternery-color);
+    padding: 3px 5px;
+    border-radius: 4px;
 }
-.search-container .search-box-section{
-   display: flex;
+.search-btn-box i{
+    font-size: 16px;
+}
+.search-container .search-box-section {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
 }
 
 .search-container input[type="text"] {
-    width: 260px;
+    width: 345px;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
     padding: 10px 10px;
     border: 0;
+    font-size: 16px;
     background-color: transparent;
   }
-  .search-container .search-input-box{
+  @media screen and (max-width:1299px) {
+    .search-container input[type="text"] {
+        width: 289px;
+    }
+  }
+  @media screen and (max-width:991px) {
+    .search-section .inputgroup_location {
+        width: 164px;
+    }
+  }
+  @media screen and (max-width:840px) {
+    .search-section .inputgroup_location {
+        width: 152px;
+    }
+  }
+  /* .search-container .search-input-box{
     border-left: 1px solid var(--primary-color);
-}
+} */
 
 .search-container .search-btn{
     background-color: transparent;
@@ -564,7 +587,6 @@ input[type="text"]::-webkit-search-cancel-button {
 .bottom-btn,
 .cta{
     position: relative;
-    z-index:999;
 }
 
 .reset-box{
@@ -585,3 +607,18 @@ input[type="text"]::-webkit-search-cancel-button {
 }
 
 
+
+/*common btn inqury btn*/
+.inqury-btn{
+    border: 1px solid var(--primary-color);
+    padding: 4px 10px;
+    font-size: 13px;
+    border-radius: 20px;
+    color: var(--dark-color);
+    transition: 0.5s all ease-in-out;
+}
+.inqury-btn:hover{
+    background-color: var(--ternery-color);
+    text-decoration: none;
+    color: var(--light-color);
+}
