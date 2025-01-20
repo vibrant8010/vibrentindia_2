@@ -48,8 +48,7 @@
 
                 <div class="search-input-box">
                     <form id="search-form" class="search-box-section" onsubmit="performSearch(event)">
-                        <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()"
-                            autocomplete="off" placeholder="Search here ...">
+                        <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ...">
                         <div class="search-btn-box">
                             <button type="submit" class="search-btn">
                                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -219,6 +218,47 @@
         </script>
     @endif
 </header>
+<script>
+    // Fetching categories from Blade (passed as JSON)
+    const categories = @json(App\Models\Category::all()->pluck('name'));
+
+    let placeholderIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingSpeed = 100;
+    const deletingSpeed = 50;
+    const delayBetweenWords = 1500;
+
+    function animatePlaceholder() {
+        const currentPlaceholder = categories[placeholderIndex];
+        const searchInput = document.getElementById("search-bar");
+        const baseText = "Search for ";
+
+        if (!isDeleting && charIndex < currentPlaceholder.length) {
+            // Typing animation
+            searchInput.placeholder = baseText + currentPlaceholder.substring(0, charIndex + 1);
+            charIndex++;
+            setTimeout(animatePlaceholder, typingSpeed);
+        } else if (isDeleting && charIndex > 0) {
+            // Deleting animation
+            searchInput.placeholder = baseText + currentPlaceholder.substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(animatePlaceholder, deletingSpeed);
+        } else if (!isDeleting && charIndex === currentPlaceholder.length) {
+            // Pause before deleting
+            isDeleting = true;
+            setTimeout(animatePlaceholder, delayBetweenWords);
+        } else if (isDeleting && charIndex === 0) {
+            // Move to the next placeholder
+            isDeleting = false;
+            placeholderIndex = (placeholderIndex + 1) % categories.length;
+            setTimeout(animatePlaceholder, typingSpeed);
+        }
+    }
+
+    // Start the animation
+    animatePlaceholder();
+</script>
 
 <script>
     // Default category is 'Products'

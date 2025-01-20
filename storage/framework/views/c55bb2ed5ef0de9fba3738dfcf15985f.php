@@ -53,4 +53,5 @@
       </div>
     </section>
 </footer>
+
 <?php /**PATH C:\xampp\htdocs\vibrant_trade\resources\views/components/footer.blade.php ENDPATH**/ ?>

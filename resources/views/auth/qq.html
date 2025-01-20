@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GST Verification</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .form-main {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .input-type {
+            margin-bottom: 15px;
+        }
+        .custom-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .custom-btn:hover {
+            background-color: #0056b3;
+        }
+        .verification-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-failure {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <form id="signupForm3" action="/submit-signup" method="POST" class="form-main row mt-3">
+        <div class="step" id="step3">
+            <div class="input-type col-12">
+                <label for="gst" class="input-field-lable">GST Number</label>
+                <input type="text" class="progress-input-box" id="gst" placeholder="Enter your GST number" required />
+                <span><i class="fa-solid fa-file-invoice-dollar input-icon"></i></span>
+            </div>
+
+            <div class="input-type col-12">
+                <button type="button" class="custom-btn" id="verifyGstBtn">Verify GST</button>
+                <div id="verificationStatus" class="verification-status"></div>
+            </div>
+
+            <div id="additionalInfo" style="display: none;">
+                <div class="input-type col-12">
+                    <label for="tradeName">Trade Name</label>
+                    <input type="text" id="tradeName" class="progress-input-box" readonly />
+                </div>
+
+                <div class="input-type col-12">
+                    <label for="pincode">Pincode</label>
+                    <input type="text" id="pincode" class="progress-input-box" readonly />
+                </div>
+
+                <div class="input-type col-12">
+                    <label for="state">State</label>
+                    <input type="text" id="state" class="progress-input-box" readonly />
+                </div>
+
+                <div class="input-type col-12">
+                    <label for="city">City</label>
+                    <input type="text" id="city" class="progress-input-box" readonly />
+                </div>
+
+                <div class="input-type col-12">
+                    <label for="status">Status</label>
+                    <input type="text" id="status" class="progress-input-box" readonly />
+                </div>
+
+                <div class="input-type col-12">
+                    <label for="registrationDate">Registration Date</label>
+                    <input type="text" id="registrationDate" class="progress-input-box" readonly />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+      $(document).ready(function () {
+    $('#verifyGstBtn').click(function () {
+        const gstNumber = $('#gst').val().trim();
+
+        if (!gstNumber) {
+            alert('Please enter a GST number.');
+            return;
+        }
+
+        // Replace with your API key
+        const apiKey = '773d5f467578e282dac1d0c338c447cb';
+        const apiUrl = `http://sheet.gstincheck.co.in/check/${apiKey}/${gstNumber}`;
+
+        $.ajax({
+            url: apiUrl,
+            method: 'GET',
+            success: function (response) {
+                if (response.flag) {
+                    $('#verificationStatus')
+                        .removeClass('status-failure')
+                        .addClass('status-success')
+                        .text('GST Verified Successfully!')
+                        .show();
+
+                    // Populate fields with response data
+                    $('#tradeName').val(response.data.tradeNam);
+                    $('#pincode').val(response.data.pradr.addr.pncd);
+                    $('#state').val(response.data.pradr.addr.stcd);
+                    $('#city').val(response.data.pradr.addr.dst);
+                    $('#status').val(response.data.sts);
+                    $('#registrationDate').val(response.data.rgdt);
+
+                    $('#additionalInfo').show();
+                } else {
+                    $('#verificationStatus')
+                        .removeClass('status-success')
+                        .addClass('status-failure')
+                        .text('GST Verification Failed: ' + response.message)
+                        .show();
+
+                    $('#additionalInfo').hide();
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error Details:', xhr);
+                $('#verificationStatus')
+                    .removeClass('status-success')
+                    .addClass('status-failure')
+                    .text('Error while verifying GST. Please try again.')
+                    .show();
+
+                $('#additionalInfo').hide();
+            },
+        });
+    });
+});
+
+    </script>
+</body>
+</html>

@@ -1,21 +1,22 @@
 <?php
-use App\Http\Controllers\Admin\AuthController as AdminAuthController;
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\InquiryController;
-
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
+
+use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\ProductController;
 
+use App\Http\Controllers\Admin\AdminController;
+
+use App\Http\Controllers\business\businessController;
 use App\Http\Controllers\Auth\AuthController as AuthController;
-
-use App\Http\Controllers\BlogController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 
 
-
+Route::post('/location', [UserController::class, 'store_location'])->name('location_store');
 Route::get('/search-suggestions', [ProductController::class, 'getSuggestions']);
 Route::get('/company/{id}/products', [ProductController::class, 'companyProducts'])->name('company.products');
-
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('/product/{id}', [ProductController::class, 'productDetails']);
 
 Route::view('/about', 'about');
@@ -37,8 +38,14 @@ Route::view('/terms&condition', 'terms&condition');
 
 
 Route::get('/register',[AuthController::class , 'register'])->name('register');
+
+Route::get('/business/register',[AuthController::class , 'businessregister'])->name('business.register');
+
+Route::post('/business/register',[AuthController::class , 'businessregisterSave'])->name('business.register.save');
+
 Route::post('/register',[AuthController::class,'registerSave'])->name('register.save');
 Route::get('/otp-validate',[AuthController::class,'otpValidate'])->name('user.email.validate');
+// Route::post('/otp-verification',[AuthController::class , 'verifyOtp'])->name('user.otp.verify');
 Route::post('/otp-verification',[AuthController::class , 'verifyOtp'])->name('user.otp.verify');
 Route::get('/View-otp',[AuthController::class,'otpblade'])->name('viewotp');
 
@@ -112,14 +119,14 @@ Route::middleware('auth:admin')->group(function () {
         Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('admin/users')->name('admin.users.')->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('index');
-        Route::get('/create', [UserController::class, 'create'])->name('create');
-        Route::post('/', [UserController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [UserController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [UserController::class, 'update'])->name('update');
-        Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
-    });
+    // Route::prefix('admin/users')->name('admin.users.')->group(callback: function () {
+    //     Route::get('/', [UserController::class, 'index'])->name('index');
+    //     Route::get('/create', [UserController::class, 'create'])->name('create');
+    //     Route::post('/', [UserController::class, 'store'])->name('store');
+    //     Route::get('/{id}/edit', [UserController::class, 'edit'])->name('edit');
+    //     Route::put('/{id}', [UserController::class, 'update'])->name('update');
+    //     Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+    // });
 
     Route::prefix('admin/inquiry')->name('admin.inquiry.')->group(function () {
         Route::get('/', [InquiryController::class, 'index'])->name('index');
@@ -137,3 +144,17 @@ Route::middleware('auth:admin')->group(function () {
         Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
     });
 });
+// business Routes
+Route::middleware(['role:business'])->group(function () {
+    Route::get('/business/dashboard', [businessController::class, 'index'])->name('business.dashboard');
+    Route::get('/business/users', [businessController::class, 'index'])->name('business.users');
+});
+// super admin Routes
+Route::middleware(['role:super_admin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::prefix('users')->group(function () {
+       Route::get('/', [UserController::class, 'show'])->name('admin.users');
+       Route::get('/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    });
+});
+
