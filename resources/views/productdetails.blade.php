@@ -167,16 +167,240 @@
                                         </p>
                                         <h4 class="description-titletxt">Company Description</h4>
                                         <p class="description-txt">{{ $product->company->description }}</p>
-
-
                                     </div>
                                 </div>
                             </div>
                             <!-- More Products Info -->
                             <div class="tab-content more-product" id="more-product">
-                                More Products Content Here
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-3 col-md-4 col-sm-6">
+                                        <div class="card-view inner-card">
+                                            <a href="http://127.0.0.1:8000/product/92" class="card-link"></a>
+                                            <div class="image-container">
+                                                <div class="thumbnail_container">
+                                                    <div class="thumbnail">
+                                                        <img src="http://127.0.0.1:8000/images/1734066639_COOKWAREINDIVISUAl.webp" class="product-image swiper-img" alt="Hammered Sauce Pan" onclick="openPopup(this)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="logo-container" style="">
+                                                                                <img src="http://127.0.0.1:8000/logos\1733305223_shri_and_sam_logo_280_by_80.png" class="logo-image" alt="Shri and Sam">
+                                                                        </div>
+
+                                            <div class="text-wrapper">
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Product:</span>
+                                                    <span class="trnding-pro-name">Hammered Sauce Pan</span>
+                                                </h6>
+
+                                            </div>
+                                            <div class="card-bottom">
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Company Name:</span>
+                                                    <span class="tranding-pro-name">Shri and Sam</span>
+                                                </h6>
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Category:</span>
+                                                    <span class="tranding-pro-name">Kitchenware</span>
+                                                </h6>
+
+                                                <h6 class="tranding-material-name">
+                                                    <span class="tranding-material-title">Material:</span>
+                                                    <span class="mt-name tranding-mt-name">Stainless Steel</span>
+                                                </h6>
+                                                <h6 class="tranding-product-size">
+                                                    <span class="tranding-size-title">Size:</span>
+                                                    <span class="tranding-sz-name">12cm to 18 cm</span>
+                                                </h6>
+                                                 <p class="card-description content-txt" id="description-92">
+
+                                                        <span class="visible-text">
+                                                            This Hammered Sauce...
+                                                        </span>
+
+                                                    </p>
+                                                    <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(92)"></a>
+
+                                                <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                                                            <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
+                                                            <span>Sign in to Inquire</span>
+                                                        </a>
+                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-3 col-md-4 col-sm-6">
+                                        <div class="card-view inner-card">
+                                            <a href="http://127.0.0.1:8000/product/92" class="card-link"></a>
+                                            <div class="image-container">
+                                                <div class="thumbnail_container">
+                                                    <div class="thumbnail">
+                                                        <img src="http://127.0.0.1:8000/images/1734066639_COOKWAREINDIVISUAl.webp" class="product-image swiper-img" alt="Hammered Sauce Pan" onclick="openPopup(this)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="logo-container" style="">
+                                                                                <img src="http://127.0.0.1:8000/logos\1733305223_shri_and_sam_logo_280_by_80.png" class="logo-image" alt="Shri and Sam">
+                                                                        </div>
+
+                                            <div class="text-wrapper">
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Product:</span>
+                                                    <span class="trnding-pro-name">Hammered Sauce Pan</span>
+                                                </h6>
+
+                                            </div>
+                                            <div class="card-bottom">
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Company Name:</span>
+                                                    <span class="tranding-pro-name">Shri and Sam</span>
+                                                </h6>
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Category:</span>
+                                                    <span class="tranding-pro-name">Kitchenware</span>
+                                                </h6>
+
+                                                <h6 class="tranding-material-name">
+                                                    <span class="tranding-material-title">Material:</span>
+                                                    <span class="mt-name tranding-mt-name">Stainless Steel</span>
+                                                </h6>
+                                                <h6 class="tranding-product-size">
+                                                    <span class="tranding-size-title">Size:</span>
+                                                    <span class="tranding-sz-name">12cm to 18 cm</span>
+                                                </h6>
+                                                 <p class="card-description content-txt" id="description-92">
+
+                                                        <span class="visible-text">
+                                                            This Hammered Sauce...
+                                                        </span>
+
+                                                    </p>
+                                                    <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(92)"></a>
+
+                                                <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                                                            <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
+                                                            <span>Sign in to Inquire</span>
+                                                        </a>
+                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-3 col-md-4 col-sm-6">
+                                        <div class="card-view inner-card">
+                                            <a href="http://127.0.0.1:8000/product/92" class="card-link"></a>
+                                            <div class="image-container">
+                                                <div class="thumbnail_container">
+                                                    <div class="thumbnail">
+                                                        <img src="http://127.0.0.1:8000/images/1734066639_COOKWAREINDIVISUAl.webp" class="product-image swiper-img" alt="Hammered Sauce Pan" onclick="openPopup(this)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="logo-container" style="">
+                                                                                <img src="http://127.0.0.1:8000/logos\1733305223_shri_and_sam_logo_280_by_80.png" class="logo-image" alt="Shri and Sam">
+                                                                        </div>
+
+                                            <div class="text-wrapper">
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Product:</span>
+                                                    <span class="trnding-pro-name">Hammered Sauce Pan</span>
+                                                </h6>
+
+                                            </div>
+                                            <div class="card-bottom">
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Company Name:</span>
+                                                    <span class="tranding-pro-name">Shri and Sam</span>
+                                                </h6>
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Category:</span>
+                                                    <span class="tranding-pro-name">Kitchenware</span>
+                                                </h6>
+
+                                                <h6 class="tranding-material-name">
+                                                    <span class="tranding-material-title">Material:</span>
+                                                    <span class="mt-name tranding-mt-name">Stainless Steel</span>
+                                                </h6>
+                                                <h6 class="tranding-product-size">
+                                                    <span class="tranding-size-title">Size:</span>
+                                                    <span class="tranding-sz-name">12cm to 18 cm</span>
+                                                </h6>
+                                                 <p class="card-description content-txt" id="description-92">
+
+                                                        <span class="visible-text">
+                                                            This Hammered Sauce...
+                                                        </span>
+
+                                                    </p>
+                                                    <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(92)"></a>
+
+                                                <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                                                            <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
+                                                            <span>Sign in to Inquire</span>
+                                                        </a>
+                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-3 col-md-4 col-sm-6">
+                                        <div class="card-view inner-card">
+                                            <a href="http://127.0.0.1:8000/product/92" class="card-link"></a>
+                                            <div class="image-container">
+                                                <div class="thumbnail_container">
+                                                    <div class="thumbnail">
+                                                        <img src="http://127.0.0.1:8000/images/1734066639_COOKWAREINDIVISUAl.webp" class="product-image swiper-img" alt="Hammered Sauce Pan" onclick="openPopup(this)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="logo-container" style="">
+                                                                                <img src="http://127.0.0.1:8000/logos\1733305223_shri_and_sam_logo_280_by_80.png" class="logo-image" alt="Shri and Sam">
+                                                                        </div>
+
+                                            <div class="text-wrapper">
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Product:</span>
+                                                    <span class="trnding-pro-name">Hammered Sauce Pan</span>
+                                                </h6>
+
+                                            </div>
+                                            <div class="card-bottom">
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Company Name:</span>
+                                                    <span class="tranding-pro-name">Shri and Sam</span>
+                                                </h6>
+                                                <h6 class="tranding-product-name">
+                                                    <span class="title">Category:</span>
+                                                    <span class="tranding-pro-name">Kitchenware</span>
+                                                </h6>
+
+                                                <h6 class="tranding-material-name">
+                                                    <span class="tranding-material-title">Material:</span>
+                                                    <span class="mt-name tranding-mt-name">Stainless Steel</span>
+                                                </h6>
+                                                <h6 class="tranding-product-size">
+                                                    <span class="tranding-size-title">Size:</span>
+                                                    <span class="tranding-sz-name">12cm to 18 cm</span>
+                                                </h6>
+                                                 <p class="card-description content-txt" id="description-92">
+
+                                                        <span class="visible-text">
+                                                            This Hammered Sauce...
+                                                        </span>
+
+                                                    </p>
+                                                    <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(92)"></a>
+
+                                                <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                                                            <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
+                                                            <span>Sign in to Inquire</span>
+                                                        </a>
+                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                </div>
                             </div>
-                        </div>
 
                     </div>
 

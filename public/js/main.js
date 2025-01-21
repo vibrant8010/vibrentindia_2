@@ -253,23 +253,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   document.addEventListener('DOMContentLoaded', () => {
-    const tabs = document.querySelectorAll('.nav-item .nav-link');
-    const contents = document.querySelectorAll('.tab-content');
+    const tabs = document.querySelectorAll('.nav-item .nav-link'); // Select all tabs
+    const contents = document.querySelectorAll('.tab-content'); // Select all tab content sections
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            // Remove active class from all tabs and hide all content
+            // Remove the 'active' class from all tabs
             tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Hide all content sections
             contents.forEach(content => (content.style.display = 'none'));
 
-            // Add active class to the clicked tab
+            // Add the 'active' class to the clicked tab
             tab.classList.add('active');
 
-            // Show the corresponding content
+            // Get the target content's ID from the 'data-tab' attribute
             const targetId = tab.getAttribute('data-tab');
-            document.getElementById(targetId).style.display = 'block';
+
+            // Display the corresponding content
+            const targetContent = document.getElementById(targetId);
+            if (targetContent) {
+                targetContent.style.display = 'block'; // Ensure only the targeted content is shown
+            }
         });
     });
+
+    // Initialize by showing only the first tab's content and marking the first tab as active
+    if (tabs.length > 0 && contents.length > 0) {
+        tabs.forEach(tab => tab.classList.remove('active'));
+        contents.forEach(content => (content.style.display = 'none'));
+
+        tabs[0].classList.add('active'); // Mark the first tab as active
+        contents[0].style.display = 'block'; // Show the first tab's content
+    }
 });
 
 
@@ -287,12 +303,6 @@ $("body").on("click", ".view-arrow-btn", function() {
     var currentToggleClass = $(this).find("i");
     $(currentToggleClass).toggleClass("fa-arrow-circle-down fa-arrow-circle-up");
 
-    // Toggle the visibility of the bottom card
-    // if ($(currentToggleClass).hasClass("fa-arrow-circle-up")) {
-    //     currentCard.find(".bottom-card").fadeIn();
-    // } else {
-    //     currentCard.find(".bottom-card").fadeOut();
-    // }
 
     // Slide up or down the product description for the clicked card only
     currentCard.find(".product-description-div").stop().slideToggle();

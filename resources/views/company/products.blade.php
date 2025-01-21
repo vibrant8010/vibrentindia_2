@@ -37,6 +37,7 @@
         <div class="filter-box">
             <div class="filter-container">
                 <!-- OEM Filter -->
+                <span class="filter-close">&times;</span>
                 <div class="filter-header">
                   <h3>CompanyName</h3>
                   <span>&#x25BC;</span>
