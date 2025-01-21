@@ -1,3 +1,44 @@
+<style>
+    #suggestions-box {
+    /* border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    z-index: 10; */
+    list-style-type: none;
+    z-index: 99999;
+    overflow-y: scroll;
+    padding: 0;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: absolute;
+    top: 47px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    display: none;
+    height: 300px;
+}
+
+#suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#suggestions-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#suggestions-list li:hover {
+    background-color: #f0f0f0;
+}
+
+</style>
 <header class="header-scroll">
     <section class="header-top">
         <!-- Left Part: Logo -->
@@ -48,14 +89,19 @@
 
                 <div class="search-input-box">
                     <form id="search-form" class="search-box-section" onsubmit="performSearch(event)">
+                        {{-- <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ..."> --}}
                         <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ...">
+                        <div id="suggestions-box" class="suggestions-box">
+                            <ul id="suggestions-list"></ul>
+                        </div>
                         <div class="search-btn-box">
                             <button type="submit" class="search-btn">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
                     </form>
-                    <div id="suggestions" class="suggestions-box"></div>
+                    {{-- <div id="suggestions" class="suggestions-box"></div>
+                    <div id="suggestions" class="suggestions-box"></div> --}}
                 </div>
             </div>
         </div>
@@ -106,11 +152,21 @@
                     <a href="#"><span class="category-img mx-1 "><i class="fa-solid fa-list"></i></span>All
                         Category</a>
                     <ul class="submenu">
-                        <li class="category-menu-item"><a href="#" class="category-menu-link">Option 1</a></li>
-                        <li class="category-menu-item"><a href="#" class="category-menu-link">Option 2</a></li>
+                        @php
+                        $categories = App\Models\Category::all()->pluck('name');
+                    @endphp
+
+                    @foreach ($categories as $category)
+                        <li class="category-menu-item">
+                            <a href="#" class="category-menu-link">{{ $category }}</a>
+                        </li>
+                    @endforeach
+
+
+                        {{-- <li class="category-menu-item"><a href="#" class="category-menu-link">Option 2</a></li>
                         <li class="category-menu-item"><a href="#" class="category-menu-link">Option 3</a></li>
                         <li class="category-menu-item"><a href="#" class="category-menu-link">Option 4</a></li>
-                        <li class="category-menu-item"><a href="#" class="category-menu-link">Option 5</a></li>
+                        <li class="category-menu-item"><a href="#" class="category-menu-link">Option 5</a></li> --}}
                     </ul>
                 </li>
             </ul>
@@ -202,10 +258,10 @@
         </div>
     </div>
     @if (session('alert'))
-        {{-- <div class="alert alert-warning">
+        <div class="alert alert-warning">
         {{ session('alert') }}
-    </div> --}}
-        <script>
+    </div>
+        {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {
 
                 var loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {
@@ -215,9 +271,75 @@
                 loginModal.show();
 
             });
-        </script>
+        </script> --}}
     @endif
 </header>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#search-bar').on('keyup', function () {
+        const query = $(this).val();
+
+        if (query.length > 2) {
+            $.ajax({
+                url: '/search-suggestions',
+                method: 'GET',
+                data: { query: query },
+                success: function (response) {
+                    let suggestionsHTML = '';
+
+                    // Add products
+                    if (response.products.length > 0) {
+                        suggestionsHTML += '<li><strong>Products:</strong></li>';
+                        response.products.forEach(product => {
+                            suggestionsHTML += `<li>${product.name}</li>`;
+                        });
+                    }
+
+                    // Add categories
+                    if (response.categories.length > 0) {
+                        suggestionsHTML += '<li><strong>Categories:</strong></li>';
+                        response.categories.forEach(category => {
+                            suggestionsHTML += `<li>${category.name}</li>`;
+                        });
+                    }
+
+                    // Add subcategories
+                    if (response.subcategories.length > 0) {
+                        suggestionsHTML += '<li><strong>Subcategories:</strong></li>';
+                        response.subcategories.forEach(subcategory => {
+                            suggestionsHTML += `<li>${subcategory.name}</li>`;
+                        });
+                    }
+
+                    // Add companies
+                    if (response.companies.length > 0) {
+                        suggestionsHTML += '<li><strong>Companies:</strong></li>';
+                        response.companies.forEach(company => {
+                            suggestionsHTML += `<li>${company.name}</li>`;
+                        });
+                    }
+
+                    $('#suggestions-list').html(suggestionsHTML);
+                    $('#suggestions-box').show();
+                },
+                error: function () {
+                    $('#suggestions-box').hide();
+                },
+            });
+        } else {
+            $('#suggestions-box').hide();
+        }
+    });
+
+    $(document).on('click', '#suggestions-list li', function () {
+        const selectedValue = $(this).text();
+        $('#search-bar').val(selectedValue);
+        $('#suggestions-box').hide();
+    });
+});
+
+</script>
 <script>
     // Fetching categories from Blade (passed as JSON)
     const categories = @json(App\Models\Category::all()->pluck('name'));

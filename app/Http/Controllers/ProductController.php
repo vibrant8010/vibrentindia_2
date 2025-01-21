@@ -251,7 +251,49 @@ class ProductController extends Controller
 
         return view('search.results', compact('results', 'searchTerm'));
     }
+    public function suggestions(Request $request)
+    {
+        $searchTerm = $request->input('query');
 
+        // Search in Products
+        $products = Product::select('id', 'name', 'description')
+            ->where('name', 'like', "%{$searchTerm}%")
+            ->orWhere('description', 'like', "%{$searchTerm}%")
+            ->orWhere('material', 'like', "%{$searchTerm}%")
+            ->orWhere('size', 'like', "%{$searchTerm}%")
+            ->limit(5)
+            ->get();
+
+        // Search in Categories
+        $categories = Category::select('id', 'name')
+            ->where('name', 'like', "%{$searchTerm}%")
+            ->limit(5)
+            ->get();
+
+        // Search in Subcategories
+        $subcategories = SubCategory::select('id', 'name')
+            ->where('name', 'like', "%{$searchTerm}%")
+            ->limit(5)
+            ->get();
+
+        // Search in Company Details
+        $companies = CompanyDetail::select('id', 'name', 'description')
+            ->where('name', 'like', "%{$searchTerm}%")
+            ->orWhere('description', 'like', "%{$searchTerm}%")
+            ->orWhere('alternate_names', 'like', "%{$searchTerm}%")
+            ->limit(5)
+            ->get();
+
+        // Combine Results
+        $results = [
+            'products' => $products,
+            'categories' => $categories,
+            'subcategories' => $subcategories,
+            'companies' => $companies,
+        ];
+
+        return response()->json($results);
+    }
 
 public function getSuggestions(Request $request)
 {
