@@ -17,6 +17,7 @@ Route::post('/location', [UserController::class, 'store_location'])->name('locat
 Route::get('/search-suggestions', [ProductController::class, 'getSuggestions']);
 Route::get('/company/{id}/products', [ProductController::class, 'companyProducts'])->name('company.products');
 Route::get('/search', [ProductController::class, 'search'])->name('search');
+Route::get('/search-suggestions', [ProductController::class, 'suggestions']);
 Route::get('/product/{id}', [ProductController::class, 'productDetails']);
 
 Route::view('/about', 'about');
