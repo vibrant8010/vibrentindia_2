@@ -1,238 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bootstrap demo</title>
-    <!-- bootstrap link -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <style>
-      body {
-        font-family: "Arial", sans-serif;
-        background: #fff;
-        overflow-x: hidden;
-      }
-
-      .step {
-        display: none;
-        width: 100%;
-        /* Ensures all steps have the same width */
-        min-height: 100px;
-        /* Adds consistent height to avoid shifting */
-      }
-
-      .step.active {
-        display: block;
-      }
-
-      .input-type {
-        margin-bottom: 24px;
-        position: relative;
-      }
-
-      .input-field-lable {
-        color: #333333bd;
-        position: absolute;
-        left: 4%;
-        bottom: 75%;
-        background-color: #fff;
-        padding: 3px 5px;
-        font-size: 12px;
-        font-weight: 600;
-      }
-
-      .input-icon {
-        position: absolute;
-        bottom: 30%;
-        left: 2%;
-      }
-
-      .progress-input-box {
-        border-radius: 3px;
-        padding: 16px 31px 12px 42px;
-        font-size: 14px;
-        width: 100%;
-        border: 1px solid #ddd;
-      }
-
-      .progressbar {
-        margin-bottom: 30px;
-        overflow: hidden;
-        display: flex;
-        justify-content: space-between;
-        padding: 0;
-        list-style-type: none;
-        position: relative;
-      }
-
-      .progressbar .progress-item {
-        list-style-type: none;
-        color: #99a2a8;
-        font-size: 9px;
-        width: calc(100% / 3);
-        float: left;
-        text-align: center;
-        position: relative;
-        font: 500 13px / 1 "Roboto", sans-serif;
-      }
-
-      .progressbar .progress-item.active {
-        color: #5cb85c;
-      }
-
-      .progressbar .progress-item.active::before {
-        background-color: #004f43;
-        color: white;
-      }
-
-      .progressbar .progress-item::before {
-        content: "";
-        font: normal normal normal 30px / 50px Ionicons;
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-        display: block;
-        background: #004f43;
-        border-radius: 50%;
-        margin: 0 auto 10px auto;
-        position: relative;
-        z-index: 99;
-      }
-
-      .progressbar .progress-item::after {
-        content: "";
-        width: 100%;
-        height: 2px;
-        background: #eaf0f4;
-        position: absolute;
-        left: -50%;
-        top: 21px;
-        z-index: 0;
-      }
-
-      .progressbar .progress-item.active::after {
-        background: #004f43;
-        color: white;
-      }
-
-      .progressbar .progress-item:nth-child(1):after {
-        content: "";
-        display: none;
-      }
-
-      .progressbar .progress-item:nth-child(1)::before {
-        content: "";
-        background-image: url(./smartphone.png);
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-
-      .progressbar .progress-item:nth-child(2)::before {
-        content: "";
-        background-image: url(./password-access.png);
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-
-      .progressbar .progress-item:nth-child(3)::before {
-        content: "";
-        background-image: url(./save.png);
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-
-      .custom_object_contain {
-        object-fit: contain;
-        filter: none !important;
-      }
-
-      .registration-step-area {
-        background-color: transparent !important;
-        color: #fff;
-        z-index: 1090 !important;
-      }
-
-      .carousel-indicators [data-bs-target] {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        top: 0;
-        bottom: 0;
-        opacity: 0.4;
-      }
-
-      @media (max-width: 480px) {
-        .registration-step-area {
-          display: none;
-        }
-
-        .input-icon {
-          left: 5%;
-        }
-      }
-
-      .form-btn-box {
-        display: flex;
-        justify-content: space-between;
-        padding: 15px;
-      }
-
-      .sign-link-btn {
-        text-decoration: none;
-      }
-
-      .custom-btn {
-        background-color: rgb(45, 116, 107);
-        border: none;
-        color: white;
-        padding: 8px 20px;
-        font-size: 17px;
-        font-weight: 600;
-        border-radius: 8px;
-        cursor: pointer;
-        width: 20%;
-        transition: background-color 0.3s ease;
-      }
-
-      .form-section {
-        /* background-color: green; */
-        padding: 30px;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        border-radius: 7px;
-      }
-      .verification-status {
-        margin-top: 10px;
-        padding: 10px;
-        border-radius: 5px;
-        display: none;
-      }
-      .status-success {
-        background-color: #d4edda;
-        color: #155724;
-      }
-      .status-failure {
-        background-color: #f8d7da;
-        color: #721c24;
-      }
-    </style>
-  </head>
-
+<head>
+    <x-head/>
+</head>
   <body>
     <div class="container-fluid">
       <div class="row">
         <!-- slider -->
         <div
-          class="col-lg-3 col-xl-2 col-md-3 col-sm-3 registration-step-area h-100 shadow p-0 sticky-top"
+          class="col-lg-2 col-xl-2 col-md-3 col-sm-3 registration-step-area h-100 shadow p-0 sticky-top"
         >
           <div class="card p-0 border-0">
             <div class="card-body p-0 border-0">
@@ -299,35 +75,33 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-10 col-lg-11 col-sm-9 col-md-9 col-xl-9">
-          <div class="row">
-            <div class="col-12 pe-0 pe-sm-3">
-              <div class="navbar d-flex flex-row-reverse my-2">
+        <div class="col-xl-10 col-lg-10 col-sm-9 col-md-9 col-xl-9 px-xl-5 px-md-2 px-sm-1 px-1">
+          <div class="row m-0">
+            <div class="col-xl-12 col-lg-12 col-12 py-4 d-flex justify-content-end">
                 <a class="navbar-brand" href="#">
-                  <img src="./company-logo.webp" width="150px" height="auto" />
+                  <img src="{{ asset('images/company-logo.png') }}" width="150px" height="auto" />
                 </a>
-              </div>
             </div>
           </div>
           <div class="progressbar-main text-center py-2">
             <!-- progressbar -->
             <ul id="progressBar" class="progressbar">
-              <li class="progress-item active">Verify Phone</li>
-              <li class="progress-item">Upload Documents</li>
-              <li class="progress-item">Security Questions</li>
+              <li class="progress-item active"></span>Verify Phone</li>
+              <li class="progress-item active">Upload Documents</li>
+              <li class="progress-item active">Security Questions</li>
             </ul>
           </div>
           <div class="form-section mt-2">
             <!-- form-section -->
-            <div id="signupForm" class="row g-3 px-5 form-btn-box">
+            <div id="signupForm" class="px-5 form-btn-box">
               <form
                 id="registrationForm"
                 action="{{ route('business.register.save') }}"
                 method="POST"
-                class="form-main row mt-3"
+                class="form-main row mt-3 registration-form"
               >
                 <div class="step active" id="step1">
-                  <div class="input-type col-12">
+                  <div class="input-type-content">
                     <span for="name" class="input-field-lable">Name</span>
                     <input
                       type="text"
@@ -339,7 +113,7 @@
                     />
                     <span><i class="fa-solid fa-user input-icon"></i></span>
                   </div>
-                  <div class="input-type col-12">
+                  <div class="input-type-content">
                     <span for="phone" class="input-field-lable"
                       >Phone Number</span
                     >
@@ -353,7 +127,7 @@
                     />
                     <span><i class="fa-solid fa-phone input-icon"></i></span>
                   </div>
-                  <div class="input-type col-12">
+                  <div class="input-type-content">
                     <span for="email" class="input-field-lable">Email</span>
                     <input
                       type="email"
@@ -365,7 +139,7 @@
                     />
                     <span><i class="fa-solid fa-envelope input-icon"></i></span>
                   </div>
-                  <div class="input-type col-12">
+                  <div class="input-type-content">
                     <span for="password" class="input-field-lable"
                       >Password</span
                     >
@@ -386,10 +160,10 @@
                     </button>
                     --}}
                     <div class="form-btn-box">
-                      <p>
+                      {{-- <p>
                         Have an account?
                         <a class="sign-link-btn" href="#">Sign In </a>now.
-                      </p>
+                      </p> --}}
                       <input
                         type="button"
                         class="custom-btn"
@@ -405,11 +179,11 @@
                 id="signupForm2"
                 action="{{ route('user.otp.verify') }}"
                 method="POST"
-                class="form-main row mt-3"
+                class="form-main mt-3"
               >
                 @csrf
-                <div class="step" id="step2">
-                  <div class="input-type col-12">
+                <div class="step active" id="step2">
+                  <div class="input-type-content">
                     <span for="otp" class="input-field-lable">Enter OTP</span>
                     <input
                       type="text"
@@ -446,7 +220,7 @@
                 class="form-main row mt-3"
               >
                 <div class="step" id="step3">
-                  <div class="input-type col-12">
+                  <div class="input-type-content">
                     <span for="gst" class="input-field-lable">GST Number</span>
                     <input
                       type="text"
@@ -483,10 +257,10 @@
                 id="signupForm3"
                 action="/submit-signup"
                 method="POST"
-                class="form-main row mt-3"
+                class="form-main mt-3"
               >
-                <div class="step" id="step3">
-                  <div class="input-type col-12">
+                <div class="step active" id="step3">
+                  <div class="input-type-content">
                     <label for="gst" class="input-field-lable"
                       >GST Number</label
                     >
@@ -502,7 +276,7 @@
                     ></span>
                   </div>
 
-                  <div class="input-type col-12">
+                  <div class="input-type-content">
                     <button type="button" class="custom-btn" id="verifyGstBtn">
                       Verify GST
                     </button>
@@ -515,8 +289,7 @@
                   <div id="additionalInfo" style="display: none">
                     <div class="row">
                       <div class="col-6">
-                        <div class="input-type">
-                          <label class="input-field-lable" for="tradeName"
+                        <div class="input-type-cont                      <label class="input-field-lable" for="tradeName"
                             >Trade Name</label
                           >
                           <input
@@ -531,8 +304,7 @@
                             ></i
                           ></span>
                         </div>
-                        <div class="input-type">
-                          <label class="input-field-lable" for="pincode"
+                        <div class="input-type-cont                      <label class="input-field-lable" for="pincode"
                             >Pincode</label
                           >
                           <input
@@ -545,8 +317,7 @@
                             ><i class="fa-solid fa-map-pin input-icon"></i
                           ></span>
                         </div>
-                        <div class="input-type">
-                          <label class="input-field-lable" for="state"
+                        <div class="input-type-cont                      <label class="input-field-lable" for="state"
                             >State</label
                           >
                           <input
@@ -562,8 +333,7 @@
                       </div>
 
                       <div class="col-6">
-                        <div class="input-type">
-                          <label class="input-field-lable" for="city"
+                        <div class="input-type-cont                      <label class="input-field-lable" for="city"
                             >City</label
                           >
                           <input
@@ -577,8 +347,7 @@
                           ></span>
                         </div>
 
-                        <div class="input-type">
-                          <label class="input-field-lable" for="status"
+                        <div class="input-type-cont                      <label class="input-field-lable" for="status"
                             >Status</label
                           >
                           <input
@@ -594,8 +363,7 @@
                           ></span>
                         </div>
 
-                        <div class="input-type">
-                          <label
+                        <div class="input-type-cont                      <label
                             class="input-field-lable"
                             for="registrationDate"
                             >Registration Date</label

@@ -1,0 +1,211 @@
+
+.registration-form{
+    min-width: 97%;
+}
+ .step {
+    display: none;
+    width: 100%;
+    /* Ensures all steps have the same width */
+    min-height: 100px;
+    /* Adds consistent height to avoid shifting */
+  }
+
+ .registration-form .step.active {
+    display: block;
+  }
+
+ .input-type {
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+
+
+  .input-icon {
+    position: absolute;
+    bottom: 30%;
+    left: 2%;
+  }
+
+
+  .progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    list-style-type: none;
+    position: relative;
+  }
+
+  .progressbar .progress-item {
+    list-style-type: none;
+    color: #99a2a8;
+    font-size: 9px;
+    width: calc(100% / 3);
+    float: left;
+    text-align: center;
+    position: relative;
+    font: 500 13px / 1 "Roboto", sans-serif;
+  }
+
+  .progressbar .progress-item.active {
+    color: #5cb85c;
+  }
+
+  .progressbar .progress-item.active::before {
+    background-color: #004f43;
+    color: white;
+  }
+
+  .progressbar .progress-item::before {
+    content: "";
+    font: normal normal normal 30px / 50px Ionicons;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    display: block;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    position: relative;
+    z-index: 99;
+  }
+
+  .progressbar .progress-item::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background: #eaf0f4;
+    position: absolute;
+    left: -50%;
+    top: 21px;
+    z-index: 0;
+  }
+
+  .progressbar .progress-item.active::after {
+    background: #004f43;
+    color: white;
+  }
+
+  .progressbar .progress-item:nth-child(1):after {
+    content: "";
+    display: none;
+  }
+  .progressbar .progress-item::before{
+    border: 1px solid var(--ternery-color);
+    font-size: 22px;
+    background-color: #004f43;
+    font-weight: 500;
+
+  }
+  .progressbar .progress-item:nth-child(1)::before {
+    content: "\f007";
+    font-family: "Font Awesome 6 Free";
+    background-repeat: no-repeat;
+    border: 1px solid var(--ternery-color);
+    background-position: center;
+  }
+
+  .progressbar .progress-item:nth-child(2)::before {
+    font-family: "Font Awesome 6 Free"; /* Font Awesome font-family */
+    content: "\f11c"; /* Unicode for the fa-keyboard icon */
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .progressbar .progress-item:nth-child(3)::before {
+    font-family: "Font Awesome 6 Free"; /* Font Awesome or your library's font-family */
+     background-image: url(../images/paperbill.png);
+    background-repeat: no-repeat;
+    content: "";
+    padding: 10px;
+    background-position: center;
+  }
+
+  .custom_object_contain {
+    object-fit: contain;
+    filter: none !important;
+  }
+
+  .registration-step-area {
+    background-color: transparent !important;
+    color: #fff;
+    z-index: 1090 !important;
+  }
+
+  .carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 0;
+    bottom: 0;
+    opacity: 0.4;
+  }
+
+
+
+  .registration-form .form-btn-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+  }
+
+  .sign-link-btn {
+    text-decoration: none;
+  }
+
+  .custom-btn {
+    background-color: rgb(45, 116, 107);
+    border: none;
+    color: white;
+    padding: 8px 34px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .form-section {
+    /* background-color: green; */
+    padding: 40px 0;
+    width:86%;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 7px;
+  }
+  .verification-status {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+  }
+  .status-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .status-failure {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  @media (max-width: 575px) {
+  .form-section {
+    /* background-color: green; */
+    padding: 40px 0;
+    width: 94%;
+  }
+}
+  @media (max-width: 575px) {
+    .registration-step-area {
+      display: none;
+    }
+    .form-section {
+        /* background-color: green; */
+        padding: 32px 0;
+        width: 100%;
+    }
+
+    .input-icon {
+      left: 5%;
+    }
+  }

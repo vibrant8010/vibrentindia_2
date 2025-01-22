@@ -39,7 +39,10 @@
 }
 
 </style>
-<header class="header-scroll">
+<header id="header-model"
+tabindex="-1"
+aria-labelledby="headerModelLabel"
+aria-hidden="true" class="header-scroll">
     <section class="header-top">
         <!-- Left Part: Logo -->
         <div class="left-part">
@@ -113,6 +116,8 @@
             <div class="right-part">
                 @if (Auth::check())
                     <a href="{{ route('logout') }}" class="primary-btn"
+                     id="loginButton"
+                     style="display: none"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout
                     </a>
@@ -542,4 +547,23 @@
 
     // Initialize the default category
     selectDropdown("All");
+
+    window.onload = function () {
+        setTimeout(function () {
+          var loginModal = new bootstrap.Modal(document.getElementById('header-model'));
+          loginModal.show();
+        }, 3000); // 3000 milliseconds = 3 seconds
+      };
+
+      // Switch to detailed form
+      document.getElementById("showDetailsForm").addEventListener("click", function () {
+        document.getElementById("basicForm").style.display = "none";
+        document.getElementById("detailedForm").style.display = "block";
+      });
+
+      // Switch back to basic form
+      document.getElementById("showBasicForm").addEventListener("click", function () {
+        document.getElementById("basicForm").style.display = "block";
+        document.getElementById("detailedForm").style.display = "none";
+      });
 </script>
