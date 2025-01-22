@@ -41,12 +41,17 @@
   }
 
   .product-list-view .product-main-box {
-    padding-bottom: 300px;
+    padding-bottom: 290px;
     overflow: hidden;
     position: relative;
     width: 100%;
   }
 
+  @media screen and (max-width:1299px) {
+    .product-list-view .product-main-box {
+        padding-bottom: 232px; }
+
+  }
   .product-list-view .product-main-box .inner-box {
     margin: 0;
     display: block;
