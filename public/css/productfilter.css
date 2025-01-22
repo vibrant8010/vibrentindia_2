@@ -52,6 +52,11 @@
         padding-bottom: 232px; }
 
   }
+  @media screen and (max-width:1199px) {
+    .product-list-view .product-main-box {
+        padding-bottom: 220px; }
+
+  }
   .product-list-view .product-main-box .inner-box {
     margin: 0;
     display: block;
