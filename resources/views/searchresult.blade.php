@@ -72,11 +72,11 @@
 
 <body>
     <x-header />
+    @if ($results['products'] && $results['products']->isNotEmpty())
     <div class="container">
         <div class="product-slideshow-container">
             <img src="{{ asset('logos/banner.jpg') }}" class="product-details-slides" alt="Slide 1" />
             <img src="{{ asset('logos/banner2.jpg') }}" class="product-details-slides" alt="Slide 2" />
-
         </div>
         <h1 class="product-detail-heading">Product from:</h1>
         <div class="company-badges">
@@ -87,8 +87,6 @@
                 <span class="badge">{{ $companyOption->name }}</span>
             @endforeach
         </div>
-
-
         <button class="filter-btn" style="background-color:transparent;border:0;">
             <i class="fa-solid fa-filter"></i>
         </button>
@@ -99,7 +97,6 @@
             <div class="filter-box">
                 <div class="filter-container">
                     <!-- OEM Filter -->
-                    <span class="filter-close">&times;</span>
                     <form id="filterForm" method="GET" action="{{ route('filter.products') }}">
                         <!-- CSRF Token (optional for GET requests) -->
                         @csrf
@@ -107,23 +104,28 @@
                         <!-- Company Filters -->
                         <div class="filter-header">
                             <h3>CompanyName</h3>
+                            <span class="down-arrow-view"><i class="fa-solid fa-angle-down"></i></span>
+                        </div>
                             <div class="filter-content">
                                 @foreach ($results['companies'] as $companyFilter)
                                     <div>
                                         <label>
-                                            <input type="checkbox" name="company_ids[]" value="{{ $companyFilter->id }}"
+                                           <span class="location-checkbox"> <input type="checkbox" name="company_ids[]" value="{{ $companyFilter->id }}"
                                                 {{ request()->has('company_ids') && in_array($companyFilter->id, request('company_ids', [])) ? 'checked' : '' }}
-                                                onchange="document.getElementById('filterForm').submit();">
-                                            {{ $companyFilter->name }}
+                                                onchange="document.getElementById('filterForm').submit();"></span>
+                                          <span class="location-title">{{ $companyFilter->name }}</span>
                                         </label>
                                     </div>
                                 @endforeach
                             </div>
-                        </div>
 
                         <!-- Category Filters -->
+                        <div>
                         <div class="filter-header">
                             <h3>Category</h3>
+                            <span class="down-arrow-view"><i class="fa-solid fa-angle-down"></i></span>
+                        </div>
+
                             <div class="filter-content">
                                 @foreach ($results['categories'] as $categoryFilter)
                                     <div>
@@ -138,10 +140,12 @@
                                 @endforeach
                             </div>
                         </div>
-
                         <!-- Subcategory Filters -->
+                        <div>
                         <div class="filter-header">
                             <h3>Subcategory</h3>
+                            <span class="down-arrow-view"><i class="fa-solid fa-angle-down"></i></span>
+                        </div>
                             <div class="filter-content">
                                 @foreach ($results['subCategories'] as $subCategoryFilter)
                                     <div>
@@ -177,10 +181,12 @@
                                         </div>
                                     </div>
                                     <div class="product-bottom-details">
-                                        <h3 class="product-detail-name">{{ $product->name }}</h3>
-                                        <h3 class="product-detail-name">{{ $product->category->name }}</h3>
-                                        <h3 class="product-detail-name">{{ $product->company->name }}</h3>
-                                        <h3 class="product-detail-name">{{ $product->subcategory->name }}</h3>
+                                        <h3 class="product-detail-name product-detail-maintitle">{{ $product->name }}</h3>
+                                        <h3 class="product-detail-name"><span class="lable-txt">Company : </span>{{ $product->company->name }}</h3>
+                                        <h3 class="product-detail-name"><span class="lable-txt">Category : </span>
+                                            {{ $product->category->name }}</h3>
+
+                                        <h3 class="product-detail-name"><span class="lable-txt">SubCategory : </span> {{ $product->subcategory->name }}</h3>
                                         <p class="product-detail-description">
                                             {{ Str::limit($product->description, 50) }}</p>
 
@@ -195,57 +201,302 @@
             </div>
 
         </div>
-    </div>
-
-    {{-- <script>
-        function applyFilter() {
-            const selectedCompanyIds = Array.from(document.querySelectorAll('input[name="company_ids[]"]:checked')).map(
-                input => input.value);
-            const selectedCategoryIds = Array.from(document.querySelectorAll('input[name="category_ids[]"]:checked')).map(
-                input => input.value);
-            const selectedSubCategoryIds = Array.from(document.querySelectorAll('input[name="subcategory_ids[]"]:checked'))
-                .map(input => input.value);
-
-            // Send data to the server using Fetch API
-            fetch('/filter-products', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}' // Include CSRF token
-                    },
-                    body: JSON.stringify({
-                        company_ids: selectedCompanyIds,
-                        category_ids: selectedCategoryIds,
-                        subcategory_ids: selectedSubCategoryIds,
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Update the product list dynamically
-                    const productContainer = document.querySelector('.prodoct-img-view');
-                    productContainer.innerHTML = data.products.map(product => `
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-                        <div class="product-card">
-                            <div class="product-main-box">
-                                <div class="inner-box">
-                                    <img src="${product.image_url}" alt="${product.name}" class="product-image" />
-                                </div>
-                            </div>
-                            <div class="product-bottom-details">
-                                <h3 class="product-detail-name">${product.name}</h3>
-                                <h3 class="product-detail-name">${product.category.name}</h3>
-                                <h3 class="product-detail-name">${product.company.name}</h3>
-                                <h3 class="product-detail-name">${product.subcategory.name}</h3>
-                                <p class="product-detail-description">${product.description.slice(0, 50)}</p>
-                                <a href="/product/${product.id}" class="product-link">View Product</a>
+        @else
+        {{-- <div class="product-slideshow-container">
+            <img src="{{ asset('logos/banner.jpg') }}" class="product-details-slides" alt="Slide 1" />
+            <img src="{{ asset('logos/banner2.jpg') }}" class="product-details-slides" alt="Slide 2" />
+        </div> --}}
+        <div class="container px-2 m-0 py-3">
+          <h6 class="not-found-content">No Result found for <span class="not-fond-txt">{{$searchTerm}}</span>. Showing result for <span class="not-fond-txt">{{$searchTerm}}</span> insted.</h6>
+        </div>
+        <div class="container">
+            <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="card-view inner-card">
+                    <a href="http://127.0.0.1:8000/product/92" class="card-link"></a>
+                    <div class="image-container">
+                        <div class="thumbnail_container">
+                            <div class="thumbnail">
+                                <img src="http://127.0.0.1:8000/images/1734066639_COOKWAREINDIVISUAl.webp" class="product-image swiper-img" alt="Hammered Sauce Pan" onclick="openPopup(this)">
                             </div>
                         </div>
                     </div>
-                `).join('');
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    </script> --}}
+                    <div class="logo-container" style="">
+                                                        <img src="http://127.0.0.1:8000/logos\1733305223_shri_and_sam_logo_280_by_80.png" class="logo-image" alt="Shri and Sam">
+                                                </div>
+
+                    <div class="text-wrapper">
+                        <h6 class="tranding-product-name">
+                            <span class="title">Product:</span>
+                            <span class="trnding-pro-name">Hammered Sauce Pan</span>
+                        </h6>
+
+                    </div>
+                    <div class="card-bottom">
+                        <h6 class="tranding-product-name">
+                            <span class="title">Company Name:</span>
+                            <span class="tranding-pro-name">Shri and Sam</span>
+                        </h6>
+                        <h6 class="tranding-product-name">
+                            <span class="title">Category:</span>
+                            <span class="tranding-pro-name">Kitchenware</span>
+                        </h6>
+
+                        <h6 class="tranding-material-name">
+                            <span class="tranding-material-title">Material:</span>
+                            <span class="mt-name tranding-mt-name">Stainless Steel</span>
+                        </h6>
+                        <h6 class="tranding-product-size">
+                            <span class="tranding-size-title">Size:</span>
+                            <span class="tranding-sz-name">12cm to 18 cm</span>
+                        </h6>
+                         <p class="card-description content-txt" id="description-92">
+
+                                <span class="visible-text">
+                                    This Hammered Sauce...
+                                </span>
+
+                            </p>
+                            <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(92)"></a>
+
+                        <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                                    <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
+                                    <span>Sign in to Inquire</span>
+                                </a>
+                                                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="card-view inner-card">
+                    <a href="http://127.0.0.1:8000/product/92" class="card-link"></a>
+                    <div class="image-container">
+                        <div class="thumbnail_container">
+                            <div class="thumbnail">
+                                <img src="http://127.0.0.1:8000/images/1734066639_COOKWAREINDIVISUAl.webp" class="product-image swiper-img" alt="Hammered Sauce Pan" onclick="openPopup(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo-container" style="">
+                                                        <img src="http://127.0.0.1:8000/logos\1733305223_shri_and_sam_logo_280_by_80.png" class="logo-image" alt="Shri and Sam">
+                                                </div>
+
+                    <div class="text-wrapper">
+                        <h6 class="tranding-product-name">
+                            <span class="title">Product:</span>
+                            <span class="trnding-pro-name">Hammered Sauce Pan</span>
+                        </h6>
+
+                    </div>
+                    <div class="card-bottom">
+                        <h6 class="tranding-product-name">
+                            <span class="title">Company Name:</span>
+                            <span class="tranding-pro-name">Shri and Sam</span>
+                        </h6>
+                        <h6 class="tranding-product-name">
+                            <span class="title">Category:</span>
+                            <span class="tranding-pro-name">Kitchenware</span>
+                        </h6>
+
+                        <h6 class="tranding-material-name">
+                            <span class="tranding-material-title">Material:</span>
+                            <span class="mt-name tranding-mt-name">Stainless Steel</span>
+                        </h6>
+                        <h6 class="tranding-product-size">
+                            <span class="tranding-size-title">Size:</span>
+                            <span class="tranding-sz-name">12cm to 18 cm</span>
+                        </h6>
+                         <p class="card-description content-txt" id="description-92">
+
+                                <span class="visible-text">
+                                    This Hammered Sauce...
+                                </span>
+
+                            </p>
+                            <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(92)"></a>
+
+                        <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                                    <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
+                                    <span>Sign in to Inquire</span>
+                                </a>
+                                                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="card-view inner-card">
+                    <a href="http://127.0.0.1:8000/product/92" class="card-link"></a>
+                    <div class="image-container">
+                        <div class="thumbnail_container">
+                            <div class="thumbnail">
+                                <img src="http://127.0.0.1:8000/images/1734066639_COOKWAREINDIVISUAl.webp" class="product-image swiper-img" alt="Hammered Sauce Pan" onclick="openPopup(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo-container" style="">
+                                                        <img src="http://127.0.0.1:8000/logos\1733305223_shri_and_sam_logo_280_by_80.png" class="logo-image" alt="Shri and Sam">
+                                                </div>
+
+                    <div class="text-wrapper">
+                        <h6 class="tranding-product-name">
+                            <span class="title">Product:</span>
+                            <span class="trnding-pro-name">Hammered Sauce Pan</span>
+                        </h6>
+
+                    </div>
+                    <div class="card-bottom">
+                        <h6 class="tranding-product-name">
+                            <span class="title">Company Name:</span>
+                            <span class="tranding-pro-name">Shri and Sam</span>
+                        </h6>
+                        <h6 class="tranding-product-name">
+                            <span class="title">Category:</span>
+                            <span class="tranding-pro-name">Kitchenware</span>
+                        </h6>
+
+                        <h6 class="tranding-material-name">
+                            <span class="tranding-material-title">Material:</span>
+                            <span class="mt-name tranding-mt-name">Stainless Steel</span>
+                        </h6>
+                        <h6 class="tranding-product-size">
+                            <span class="tranding-size-title">Size:</span>
+                            <span class="tranding-sz-name">12cm to 18 cm</span>
+                        </h6>
+                         <p class="card-description content-txt" id="description-92">
+
+                                <span class="visible-text">
+                                    This Hammered Sauce...
+                                </span>
+
+                            </p>
+                            <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(92)"></a>
+
+                        <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                                    <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
+                                    <span>Sign in to Inquire</span>
+                                </a>
+                                                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="card-view inner-card">
+                    <a href="http://127.0.0.1:8000/product/92" class="card-link"></a>
+                    <div class="image-container">
+                        <div class="thumbnail_container">
+                            <div class="thumbnail">
+                                <img src="http://127.0.0.1:8000/images/1734066639_COOKWAREINDIVISUAl.webp" class="product-image swiper-img" alt="Hammered Sauce Pan" onclick="openPopup(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo-container" style="">
+                                                        <img src="http://127.0.0.1:8000/logos\1733305223_shri_and_sam_logo_280_by_80.png" class="logo-image" alt="Shri and Sam">
+                                                </div>
+
+                    <div class="text-wrapper">
+                        <h6 class="tranding-product-name">
+                            <span class="title">Product:</span>
+                            <span class="trnding-pro-name">Hammered Sauce Pan</span>
+                        </h6>
+
+                    </div>
+                    <div class="card-bottom">
+                        <h6 class="tranding-product-name">
+                            <span class="title">Company Name:</span>
+                            <span class="tranding-pro-name">Shri and Sam</span>
+                        </h6>
+                        <h6 class="tranding-product-name">
+                            <span class="title">Category:</span>
+                            <span class="tranding-pro-name">Kitchenware</span>
+                        </h6>
+
+                        <h6 class="tranding-material-name">
+                            <span class="tranding-material-title">Material:</span>
+                            <span class="mt-name tranding-mt-name">Stainless Steel</span>
+                        </h6>
+                        <h6 class="tranding-product-size">
+                            <span class="tranding-size-title">Size:</span>
+                            <span class="tranding-sz-name">12cm to 18 cm</span>
+                        </h6>
+                         <p class="card-description content-txt" id="description-92">
+
+                                <span class="visible-text">
+                                    This Hammered Sauce...
+                                </span>
+
+                            </p>
+                            <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(92)"></a>
+
+                        <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                                    <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
+                                    <span>Sign in to Inquire</span>
+                                </a>
+                                                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="card-view inner-card">
+                    <a href="http://127.0.0.1:8000/product/92" class="card-link"></a>
+                    <div class="image-container">
+                        <div class="thumbnail_container">
+                            <div class="thumbnail">
+                                <img src="http://127.0.0.1:8000/images/1734066639_COOKWAREINDIVISUAl.webp" class="product-image swiper-img" alt="Hammered Sauce Pan" onclick="openPopup(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo-container" style="">
+                                                        <img src="http://127.0.0.1:8000/logos\1733305223_shri_and_sam_logo_280_by_80.png" class="logo-image" alt="Shri and Sam">
+                                                </div>
+
+                    <div class="text-wrapper">
+                        <h6 class="tranding-product-name">
+                            <span class="title">Product:</span>
+                            <span class="trnding-pro-name">Hammered Sauce Pan</span>
+                        </h6>
+
+                    </div>
+                    <div class="card-bottom">
+                        <h6 class="tranding-product-name">
+                            <span class="title">Company Name:</span>
+                            <span class="tranding-pro-name">Shri and Sam</span>
+                        </h6>
+                        <h6 class="tranding-product-name">
+                            <span class="title">Category:</span>
+                            <span class="tranding-pro-name">Kitchenware</span>
+                        </h6>
+
+                        <h6 class="tranding-material-name">
+                            <span class="tranding-material-title">Material:</span>
+                            <span class="mt-name tranding-mt-name">Stainless Steel</span>
+                        </h6>
+                        <h6 class="tranding-product-size">
+                            <span class="tranding-size-title">Size:</span>
+                            <span class="tranding-sz-name">12cm to 18 cm</span>
+                        </h6>
+                         <p class="card-description content-txt" id="description-92">
+
+                                <span class="visible-text">
+                                    This Hammered Sauce...
+                                </span>
+
+                            </p>
+                            <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(92)"></a>
+
+                        <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                                    <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
+                                    <span>Sign in to Inquire</span>
+                                </a>
+                                                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+    @endif
+
 
 
     <script>
