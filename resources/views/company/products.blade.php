@@ -89,8 +89,8 @@
                     </div>
                     <div class="product-bottom-details">
                         <h3 class="product-detail-name">{{ $product->name }}</h3>
-                        <h3 class="product-detail-name">{{$product->category->name}}</h3>
                         <h3 class="product-detail-name">{{$product->company->name}}</h3>
+                     =<h3 class="product-detail-name">{{$product->category->name}}</h3>
                         <h3 class="product-detail-name">{{$product->subcategory->name}}</h3>
                         <p class="product-detail-description">{{ Str::limit($product->description, 50) }}</p>
 

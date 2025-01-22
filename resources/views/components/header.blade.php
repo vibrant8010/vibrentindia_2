@@ -149,7 +149,7 @@ aria-hidden="true" class="header-scroll">
                         {{-- <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ..."> --}}
                         <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ...">
                         <div id="suggestions-box" class="suggestions-box">
-                            <ul id="suggestions-list"></ul>
+                            <ul id="suggestions-list" class="pt-2"></ul>
                         </div>
                         <div class="search-btn-box">
                             <button type="submit" class="search-btn">
@@ -338,11 +338,11 @@ aria-hidden="true" class="header-scroll">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {{-- search-suggestions --}}
 <script>
-    $(document).ready(function () {
+ $(document).ready(function () {
     $('#search-bar').on('keyup', function () {
         const query = $(this).val();
 
-        if (query.length != 0) {
+        if (query.length !== 0) {
             $.ajax({
                 url: '/search-suggestions',
                 method: 'GET',
@@ -350,33 +350,28 @@ aria-hidden="true" class="header-scroll">
                 success: function (response) {
                     let suggestionsHTML = '';
 
-                    // Add products
                     if (response.products.length > 0) {
-                        suggestionsHTML += '<li><strong>Products:</strong></li>';
+                        suggestionsHTML += '<strong class="globalnav-searchresults-header">Products:</strong>';
                         response.products.forEach(product => {
                             suggestionsHTML += `<li>${product.name}</li>`;
                         });
                     }
 
-                    // Add categories
                     if (response.categories.length > 0) {
-                        suggestionsHTML += '<li><strong>Categories:</strong></li>';
+                        suggestionsHTML += '<strong class="globalnav-searchresults-header">Categories:</strong>';
                         response.categories.forEach(category => {
                             suggestionsHTML += `<li>${category.name}</li>`;
                         });
                     }
-
-                    // Add subcategories
                     if (response.subcategories.length > 0) {
-                        suggestionsHTML += '<li><strong>Subcategories:</strong></li>';
+                        suggestionsHTML += '<strong class="globalnav-searchresults-header">Subcategories:</strong>';
                         response.subcategories.forEach(subcategory => {
                             suggestionsHTML += `<li>${subcategory.name}</li>`;
                         });
                     }
 
-                    // Add companies
                     if (response.companies.length > 0) {
-                        suggestionsHTML += '<li><strong>Companies:</strong></li>';
+                        suggestionsHTML += '<strong class="globalnav-searchresults-header">Companies:</strong>';
                         response.companies.forEach(company => {
                             suggestionsHTML += `<li>${company.name}</li>`;
                         });
@@ -394,7 +389,7 @@ aria-hidden="true" class="header-scroll">
         }
     });
 
-    $(document).on('click', '#suggestions-list li', function () {
+    $(document).on('click', '#suggestions-list li:not(.globalnav-searchresults-header)', function () {
         const selectedValue = $(this).text();
         $('#search-bar').val(selectedValue);
         $('#suggestions-box').hide();

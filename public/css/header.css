@@ -1010,3 +1010,30 @@ header .nav-container .nav-view .nav-item .nav-link:hover::before,
   .login-btn:hover {
     background-image: linear-gradient(135deg, rgb(80, 200, 180), rgb(45, 116, 107));
   }
+  .strog-data {
+    pointer-events: none; /* Prevents clicking */
+  user-select: none; /* Prevents text selection */
+  cursor: default; /* Neutral cursor */
+  color: #000; /* Text color */
+  font-size: 18px; /* Adjust font size */
+  font-weight: bold; /* Make it visually prominent */
+  margin-bottom: 10px; /* Add spacing if needed */
+}
+.globalnav-searchresults-header {
+    pointer-events: none; /* Disables all interactions like clicking */
+    user-select: none; /* Prevents text selection or highlighting */
+    cursor: default; /* Shows a neutral cursor (not clickable or text cursor) */
+    font-weight: bold; /* Emphasize the text visually */
+    margin-bottom: 10px; /* Add spacing if needed */
+    color: #000; /* Set the text color */
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .suggestions-box #suggestions-list li {
+    padding: 5px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #80808057;
+    font-size: 14px;
+}
+
