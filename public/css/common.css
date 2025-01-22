@@ -622,3 +622,36 @@ input[type="text"]::-webkit-search-cancel-button {
     text-decoration: none;
     color: var(--light-color);
 }
+
+/*common textbox*/
+.input-type-content {
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .progress-input-box {
+    border-radius: 3px;
+    padding: 16px 31px 12px 42px;
+    font-size: 14px;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  .input-type-content .input-icon {
+    position: absolute;
+    bottom: 33%;
+    left: 2%;
+    font-size: 14px;
+}
+.input-field-lable {
+    color: #33333394;
+    position: absolute;
+    left: 4%;
+    bottom: 71%;
+    background-color: #fff;
+    padding: 3px 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+
