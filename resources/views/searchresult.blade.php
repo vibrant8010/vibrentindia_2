@@ -78,123 +78,125 @@
             <img src="{{ asset('logos/banner2.jpg') }}" class="product-details-slides" alt="Slide 2" />
 
         </div>
-        <h1 class="product-detail-heading">Product from:</h1>
-        <div class="company-badges">
-            {{-- @foreach ($companies->whereIn('id', old('company_ids', $selectedCompanyIds)) as $companyOption)
+        @if ($results['products'] && $results['products']->isNotEmpty())
+
+
+            <h1 class="product-detail-heading">Product from:</h1>
+            <div class="company-badges">
+                {{-- @foreach ($companies->whereIn('id', old('company_ids', $selectedCompanyIds)) as $companyOption)
         <span class="badge">{{ $companyOption->name }}</span>
     @endforeach --}}
-            @foreach ($results['companies'] as $companyOption)
-                <span class="badge">{{ $companyOption->name }}</span>
-            @endforeach
-        </div>
-
-
-        <button class="filter-btn" style="background-color:transparent;border:0;">
-            <i class="fa-solid fa-filter"></i>
-        </button>
-        <div class="outer-box-search">
-
-            <!--filter section-->
-            <!--filter section-->
-            <div class="filter-box">
-                <div class="filter-container">
-                    <!-- OEM Filter -->
-                    <span class="filter-close">&times;</span>
-                    <form id="filterForm" method="GET" action="{{ route('filter.products') }}">
-                        <!-- CSRF Token (optional for GET requests) -->
-                        @csrf
-
-                        <!-- Company Filters -->
-                        <div class="filter-header">
-                            <h3>CompanyName</h3>
-                            <div class="filter-content">
-                                @foreach ($results['companies'] as $companyFilter)
-                                    <div>
-                                        <label>
-                                            <input type="checkbox" name="company_ids[]" value="{{ $companyFilter->id }}"
-                                                {{ request()->has('company_ids') && in_array($companyFilter->id, request('company_ids', [])) ? 'checked' : '' }}
-                                                onchange="document.getElementById('filterForm').submit();">
-                                            {{ $companyFilter->name }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- Category Filters -->
-                        <div class="filter-header">
-                            <h3>Category</h3>
-                            <div class="filter-content">
-                                @foreach ($results['categories'] as $categoryFilter)
-                                    <div>
-                                        <label>
-                                            <input type="checkbox" name="category_ids[]"
-                                                value="{{ $categoryFilter->id }}"
-                                                {{ request()->has('category_ids') && in_array($categoryFilter->id, request('category_ids', [])) ? 'checked' : '' }}
-                                                onchange="document.getElementById('filterForm').submit();">
-                                            {{ $categoryFilter->name }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- Subcategory Filters -->
-                        <div class="filter-header">
-                            <h3>Subcategory</h3>
-                            <div class="filter-content">
-                                @foreach ($results['subCategories'] as $subCategoryFilter)
-                                    <div>
-                                        <label>
-                                            <input type="checkbox" name="subcategory_ids[]"
-                                                value="{{ $subCategoryFilter->id }}"
-                                                {{ request()->has('subcategory_ids') && in_array($subCategoryFilter->id, request('subcategory_ids', [])) ? 'checked' : '' }}
-                                                onchange="document.getElementById('filterForm').submit();">
-                                            {{ $subCategoryFilter->name }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </form>
-
-
-
-
-                </div>
-
+                @foreach ($results['companies'] as $companyOption)
+                    <span class="badge">{{ $companyOption->name }}</span>
+                @endforeach
             </div>
-            <div class="product-view-box">
-                <div class="product-list-view">
-                    <div class="row g-4 gy-3 prodoct-img-view">
-                        @foreach ($results['products'] as $product)
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-                                <div class="product-card">
-                                    <div class="product-main-box">
-                                        <div class="inner-box">
-                                            <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}"
-                                                class="product-image" />
+
+
+            <button class="filter-btn" style="background-color:transparent;border:0;">
+                <i class="fa-solid fa-filter"></i>
+            </button>
+            <div class="outer-box-search">
+
+                <!--filter section-->
+                <!--filter section-->
+                <div class="filter-box">
+                    <div class="filter-container">
+                        <!-- OEM Filter -->
+                        <span class="filter-close">&times;</span>
+                        <form id="filterForm" method="GET" action="{{ route('filter.products') }}">
+                            <!-- CSRF Token (optional for GET requests) -->
+                            @csrf
+
+                            <!-- Company Filters -->
+                            <div class="filter-header">
+                                <h3>CompanyName</h3>
+                                <div class="filter-content">
+                                    @foreach ($results['companies'] as $companyFilter)
+                                        <div>
+                                            <label>
+                                                <input type="checkbox" name="company_ids[]"
+                                                    value="{{ $companyFilter->id }}"
+                                                    {{ request()->has('company_ids') && in_array($companyFilter->id, request('company_ids', [])) ? 'checked' : '' }}
+                                                    onchange="document.getElementById('filterForm').submit();">
+                                                {{ $companyFilter->name }}
+                                            </label>
                                         </div>
-                                    </div>
-                                    <div class="product-bottom-details">
-                                        <h3 class="product-detail-name">{{ $product->name }}</h3>
-                                        <h3 class="product-detail-name">{{ $product->category->name }}</h3>
-                                        <h3 class="product-detail-name">{{ $product->company->name }}</h3>
-                                        <h3 class="product-detail-name">{{ $product->subcategory->name }}</h3>
-                                        <p class="product-detail-description">
-                                            {{ Str::limit($product->description, 50) }}</p>
-
-                                        <a href="/product/{{ $product->id }}" class="product-link">View Product</a>
-
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        @endforeach
+
+                            <!-- Category Filters -->
+                            <div class="filter-header">
+                                <h3>Category</h3>
+                                <div class="filter-content">
+                                    @foreach ($results['categories'] as $categoryFilter)
+                                        <div>
+                                            <label>
+                                                <input type="checkbox" name="category_ids[]"
+                                                    value="{{ $categoryFilter->id }}"
+                                                    {{ request()->has('category_ids') && in_array($categoryFilter->id, request('category_ids', [])) ? 'checked' : '' }}
+                                                    onchange="document.getElementById('filterForm').submit();">
+                                                {{ $categoryFilter->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <!-- Subcategory Filters -->
+                            <div class="filter-header">
+                                <h3>Subcategory</h3>
+                                <div class="filter-content">
+                                    @foreach ($results['subCategories'] as $subCategoryFilter)
+                                        <div>
+                                            <label>
+                                                <input type="checkbox" name="subcategory_ids[]"
+                                                    value="{{ $subCategoryFilter->id }}"
+                                                    {{ request()->has('subcategory_ids') && in_array($subCategoryFilter->id, request('subcategory_ids', [])) ? 'checked' : '' }}
+                                                    onchange="document.getElementById('filterForm').submit();">
+                                                {{ $subCategoryFilter->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="product-view-box">
+                    <div class="product-list-view">
+                        <div class="row g-4 gy-3 prodoct-img-view">
+                            @foreach ($results['products'] as $product)
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+                                    <div class="product-card">
+                                        <div class="product-main-box">
+                                            <div class="inner-box">
+                                                <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}"
+                                                    class="product-image" />
+                                            </div>
+                                        </div>
+                                        <div class="product-bottom-details">
+                                            <h3 class="product-detail-name">{{ $product->name }}</h3>
+                                            <h3 class="product-detail-name">{{ $product->category->name }}</h3>
+                                            <h3 class="product-detail-name">{{ $product->company->name }}</h3>
+                                            <h3 class="product-detail-name">{{ $product->subcategory->name }}</h3>
+                                            <p class="product-detail-description">
+                                                {{ Str::limit($product->description, 50) }}</p>
+
+                                            <a href="/product/{{ $product->id }}" class="product-link">View
+                                                Product</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
+        @endif
     </div>
 
     {{-- <script>

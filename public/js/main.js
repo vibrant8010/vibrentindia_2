@@ -119,7 +119,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     alert(`Email: ${email}\nPassword: ${password}`);
 });
 
-// get user location
+// // get user location
 
 window.onload = () => {
     // Check if Geolocation is supported
@@ -135,21 +135,49 @@ window.onload = () => {
 };
 
 function successCallback(position) {
+    // const latitude = position.coords.latitude;
+    // const longitude = position.coords.longitude;
+
+    // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+    // // Prepare data to send
+    // const data = {
+    //     latitude: latitude,
+    //     longitude: longitude,
+    //     timestamp: position.timestamp
+    // };
+
+    // // Send data to the backend
+    // // sendLocationData(data);
+    // console.log(data);
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
 
-    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-
-    // Prepare data to send
-    const data = {
-        latitude: latitude,
-        longitude: longitude,
-        timestamp: position.timestamp
-    };
-
-    // Send data to the backend
-    // sendLocationData(data);
-    console.log(data);
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // const address = data.address || {};
+            // const state = address.state || '';
+            // const city = address.city || address.town || address.village || '';
+            // const postalCode = address.postcode || '';
+            const address = data.address || {};
+            const state = address.state || '';
+            const city = address.city || address.state_district || address.town || address.village || '';
+            const postalCode = address.postcode || '';
+            if (state && city && postalCode) {
+                document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
+                sendLocationData({ state, city, postalCode });
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching geolocation data:", error);
+        });
 }
 
 function errorCallback(error) {
@@ -169,87 +197,367 @@ function errorCallback(error) {
             break;
     }
 }
-
 function sendLocationData(data) {
-    fetch('/api/location', { // Adjust the endpoint as needed
-        method: 'POST',
+    // console.log(data);
+    $.ajax({
+        url: "/location",
+        type: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error('Failed to send location data.');
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: function(response) {
+            console.log('Success:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
         }
-    })
-    .then(data => {
-        console.log('Success:', data);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
     });
 }
+// function sendLocationData(data) {
+//     fetch('/api/location', { // Adjust the endpoint as needed
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(data)
+//     })
+//     .then(response => {
+//         if (response.ok) {
+//             return response.json();
+//         } else {
+//             throw new Error('Failed to send location data.');
+//         }
+//     })
+//     .then(data => {
+//         console.log('Success:', data);
+//     })
+//     .catch((error) => {
+//         console.error('Error:', error);
+//     });
+// }
+// window.onload = () => {
+//     if ('geolocation' in navigator) {
+//         navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+//             enableHighAccuracy: true,
+//             timeout: 5000,
+//             maximumAge: 0
+//         });
+//     } else {
+//         console.error('Geolocation is not supported by your browser.');
+//     }
+// };
 
+// function successCallback(position) {
+//     const latitude = position.coords.latitude;
+//     const longitude = position.coords.longitude;
+//     const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+
+//     fetch(url)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error(`HTTP error! Status: ${response.status}`);
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             const address = data.address || {};
+//             const state = address.state || '';
+//             const city = address.city || address.town || address.village || '';
+//             const postalCode = address.postcode || '';
+
+//             if (state && city && postalCode) {
+//                 document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
+//                 console.log('hello');
+//                 sendLocationData({ state, city, postalCode });
+//             }
+//         })
+//         .catch(error => {
+//             console.error("Error fetching geolocation data:", error);
+//         });
+// }
+
+// function errorCallback(error) {
+//     console.error('Error retrieving location:', error);
+//     switch (error.code) {
+//         case error.PERMISSION_DENIED:
+//             alert("User denied the request for Geolocation.");
+//             break;
+//         case error.POSITION_UNAVAILABLE:
+//             alert("Location information is unavailable.");
+//             break;
+//         case error.TIMEOUT:
+//             alert("The request to get user location timed out.");
+//             break;
+//         case error.UNKNOWN_ERROR:
+//             alert("An unknown error occurred.");
+//             break;
+//     }
+// }
+
+// function sendLocationData(data) {
+//     $.ajax({
+//         url: "{{ route('location_store') }}",
+//         type: 'POST',
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         },
+//         data: JSON.stringify(data),
+//         contentType: 'application/json',
+//         success: function(response) {
+//             console.log('Success:', response);
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('Error:', error);
+//         }
+//     });
+// }
+
+// // Dynamic suggestions
+// document.getElementById('city-auto-sug').addEventListener('input', function() {
+//     const query = this.value;
+//     if (query.length < 3) return;
+
+//     const url = `https://nominatim.openstreetmap.org/search?q=${query}&format=json&addressdetails=1&limit=5`;
+//     fetch(url)
+//         .then(response => response.json())
+//         .then(data => {
+//             const suggestionsList = document.getElementById('suggestions');
+//             suggestionsList.innerHTML = ''; // Clear existing suggestions
+
+//             data.forEach(location => {
+//                 const li = document.createElement('li');
+//                 li.classList.add('dropdown-item');
+//                 li.setAttribute('role', 'option');
+//                 const address = location.address || {};
+//                 li.textContent = `${address.city || address.town || address.village || ''}, ${address.state || ''}, ${address.postcode || ''}`;
+//                 li.addEventListener('click', () => {
+//                     document.getElementById('city-auto-sug').value = li.textContent;
+//                     sendLocationData({
+//                         state: address.state || '',
+//                         city: address.city || address.town || address.village || '',
+//                         postalCode: address.postcode || ''
+//                     });
+//                 });
+//                 suggestionsList.appendChild(li);
+//             });
+//         })
+//         .catch(error => console.error('Error fetching suggestions:', error));
+// });
+
+// document.getElementById('city-auto-sug').addEventListener('input', function() {
+//     const query = this.value.trim();
+//     if (query.length < 3) return; // Only fetch suggestions for queries with 3+ characters
+
+//     // Fetch only Indian locations using OpenStreetMap API
+//     const url2 = `https://nominatim.openstreetmap.org/search?q=${query}&countrycodes=in&format=json&addressdetails=1&limit=5`;
+//     fetch(url2)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error(`HTTP error! Status: ${response.status}`);
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             const suggestionsList = document.getElementById('suggestions');
+//             suggestionsList.innerHTML = ''; // Clear previous suggestions
+
+//             data.forEach(location => {
+//                 const address = location.address || {};
+//                 const city = address.city || address.state_district || address.town || address.village || '';
+//                 if (city) {
+//                     const li = document.createElement('li');
+//                     li.classList.add('dropdown-item');
+//                     li.setAttribute('role', 'option');
+//                     li.textContent = city;
+//                     li.addEventListener('click', () => {
+//                         document.getElementById('city-auto-sug').value = city;
+//                         // Send data to backend
+//                         // sendLocationData({ city });
+//                     });
+//                     suggestionsList.appendChild(li);
+//                 }
+//             });
+//         })
+//         .catch(error => console.error('Error fetching Indian city suggestions:', error));
+// });
+// let debounceTimeout;
+// document.getElementById('city-auto-sug').addEventListener('input', function () {
+//     clearTimeout(debounceTimeout);
+//     debounceTimeout = setTimeout(() => {
+//         const query = this.value.trim();
+//         if (query.length < 3) return;
+//         fetchSuggestions(query);
+//     }, 300); // 300ms delay
+// });
+
+// function fetchSuggestions(query) {
+//     const url2 = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&countrycodes=in&format=json&addressdetails=1&limit=5`;
+//     fetch(url2)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error(`HTTP error! Status: ${response.status}`);
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             const suggestionsList = document.getElementById('suggestions');
+//             suggestionsList.innerHTML = '';
+//             if (data.length === 0) {
+//                 const li = document.createElement('li');
+//                 li.classList.add('dropdown-item');
+//                 li.textContent = 'No suggestions found';
+//                 suggestionsList.appendChild(li);
+//                 return;
+//             }
+//             data.forEach(location => {
+//                 const address = location.address || {};
+//                 const city = address.city || address.state_district || address.town || address.village || address.hamlet || address.state || address.county || '';
+//                 if (city) {
+//                     const li = document.createElement('li');
+//                     li.classList.add('dropdown-item');
+//                     li.setAttribute('role', 'option');
+//                     li.textContent = city;
+//                     li.addEventListener('click', () => {
+//                         document.getElementById('city-auto-sug').value = city;
+//                     });
+//                     suggestionsList.appendChild(li);
+//                 }
+//             });
+//         })
+//         .catch(error => console.error('Error fetching Indian city suggestions:', error));
+// }
+let debounceTimeout;
+document.getElementById('city-auto-sug').onkeyup = function () {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        const query = this.value.trim();
+        if (query.length < 3) return; // Fetch only if input has 3+ characters
+        fetchSuggestions(query);
+    }, 300); // 300ms delay
+};
+
+function fetchSuggestions(query) {
+    const url2 = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&countrycodes=in&format=json&addressdetails=1&limit=5`;
+    fetch(url2)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const suggestionsList = document.getElementById('suggestions2');
+            suggestionsList.innerHTML = ''; // Clear previous suggestions
+            if (data.length === 0) {
+                const li = document.createElement('li');
+                li.classList.add('dropdown-item');
+                li.textContent = 'No suggestions found';
+                suggestionsList.appendChild(li);
+                return;
+            }
+            data.forEach(location => {
+                const address = location.address || {};
+                const city =
+                    address.city ||
+                    address.state_district ||
+                    address.town ||
+                    address.village ||
+                    address.hamlet ||
+                    address.state ||
+                    address.county ||
+                    '';
+                if (city) {
+                    const li = document.createElement('li');
+                    li.classList.add('dropdown-item');
+                    li.setAttribute('role', 'option');
+                    li.textContent = city;
+                    li.addEventListener('click', () => {
+                        document.getElementById('city-auto-sug').value = city;
+                    });
+                    suggestionsList.appendChild(li);
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching Indian city suggestions:', error));
+}
+
+
+// function sendLocationData(data) {
+//     $.ajax({
+//         url: "{{ route('location_store') }}", // Backend route
+//         type: 'POST',
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         },
+//         data: JSON.stringify(data),
+//         contentType: 'application/json',
+//         success: function(response) {
+//             console.log('Location data successfully sent:', response);
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('Error sending location data:', error);
+//         }
+//     });
+// }
 
 
 
 /*seach for location */
 
-document.addEventListener("DOMContentLoaded", () => {
-    const input = document.querySelector("#city-auto-sug");
-    const dropdown = document.querySelector(".dropdown-list");
-    const items = document.querySelectorAll(".dropdown-item");
+// document.addEventListener("DOMContentLoaded", () => {
+//     const input = document.querySelector("#city-auto-sug");
+//     const dropdown = document.querySelector(".dropdown-list");
+//     const items = document.querySelectorAll(".dropdown-item");
 
-    // Clear text and update placeholder on click
-    input.addEventListener("click", () => {
-      if (input.value === "Palanpur") {
-        input.value = ""; // Clear the existing value
-        input.placeholder = "Enter Location"; // Show placeholder
-      }
-      dropdown.classList.add("open"); // Show dropdown
-    });
+//     // Clear text and update placeholder on click
+//     input.addEventListener("click", () => {
+//       if (input.value === "Palanpur") {
+//         input.value = ""; // Clear the existing value
+//         input.placeholder = "Enter Location"; // Show placeholder
+//       }
+//       dropdown.classList.add("open"); // Show dropdown
+//     });
 
-    // Filter dropdown items based on input
-    input.addEventListener("input", () => {
-      const filter = input.value.toLowerCase();
-      items.forEach(item => {
-        item.style.display = item.textContent.toLowerCase().includes(filter) ? "block" : "none";
-      });
-    });
+//     // Filter dropdown items based on input
+//     input.addEventListener("input", () => {
+//       const filter = input.value.toLowerCase();
+//       items.forEach(item => {
+//         item.style.display = item.textContent.toLowerCase().includes(filter) ? "block" : "none";
+//       });
+//     });
 
-    // Navigate through dropdown items using keyboard
-    input.addEventListener("keydown", (e) => {
-      const visibleItems = Array.from(items).filter(item => item.style.display !== "none");
-      let currentIndex = visibleItems.indexOf(document.activeElement);
+//     // Navigate through dropdown items using keyboard
+//     input.addEventListener("keydown", (e) => {
+//       const visibleItems = Array.from(items).filter(item => item.style.display !== "none");
+//       let currentIndex = visibleItems.indexOf(document.activeElement);
 
-      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-        e.preventDefault();
-        currentIndex = (currentIndex + (e.key === "ArrowDown" ? 1 : -1) + visibleItems.length) % visibleItems.length;
-        visibleItems[currentIndex]?.focus();
-      } else if (e.key === "Enter" && visibleItems[currentIndex]) {
-        e.preventDefault();
-        input.value = visibleItems[currentIndex].textContent;
-        dropdown.classList.remove("open");
-      }
-    });
+//       if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+//         e.preventDefault();
+//         currentIndex = (currentIndex + (e.key === "ArrowDown" ? 1 : -1) + visibleItems.length) % visibleItems.length;
+//         visibleItems[currentIndex]?.focus();
+//       } else if (e.key === "Enter" && visibleItems[currentIndex]) {
+//         e.preventDefault();
+//         input.value = visibleItems[currentIndex].textContent;
+//         dropdown.classList.remove("open");
+//       }
+//     });
 
-    // Handle click on dropdown items
-    items.forEach(item => {
-      item.addEventListener("click", () => {
-        input.value = item.textContent;
-        dropdown.classList.remove("open");
-      });
-    });
+//     // Handle click on dropdown items
+//     items.forEach(item => {
+//       item.addEventListener("click", () => {
+//         input.value = item.textContent;
+//         dropdown.classList.remove("open");
+//       });
+//     });
 
-    // Close dropdown when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".search-location-box")){ dropdown.classList.remove("open");
-      }
-    });
-  });
+//     // Close dropdown when clicking outside
+//     document.addEventListener("click", (e) => {
+//       if (!e.target.closest(".search-location-box")){ dropdown.classList.remove("open");
+//       }
+//     });
+//   });
 
 
   document.addEventListener('DOMContentLoaded', () => {

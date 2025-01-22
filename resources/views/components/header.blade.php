@@ -37,7 +37,37 @@
 #suggestions-list li:hover {
     background-color: #f0f0f0;
 }
+#suggestions-box2 {
+    list-style-type: none;
+    z-index: 99999;
+    overflow-y: scroll;
+    padding: 0;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: absolute;
+    top: 47px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    display: none;
+    height: 300px;
+}
 
+#suggestions2 {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#suggestions2 li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#suggestions2 li:hover {
+    background-color: #f0f0f0;
+}
 </style>
 <header id="header-model"
 tabindex="-1"
@@ -56,7 +86,7 @@ aria-hidden="true" class="header-scroll">
         <!-- Center Part: Search and Dropdown (Desktop) -->
         <div class="d-lg-block d-md-block d-block">
         <div class="search-section">
-            <div class="search-location-box">
+            {{-- <div class="search-location-box">
                 <div class="inputgroup_location">
                   <div class="input_location_box">
                     <input type="text" autocomplete="off"
@@ -73,7 +103,29 @@ aria-hidden="true" class="header-scroll">
                     </ul>
                   </div>
                 </div>
+              </div> --}}
+              <div class="search-location-box">
+                <div class="inputgroup_location">
+                  <div class="input_location_box">
+                    <form method="GET" action="{{ route('search') }}">
+                    <input type="text" autocomplete="off"
+                      class="input_location"
+                      aria-label="City Auto-suggest"
+                      placeholder="Enter City"
+                      name="location"
+                      id="city-auto-sug">
+                    {{-- <ul class="dropdown-list" role="listbox" id="suggestions">
+
+                      <!-- Suggestions for Indian cities will be dynamically populated -->
+                    </ul> --}}
+                    <div id="suggestions-box2" class="suggestions-box">
+                        <ul id="suggestions2"></ul>
+                    </div>
+                  </div>
+                </div>
               </div>
+
+
 
             <div class="search-container">
                 {{-- <div class="select-box">
@@ -92,7 +144,8 @@ aria-hidden="true" class="header-scroll">
 
                 <div class="search-input-box">
                     {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}" onsubmit="performSearch(event)"> --}}
-                        <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}">
+                        {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}"> --}}
+                            <div id="search-form" class="search-box-section">
                         {{-- <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ..."> --}}
                         <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ...">
                         <div id="suggestions-box" class="suggestions-box">
@@ -103,7 +156,9 @@ aria-hidden="true" class="header-scroll">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
                         </div>
+                    </div>
                     </form>
+
                     {{-- <div id="suggestions" class="suggestions-box"></div>
                     <div id="suggestions" class="suggestions-box"></div> --}}
                 </div>
@@ -281,6 +336,7 @@ aria-hidden="true" class="header-scroll">
     @endif
 </header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{-- search-suggestions --}}
 <script>
     $(document).ready(function () {
     $('#search-bar').on('keyup', function () {

@@ -26,90 +26,91 @@
     <script>
         // get user location
 
-        window.onload = () => {
-            // Check if Geolocation is supported
-            if ('geolocation' in navigator) {
-                navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-                    enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0
-                });
-            } else {
-                console.error('Geolocation is not supported by your browser.');
-            }
-        };
+        // window.onload = () => {
+        //     // Check if Geolocation is supported
+        //     if ('geolocation' in navigator) {
+        //         navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+        //             enableHighAccuracy: true,
+        //             timeout: 5000,
+        //             maximumAge: 0
+        //         });
+        //     } else {
+        //         console.error('Geolocation is not supported by your browser.');
+        //     }
+        // };
 
-        function successCallback(position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+        // function successCallback(position) {
+        //     const latitude = position.coords.latitude;
+        //     const longitude = position.coords.longitude;
+        //     const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
 
-            // Fetch data from the API
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log("Reverse Geolocation Data:", data);
-                    // You can access properties like:
-                    // data.display_name, data.address, etc.
-                })
-                .catch(error => {
-                    console.error("Error fetching geolocation data:", error);
-                });
+        //     // Fetch data from the API
+        //     fetch(url)
+        //         .then(response => {
+        //             if (!response.ok) {
+        //                 throw new Error(`HTTP error! Status: ${response.status}`);
+        //             }
+        //             return response.json();
+        //         })
+        //         .then(data => {
+        //             console.log("Reverse Geolocation Data:", data);
+        //             // You can access properties like:
+        //             // data.display_name, data.address, etc.
+        //         })
+        //         .catch(error => {
+        //             console.error("Error fetching geolocation data:", error);
+        //         });
 
-            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        //     console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
-            // Prepare data to send
-            const data = {
-                latitude: latitude,
-                longitude: longitude,
-                timestamp: position.timestamp
-            };
+        //     // Prepare data to send
+        //     const data = {
+        //         latitude: latitude,
+        //         longitude: longitude,
+        //         timestamp: position.timestamp
+        //     };
 
-            // Send data to the backend
-            sendLocationData(data);
-            // console.log(data);
-        }
+        //     // Send data to the backend
+        //     sendLocationData(data);
+        //     // console.log(data);
+        // }
 
-        function errorCallback(error) {
-            console.error('Error retrieving location:', error);
-            switch (error.code) {
-                case error.PERMISSION_DENIED:
-                    alert("User denied the request for Geolocation.");
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    alert("Location information is unavailable.");
-                    break;
-                case error.TIMEOUT:
-                    alert("The request to get user location timed out.");
-                    break;
-                case error.UNKNOWN_ERROR:
-                    alert("An unknown error occurred.");
-                    break;
-            }
-        }
+        // function errorCallback(error) {
+        //     console.error('Error retrieving location:', error);
+        //     switch (error.code) {
+        //         case error.PERMISSION_DENIED:
+        //             alert("User denied the request for Geolocation.");
+        //             break;
+        //         case error.POSITION_UNAVAILABLE:
+        //             alert("Location information is unavailable.");
+        //             break;
+        //         case error.TIMEOUT:
+        //             alert("The request to get user location timed out.");
+        //             break;
+        //         case error.UNKNOWN_ERROR:
+        //             alert("An unknown error occurred.");
+        //             break;
+        //     }
+        // }
 
-        function sendLocationData(data) {
-            $.ajax({
-                url: "{{ route('location_store') }}", // Use the dynamically constructed endpoint
-                type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                success: function(response) {
-                    console.log('Success:', response);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                }
-            });
-        }
+        // function sendLocationData(data) {
+        //     $.ajax({
+        //         url: "{{ route('location_store') }}", // Use the dynamically constructed endpoint
+        //         type: 'POST',
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         data: JSON.stringify(data),
+        //         contentType: 'application/json',
+        //         success: function(response) {
+        //             console.log('Success:', response);
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.error('Error:', error);
+        //         }
+        //     });
+        // }
+      
     </script>
 
 </body>
