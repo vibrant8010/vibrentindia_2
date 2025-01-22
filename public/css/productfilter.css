@@ -248,7 +248,7 @@
     display: block;
     padding: 15px;
     overflow-y: scroll;
-    height: 350px;
+    height: 190px;
 }
 
 .filter-content input[type="text"] {

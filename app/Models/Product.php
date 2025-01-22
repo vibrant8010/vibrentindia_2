@@ -14,14 +14,14 @@ class Product extends Model
        'name',
        'company_id',
         'description',
-       'material', 
-       'logo_url', 
+       'material',
+       'logo_url',
        'companyname',
         'size'  ,
         'image_url',
         'subcategory_id',
         'category_type'
-        
+
     ];
        public function company()
 {
@@ -38,4 +38,6 @@ class Product extends Model
     {
         return $this->hasOneThrough(Category::class, Subcategory::class, 'id', 'id', 'subcategory_id', 'category_id');
     }
+
+
 }

@@ -88,7 +88,8 @@
                 </div> --}}
 
                 <div class="search-input-box">
-                    <form id="search-form" class="search-box-section" onsubmit="performSearch(event)">
+                    {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}" onsubmit="performSearch(event)"> --}}
+                        <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}">
                         {{-- <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ..."> --}}
                         <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ...">
                         <div id="suggestions-box" class="suggestions-box">
@@ -280,7 +281,7 @@
     $('#search-bar').on('keyup', function () {
         const query = $(this).val();
 
-        if (query.length > 2) {
+        if (query.length != 0) {
             $.ajax({
                 url: '/search-suggestions',
                 method: 'GET',
