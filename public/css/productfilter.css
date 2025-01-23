@@ -284,6 +284,7 @@ color: var(--light-color);
     display: block;
     padding: 15px;
     overflow-y: scroll;
+    scrollbar-width: thin;
     height: 190px;
 }
 
@@ -377,7 +378,7 @@ padding: 5px 10px;
 margin-right: 5px;
 display: inline-block;
 font-weight:500;
-margin:15px 10px;
+margin:6px 10px;
 font-size: 14px;
 }
 /* Cross button styles */
@@ -398,6 +399,21 @@ font-size: 14px;
   @media screen and (max-width: 1199px) {
     .filter-box {
         width: 29%;
+    }
+}
+@media screen and (max-width:767px) {
+    .product-list-view .product-detail-name {
+        font-size: 12px;
+    }
+    .product-list-view .product-detail-description {
+        font-size: 12px;
+        line-height: 19px;
+    }
+    .filter-header h3 {
+        font-size: 13px;
+    }
+    .filter-content {
+        padding: 15px 6px;
     }
 }
 

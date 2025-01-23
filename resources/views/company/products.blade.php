@@ -80,7 +80,7 @@
     <div class="product-list-view">
         <div class="row g-1 gy-1 prodoct-img-view">
             @foreach ($products as $product)
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-3 p-0">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
                 <div class="product-card">
                     <div class="product-main-box">
                         <div class="inner-box">

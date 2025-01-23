@@ -59,25 +59,95 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Swiper Initialization
-var swiper = new Swiper(".mySwiper", {
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    loop: true,
-    slidesPerView: 1,
-    spaceBetween: 10,
-    breakpoints: {
-        430: { slidesPerView: 2, spaceBetween: 10 },
-        768: { slidesPerView: 3, spaceBetween: 5 },
-        1024: { slidesPerView: 4, spaceBetween: 15 },
-    },
-});
+// var swiper = new Swiper(".mySwiper", {
+//     pagination: {
+//         el: ".swiper-pagination",
+//         clickable: true,
+//     },
+//     navigation: {
+//         nextEl: ".swiper-button-next",
+//         prevEl: ".swiper-button-prev",
+//     },
+//     loop: true,
+//     slidesPerView: 1,
+//     spaceBetween: 10,
+//     breakpoints: {
+//         430: { slidesPerView: 2, spaceBetween: 10 },
+//         768: { slidesPerView: 3, spaceBetween: 5 },
+//         1024: { slidesPerView: 4, spaceBetween: 15 },
+//     },
+// });
 
+$(document).ready(function () {
+    $("#topcategorycaresoule").owlCarousel({
+      loop: true,                // Infinite loop
+      margin: 20,                // Space between items
+      nav: true,                 // Show navigation buttons
+      dots: true,                // Show dots for navigation
+      responsive: {
+        0: {
+          items: 1               // Show 1 card for screens <= 575px
+        },
+        576: {
+          items: 2               // Show 2 cards for screens <= 767px
+        },
+        768: {
+          items: 3               // Show 2 cards for screens <= 991px
+        },
+        991: {
+          items: 4               // Show 3 cards for screens >= 992px
+        }
+      }
+    });
+  });
+
+  /*tranding product caresoule */
+  $(document).ready(function () {
+    $("#trandingproductcaresoule").owlCarousel({
+      loop: true,                // Infinite loop
+      margin: 40,                // Space between items
+      nav: true,                 // Show navigation buttons
+      dots: true,                // Show dots for navigation
+      responsive: {
+        0: {
+          items: 1               // Show 1 card for screens <= 575px
+        },
+        576: {
+          items: 2               // Show 2 cards for screens <= 767px
+        },
+        768: {
+          items: 3               // Show 2 cards for screens <= 991px
+        },
+        991: {
+          items: 4               // Show 3 cards for screens >= 992px
+        }
+      }
+    });
+  });
+
+//   newarrivalcaresoule
+$(document).ready(function () {
+    $("#newarrivalcaresoule").owlCarousel({
+      loop: true,                // Infinite loop
+      margin: 40,                // Space between items
+      nav: true,                 // Show navigation buttons
+      dots: true,                // Show dots for navigation
+      responsive: {
+        0: {
+          items: 1               // Show 1 card for screens <= 575px
+        },
+        576: {
+          items: 2               // Show 2 cards for screens <= 767px
+        },
+        768: {
+          items: 3               // Show 2 cards for screens <= 991px
+        },
+        991: {
+          items: 4               // Show 3 cards for screens >= 992px
+        }
+      }
+    });
+  });
 
 // Popup Logic for viewing large product image
 const popup = document.getElementById('popup');

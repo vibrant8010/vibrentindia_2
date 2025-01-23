@@ -55,11 +55,27 @@
 }
 .product-description-div {
     display: none;
-    padding-top: 10px;
 }
- .hide {
+.product-description-div .title,
+.product-name .title,
+.product-size .size-title,
+.tranding-material-title,
+.tranding-size-title,
+.material-name .material-title{
+    color: #010101c4;
+    font-size: 15px;
+    font-weight: 400;
+    /* width: 76px; */
+}
+.hide {
     display: none;
     transition: 0.5s all ease-in-out;
+}
+@media screen and (max-width:991px) {
+    .product-description-div .title, .product-name .title, .product-size .size-title, .tranding-material-title, .tranding-size-title, .material-name .material-title {
+        font-size: 13px;
+        font-weight: 400;
+    }
 }
 @media screen and (max-width:575px) {
     .card-view {
@@ -117,22 +133,31 @@
 
  .product-name,
  .company-name,
+ .material-name,
+ .product-size,
  .tranding-product-name,
  .tranding-material-name,
  .tranding-product-size,
- .pro-name,
+ /* .pro-name, */
 .card-bottom .material-name,
 .card-bottom .product-size{
-    font-size: 15px !important;
+    font-size: 14px !important;
     padding: 0 4px;
-    font-size: 14px;
     font-weight: 500 !important;
-    font-family: revert;
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+.text-product{
+    font-weight: 600 !important;
+    font-size: 17px;
+    color: #060000d4;
 }
  .card-bottom .product-name .title,
  .card-bottom .product-name .material-title,
  .card-bottom .product-name .size-title{
   font-size: 14px;
+
 }
  .card-bottom .pro-name,
 .card-bottom .product-name .mt-name,
@@ -225,7 +250,7 @@
   }
 
  .card-view .text-wrapper{
-    margin-top: 15px;
+    margin-top: 8px;
     position: relative;
     z-index: 999999;
  }
@@ -277,20 +302,44 @@
 
         }
         .card-view {
-            padding: 14px 0;
+            padding: 14px 10px;
         }
 }
-@media screen and (max-width:767px) {
+@media screen and (max-width:991px) {
     .product-col {
        margin-bottom: -7px;
     }
     .product-card-body {
        position: relative;
-       height: 264px;
+       height: 278px;
        box-shadow: none !important;
     }
     .product-description-div {
         display: block;
         padding: 0;
+    }
+}
+
+
+.owl-carousel {
+    display: none !important;
+}
+@media screen and (max-width: 991px) {
+    .desktop-grid {
+        display: none;
+    }
+    .owl-carousel {
+        display: block !important;
+    }
+    .image_overlay {
+        display: none;
+    }
+    .owl-theme .owl-nav {
+        display: none;
+    }
+}
+@media screen and (max-width:575px) {
+    .product-col .image-container {
+       padding: 0 10px;
     }
 }

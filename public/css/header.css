@@ -474,7 +474,7 @@ header .nav-container .nav-view .nav-item {
     }
     .search-container input[type="text"] {
         width: 192px;
-        padding: 8px 9px;
+        padding: 10px 9px;
     }
 }
  @media screen and (max-width:840px) {
@@ -497,7 +497,11 @@ header .nav-container .nav-view .nav-item {
     }
     .search-container input[type="text"] {
         width: 184px;
-        padding: 5px 3px;
+        padding: 9px 3px;
+        font-size: 12px;
+    }
+    .search-section .input_location {
+        font-size: 12px !important;
     }
     header .lg-img img {
     height: 18px;
@@ -532,6 +536,12 @@ header .contact-cheap {
     }
     header .header-top {
         padding: 18px 14px 15px 15px;
+    }
+    #suggestions-box{
+        top: 38px !important;
+    }
+    .suggestions-box #suggestions-list li {
+      font-size: 12px !important;
     }
 }
 @media screen and (max-width:440px) {
@@ -609,10 +619,10 @@ header .contact-cheap {
         font-size: 24px;
     }
     .search-container input[type="text"] {
-        font-size: 14px;
+        font-size: 12px;
         width: 167px;
-        padding: 6px 2px;
-        font-weight: 600;
+        padding: 9px 2px;
+        font-weight: 500;
     }
     .dropdown-button {
         padding: 4px 2px;
@@ -788,7 +798,9 @@ header .nav-container .nav-view .nav-item .nav-link:hover::before,
    overflow: hidden;
    box-shadow: 0 2px 4px 0 rgba(0,0,0,.15);
 }
-
+.suggestions-box{
+    scrollbar-width: thin;
+}
 .search-section .input_location_box:after {
     position: absolute;
     content: "";

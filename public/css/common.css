@@ -23,23 +23,6 @@ input[type="text"]::-ms-clear {
     height: 0;
 }
 
-/* .scrollbar-thin {
-    scrollbar-width: thin;
-    background-color: lightgreen;
-    height: 150px;
-    width: 200px;
-    overflow-y: scroll;
-    margin: 10px;
-}
-
-.scrollbar-inherit {
-    scrollbar-width: inherit;
-    background-color: green;
-    height: 50px;
-    width: 150px;
-    overflow-y: scroll;
-} */
-
 input[type="text"]::-webkit-search-cancel-button {
     display: none;
 }
@@ -69,11 +52,11 @@ input[type="text"]::-webkit-search-cancel-button {
 /*common container*/
 /*margin class start*/
   .section-margin{
-    margin: 100px 0;
+    margin: 60px 0;
   }
   @media screen and (max-width:574px) {
     .section-margin {
-        margin: 55px 0;
+        margin: 22px 0;
     }
   }
 /*marginn class end*/
@@ -139,7 +122,7 @@ input[type="text"]::-webkit-search-cancel-button {
     outline: none;
     padding: 10px 10px;
     border: 0;
-    font-size: 16px;
+    font-size: 14px;
     background-color: transparent;
   }
   @media screen and (max-width:1299px) {
@@ -463,8 +446,7 @@ input[type="text"]::-webkit-search-cancel-button {
 @media screen and (max-width:575px){
     .main-heading{
         font-size: 24px;
-        margin-bottom:15px;
-    }
+       }
     /* .heading-section {
         flex-direction: column;
     }
@@ -479,10 +461,16 @@ input[type="text"]::-webkit-search-cancel-button {
         display: none;
     }
     .primary-btn {
-        padding: 9px 14px;
+        padding: 6px 10px;
         color: var(--primary-color);
         border-radius: 20px;
         font-size: 17px;
+
+}
+.mobile-btn{
+    margin: 10px 0;
+    padding: 6px 15px;
+    font-size: 14px;
 }
 }
 .inqury-cheap{
@@ -506,7 +494,7 @@ input[type="text"]::-webkit-search-cancel-button {
   background-color: #008483;
 }
 .thumbnail_container {
-    padding-bottom: 100%;
+    padding-bottom: 97%;
     display: block;
     position: relative;
     width: 100%;
@@ -671,5 +659,33 @@ input[type="text"]::-webkit-search-cancel-button {
     font-weight: 500;
 }
 
+/*read more text*/
+.text-wrapper {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
 
+.card-description {
+    margin-bottom: 8px;
+}
 
+.visible-text {
+    display: inline;
+}
+
+.more-text {
+    display: none;
+}
+
+.read-more {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
