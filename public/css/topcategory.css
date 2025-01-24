@@ -1,27 +1,32 @@
-.top-category{
+.top-category {
     position: relative;
 }
+
 /* .top-category .container{
     max-width:1350px;
 } */
-.card-view{
-   padding: 14px 8px;
+.card-view {
+    padding: 14px 8px;
     margin: 30px 5px;
-   position: relative;
-   box-shadow:-2px 0rem 1rem rgb(0 0 0 / 6%) !important;
-   background: var(--white-color);
+    position: relative;
+    box-shadow: -2px 0rem 1rem rgb(0 0 0 / 6%) !important;
+    background: var(--white-color);
 }
-.card-view.inner-card{
+
+.card-view.inner-card {
     height: 555px;
 }
+
 .product-col {
     position: relative;
     min-height: 440px;
     margin-bottom: 17px;
 }
-.product-col .image-container{
+
+.product-col .image-container {
     position: relative;
 }
+
 .product-card-body {
     padding: 15px;
     position: absolute;
@@ -29,16 +34,16 @@
     z-index: 999;
     padding: 11.5px 5px;
     width: 100%;
-        left: 0;
-        right: 0;
-        background-color: #fff;
-        box-shadow:0px 6px 7px rgb(0 0 0 / 7%) !important;
-        z-index: 2;
-    }
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 6px 7px rgb(0 0 0 / 7%) !important;
+    z-index: 2;
+}
 
 .image_overlay {
     position: absolute;
-    top:90%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.5);
@@ -53,57 +58,112 @@
     justify-content: center;
     z-index: 999;
 }
+
 .product-description-div {
     display: none;
 }
+
 .product-description-div .title,
 .product-name .title,
 .product-size .size-title,
 .tranding-material-title,
 .tranding-size-title,
-.material-name .material-title{
+.tranding-product-name .title,
+.material-name .material-title {
     color: #010101c4;
     font-size: 15px;
     font-weight: 400;
     /* width: 76px; */
 }
+
 .hide {
     display: none;
     transition: 0.5s all ease-in-out;
 }
+
 @media screen and (max-width:991px) {
-    .product-description-div .title, .product-name .title, .product-size .size-title, .tranding-material-title, .tranding-size-title, .material-name .material-title {
+
+    .product-description-div .title,
+    .product-name .title,
+    .product-size .size-title,
+    .tranding-material-title,
+    .tranding-size-title,
+    .material-name .material-title {
         font-size: 13px;
         font-weight: 400;
     }
 }
+
 @media screen and (max-width:575px) {
     .card-view {
         padding: 16px 12px;
         margin: 20px 10px;
     }
+
+    .product-card-body {
+        padding: 0;
+    }
+
+    .card-view .text-wrapper {
+        margin-top: 3px;
+    }
+
+    .product-name,
+    .company-name,
+    .material-name,
+    .product-size,
+    .tranding-product-name,
+    .tranding-material-name,
+    .tranding-product-size,
+    .card-bottom .material-name,
+    .tranding-product-name .trnding-pro-name,
+    .card-bottom .product-size {
+        margin-bottom: 8px !important;
+    }
+
+    .product-name,
+    .company-name,
+    .material-name,
+    .product-size,
+    .tranding-product-name,
+    .tranding-material-name,
+    .tranding-product-size,
+    .card-bottom .material-name,
+    .tranding-product-name .trnding-pro-name,
+    .card-bottom .product-size {
+        font-size: 13px !important;
+    }
+    .product-card-body {
+        position: relative;
+        height: auto;
+    }
+
 }
-.card-view .img-container{
+
+.card-view .img-container {
     position: relative;
-   max-width: 100%;
-   height: 220px;
+    max-width: 100%;
+    height: 220px;
 }
-.card-view .img-container img{
+
+.card-view .img-container img {
     height: 100%;
     width: 100%;
 }
+
 .card-view .card-description,
 .card-view .arrival-card-description,
-.card-view .tranding-card-description{
+.card-view .tranding-card-description {
     color: #000000e5;
-    font-weight:600;
+    font-weight: 600;
     font-size: 14px;
     margin-bottom: 7px;
     line-height: 22px;
     margin-top: 11px;
     padding: 0 4px;
 }
-.card-view .open-bar{
+
+.card-view .open-bar {
     border: 0;
     border-radius: 30px;
     height: 40px;
@@ -126,93 +186,103 @@
     border: 1px solid #b7aeae2b;
 }
 
-.card-view.open .open-bar{
+.card-view.open .open-bar {
     border: 0;
-    transform: rotate(180deg); /* Rotate the button when open */
+    transform: rotate(180deg);
+    /* Rotate the button when open */
 }
 
- .product-name,
- .company-name,
- .material-name,
- .product-size,
- .tranding-product-name,
- .tranding-material-name,
- .tranding-product-size,
- /* .pro-name, */
+.product-name,
+.company-name,
+.material-name,
+.product-size,
+.tranding-product-name,
+.tranding-material-name,
+.tranding-product-size,
+/* .pro-name, */
 .card-bottom .material-name,
-.card-bottom .product-size{
+.tranding-product-name .trnding-pro-name,
+.card-bottom .product-size {
     font-size: 14px !important;
     padding: 0 4px;
     font-weight: 500 !important;
     display: flex;
     gap: 6px;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
 }
-.text-product{
+
+.text-product {
     font-weight: 600 !important;
     font-size: 17px;
     color: #060000d4;
 }
- .card-bottom .product-name .title,
- .card-bottom .product-name .material-title,
- .card-bottom .product-name .size-title{
-  font-size: 14px;
+
+.card-bottom .product-name .title,
+.card-bottom .product-name .material-title,
+.card-bottom .product-name .size-title {
+    font-size: 14px;
 
 }
- .card-bottom .pro-name,
+
+.card-bottom .pro-name,
 .card-bottom .product-name .mt-name,
-.card-bottom .product-name .sz-name{
+.card-bottom .product-name .sz-name {
     font-weight: 400;
 }
-.swiper-button-next{
+
+.swiper-button-next {
     padding: 25px;
     background-color: #0053535e;
     box-shadow: 1px 1px 5px 2px grey;
     border-radius: 50%;
 }
 
-.swiper-button-next:after, .swiper-button-prev:after {
+.swiper-button-next:after,
+.swiper-button-prev:after {
     color: rgb(56, 0, 0) !important;
     font-size: 16px !important;
 }
 
-.swiper-pagination-bullet.swiper-pagination-bullet-active
-{
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
     transition: 0.7s all ease-in-out;
     height: 10px;
     width: 41px;
     background: var(--ternery-color) !important;
     border-radius: 8px;
 }
-.swiper-pagination-bullet{
+
+.swiper-pagination-bullet {
     background: #1e1c1c2b !important;
     opacity: 0.8 !important;
 }
 
-  .cta {
+.cta {
     position: relative;
     padding: 19px 22px;
-    color:var(--dark-color);
+    color: var(--dark-color);
     transition: all 0.2s ease;
     text-decoration: none !important;
-  }
-.cta:hover{
+}
+
+.cta:hover {
     color: var(--light-color) !important;
 }
-  .cta:before {
+
+.cta:before {
     content: "";
     position: absolute;
     top: 10px;
     left: 0;
     display: block;
     border-radius: 28px;
-    background: var(--primary-color); /* Assuming --primary is a custom property */
+    background: var(--primary-color);
+    /* Assuming --primary is a custom property */
     width: 40px;
     height: 40px;
     transition: all 0.3s ease;
-  }
+}
 
-  .cta span {
+.cta span {
     position: relative;
     font-size: 15px;
     line-height: 18px;
@@ -220,100 +290,119 @@
     letter-spacing: 1.2px;
     text-transform: capitalize;
     vertical-align: middle;
-  }
+}
 
-  .cta .fa-arrow-right {
+.cta .fa-arrow-right {
     position: relative;
     top: 0;
     margin-left: 10px;
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke: var(--color); /* Assuming --color is a custom property */
+    stroke: var(--color);
+    /* Assuming --color is a custom property */
     stroke-width: 2;
     transform: translateX(-5px);
     transition: all 0.3s ease;
-  }
+}
 
-  .cta:hover:before {
+.cta:hover:before {
     width: 100%;
     background-color: rgb(107, 228, 187);
-    background:  var(--primary-color);  /* Assuming --primary is a custom property */
-  }
+    background: var(--primary-color);
+    /* Assuming --primary is a custom property */
+}
 
-  .cta:hover .fa-arrow-right {
+.cta:hover .fa-arrow-right {
     transform: translateX(0);
-  }
+}
 
-  .cta:active {
+.cta:active {
     transform: scale(0.96);
-  }
+}
 
- .card-view .text-wrapper{
+.card-view .text-wrapper {
     margin-top: 8px;
     position: relative;
     z-index: 999999;
- }
+}
 
-  figure.zoom img {
+figure.zoom img {
     transition: opacity .5s;
     display: block;
     width: 100%;
-  }
+}
 
 
-  .text-wrapper p {
+.text-wrapper p {
     display: inline;
 }
+
 .full-text {
-    display: none; /* Hidden initially */
+    display: none;
+    /* Hidden initially */
 }
+
 .dots {
     display: none !important;
 }
+
 .readmore-btn {
-        color: #747481;
-        cursor: pointer;
-        display: inline-block;
-        margin-top: 5px;
-        text-decoration: underline;
-        font-size: 12px;
-    }
+    color: #747481;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
+    text-decoration: underline;
+    font-size: 12px;
+}
 
 
 /*desktop view*/
 @media screen and (max-width:1199px) {
-        .cta:before {
-            height: 34px;
-            width: 34px;
-        }
-        .cta {
-            position: relative;
-            padding: 15px 15px;
-        }
-        .cta span {
-            font-size: 13px;
-            line-height: 12px;
-            letter-spacing: 0.5px;
-        }
+    .cta:before {
+        height: 34px;
+        width: 34px;
+    }
 
-        .product-name, .company-name, .tranding-product-name, .tranding-material-name, .tranding-product-size, .pro-name, .card-bottom .material-name, .card-bottom .product-size {
-            font-size: 14px;
+    .cta {
+        position: relative;
+        padding: 15px 15px;
+    }
 
-        }
-        .card-view {
-            padding: 14px 10px;
-        }
+    .cta span {
+        font-size: 13px;
+        line-height: 12px;
+        letter-spacing: 0.5px;
+    }
+
+    .product-name,
+    .company-name,
+    .tranding-product-name,
+    .tranding-material-name,
+    .tranding-product-size,
+    .pro-name,
+    .card-bottom .material-name,
+    .card-bottom .product-size {
+        font-size: 14px;
+
+    }
+
+    .card-view {
+        padding: 14px 10px;
+    }
 }
+
 @media screen and (max-width:991px) {
     .product-col {
-       margin-bottom: -7px;
+        margin-bottom: -7px;
     }
+
     .product-card-body {
-       position: relative;
-       height: 278px;
-       box-shadow: none !important;
+        position: relative;
+        height: auto;
+        box-shadow: none !important;
     }
+
     .product-description-div {
         display: block;
         padding: 0;
@@ -324,22 +413,30 @@
 .owl-carousel {
     display: none !important;
 }
+
 @media screen and (max-width: 991px) {
     .desktop-grid {
         display: none;
     }
+
     .owl-carousel {
         display: block !important;
     }
+
     .image_overlay {
         display: none;
     }
+
     .owl-theme .owl-nav {
         display: none;
     }
 }
+
 @media screen and (max-width:575px) {
     .product-col .image-container {
-       padding: 0 10px;
+        padding: 0 10px;
+    }
+    .card-view.inner-card {
+        height: auto;
     }
 }

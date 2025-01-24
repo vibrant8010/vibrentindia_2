@@ -32,15 +32,15 @@
                             </div>
 
                             <div class="text-wrapper">
-                                <h6 class="tranding-product-name">
-                                    <span class="title">Product:</span>
+                                <h6 class="tranding-product-name text-product m-0">
+                                    {{-- <span class="title">Product:</span> --}}
                                     <span class="trnding-pro-name">{{ $product->name }}</span>
                                 </h6>
 
                             </div>
                             <div class="card-bottom">
                                 <h6 class="tranding-product-name">
-                                    <span class="title">Company Name:</span>
+                                    <span class="title">Company:</span>
                                     <span class="tranding-pro-name">{{ $product->company->name }}</span>
                                 </h6>
                                 <h6 class="tranding-product-name">
@@ -59,7 +59,7 @@
                                  <p class="card-description content-txt" id="description-{{ $product->id }}">
 
                                         <span class="visible-text">
-                                            {{ Str::limit($product->description, 20) }}
+                                            {{ Str::limit($product->description, 40) }}
                                         </span>
 
                                     </p>

@@ -78,7 +78,7 @@ aria-hidden="true" class="header-scroll">
         <div class="left-part">
             <div class="header-logo-container">
                 <a href="{{ route('user.home') }}">
-                    <img src="{{ asset('images/company-logo.png') }}" alt="company logo">
+                    <img src="{{ asset('images/vibrantnewlogo.png') }}" alt="company logo">
                 </a>
             </div>
         </div>
