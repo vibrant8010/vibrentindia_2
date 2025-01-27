@@ -73,18 +73,30 @@
 tabindex="-1"
 aria-labelledby="headerModelLabel"
 aria-hidden="true" class="header-scroll">
+{{-- /*searchpopu area*/ --}}
+<div class="modal">
+    {{-- <span class="close-button"><</span> --}}
+    {{-- <div class="modal-content">
+
+        <h1>Hello, I am a modal!</h1>
+    </div> --}}
+</div>
+  <span class="close-button"><</span>
+{{-- /*searchpopu area*/ --}}
     <section class="header-top">
+        <button class="menu-btn d-lg-none d-sm-block d-md-none d-block" id="menu-btn" style="display: block;">
+            <i class="fa-solid fa-bars"></i>
+        </button>
         <!-- Left Part: Logo -->
         <div class="left-part">
             <div class="header-logo-container">
                 <a href="{{ route('user.home') }}">
-                    <img src="{{ asset('images/vibrantnewlogo.png') }}" alt="company logo">
+                    <img src="{{ asset('images/vibrantupdatelogo.png') }}" alt="company logo">
                 </a>
             </div>
         </div>
 
         <!-- Center Part: Search and Dropdown (Desktop) -->
-        <div class="d-lg-block d-md-block d-block">
         <div class="search-section">
             {{-- <div class="search-location-box">
                 <div class="inputgroup_location">
@@ -162,10 +174,11 @@ aria-hidden="true" class="header-scroll">
                     {{-- <div id="suggestions" class="suggestions-box"></div>
                     <div id="suggestions" class="suggestions-box"></div> --}}
                 </div>
-            </div>
-        </div>
-        </div>
 
+            </div>
+
+        </div>
+        <button class="trigger"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i></button>
         <!-- Right Part: Authentication & Contact (Desktop) -->
         <div class="d-lg-block d-md-block d-none">
             <div class="right-part">
@@ -188,13 +201,19 @@ aria-hidden="true" class="header-scroll">
                     </a>
                     <a href="{{ route('login') }}" class="btn-links">
                         <span class="lg-img">
+                            <img src="{{ asset('images/registration.png') }}" alt="" style="height: 30px;width:30px;">
+                        </span>
+                         Join Free
+                    </a>
+                    {{-- <a href="{{ route('login') }}" class="btn-links">
+                        <span class="lg-img">
                             <img src="{{ asset('images/INQUIRY.png') }}" alt="">
                         </span>
                         Inquiry
                     </a>
                     <a href="https://wa.me/+918511684938" class="contact-cheap">
                         +91 8511 6849 38
-                    </a>
+                    </a> --}}
                 @endif
             </div>
         </div>
@@ -202,13 +221,13 @@ aria-hidden="true" class="header-scroll">
 
     <!-- Header Bottom: Mobile Menu and Navigation -->
     <div class="header-bottom">
-        <button class="menu-btn d-lg-none d-sm-block d-md-none" id="menu-btn">
+        {{-- <button class="menu-btn d-lg-none d-sm-block d-md-none" id="menu-btn">
             <i class="fa-solid fa-bars"></i>
-        </button>
+        </button> --}}
 
         <nav class="nav-container">
             <span class="close-btn" id="close-btn">&times;</span>
-            <ul class="menu">
+            <ul class="menu d-lg-block d-xl-block d-md-block d-sm-none d-none">
                 <li class="dropdown menu-item">
                     <a href="#"><span class="category-img mx-1 "><i class="fa-solid fa-list"></i></span>All
                         Category</a>
@@ -262,36 +281,6 @@ aria-hidden="true" class="header-scroll">
                     </div>
                 </li>
             </ul>
-
-            <!-- Mobile Search and Dropdown -->
-            {{-- <div class="d-lg-none d-md-none d-block">
-                <div class="search-container">
-                    <div class="select-box">
-                        <div class="dropdown" id="mobile-dropdown">
-                            <div class="dropdown-button" id="dropdownButtonMobile">
-                                Products
-                            </div>
-                            <div class="dropdown-menu" id="dropdownMenuMobile">
-                                <div class="dropdown-item" onclick="selectDropdownMobile('Products')">Products</div>
-                                <div class="dropdown-item" onclick="selectDropdownMobile('Companies')">Companies</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="search-input-box">
-                        <form id="search-form-mobile" class="search-box-section"
-                            onsubmit="performSearchMobile(event)">
-                            <input type="text" name="query" id="search-bar-mobile"
-                                oninput="fetchSuggestionsMobile()" autocomplete="off" placeholder="Search here ...">
-                            <div class="search-btn-box">
-                                <button type="submit" class="search-btn">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </div>
-                        </form>
-                        <div id="suggestions-mobile" class="suggestions-box"></div>
-                    </div>
-                </div>
-            </div> --}}
         </nav>
     </div>
 
@@ -306,7 +295,7 @@ aria-hidden="true" class="header-scroll">
                     <form id="loginForm">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input  type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
@@ -617,4 +606,5 @@ aria-hidden="true" class="header-scroll">
         document.getElementById("basicForm").style.display = "block";
         document.getElementById("detailedForm").style.display = "none";
       });
+
 </script>

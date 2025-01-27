@@ -1,6 +1,4 @@
 /* Header view */
-
-
     document.getElementById('menu-btn').addEventListener('click', function() {
         document.querySelector('.nav-container').classList.add('open');
     });
@@ -706,3 +704,37 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+
+//   var changeClass = function(name){
+//     $('#search, #nav ul').removeAttr('class').addClass(name);
+//   }
+
+/*search toggle */
+var modal = document.querySelector(".modal");
+var trigger = document.querySelector(".trigger");
+var closeButton = document.querySelector(".close-button");
+var search_section = document.querySelector(".search-section");
+
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+    search_section.classList.toggle("show-searchbar");
+
+    // Add or remove the class for the close button
+    if (modal.classList.contains("show-modal")) {
+        closeButton.classList.add("show-close-button"); // Show the close button
+    } else {
+        closeButton.classList.remove("show-close-button"); // Hide the close button
+    }
+}
+
+function windowOnClick(event) {
+    if (event.target === modal) {
+        toggleModal();
+    }
+}
+
+// Event Listeners
+trigger.addEventListener("click", toggleModal);
+closeButton.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);
