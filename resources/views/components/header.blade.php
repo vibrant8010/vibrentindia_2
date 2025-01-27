@@ -80,6 +80,54 @@ aria-hidden="true" class="header-scroll">
 
         <h1>Hello, I am a modal!</h1>
     </div> --}}
+    <div class="modal-content">
+    <h6 class="category-title">All Category</h6>
+    <ul class="modal-category">
+      <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li>
+      <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li>
+      <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li>
+      <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li>
+      <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li> <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li>
+      <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li> <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li>
+      <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li>
+      <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li>
+      <li class="modal-nav-item">
+        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+         <a href="#" class="modal-nav-view">Kitchenware</a>
+      </li>
+
+    </ul>
+</div>
 </div>
   <span class="close-button"><</span>
 {{-- /*searchpopu area*/ --}}
@@ -91,11 +139,12 @@ aria-hidden="true" class="header-scroll">
         <div class="left-part">
             <div class="header-logo-container">
                 <a href="{{ route('user.home') }}">
-                    <img src="{{ asset('images/vibrantupdatelogo.png') }}" alt="company logo">
+                    <img src="{{ asset('images/desktoplogo.png') }}" alt="company logo">
                 </a>
             </div>
         </div>
 
+        <div class="d-flex aligin-items-center justify-content-center mobil-rightpart">
         <!-- Center Part: Search and Dropdown (Desktop) -->
         <div class="search-section">
             {{-- <div class="search-location-box">
@@ -178,7 +227,18 @@ aria-hidden="true" class="header-scroll">
             </div>
 
         </div>
-        <button class="trigger"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i></button>
+
+
+        <button class="trigger icon-mobile-view"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i></button>
+         <div class="mobile-sigin-logo">
+        <a href="{{ route('login') }}" class="d-block d-lg-none d-md-none d-sm-block d-xl-none icon-mobile-view">
+            <span class="lg-img">
+                {{-- <img src="{{ asset('images/personmobile.png') }}" alt=""> --}}
+                <i class="fa-regular fa-user" style="color: #000000;"></i>
+            </span>
+        </a>
+    </div>
+    </div>
         <!-- Right Part: Authentication & Contact (Desktop) -->
         <div class="d-lg-block d-md-block d-none">
             <div class="right-part">
@@ -194,7 +254,7 @@ aria-hidden="true" class="header-scroll">
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="btn-links">
-                        <span class="lg-img">
+                        <span class="lg-img"    >
                             <img src="{{ asset('images/personicon.png') }}" alt="">
                         </span>
                         Sign in
@@ -254,17 +314,18 @@ aria-hidden="true" class="header-scroll">
                 <li class="nav-item mobile-logo py-4 px-1 d-lg-none d-sm-block d-md-none">
                     <div class="header-logo-container d-md-block d-sm-block d-lg-none">
                         <a href="{{ route('user.home') }}">
-                            <img src="{{ asset('images/mobile-logo.png') }}" alt="company logo"
-                                style="height: 100%; width: 187px;">
+                            <img src="{{ asset('images/mobilelogo.png') }}" alt="company logo"
+                                style="height: 32px; width: 169px;">
                         </a>
                     </div>
+                    {{-- <span class="close-btn" id="close-btn" style="display: block;">×</span> --}}
                 </li>
                 <li class="nav-item"><a href="{{ route('innertopcategory') }}" class="nav-link">Top Category</a></li>
                 <li class="nav-item"><a href="{{ route('newarrival') }}" class="nav-link">New Arrival</a></li>
                 <li class="nav-item"><a href="{{ route('alltrendingcategory') }}" class="nav-link">Trending
                         Products</a></li>
                 <li class="nav-item"><a href="#Blogs" class="nav-link">Blogs</a></li>
-                <li class="s-box d-lg-none d-md-none d-sm-block">
+                {{-- <li class="s-box d-lg-none d-md-none d-sm-block">
                     <div class="right-part mt-5">
                         <a href="{{ route('login') }}" class="btn-links">
                             <span class="lg-img">
@@ -279,7 +340,7 @@ aria-hidden="true" class="header-scroll">
                             Inquiry
                         </a>
                     </div>
-                </li>
+                </li> --}}
             </ul>
         </nav>
     </div>

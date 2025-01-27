@@ -84,7 +84,7 @@ $(document).ready(function () {
       dots: true,                // Show dots for navigation
       responsive: {
         0: {
-          items: 1               // Show 1 card for screens <= 575px
+          items: 1
         },
         576: {
           items: 2               // Show 2 cards for screens <= 767px

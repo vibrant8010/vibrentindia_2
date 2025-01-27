@@ -100,6 +100,10 @@
         margin: 20px 10px;
     }
 
+    .card-view {
+        padding: 14px 20px;
+    }
+
     .product-card-body {
         padding: 0;
     }
@@ -133,6 +137,7 @@
     .card-bottom .product-size {
         font-size: 13px !important;
     }
+
     .product-card-body {
         position: relative;
         height: auto;
@@ -434,9 +439,47 @@ figure.zoom img {
 
 @media screen and (max-width:575px) {
     .product-col .image-container {
-        padding: 0 10px;
+        padding: 0 15px;
     }
+
+    .product-col {
+        margin: 0 19px;
+    }
+
+    .product-name,
+    .company-name,
+    .tranding-product-name,
+    .tranding-material-name,
+    .tranding-product-size,
+    .material-name,
+    .card-bottom .material-name,
+    .card-bottom .product-size {
+        border-bottom: 1px solid #d4d4d45e;
+        padding-bottom: 3px;
+        display: flex;
+        flex-direction: column;
+    }
+    .card-view .card-description, .card-view .arrival-card-description, .card-view .tranding-card-description,
+    .tranding-product-name .trnding-pro-name {
+        font-size: 13px;
+    }
+
+    .product-description-div .title,
+    .product-name .title,
+    .product-size .size-title,
+    .tranding-material-title,
+    .tranding-size-title,
+    .material-name .material-title {
+        font-size: 12px;
+    }
+
     .card-view.inner-card {
         height: auto;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .product-col {
+        margin: 0;
     }
 }
