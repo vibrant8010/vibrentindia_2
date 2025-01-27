@@ -1,0 +1,252 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<title>403 Forbidden</title>
+	<style>#suggestion-box {
+		max-height: 200px;
+		overflow-y: auto;
+		border-radius: 4px;
+	}
+
+	.suggestion-item:hover {
+		background-color: #f0f0f0;
+	}
+	</style>
+</head>
+<body>
+
+	<div class="global-search-container" style="position: relative; width: 300px;">
+		<input
+			type="text"
+			id="global-search"
+			class="form-control"
+			placeholder="Search..."
+			autocomplete="off"
+			style="width: 100%; padding: 8px; box-sizing: border-box;"
+		/>
+		<ul id="suggestion-box" style="
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			width: 100%;
+			border: 1px solid #ddd;
+			background-color: white;
+			display: none;
+			z-index: 1000;">
+		</ul>
+	</div>
+<script>document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('global-search');
+    const suggestionBox = document.getElementById('suggestion-box');
+    let currentIndex = -1;
+
+    // Sample suggestions (replace with API call)
+    const suggestions = [
+        { id: 1, name: 'Product A' },
+        { id: 2, name: 'Product B' },
+        { id: 3, name: 'Product C' },
+        { id: 4, name: 'Service D' },
+    ];
+
+    // Function to fetch and display suggestions
+    function showSuggestions(query) {
+        const filteredSuggestions = suggestions.filter(item =>
+            item.name.toLowerCase().includes(query.toLowerCase())
+        );
+
+        suggestionBox.innerHTML = '';
+        filteredSuggestions.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.textContent = item.name;
+            li.setAttribute('data-id', item.id);
+            li.classList.add('suggestion-item');
+            li.style.padding = '8px';
+            li.style.cursor = 'pointer';
+            li.addEventListener('click', () => {
+                searchInput.value = item.name;
+                suggestionBox.style.display = 'none';
+            });
+            suggestionBox.appendChild(li);
+        });
+
+        suggestionBox.style.display = filteredSuggestions.length ? 'block' : 'none';
+    }
+
+    // Handle input event
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim();
+        if (query.length > 0) {
+            showSuggestions(query);
+        } else {
+            suggestionBox.style.display = 'none';
+        }
+        currentIndex = -1; // Reset index
+    });
+
+    // Handle keyboard navigation
+    searchInput.addEventListener('keydown', (e) => {
+        const items = suggestionBox.querySelectorAll('.suggestion-item');
+        if (items.length > 0) {
+            if (e.key === 'ArrowDown') {
+                currentIndex = (currentIndex + 1) % items.length;
+                highlightItem(items, currentIndex);
+            } else if (e.key === 'ArrowUp') {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                highlightItem(items, currentIndex);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (currentIndex >= 0 && currentIndex < items.length) {
+                    searchInput.value = items[currentIndex].textContent;
+                    suggestionBox.style.display = 'none';
+                }
+            }
+        }
+    });
+
+    // Highlight the current item
+    function highlightItem(items, index) {
+        items.forEach((item, i) => {
+            item.style.backgroundColor = i === index ? '#f0f0f0' : 'white';
+        });
+    }
+
+    // Close suggestion box if clicked outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.global-search-container')) {
+            suggestionBox.style.display = 'none';
+        }
+    });
+});
+</script>
+
+</body>
+</html> -->
+<style>
+    /* body
+{
+  background-color:#fafafa!important;
+}
+.card
+{
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  background-color:white;
+} */
+
+
+
+    .loader_circle_1s{
+    animation: rotateClockwise 1s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    }
+    .loader_circle_12s{
+    animation: rotateClockwise 12s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    }
+    .loader_circle_144s{
+    animation: rotateClockwise 144s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    }
+    .loader_circle_1{
+    animation: rotateClockwise 1.5s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    }
+    .loader_circle_2{
+    animation: rotateClockwise 2.5s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    }
+    .loader_circle_3{
+    animation: rotateClockwise 3.5s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    }
+    .loader_circle_4{
+    animation: rotateClockwise 4.5s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    }
+    .loader_circle_5{
+    animation: rotateClockwise 5.5s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    }
+    .loader_circle_6{
+    animation: rotateClockwise 6.5s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+    }
+
+    @keyframes rotateClockwise {
+    from {
+    transform: rotate(0deg);
+    }
+    to {
+    transform: rotate(360deg);
+    }
+    }
+        .loader_circle_1_counter{
+        animation: rotateCounterClockwise 1.5s linear infinite;
+        transform-origin: center;
+        transform-box: fill-box;
+        }
+        .loader_circle_2_counter{
+        animation: rotateCounterClockwise 2.5s linear infinite;
+        transform-origin: center;
+        transform-box: fill-box;
+        }
+        .loader_circle_3_counter{
+        animation: rotateCounterClockwise 3.5s linear infinite;
+        transform-origin: center;
+        transform-box: fill-box;
+        }
+        .loader_circle_4_counter{
+        animation: rotateCounterClockwise 4.5s linear infinite;
+        transform-origin: center;
+        transform-box: fill-box;
+        }
+        .loader_circle_5_counter{
+        animation: rotateCounterClockwise 5.5s linear infinite;
+        transform-origin: center;
+        transform-box: fill-box;
+        }
+        .loader_circle_6_counter{
+        animation: rotateCounterClockwise 6.5s linear infinite;
+        transform-origin: center;
+        transform-box: fill-box;
+        }
+
+    @keyframes rotateCounterClockwise {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(-360deg);
+        }
+      }
+
+
+</style>
+<!-- -->
+        <!-- <div class="pt-5 pb-5 card-body"> -->
+            <svg class="mx-auto d-block" width="60"
+                height="60" viewBox="0 0 60 60"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g class="loader_circle_1"
+                    id="loader_151">
+                    <circle id="Ellipse 858" cx="30"
+                        cy="30" r="30"
+                        fill="transparent" />
+                    <path id="Union" fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M5 35C5 21.1929 16.1929 10 30 10C32.7614 10 35 7.76142 35 5C35 2.23858 32.7614 0 30 0C13.4315 0 0 13.4315 0 30C0 46.5685 13.4315 60 30 60C16.1929 60 5 48.8071 5 35Z"
+                        fill="#0043AA" />
+                </g>
+            </svg>
+        <!-- </div> -->
+

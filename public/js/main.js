@@ -241,7 +241,8 @@ function successCallback(position) {
             const city = address.city || address.state_district || address.town || address.village || '';
             const postalCode = address.postcode || '';
             if (state && city && postalCode) {
-                document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
+                // document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
+                document.getElementById('city-auto-sug').value =  address.city || address.state_district || address.town || address.village || '';
                 sendLocationData({ state, city, postalCode });
             }
         })

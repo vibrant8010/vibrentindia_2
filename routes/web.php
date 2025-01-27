@@ -20,7 +20,8 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('/filter-products', [ProductController::class, 'filterProducts'])->name('filter.products');
 
 Route::get('/search-suggestions', [ProductController::class, 'suggestions']);
-Route::get('/product/{id}', [ProductController::class, 'productDetails']);
+// Route::get('/product/{id}', [ProductController::class, 'productDetails'])->name('productDetails');
+Route::get('/product/{id}', [ProductController::class, 'productDetails'])->name('productDetails');
 
 Route::view('/about', 'about');
 
