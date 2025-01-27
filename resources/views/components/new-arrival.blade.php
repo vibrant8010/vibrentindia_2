@@ -54,16 +54,17 @@
 
                             <h6 class="tranding-product-name">
                                 <span class="title">Company:</span>
+
                                 <span class="tranding-pro-name">{{ $product->company->name }}</span>
                             </h6>
                             <h6 class="tranding-product-name">
                                 <span class="title">Category:</span>
                                 <span class="tranding-pro-name">{{ $product->category->name }}</span>
                             </h6>
-                            <h6 class="tranding-product-name">
+                            {{-- <h6 class="tranding-product-name">
                                 <span class="title">Product:</span>
                                 <span class="trnding-pro-name">{{ $product->name }}</span>
-                            </h6>
+                            </h6> --}}
 
                             <h6 class="tranding-material-name">
                                 <span class="tranding-material-title">Material:</span>
