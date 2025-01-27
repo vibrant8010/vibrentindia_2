@@ -85,20 +85,23 @@
                             </div>
                         </div>
                         @php
-                        $fullAddress = implode(', ', array_filter([
-                            $product->company->city ?? '',
-                            $product->company->state ?? '',
-                            $product->company->pincode ?? ''
-                        ]));
-                        // print_r($fullAddress);
+                            $fullAddress = implode(
+                                ', ',
+                                array_filter([
+                                    $product->company->city ?? '',
+                                    $product->company->state ?? '',
+                                    $product->company->pincode ?? '',
+                                ]),
+                            );
+                            // print_r($fullAddress);
                         @endphp
-                          @php
-                          use Carbon\Carbon;
-                          $registrationDate = Carbon::parse($product->company->gst_registration_date);
-                          $currentYear = Carbon::now();
-                          $yearsSinceRegistration = $registrationDate->diffInYears($currentYear);
-                          $registrationYear = $registrationDate->year;
-                         @endphp
+                        @php
+                            use Carbon\Carbon;
+                            $registrationDate = Carbon::parse($product->company->gst_registration_date);
+                            $currentYear = Carbon::now();
+                            $yearsSinceRegistration = $registrationDate->diffInYears($currentYear);
+                            $registrationYear = $registrationDate->year;
+                        @endphp
                         <div class="col-lg-12 d-block d-lg-none d-sm-block">
                             <div class="company-personal-details sticky-top-new">
                                 <div class="product-details mt-3">
@@ -117,31 +120,32 @@
                                     <span class="title-ans">{{ $product->company->nature_of_business ?? '' }}</span>
                                 </div>
                                 <div class="company-product-count"><span class="title">Number of Product :</span> <span
-                                        class="title-ans">  {{ $product->company->products->count() ?? '0' }}</span></div>
-                                        <div class="mobile-no-content">
-                                            <ul class="mobile-no-data">
-                                                <li class="company-no">
-                                                    <div class="action_button_filled">
-                                                        <span class="telephone-icon">
-                                                            <i class="fa-solid fa-phone" style="color: #ffffff;"></i>
-                                                        </span>
-                                                        <a href="tel:8511684938" class="no-link">
-                                                            8511684938
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="whatsup-content">
-                                                    <div class="action_whatsup_filled">
-                                                        <a target="_blank" rel="noopener noreferrer" role="button"
-                                                            title="Whats App Chat" aria-label="Whats app chat"
-                                                            class="no-link">
-                                                            <span class="whatus-icon"><i class="fa-brands fa-whatsapp" style="color: #2aa81a;"></i></span>
-                                                            <span class="whatsup-link">WhatsApp</span>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        class="title-ans"> {{ $product->company->products->count() ?? '0' }}</span>
+                                </div>
+                                <div class="mobile-no-content">
+                                    <ul class="mobile-no-data">
+                                        <li class="company-no">
+                                            <div class="action_button_filled">
+                                                <span class="telephone-icon">
+                                                    <i class="fa-solid fa-phone" style="color: #ffffff;"></i>
+                                                </span>
+                                                <a href="tel:8511684938" class="no-link">
+                                                    8511684938
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li class="whatsup-content">
+                                            <div class="action_whatsup_filled">
+                                                <a target="_blank" rel="noopener noreferrer" role="button"
+                                                    title="Whats App Chat" aria-label="Whats app chat" class="no-link">
+                                                    <span class="whatus-icon"><i class="fa-brands fa-whatsapp"
+                                                            style="color: #2aa81a;"></i></span>
+                                                    <span class="whatsup-link">WhatsApp</span>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <div class="btn-area my-4">
                                     <a href="#" class="inqury-btn d-block text-center">Inqury now</a>
                                 </div>
@@ -192,69 +196,84 @@
                             <div class="tab-content more-product" id="more-product">
                                 <div class="row">
                                     @php
-                                    $categories2 = App\Models\Product::where('company_id', '=', $product->company->id)->get();
-                                    // print_r($categories2);
-                                @endphp
-                                   @forelse ($categories2 as $reletaedProductes )
-                                   <div class="col-xl-4 col-lg-3 col-md-4 col-sm-6">
-                                    <div class="card-view inner-card">
-                                        <a href="/product/{{$reletaedProductes->id}}" class="card-link"></a>
-                                        <div class="image-container">
-                                            <div class="thumbnail_container">
-                                                <div class="thumbnail">
-                                                    <img src="{{ asset($reletaedProductes->image_url) }}" alt="{{ $reletaedProductes->name }}" class="product-image swiper-img" onclick="openPopup(this)">
+                                        $categories2 = App\Models\Product::where(
+                                            'company_id',
+                                            '=',
+                                            $product->company->id,
+                                        )->get();
+                                        // print_r($categories2);
+                                    @endphp
+                                    @forelse ($categories2 as $reletaedProductes)
+                                        <div class="col-xl-4 col-lg-3 col-md-4 col-sm-6">
+                                            <div class="card-view inner-card">
+                                                <a href="/product/{{ $reletaedProductes->id }}"
+                                                    class="card-link"></a>
+                                                <div class="image-container">
+                                                    <div class="thumbnail_container">
+                                                        <div class="thumbnail">
+                                                            <img src="{{ asset($reletaedProductes->image_url) }}"
+                                                                alt="{{ $reletaedProductes->name }}"
+                                                                class="product-image swiper-img"
+                                                                onclick="openPopup(this)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="logo-container" style="">
+                                                    <img src="{{ asset($reletaedProductes->company->logo_url) }}"
+                                                        class="logo-image" alt="{{ $reletaedProductes->name }}">
+                                                </div>
+
+                                                <div class="text-wrapper">
+                                                    <h6 class="tranding-product-name">
+                                                        <span class="title">Product:</span>
+                                                        <span
+                                                            class="trnding-pro-name">{{ $reletaedProductes->name }}</span>
+                                                    </h6>
+
+                                                </div>
+                                                <div class="card-bottom">
+                                                    <h6 class="tranding-product-name">
+                                                        <span class="title">Company Name:</span>
+                                                        <span
+                                                            class="tranding-pro-name">{{ $reletaedProductes->company->name }}</span>
+                                                    </h6>
+                                                    <h6 class="tranding-product-name">
+                                                        <span class="title">Category:</span>
+                                                        <span
+                                                            class="tranding-pro-name">{{ $reletaedProductes->category->name }}</span>
+                                                    </h6>
+
+                                                    <h6 class="tranding-material-name">
+                                                        <span class="tranding-material-title">Material:</span>
+                                                        <span
+                                                            class="mt-name tranding-mt-name">{{ $reletaedProductes->material }}</span>
+                                                    </h6>
+                                                    <h6 class="tranding-product-size">
+                                                        <span class="tranding-size-title">Size:</span>
+                                                        <span
+                                                            class="tranding-sz-name">{{ $reletaedProductes->size }}</span>
+                                                    </h6>
+                                                    <p class="card-description content-txt" id="description-92">
+
+                                                        <span class="visible-text">
+                                                            This Hammered Sauce...
+                                                        </span>
+
+                                                    </p>
+                                                    <a href="javascript:void(0)" class="read-more"
+                                                        onclick="toggleReadMore(92)"></a>
+
+                                                    <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                        <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
+                                                            <span>Sign in to Inquire</span>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="logo-container" style="">
-                                                                            <img src="{{ asset($reletaedProductes->company->logo_url) }}" class="logo-image" alt="{{ $reletaedProductes->name }}">
-                                                                    </div>
-
-                                        <div class="text-wrapper">
-                                            <h6 class="tranding-product-name">
-                                                <span class="title">Product:</span>
-                                                <span class="trnding-pro-name">{{ $reletaedProductes->name }}</span>
-                                            </h6>
-
-                                        </div>
-                                        <div class="card-bottom">
-                                            <h6 class="tranding-product-name">
-                                                <span class="title">Company Name:</span>
-                                                <span class="tranding-pro-name">{{ $reletaedProductes->company->name }}</span>
-                                            </h6>
-                                            <h6 class="tranding-product-name">
-                                                <span class="title">Category:</span>
-                                                <span class="tranding-pro-name">{{ $reletaedProductes->category->name }}</span>
-                                            </h6>
-
-                                            <h6 class="tranding-material-name">
-                                                <span class="tranding-material-title">Material:</span>
-                                                <span class="mt-name tranding-mt-name">{{ $reletaedProductes->material }}</span>
-                                            </h6>
-                                            <h6 class="tranding-product-size">
-                                                <span class="tranding-size-title">Size:</span>
-                                                <span class="tranding-sz-name">{{ $reletaedProductes->size }}</span>
-                                            </h6>
-                                             <p class="card-description content-txt" id="description-92">
-
-                                                    <span class="visible-text">
-                                                        This Hammered Sauce...
-                                                    </span>
-
-                                                </p>
-                                                <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore(92)"></a>
-
-                                            <div class="d-flex justify-content-start mx-2 bottom-btn">
-                                                                                        <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
-                                                        <span>Sign in to Inquire</span>
-                                                    </a>
-                                                                                </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @empty
-                                <li>No products found.</li>
-                            @endforelse
+                                    @empty
+                                        <li>No products found.</li>
+                                    @endforelse
                                     {{-- <div class="col-xl-4 col-lg-3 col-md-4 col-sm-6">
                                         <div class="card-view inner-card">
                                             <a href="http://127.0.0.1:8000/product/92" class="card-link"></a>
@@ -481,8 +500,8 @@
                                     </div> --}}
                                 </div>
 
-                                </div>
                             </div>
+                        </div>
 
                     </div>
 
@@ -519,8 +538,7 @@
                         </div>
                         <h6 class="company-product-title detail-text">{{ $product->name }}</h6>
                         <h6 class="detail-text company-address">{{ $fullAddress }}</h6>
-                        <div class="company-start-date"><span class="title">since:</span> <span
-                                class="title-ans">
+                        <div class="company-start-date"><span class="title">since:</span> <span class="title-ans">
                                 {{-- {{ $product->company->gst_registration_date }}2011 --}}
                                 <p>Registration Year: {{ $registrationYear }}</p>
                                 <p>Years Since Registration: {{ $yearsSinceRegistration }} years</p>
@@ -528,7 +546,7 @@
                         <div class="company-business-category"><span class="title">Business Category :</span> <span
                                 class="title-ans">{{ $product->company->nature_of_business ?? '' }}</span></div>
                         <div class="company-product-count"><span class="title">Number of Product :</span> <span
-                                class="title-ans">  {{ $product->company->products->count() ?? '0' }}</span></div>
+                                class="title-ans"> {{ $product->company->products->count() ?? '0' }}</span></div>
                         <div class="mobile-no-content">
                             <ul class="mobile-no-data">
                                 <li class="company-no">
@@ -544,9 +562,9 @@
                                 <li class="whatsup-content">
                                     <div class="action_whatsup_filled">
                                         <a target="_blank" rel="noopener noreferrer" role="button"
-                                            title="Whats App Chat" aria-label="Whats app chat"
-                                            class="no-link">
-                                            <span class="whatus-icon"><i class="fa-brands fa-whatsapp" style="color: #2aa81a;"></i></span>
+                                            title="Whats App Chat" aria-label="Whats app chat" class="no-link">
+                                            <span class="whatus-icon"><i class="fa-brands fa-whatsapp"
+                                                    style="color: #2aa81a;"></i></span>
                                             <span class="whatsup-link">WhatsApp</span>
                                         </a>
                                     </div>
@@ -599,7 +617,7 @@
             });
         </script>
     </section>
-    <x-footer class="mb-0"/>
+    <x-footer class="mb-0" />
     <x-script />
 </body>
 
