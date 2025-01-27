@@ -122,7 +122,7 @@
 
 </body>
 </html> -->
-<style>
+<!-- <style>
     /* body
 {
   background-color:#fafafa!important;
@@ -230,10 +230,10 @@
       }
 
 
-</style>
+</style> -->
 <!-- -->
-        <!-- <div class="pt-5 pb-5 card-body"> -->
-            <svg class="mx-auto d-block" width="60"
+<!-- <div class="pt-5 pb-5 card-body"> -->
+<!-- <svg class="mx-auto d-block" width="60"
                 height="60" viewBox="0 0 60 60"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -247,6 +247,243 @@
                         d="M5 35C5 21.1929 16.1929 10 30 10C32.7614 10 35 7.76142 35 5C35 2.23858 32.7614 0 30 0C13.4315 0 0 13.4315 0 30C0 46.5685 13.4315 60 30 60C16.1929 60 5 48.8071 5 35Z"
                         fill="#0043AA" />
                 </g>
-            </svg>
-        <!-- </div> -->
+            </svg> -->
+<!-- </div> -->
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Login Pop-up</title>
+    <style>
+        /* Modal Overlay */
+        .custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Modal */
+        .custom-modal {
+            background: #fff;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Header */
+        .custom-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .custom-modal-logo img {
+            height: 40px;
+        }
+
+        .custom-modal-welcome {
+            font-size: 14px;
+            color: #333;
+            margin-left: 10px;
+        }
+
+        .custom-modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Body */
+        .custom-modal-body {
+            padding: 20px;
+        }
+
+        .custom-input-group {
+            margin-bottom: 15px;
+        }
+
+        .custom-label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .custom-link-text {
+            font-size: 12px;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        .custom-link {
+            color: #007bff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: underline;
+        }
+
+        .custom-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .custom-forgot {
+            font-size: 12px;
+            color: #007bff;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .custom-modal-footer {
+            padding: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .custom-btn {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Trigger Button -->
+    <button class="login-btn" id="openModal" onclick="openModal()">Sign UP</button>
+
+    <!-- Custom Modal -->
+    <div class="custom-modal-overlay" id="customModal" style="display: none;">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-logo">
+                    <a href="#"><img src="./company-logo.webp" alt="Company Logo" /></a>
+                </div>
+                <div class="custom-modal-welcome">
+                    Welcome, <br />
+                    Login for a seamless experience
+                </div>
+                <button class="custom-modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="custom-modal-body">
+                <!-- Basic Form -->
+                <div id="basicCustomForm">
+                    <div class="custom-input-group">
+                        <label for="email" class="custom-label">Email</label>
+                        <input type="email" class="custom-input" id="email" placeholder="Enter your email" required />
+                    </div>
+                    <p class="custom-link-text">
+                        Don't have an account?
+                        <button type="button" class="custom-link" id="showSignUpForm">
+                            Sign Up
+                        </button>
+                    </p>
+                </div>
+                <!-- Detailed Form -->
+                <div id="detailedCustomForm" style="display: none;">
+                    <div class="custom-input-group">
+                        <label for="name" class="custom-label">Name</label>
+                        <input type="text" class="custom-input" id="name" placeholder="Enter your name" required />
+                    </div>
+                    <div class="custom-input-group">
+                        <label for="emailSignUp" class="custom-label">Email</label>
+                        <input type="email" class="custom-input" id="emailSignUp" placeholder="Enter your email"
+                            required />
+                    </div>
+                    <div class="custom-input-group">
+                        <label for="phone" class="custom-label">Phone Number</label>
+                        <input type="tel" class="custom-input" id="phone" placeholder="Enter your phone number"
+                            required />
+                    </div>
+                    <div class="custom-links">
+                        <a href="#" class="custom-forgot">Forgot Password?</a>
+                        <button type="button" class="custom-link" id="showLoginForm">
+                            Login?
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-modal-footer">
+                <button type="button" class="custom-btn" id="signUpBtn">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //  const openModal = document.getElementById("loginButton");
+        const modal = document.getElementById("customModal");
+        const closeModal = document.getElementById("closeModal");
+        const showSignUpForm = document.getElementById("showSignUpForm");
+        const showLoginForm = document.getElementById("showLoginForm");
+        const basicForm = document.getElementById("basicCustomForm");
+        const detailedForm = document.getElementById("detailedCustomForm");
+
+        // Open modal
+        function openModal() {
+            modal.style.display = "flex";
+        }
+
+        // Close modal
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // Toggle forms
+        showSignUpForm.addEventListener("click", () => {
+            basicForm.style.display = "none";
+            detailedForm.style.display = "block";
+        });
+
+        showLoginForm.addEventListener("click", () => {
+            detailedForm.style.display = "none";
+            basicForm.style.display = "block";
+        });
+    </script>
+</body>
+
+</html>

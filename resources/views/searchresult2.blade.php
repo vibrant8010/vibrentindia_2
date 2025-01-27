@@ -68,108 +68,125 @@
 
 <head>
     <x-head />
-    <style> .loader_circle_1s{
-        animation: rotateClockwise 1s linear infinite;
-        transform-origin: center;
-        transform-box: fill-box;
+    <style>
+        .loader_circle_1s {
+            animation: rotateClockwise 1s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
         }
-        .loader_circle_12s{
-        animation: rotateClockwise 12s linear infinite;
-        transform-origin: center;
-        transform-box: fill-box;
+
+        .loader_circle_12s {
+            animation: rotateClockwise 12s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
         }
-        .loader_circle_144s{
-        animation: rotateClockwise 144s linear infinite;
-        transform-origin: center;
-        transform-box: fill-box;
+
+        .loader_circle_144s {
+            animation: rotateClockwise 144s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
         }
-        .loader_circle_1{
-        animation: rotateClockwise 1.5s linear infinite;
-        transform-origin: center;
-        transform-box: fill-box;
+
+        .loader_circle_1 {
+            animation: rotateClockwise 1.5s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
         }
-        .loader_circle_2{
-        animation: rotateClockwise 2.5s linear infinite;
-        transform-origin: center;
-        transform-box: fill-box;
+
+        .loader_circle_2 {
+            animation: rotateClockwise 2.5s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
         }
-        .loader_circle_3{
-        animation: rotateClockwise 3.5s linear infinite;
-        transform-origin: center;
-        transform-box: fill-box;
+
+        .loader_circle_3 {
+            animation: rotateClockwise 3.5s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
         }
-        .loader_circle_4{
-        animation: rotateClockwise 4.5s linear infinite;
-        transform-origin: center;
-        transform-box: fill-box;
+
+        .loader_circle_4 {
+            animation: rotateClockwise 4.5s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
         }
-        .loader_circle_5{
-        animation: rotateClockwise 5.5s linear infinite;
-        transform-origin: center;
-        transform-box: fill-box;
+
+        .loader_circle_5 {
+            animation: rotateClockwise 5.5s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
         }
-        .loader_circle_6{
-        animation: rotateClockwise 6.5s linear infinite;
-        transform-origin: center;
-        transform-box: fill-box;
+
+        .loader_circle_6 {
+            animation: rotateClockwise 6.5s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
         }
 
         @keyframes rotateClockwise {
-        from {
-        transform: rotate(0deg);
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
-        to {
-        transform: rotate(360deg);
-        }
-        }
-            .loader_circle_1_counter{
+
+        .loader_circle_1_counter {
             animation: rotateCounterClockwise 1.5s linear infinite;
             transform-origin: center;
             transform-box: fill-box;
-            }
-            .loader_circle_2_counter{
+        }
+
+        .loader_circle_2_counter {
             animation: rotateCounterClockwise 2.5s linear infinite;
             transform-origin: center;
             transform-box: fill-box;
-            }
-            .loader_circle_3_counter{
+        }
+
+        .loader_circle_3_counter {
             animation: rotateCounterClockwise 3.5s linear infinite;
             transform-origin: center;
             transform-box: fill-box;
-            }
-            .loader_circle_4_counter{
+        }
+
+        .loader_circle_4_counter {
             animation: rotateCounterClockwise 4.5s linear infinite;
             transform-origin: center;
             transform-box: fill-box;
-            }
-            .loader_circle_5_counter{
+        }
+
+        .loader_circle_5_counter {
             animation: rotateCounterClockwise 5.5s linear infinite;
             transform-origin: center;
             transform-box: fill-box;
-            }
-            .loader_circle_6_counter{
+        }
+
+        .loader_circle_6_counter {
             animation: rotateCounterClockwise 6.5s linear infinite;
             transform-origin: center;
             transform-box: fill-box;
-            }
+        }
 
         @keyframes rotateCounterClockwise {
             from {
-              transform: rotate(0deg);
+                transform: rotate(0deg);
             }
+
             to {
-              transform: rotate(-360deg);
+                transform: rotate(-360deg);
             }
-          }
+        }
 
 
         .loader_circle_1_counter {
             animation: rotateCounterClockwise 1.5s linear infinite;
             transform-origin: center;
             transform-box: fill-box;
-        } */
+        }
 
-        #loader img {
+        */ #loader img {
             animation: spin 1s linear infinite;
         }
 
@@ -222,7 +239,8 @@
                                             <span class="location-checkbox">
                                                 <input type="checkbox" name="company_ids[]"
                                                     value="{{ $companyFilter->id }}"
-                                                    {{ request()->has('company_ids') && in_array($companyFilter->id, request('company_ids', [])) ? 'checked' : '' }}
+                                                    {{-- {{ request()->has('company_ids') || in_array($companyFilter->id, request('company_ids', [])) ? 'checked' : '' }} --}}
+                                                    {{ $companyFilter->id ? 'checked' : '' }}
                                                     class="filter-checkbox">
                                             </span>
                                             <span class="location-title">{{ $companyFilter->name }}</span>
@@ -286,6 +304,39 @@
                         <div class="row g-4 gy-3 prodoct-img-view" id="product-list">
                             <!-- Products will be dynamically loaded here -->
                         </div>
+                        <div class="row g-4 gy-3 prodoct-img-view" id="product-list-2">
+                            @foreach ($results['products'] as $product)
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-3 p-1">
+                                    <div class="product-card">
+                                        <div class="product-main-box">
+                                            <div class="inner-box">
+                                                <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}"
+                                                    class="product-image" />
+                                            </div>
+                                        </div>
+                                        <div class="product-bottom-details">
+                                            <h3 class="product-detail-name product-detail-maintitle">
+                                                {{ $product->name }}</h3>
+                                            <h3 class="product-detail-name"><span class="lable-txt">Company :
+                                                </span>{{ $product->company->name }}</h3>
+                                            <h3 class="product-detail-name"><span class="lable-txt">Category :
+                                                </span>
+                                                {{ $product->category->name }}</h3>
+
+                                            <h3 class="product-detail-name"><span class="lable-txt">SubCategory
+                                                    :
+                                                </span> {{ $product->subcategory->name }}</h3>
+                                            <p class="product-detail-description">
+                                                {{ Str::limit($product->description, 50) }}</p>
+
+                                            <a href="/product/{{ $product->id }}" class="product-link">View
+                                                Product</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -300,6 +351,8 @@
             function updateProductList() {
                 $('#loader').show();
                 $('#product-list').hide();
+                $('#product-list-2').hide();
+
                 // Get form data
                 let formData = $('#filterForm').serialize();
 
@@ -351,10 +404,10 @@
                 updateProductList();
             });
 
-            // Initial load
-            $(document).ready(function() {
-                updateProductList(); // Load products on page load
-            });
+            // // Initial load
+            // $(document).ready(function() {
+            //     updateProductList(); // Load products on page load
+            // });
         </script>
     @else
         {{-- <div class="product-slideshow-container">

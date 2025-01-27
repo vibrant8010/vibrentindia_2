@@ -193,13 +193,13 @@ aria-hidden="true" class="header-scroll">
                         @csrf
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="btn-links">
+                    <a id="openlogin" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn-links">
                         <span class="lg-img">
                             <img src="{{ asset('images/personicon.png') }}" alt="">
                         </span>
                         Sign in
                     </a>
-                    <a href="{{ route('login') }}" class="btn-links">
+                    <a href="{{ route('business.register') }}" class="btn-links">
                         <span class="lg-img">
                             <img src="{{ asset('images/registration.png') }}" alt="" style="height: 30px;width:30px;">
                         </span>
@@ -284,33 +284,10 @@ aria-hidden="true" class="header-scroll">
         </nav>
     </div>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="loginForm">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
-                            <input  type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     @if (session('alert'))
         <div class="alert alert-warning">
         {{ session('alert') }}
-    </div>
+        </div>
         {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {
 
@@ -323,6 +300,107 @@ aria-hidden="true" class="header-scroll">
             });
         </script> --}}
     @endif
+
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header mt-2 login-header">
+            <div class="login-logo">
+              <a href="#"><img src="./company-logo.webp" alt="" /></a>
+            </div>
+            <div class="txt-header">
+              Wel Come, <br />
+              Login for a seamless experience
+            </div>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div id="basicForm">
+              <div class="login-type">
+                <span for="email" class="login-field-lable">Email</span>
+                <input
+                  type="email"
+                  class="login-input-box"
+                  id="email"
+                  placeholder="Enter your email"
+                  required
+                />
+                <span><i class="fa-solid fa-envelope input-icon"></i></span>
+              </div>
+              <span
+                >"Don't have an account? "
+                <a
+                  type="button"
+                  class="forgot-password mt-2"
+                  id="showDetailsForm"
+                >
+                  Sign UP
+                </a></span
+              >
+            </div>
+            <div id="detailedForm" style="display: none">
+              <div class="login-type">
+                <span for="name" class="login-field-lable">Name</span>
+                <input
+                  type="text"
+                  class="login-input-box"
+                  id="name"
+                  placeholder="Enter your name"
+                  required
+                />
+                <span><i class="fa-solid fa-user input-icon"></i></span>
+              </div>
+              <div class="login-type">
+                <span for="email" class="login-field-lable">Email</span>
+                <input
+                  type="email"
+                  class="login-input-box"
+                  id="email"
+                  placeholder="Enter your email"
+                  required
+                />
+                <span><i class="fa-solid fa-envelope input-icon"></i></span>
+              </div>
+              <div class="login-type">
+                <span for="phone" class="login-field-lable">Phone Number</span>
+                <input
+                  type="tel"
+                  class="login-input-box"
+                  id="phone"
+                  placeholder="Enter your phone number"
+                  required
+                />
+                <span><i class="fa-solid fa-phone input-icon"></i></span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="#" class="forgot-password">Forgot Password?</a>
+                <a
+                  type="button"
+                  class="forgot-password mt-2"
+                  id="showBasicForm"
+                >
+                  Login?
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn login-btn w-100">Sign UP</button>
+          </div>
+        </div>
+      </div>
+    </div>
 </header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {{-- search-suggestions --}}
@@ -588,23 +666,60 @@ aria-hidden="true" class="header-scroll">
     // Initialize the default category
     selectDropdown("All");
 
-    window.onload = function () {
-        setTimeout(function () {
-          var loginModal = new bootstrap.Modal(document.getElementById('header-model'));
-          loginModal.show();
-        }, 3000); // 3000 milliseconds = 3 seconds
-      };
+    // window.onload = function () {
+    //     setTimeout(function () {
+    //       var loginModal = new bootstrap.Modal(document.getElementById('header-model'));
+    //       loginModal.show();
+    //     }, 3000); // 3000 milliseconds = 3 seconds
+    //   };
 
-      // Switch to detailed form
-      document.getElementById("showDetailsForm").addEventListener("click", function () {
-        document.getElementById("basicForm").style.display = "none";
-        document.getElementById("detailedForm").style.display = "block";
-      });
+    //   // Switch to detailed form
+    //   document.getElementById("showDetailsForm").addEventListener("click", function () {
+    //     document.getElementById("basicForm").style.display = "none";
+    //     document.getElementById("detailedForm").style.display = "block";
+    //   });
 
-      // Switch back to basic form
-      document.getElementById("showBasicForm").addEventListener("click", function () {
-        document.getElementById("basicForm").style.display = "block";
-        document.getElementById("detailedForm").style.display = "none";
-      });
+    //   // Switch back to basic form
+    //   document.getElementById("showBasicForm").addEventListener("click", function () {
+    //     document.getElementById("basicForm").style.display = "block";
+    //     document.getElementById("detailedForm").style.display = "none";
+    //   });
 
 </script>
+<script>
+    // Open modal automatically after page loads
+    window.onload = function () {
+      setTimeout(function () {
+        var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        loginModal.show();
+      }, 3000); // 3000 milliseconds = 3 seconds
+    };
+
+
+              const modal = document.getElementById("loginModal");
+              const openModal = document.getElementById("loginButton");
+              const closeModal = document.getElementById("closeModal");
+              const showDetailsForm = document.getElementById("showDetailsForm");
+              const showBasicForm = document.getElementById("showBasicForm");
+
+              openModal.addEventListener("click", () => {
+                modal.classList.add("active");
+              });
+
+              closeModal.addEventListener("click", () => {
+                modal.classList.remove("active");
+              });
+
+              showDetailsForm.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.getElementById("basicForm").style.display = "none";
+                document.getElementById("detailedForm").style.display = "block";
+              });
+
+              showBasicForm.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.getElementById("basicForm").style.display = "block";
+                document.getElementById("detailedForm").style.display = "none";
+              });
+
+  </script>

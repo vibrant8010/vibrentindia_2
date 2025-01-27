@@ -304,15 +304,15 @@ class ProductController extends Controller
         if (!empty($searchTerm)) {
             $companyQuery->where(function ($query) use ($searchTerm) {
                 $query->where('name', 'like', "%{$searchTerm}%")
-                      ->orWhere('description', 'like', "%{$searchTerm}%");
+                    ->orWhere('description', 'like', "%{$searchTerm}%");
             });
         }
 
         if (!empty($location)) {
             $companyQuery->where(function ($query) use ($location) {
                 $query->where('city', 'like', "%{$location}%")
-                        ->orWhere('state', 'like', "%{$location}%")
-                        ->orWhere('pincode', 'like', "%{$location}%");
+                    ->orWhere('state', 'like', "%{$location}%")
+                    ->orWhere('pincode', 'like', "%{$location}%");
             });
         }
 
@@ -348,6 +348,19 @@ class ProductController extends Controller
 
         $products = $productQuery->get();
 
+        $subCategories2 = $products->pluck('subcategory_id');
+        $subCategories = SubCategory::where('name', 'like', "%{$searchTerm}%")
+            ->orWhereIn('category_id', $categoryIds)
+            ->orWhereIn('category_id', $subCategories2)
+            ->get();
+        $companies2 = $products->pluck('company_id');
+        $companies = CompanyDetail::where('name', 'like', "%{$searchTerm}%")
+            // ->orWhereIn('category_id', $categoryIds)
+            ->orWhereIn('id', $companies2)
+            ->get();
+        // echo '<pre>';
+        // print_r($products);die();
+        // print_r($subCategories);die();
         // Combining results
         $results = [
             'products' => $products,
@@ -355,7 +368,7 @@ class ProductController extends Controller
             'companies' => $companies,
             'subCategories' => $subCategories,
         ];
-
+        // print_r($subCategories);die();
         return view('searchresult2', compact('results', 'searchTerm'));
     }
 
@@ -447,8 +460,8 @@ class ProductController extends Controller
     //         'companies' => $companies,
     //         'subCategories' => $subCategories,
     //     ]);
-
-    //     return view('searchresult', compact('results', 'searchTerm'));
+    //     // print_r($subCategories);die;
+    //     return view('searchresult2', compact('results', 'searchTerm'));
     // }
 
     // public function search(Request $request)
