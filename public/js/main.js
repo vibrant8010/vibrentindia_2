@@ -6,11 +6,6 @@ document.getElementById('close-btn').addEventListener('click', function() {
     document.querySelector('.nav-container').classList.remove('open');
 });
 
-
-
-
-
-
 const menuBtn = document.getElementById('menu-btn');
 const navMenu = document.querySelector('.nav-view');
 const closeBtn = document.getElementById('close-btn');

@@ -116,11 +116,17 @@
     }
 
     .custom-modal-close {
-        background: none;
         border: none;
-        font-size: 20px;
-        cursor: pointer;
-        color: #333;
+    font-size: 20px;
+    cursor: pointer;
+    color: #ffffff;
+    background-color:#005353;
+    border-radius: 40px;
+    height: 30px;
+    width: 37px;
+    top: -35px;
+    left: 9px;
+    position: relative;
     }
 
     /* Body */
@@ -129,7 +135,7 @@
     }
 
     .custom-input-group {
-        margin-bottom: 15px;
+        margin-bottom: 6px;
     }
 
     .custom-label {
@@ -144,21 +150,25 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        font-size: 13px;
+        font-weight: 500;
     }
 
     .custom-link-text {
-        font-size: 12px;
-        color: #777;
-        margin-top: 10px;
+        font-size: 13px;
+    color: #000000;
+    margin-top: 10px;
+    font-weight: 500;
     }
 
     .custom-link {
-        color: #007bff;
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 12px;
-        text-decoration: underline;
+        color: #005353;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+
     }
 
     .custom-links {
@@ -182,7 +192,7 @@
     .custom-btn {
         width: 100%;
         padding: 10px;
-        background: #007bff;
+        background: #005353;
         color: #fff;
         border: none;
         border-radius: 5px;
@@ -488,10 +498,10 @@
         <div class="custom-modal">
             <div class="custom-modal-header">
                 <div class="custom-modal-logo">
-                    <a href="#"><img src="./company-logo.webp" alt="Company Logo" /></a>
+                    <a href="#"><img src="{{ asset('images/desktoplogo.png') }}" alt="Company Logo" style="height: 25px;width:132px;" /></a>
                 </div>
                 <div class="custom-modal-welcome">
-                    Welcome, <br />
+                    <span class="welcom-txt">Welcome,</span> <br />
                     Login for a seamless experience
                 </div>
                 <button class="custom-modal-close" id="closeModal">&times;</button>
@@ -500,7 +510,8 @@
                 <!-- Basic Form -->
                 <div id="basicCustomForm">
                     <div class="custom-input-group">
-                        <label for="email" class="custom-label">Email</label>
+                        <span class="custom-label">Email</span>
+                        {{-- <label for="email" class="custom-label">Email</label> --}}
                         <input type="email" class="custom-input" id="otp_email" placeholder="Enter your email"
                             required />
                     </div>
@@ -547,7 +558,8 @@
                             placeholder="Enter your phone number" />
                     </div>
                     <div class="custom-links">
-                        <a href="#" class="custom-forgot">Forgot Password?</a>
+                        {{-- <a href="#" class="custom-forgot">Forgot Password?</a> --}}
+                        <span class="custom-link-text">you have an account?</span>
                         <button type="button" class="custom-link" id="showLoginForm">
                             Login?
                         </button>
