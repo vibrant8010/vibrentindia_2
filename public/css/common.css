@@ -931,8 +931,8 @@ input[type="text"]::-webkit-search-cancel-button {
 }
 .close-button {
     position: relative;
-    top: 23px;
-    left: 30px;
+    top: 20px;
+    left: 20px;
     color: #211f1f;
     /* background-color: teal; */
     border: none;
@@ -1001,7 +1001,7 @@ header .lg-img {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 9999999;
   }
 
   /* Modal */
