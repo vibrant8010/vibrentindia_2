@@ -158,43 +158,51 @@ setInterval(() => {
 }, 5000);
 
 // Toggle filter content with arrow animation
-const filterHeaders = document.querySelectorAll('.filter-header');
+// Toggle filter content with arrow animation and close others
+// Select all filter headers
+const filterHeaders = document.querySelectorAll(".filter-header");
 
-filterHeaders.forEach(header => {
-  header.addEventListener('click', () => {
+// Ensure the first dropdown (CompanyName) is open at runtime
+document.addEventListener("DOMContentLoaded", function () {
+  filterHeaders.forEach((header, index) => {
     const content = header.nextElementSibling;
-    const isActive = content.style.display === 'block';
-
-    // Toggle content visibility
-    content.style.display = isActive ? 'none' : 'block';
-
-    // Rotate arrow
-    const arrow = header.querySelector('span');
-    if (isActive) {
-      arrow.classList.remove('rotate');
+    if (index === 0) {
+      content.style.display = "block"; // Open first dropdown
+      header.classList.add("active"); // Mark as active
     } else {
-      arrow.classList.add('rotate');
+      content.style.display = "none"; // Close others
     }
   });
 });
 
-// Clear location checkboxes
-function clearLocation() {
-  const checkboxes = document.querySelectorAll('#location-list input[type="checkbox"]');
-  checkboxes.forEach(checkbox => checkbox.checked = false);
-}
+// Click event listener for toggling dropdowns
+filterHeaders.forEach((header) => {
+  header.addEventListener("click", function () {
+    const content = this.nextElementSibling;
+    const isActive = this.classList.contains("active");
 
-// Filter location list
-const locationSearch = document.getElementById('location-search');
-locationSearch.addEventListener('input', () => {
-  const filter = locationSearch.value.toLowerCase();
-  const locations = document.querySelectorAll('#location-list li');
-  locations.forEach(location => {
-    const text = location.textContent.toLowerCase();
-    location.style.display = text.includes(filter) ? 'flex' : 'none';
+    // Close all dropdowns except the clicked one
+    filterHeaders.forEach((otherHeader) => {
+      const otherContent = otherHeader.nextElementSibling;
+      if (otherHeader !== header) {
+        otherContent.style.display = "none";
+        otherHeader.classList.remove("active");
+        otherHeader.querySelector("span").classList.remove("rotate");
+      }
+    });
+
+    // Toggle the clicked dropdown
+    if (isActive) {
+      content.style.display = "none";
+      this.classList.remove("active");
+      this.querySelector("span").classList.remove("rotate");
+    } else {
+      content.style.display = "block";
+      this.classList.add("active");
+      this.querySelector("span").classList.add("rotate");
+    }
   });
 });
-
       </script>
 
 

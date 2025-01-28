@@ -1,1 +1,1 @@
-a:5:{s:6:"_flash";a:2:{s:3:"new";a:0:{}s:3:"old";a:0:{}}s:6:"_token";s:40:"hSj7IxBm0q0JnRhojgXg4SYkOLJjZTnKEHa5mLSl";s:9:"_previous";a:1:{s:3:"url";s:21:"http://127.0.0.1:8000";}s:4:"city";s:9:"Ahmedabad";s:7:"user_id";i:67;}
+a:5:{s:6:"_flash";a:2:{s:3:"new";a:0:{}s:3:"old";a:0:{}}s:6:"_token";s:40:"hSj7IxBm0q0JnRhojgXg4SYkOLJjZTnKEHa5mLSl";s:9:"_previous";a:1:{s:3:"url";s:76:"http://127.0.0.1:8000/search?location=Ahmedabad&query=Hammered%20Sauce%20Pan";}s:4:"city";s:9:"Ahmedabad";s:7:"user_id";i:67;}
