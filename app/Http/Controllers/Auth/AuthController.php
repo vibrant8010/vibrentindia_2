@@ -26,38 +26,41 @@ class AuthController extends Controller
     {
         return view('Auth.register');
     }
-    // public function registerSave(Request $request)
-    // {
-    //      $request->validate([
-    //         'email' => 'required|email|unique:users,email',
-    //         'mobileno' => 'required|regex:/^[6-9][0-9]{9}$/',
-    //         'name' => 'required|string|max:255',
-    //         'password' => 'required|min:6',
-    //     ], [
-    //         'email.unique' => 'The email ID already exists.',
-    //         'email.required' => 'The email field is required.',
-    //         'mobileno.regex' => 'The mobile number must start with 6, 7, 8, or 9 and contain 10 digits.',
-    //         'name.required' => 'The name field is required.',
-    //         'password.required' => 'The password field is required.',
-    //         'password.min' => 'The password must be at least 6 characters.',
-    //     ]);
 
+    public function registerSave(Request $request)
+    {
+        // Validate incoming request data
+        $validatedData = $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'mobileno' => 'required|regex:/^[6-9][0-9]{9}$/',
+            'name' => 'required|string|max:255',
+        ], [
+            'email.unique' => 'The email ID already exists.',
+            'email.required' => 'The email field is required.',
+            'mobileno.regex' => 'The mobile number must start with 6, 7, 8, or 9 and contain 10 digits.',
+            'name.required' => 'The name field is required.',
+        ]);
 
-    //     $otp =rand(1000000,9999999);
-    //     $expiry=time()+10*60;
-    //        $user = new User();
-    //        $user->name=$request->name;
-    //        $user->email=$request->email;
-    //       $user->mobileno=$request->mobileno;
-    //       $user->otp=$otp;
-    //       $user->otp_expiry=$expiry;
-    //       $user->password=bcrypt($request->password);
-    //        $user->save();
-    //      Session::put('user_id',$user->id);
-    //       Mail::to($request->email)->send(new OtpEmail($otp));
-    //     //   return redirect()->route('user.email.validate')->with('success','Otp Has be sent on email');
-    //        return response()->json('', 200, $headers);
-    // }
+        // Generate a 6-digit OTP and set an expiry time
+        $otp = rand(100000, 999999); // 6-digit OTP
+        $expiry = Carbon::now()->addMinutes(10)->timestamp; // OTP expires in 10 minutes
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->mobileno = $request->mobileno; // Corrected to match 'mobileno' from request
+        $user->role = 'user';
+        $user->otp = $otp;
+        $user->otp_expiry = $expiry;
+        $user->save();
+
+        Session::put('user_id', $user->id);
+
+        // Send OTP email as a queued job
+        Mail::to($request->email)->send(new OtpEmail($otp));
+
+        return response()->json(['message' => 'Registration successful. OTP sent.']);
+    }
+
     // public function otpValidate()
     // {
     //     if(!Session::has('user_id')){
@@ -137,45 +140,91 @@ class AuthController extends Controller
         return view('otp');
     }
 
+    //     public function verifyOtp(Request $request)
+//     {
+
+    //         $request->validate([
+//             'otp' => 'required|numeric',
+//         ], [
+//             'otp.required' => 'The OTP field is required.',
+//             'otp.numeric' => 'The OTP must be a number.',
+//         ]);
+
+    //         $otp = $request->otp;
+//         $user_id = Session::get('user_id');
+
+    //         $user = User::find($user_id);
+//         //         DB::enableQueryLog();
+
+    //         // DB::table('users')
+// //     ->where('id', $user_id)
+// //     ->update(['is_otp_verified' => '1']);
+
+    //         // print_r(DB::getQueryLog());
+// //         die();
+//         if ($user && $user->otp == $otp && Carbon::now()->timestamp < $user->otp_expiry) {
+
+    //             $user->is_otp_verified = 1;
+//             $user->update();
+//             //         DB::table('users')
+//             // ->where('id', $user_id)
+//             // ->update(['is_otp_verified' => 1]);
+
+    //             // print_r($user_id);
+//             // print_r($user->id);
+//             // print_r($user->is_otp_verified);die();
+//             Session::forget('user_id');
+
+    //             //         return redirect()->route('login')->with('success', 'Your account has been activated.');
+//             return response()->json(['message' => 'Your account has been activated.']);
+//         } else {
+//             return redirect()->back()->with('error', 'Invalid OTP or OTP expired.');
+//         }
+//     }
     public function verifyOtp(Request $request)
     {
-
+        // Validate OTP input
         $request->validate([
-            'otp' => 'required|numeric',
-        ], [
-            'otp.required' => 'The OTP field is required.',
-            'otp.numeric' => 'The OTP must be a number.',
+            'otp' => 'required|numeric|digits:6',  // Ensure OTP is exactly 6 digits
         ]);
 
+        // Get user ID from session
+        $userId = Session::get('user_id');
+
+        // If no user ID in session, return error
+        if (!$userId) {
+            return redirect()->route('login')->with('error', 'Session expired. Please try again.');
+        }
+
+        // Find the user from the database
+        $user = User::find($userId);
+
+        if (!$user) {
+            return back()->with('error', 'User not found.');
+        }
         $otp = $request->otp;
-        $user_id = Session::get('user_id');
-
-        $user = User::find($user_id);
-//         DB::enableQueryLog();
-
-// DB::table('users')
-//     ->where('id', $user_id)
-//     ->update(['is_otp_verified' => '1']);
-
-// print_r(DB::getQueryLog());
-//         die();
+        // Check if OTP matches and is within expiry time
         if ($user && $user->otp == $otp && Carbon::now()->timestamp < $user->otp_expiry) {
-
+            // OTP is valid, mark user as verified
             $user->is_otp_verified = 1;
-            $user->update();
-    //         DB::table('users')
-    // ->where('id', $user_id)
-    // ->update(['is_otp_verified' => 1]);
+            $user->save();
 
-            // print_r($user_id);
-            // print_r($user->id);
-            // print_r($user->is_otp_verified);die();
-              Session::forget('user_id');
+            // Clear the session
+            Session::forget('user_id');
 
-    //         return redirect()->route('login')->with('success', 'Your account has been activated.');
-            return response()->json(['message' => 'Your account has been activated.']);
+            // Proceed with login or redirect based on role
+            Auth::login($user);
+
+            if ($user->role == 'business') {
+                return redirect()->route('business.dashboard')->with('success', 'Login successful!');
+            } elseif ($user->role == 'super_admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Login successful!');
+            }
+
+            return redirect()->route('user.home')->with('success', 'Login successful!');
         } else {
-            return redirect()->back()->with('error', 'Invalid OTP or OTP expired.');
+            // Invalid OTP or OTP expired
+            return back()->with('error', 'Invalid OTP or OTP expired.');
         }
     }
 
@@ -183,49 +232,67 @@ class AuthController extends Controller
     {
         return view('Auth.login');
     }
+
     public function login(Request $request)
     {
+        // Validate the email field
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:6',
         ]);
 
-        // Get credentials from the request
-        $credentials = $request->only('email', 'password');
-
-        // Check if the user exists and is verified
+        // Check if user exists
         $user = User::where('email', $request->email)->first();
 
-        if ($user && $user->is_otp_verified != 1) {
-            // OTP not verified, prevent login
-            return back()->with('error', 'Your OTP is not verified. Please verify your account to log in.');
+        if (!$user) {
+            return back()->with('error', 'User not found.');
         }
 
-        // Attempt to log in
-        if (Auth::attempt($credentials)) {
-            // Authentication successful
+        $otp = rand(100000, 999999); // Generate a 6-digit OTP
+        $expiry = Carbon::now()->addMinutes(10)->timestamp; // OTP expires in 10 minutes
+        $user->otp = $otp;
+        $user->otp_expiry = $expiry;
+        $user->save();
 
-            if (Auth::user()->role == 'business') {
-                return redirect()->route('business.dashboard')->with('success', 'Login successful!');
-            } elseif (Auth::user()->role == 'super_admin') {
-                return redirect()->route('admin.dashboard')->with('success', 'Login successful!');
-            }
-            return redirect()->route('user.home')->with('success', 'Login successful!');
+        // Send OTP via email (make sure your OtpEmail mailable is correctly configured)
+        Mail::to($request->email)->send(new OtpEmail($otp));  // Assuming OtpEmail is a Mailable class
+        // Send OTP via SMS if the phone number exists
+        if (!empty($user->phone)) {
+            $smsMessage = "Your OTP is {$otp}. It will expire in 10 minutes.";
+            $this->sendSmsViaEmail($user->phone, $smsMessage); // Use the email-to-SMS method
         }
 
-        // Authentication failed
-        return back()->with('error', 'Invalid  password');
+        // Store the user ID in session for verification
+        Session::put('user_id', $user->id);
+
+        return response()->json(['message' => 'OTP sent to your email.']);
     }
+
+
     public function home()
     {
+        $phoneNumber = '7990837846'; // User's phone number
+        $message = 'Your OTP is 123456.';
+        $response = $this->sendSmsViaEmail($phoneNumber, $message);
         return view('home'); // Home view file
     }
+    public function sendSmsViaEmail($phoneNumber, $message)
+    {
+        // Replace with the carrier's email-to-SMS gateway domain
+        $to = $phoneNumber . '@vtext.com'; // For Verizon. Replace for other carriers.
 
+        Mail::raw($message, function ($mail) use ($to) {
+            $mail->to($to)
+                ->subject('SMS Notification');
+            \Log::info("Email sent to: $to");
+        });
+
+        return 'SMS Sent!';
+    }
     public function logout()
     {
         Auth::logout();
         Session::flush(); // Clears all session data
-        return redirect()->route('login')->with('success', 'Logged out successfully');
+        return redirect()->route('user.home')->with('success', 'Logged out successfully');
     }
     public function otpblade()
     {

@@ -1121,3 +1121,22 @@ header .lg-img {
       transform: scale(1);
     }
   }
+
+  .spinner {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+    position: relative;
+    display: inline-block ;
+    right: 109px;
+    top: 2px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

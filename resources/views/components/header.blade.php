@@ -265,24 +265,24 @@
     </div>
     <span class="close-button"><i style='font-size:24px' class='fas'>&#xf104;</i></span>
 
-            {{-- /*searchpopu area*/ --}}
-            <section class="header-top">
-                <button class="menu-btn d-lg-none d-sm-block d-md-none d-block" id="menu-btn" style="display: block;">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <!-- Left Part: Logo -->
-                <div class="left-part">
-                    <div class="header-logo-container">
-                        <a href="{{ route('user.home') }}">
-                            <img src="{{ asset('images/desktoplogo.png') }}" alt="company logo">
-                        </a>
-                    </div>
-                </div>
+    {{-- /*searchpopu area*/ --}}
+    <section class="header-top">
+        <button class="menu-btn d-lg-none d-sm-block d-md-none d-block" id="menu-btn" style="display: block;">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <!-- Left Part: Logo -->
+        <div class="left-part">
+            <div class="header-logo-container">
+                <a href="{{ route('user.home') }}">
+                    <img src="{{ asset('images/desktoplogo.png') }}" alt="company logo">
+                </a>
+            </div>
+        </div>
 
-                <div class="d-flex aligin-items-center justify-content-center mobil-rightpart">
-                    <!-- Center Part: Search and Dropdown (Desktop) -->
-                    <div class="search-section">
-                        {{-- <div class="search-location-box">
+        <div class="d-flex aligin-items-center justify-content-center mobil-rightpart">
+            <!-- Center Part: Search and Dropdown (Desktop) -->
+            <div class="search-section">
+                {{-- <div class="search-location-box">
                 <div class="inputgroup_location">
                   <div class="input_location_box">
                     <input type="text" autocomplete="off"
@@ -300,29 +300,29 @@
                   </div>
                 </div>
               </div> --}}
-                        <div class="search-location-box">
-                            <div class="inputgroup_location">
-                                <div class="input_location_box">
-                                    <form method="GET" action="{{ route('search') }}">
-                                        <input type="text" autocomplete="off" class="input_location"
-                                            aria-label="City Auto-suggest" placeholder="Enter City" name="location"
-                                            id="city-auto-sug"
-                                            @if (session()->has('city')) value="{{ session('city') }}" @endif>
-                                        {{-- <ul class="dropdown-list" role="listbox" id="suggestions">
+                <div class="search-location-box">
+                    <div class="inputgroup_location">
+                        <div class="input_location_box">
+                            <form method="GET" action="{{ route('search') }}">
+                                <input type="text" autocomplete="off" class="input_location"
+                                    aria-label="City Auto-suggest" placeholder="Enter City" name="location"
+                                    id="city-auto-sug"
+                                    @if (session()->has('city')) value="{{ session('city') }}" @endif>
+                                {{-- <ul class="dropdown-list" role="listbox" id="suggestions">
 
                       <!-- Suggestions for Indian cities will be dynamically populated -->
                     </ul> --}}
-                                        <div id="suggestions-box2" class="suggestions-box">
-                                            <ul id="suggestions2"></ul>
-                                        </div>
+                                <div id="suggestions-box2" class="suggestions-box">
+                                    <ul id="suggestions2"></ul>
                                 </div>
-                            </div>
                         </div>
+                    </div>
+                </div>
 
 
 
-                        <div class="search-container">
-                            {{-- <div class="select-box">
+                <div class="search-container">
+                    {{-- <div class="select-box">
                     <div class="dropdown" id="desktop-dropdown">
                         <div class="dropdown-button" id="dropdownButton">
                             Products
@@ -336,74 +336,72 @@
                     </div>
                 </div> --}}
 
-                            <div class="search-input-box">
-                                {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}" onsubmit="performSearch(event)"> --}}
-                                {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}"> --}}
-                                <div id="search-form" class="search-box-section">
-                                    {{-- <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ..."> --}}
-                                    <input type="text" name="query" id="search-bar"
-                                        oninput="fetchSuggestions()" autocomplete="off"
-                                        placeholder="Search here ...">
-                                    <div id="suggestions-box" class="suggestions-box">
-                                        <ul id="suggestions-list" class="pt-2"></ul>
-                                    </div>
-                                    <div class="search-btn-box">
-                                        <button type="submit" class="search-btn">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                </form>
-
-                                {{-- <div id="suggestions" class="suggestions-box"></div>
-                    <div id="suggestions" class="suggestions-box"></div> --}}
+                    <div class="search-input-box">
+                        {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}" onsubmit="performSearch(event)"> --}}
+                        {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}"> --}}
+                        <div id="search-form" class="search-box-section">
+                            {{-- <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ..."> --}}
+                            <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()"
+                                autocomplete="off" placeholder="Search here ...">
+                            <div id="suggestions-box" class="suggestions-box">
+                                <ul id="suggestions-list" class="pt-2"></ul>
                             </div>
-
+                            <div class="search-btn-box">
+                                <button type="submit" class="search-btn">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </div>
                         </div>
+                        </form>
 
+                        {{-- <div id="suggestions" class="suggestions-box"></div>
+                    <div id="suggestions" class="suggestions-box"></div> --}}
                     </div>
 
-
-                    <button class="trigger icon-mobile-view"><i class="fa-solid fa-magnifying-glass"
-                            style="color: #000000;"></i></button>
-                    <div class="mobile-sigin-logo">
-                        <a href="{{ route('login') }}"
-                            class="d-block d-lg-none d-md-none d-sm-block d-xl-none icon-mobile-view">
-                            <span class="lg-img">
-                                {{-- <img src="{{ asset('images/personmobile.png') }}" alt=""> --}}
-                                <i class="fa-regular fa-user" style="color: #000000;"></i>
-                            </span>
-                        </a>
-                    </div>
                 </div>
-                <!-- Right Part: Authentication & Contact (Desktop) -->
-                <div class="d-lg-block d-md-block d-none">
-                    <div class="right-part">
-                        @if (Auth::check())
-                            <a href="{{ route('logout') }}" class="primary-btn" id="loginButton"
-                                style="display: none"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                style="display: none;">
-                                @csrf
-                            </form>
-                        @else
-                            <a style="cursor: pointer" onclick="openModal()" class="btn-links">
-                                <span class="lg-img">
-                                    <img src="{{ asset('images/personicon.png') }}" alt="">
-                                </span>
-                                Sign in
-                            </a>
-                            <a href="{{ route('login') }}" class="btn-links">
-                                <span class="lg-img">
-                                    <img src="{{ asset('images/registration.png') }}" alt=""
-                                        style="height: 30px;width:30px;">
-                                </span>
-                                Join Free
-                            </a>
-                            {{-- <a href="{{ route('login') }}" class="btn-links">
+
+            </div>
+
+
+            <button class="trigger icon-mobile-view"><i class="fa-solid fa-magnifying-glass"
+                    style="color: #000000;"></i></button>
+            <div class="mobile-sigin-logo">
+                <a href="{{ route('login') }}"
+                    class="d-block d-lg-none d-md-none d-sm-block d-xl-none icon-mobile-view">
+                    <span class="lg-img">
+                        {{-- <img src="{{ asset('images/personmobile.png') }}" alt=""> --}}
+                        <i class="fa-regular fa-user" style="color: #000000;"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!-- Right Part: Authentication & Contact (Desktop) -->
+        <div class="d-lg-block d-md-block d-none">
+            <div class="right-part">
+                @if (Auth::check())
+                    {{-- <h1>hello</h1> --}}
+                    <a href="{{ route('logout') }}" class="primary-btn" id="loginButton" {{-- style="display: none" --}}
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @else
+                    <a style="cursor: pointer" onclick="openModal()" class="btn-links">
+                        <span class="lg-img">
+                            <img src="{{ asset('images/personicon.png') }}" alt="">
+                        </span>
+                        Sign in
+                    </a>
+                    <a href="{{ route('login') }}" class="btn-links">
+                        <span class="lg-img">
+                            <img src="{{ asset('images/registration.png') }}" alt=""
+                                style="height: 30px;width:30px;">
+                        </span>
+                        Join Free
+                    </a>
+                    {{-- <a href="{{ route('login') }}" class="btn-links">
                         <span class="lg-img">
                             <img src="{{ asset('images/INQUIRY.png') }}" alt="">
                         </span>
@@ -412,61 +410,60 @@
                     <a href="https://wa.me/+918511684938" class="contact-cheap">
                         +91 8511 6849 38
                     </a> --}}
-                        @endif
-                    </div>
-                </div>
-            </section>
+                @endif
+            </div>
+        </div>
+    </section>
 
-            <!-- Header Bottom: Mobile Menu and Navigation -->
-            <div class="header-bottom">
-                {{-- <button class="menu-btn d-lg-none d-sm-block d-md-none" id="menu-btn">
+    <!-- Header Bottom: Mobile Menu and Navigation -->
+    <div class="header-bottom">
+        {{-- <button class="menu-btn d-lg-none d-sm-block d-md-none" id="menu-btn">
             <i class="fa-solid fa-bars"></i>
         </button> --}}
 
-                <nav class="nav-container">
-                    <span class="close-btn" id="close-btn">&times;</span>
-                    <ul class="menu d-lg-block d-xl-block d-md-block d-sm-none d-none">
-                        <li class="dropdown menu-item">
-                            <a href="#"><span class="category-img mx-1 "><i
-                                        class="fa-solid fa-list"></i></span>All
-                                Category</a>
-                            <ul class="submenu">
-                                @php
-                                    $categories = App\Models\Category::all()->pluck('name');
-                                @endphp
+        <nav class="nav-container">
+            <span class="close-btn" id="close-btn">&times;</span>
+            <ul class="menu d-lg-block d-xl-block d-md-block d-sm-none d-none">
+                <li class="dropdown menu-item">
+                    <a href="#"><span class="category-img mx-1 "><i class="fa-solid fa-list"></i></span>All
+                        Category</a>
+                    <ul class="submenu">
+                        @php
+                            $categories = App\Models\Category::all()->pluck('name');
+                        @endphp
 
-                                @foreach ($categories as $category)
-                                    <li class="category-menu-item">
-                                        <a href="#" class="category-menu-link">{{ $category }}</a>
-                                    </li>
-                                @endforeach
+                        @foreach ($categories as $category)
+                            <li class="category-menu-item">
+                                <a href="#" class="category-menu-link">{{ $category }}</a>
+                            </li>
+                        @endforeach
 
 
-                                {{-- <li class="category-menu-item"><a href="#" class="category-menu-link">Option 2</a></li>
+                        {{-- <li class="category-menu-item"><a href="#" class="category-menu-link">Option 2</a></li>
                         <li class="category-menu-item"><a href="#" class="category-menu-link">Option 3</a></li>
                         <li class="category-menu-item"><a href="#" class="category-menu-link">Option 4</a></li>
                         <li class="category-menu-item"><a href="#" class="category-menu-link">Option 5</a></li> --}}
-                            </ul>
-                        </li>
                     </ul>
-                    <ul class="nav-view">
-                        <li class="nav-item mobile-logo py-4 px-1 d-lg-none d-sm-block d-md-none">
-                            <div class="header-logo-container d-md-block d-sm-block d-lg-none">
-                                <a href="{{ route('user.home') }}">
-                                    <img src="{{ asset('images/mobilelogo.png') }}" alt="company logo"
-                                        style="height: 32px; width: 169px;">
-                                </a>
-                            </div>
-                            {{-- <span class="close-btn" id="close-btn" style="display: block;">×</span> --}}
-                        </li>
-                        <li class="nav-item"><a href="{{ route('innertopcategory') }}" class="nav-link">Top
-                                Category</a></li>
-                        <li class="nav-item"><a href="{{ route('newarrival') }}" class="nav-link">New Arrival</a>
-                        </li>
-                        <li class="nav-item"><a href="{{ route('alltrendingcategory') }}" class="nav-link">Trending
-                                Products</a></li>
-                        <li class="nav-item"><a href="#Blogs" class="nav-link">Blogs</a></li>
-                        {{-- <li class="s-box d-lg-none d-md-none d-sm-block">
+                </li>
+            </ul>
+            <ul class="nav-view">
+                <li class="nav-item mobile-logo py-4 px-1 d-lg-none d-sm-block d-md-none">
+                    <div class="header-logo-container d-md-block d-sm-block d-lg-none">
+                        <a href="{{ route('user.home') }}">
+                            <img src="{{ asset('images/mobilelogo.png') }}" alt="company logo"
+                                style="height: 32px; width: 169px;">
+                        </a>
+                    </div>
+                    {{-- <span class="close-btn" id="close-btn" style="display: block;">×</span> --}}
+                </li>
+                <li class="nav-item"><a href="{{ route('innertopcategory') }}" class="nav-link">Top
+                        Category</a></li>
+                <li class="nav-item"><a href="{{ route('newarrival') }}" class="nav-link">New Arrival</a>
+                </li>
+                <li class="nav-item"><a href="{{ route('alltrendingcategory') }}" class="nav-link">Trending
+                        Products</a></li>
+                <li class="nav-item"><a href="#Blogs" class="nav-link">Blogs</a></li>
+                {{-- <li class="s-box d-lg-none d-md-none d-sm-block">
                     <div class="right-part mt-5">
                         <a href="{{ route('login') }}" class="btn-links">
                             <span class="lg-img">
@@ -482,90 +479,97 @@
                         </a>
                     </div>
                 </li> --}}
-                    </ul>
-                </nav>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Custom Modal -->
+    <div class="custom-modal-overlay" id="customModal" style="display: none;">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-logo">
+                    <a href="#"><img src="./company-logo.webp" alt="Company Logo" /></a>
+                </div>
+                <div class="custom-modal-welcome">
+                    Welcome, <br />
+                    Login for a seamless experience
+                </div>
+                <button class="custom-modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="custom-modal-body">
+                <!-- Basic Form -->
+                <div id="basicCustomForm">
+                    <div class="custom-input-group">
+                        <label for="email" class="custom-label">Email</label>
+                        <input type="email" class="custom-input" id="otp_email" placeholder="Enter your email"
+                            required />
+                    </div>
+                    <p class="custom-link-text">
+                        Don't have an account?
+                        <button type="button" class="custom-link" id="showSignUpForm">
+                            Sign Up
+                        </button>
+                    </p>
+                    <div class="custom-modal-footer">
+                        <button type="button" class="custom-btn" id="sandotp">
+                            <span id="sandotpText">Send OTP</span>
+                            <span id="sandotpLoader" class="spinner" style="display: none;"></span>
+                        </button>
+                    </div>
+                </div>
+                {{-- otp --}}
+                <form action="{{ route('user.otp.verify') }}" method="post">
+                    @csrf
+                    <div id="otpCustomForm" style="display: none;">
+                        <div class="custom-input-group">
+                            <label for="otp" class="custom-label">Enter OTP</label>
+                            <input type="text" name="otp" class="custom-input" id="otp"
+                                placeholder="Enter the OTP" required />
+                        </div>
+                        <div class="custom-modal-footer">
+                            <button type="submit" class="custom-btn" id="verifyOtpBtn">Verify OTP</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- Detailed Form -->
+                <div id="detailedCustomForm" style="display: none;">
+                    <div class="custom-input-group">
+                        <label for="name" class="custom-label">Name</label>
+                        <input type="text" class="custom-input" id="name2" placeholder="Enter your name" />
+                    </div>
+                    <div class="custom-input-group">
+                        <label for="emailSignUp" class="custom-label">Email</label>
+                        <input type="email" class="custom-input" id="email2" placeholder="Enter your email" />
+                    </div>
+                    <div class="custom-input-group">
+                        <label for="phone" class="custom-label">Phone Number</label>
+                        <input type="tel" class="custom-input" id="phone2"
+                            placeholder="Enter your phone number" />
+                    </div>
+                    <div class="custom-links">
+                        <a href="#" class="custom-forgot">Forgot Password?</a>
+                        <button type="button" class="custom-link" id="showLoginForm">
+                            Login?
+                        </button>
+                    </div>
+                    <div class="custom-modal-footer">
+                        <button type="button" class="custom-btn" id="signUpBtn2">
+                            <span id="signUpBtnText">Sign Up</span>
+                            <span id="signUpBtnLoader" class="spinner" style="display: none;"></span>
+                        </button>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Custom Modal -->
-            <div class="custom-modal-overlay" id="customModal" style="display: none;">
-                <div class="custom-modal">
-                    <div class="custom-modal-header">
-                        <div class="custom-modal-logo">
-                            <a href="#"><img src="./company-logo.webp" alt="Company Logo" /></a>
-                        </div>
-                        <div class="custom-modal-welcome">
-                            Welcome, <br />
-                            Login for a seamless experience
-                        </div>
-                        <button class="custom-modal-close" id="closeModal">&times;</button>
-                    </div>
-                    <div class="custom-modal-body">
-                        <!-- Basic Form -->
-                        <div id="basicCustomForm">
-                            <div class="custom-input-group">
-                                <label for="email" class="custom-label">Email</label>
-                                <input type="email" class="custom-input" id="otp_email"
-                                    placeholder="Enter your email" required />
-                            </div>
-                            <p class="custom-link-text">
-                                Don't have an account?
-                                <button type="button" class="custom-link" id="showSignUpForm">
-                                    Sign Up
-                                </button>
-                            </p>
-                            <div class="custom-modal-footer">
-                                <button type="button" class="custom-btn" id="sandotp">Sand otp</button>
-                            </div>
-                        </div>
-                        {{-- otp --}}
-                        <div id="otpCustomForm" style="display: none;">
-                            <div class="custom-input-group">
-                                <label for="otp" class="custom-label">Enter OTP</label>
-                                <input type="text" class="custom-input" id="otp"
-                                    placeholder="Enter the OTP" required />
-                            </div>
-                            <div class="custom-modal-footer">
-                                <button type="button" class="custom-btn" id="verifyOtpBtn">Verify OTP</button>
-                            </div>
-                        </div>
-                        <!-- Detailed Form -->
-                        <div id="detailedCustomForm" style="display: none;">
-                            <div class="custom-input-group">
-                                <label for="name" class="custom-label">Name</label>
-                                <input type="text" class="custom-input" id="name"
-                                    placeholder="Enter your name" required />
-                            </div>
-                            <div class="custom-input-group">
-                                <label for="emailSignUp" class="custom-label">Email</label>
-                                <input type="email" class="custom-input" id="emailSignUp"
-                                    placeholder="Enter your email" required />
-                            </div>
-                            <div class="custom-input-group">
-                                <label for="phone" class="custom-label">Phone Number</label>
-                                <input type="tel" class="custom-input" id="phone"
-                                    placeholder="Enter your phone number" required />
-                            </div>
-                            <div class="custom-links">
-                                <a href="#" class="custom-forgot">Forgot Password?</a>
-                                <button type="button" class="custom-link" id="showLoginForm">
-                                    Login?
-                                </button>
-                            </div>
-                            <div class="custom-modal-footer">
-                                <button type="button" class="custom-btn" id="signUpBtn2">Sign Up</button>
-                            </div>
-                        </div>
+        </div>
+    </div>
 
-                    </div>
-
-                </div>
-            </div>
-
-            @if (session('alert'))
-                <div class="alert alert-warning">
-                    {{ session('alert') }}
-                </div>
-                {{-- <script>
+    @if (session('alert'))
+        <div class="alert alert-warning">
+            {{ session('alert') }}
+        </div>
+        {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {
 
                 var loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {
@@ -576,7 +580,7 @@
 
             });
         </script> --}}
-            @endif
+    @endif
 </header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {{-- search-suggestions --}}
@@ -976,70 +980,200 @@
         </script>
     @endpush
 @endif
-    {{-- @if (!session()->has('user_id')) --}}
-    {{-- @push('scripts') --}}
-    <script>
-        //  const openModal = document.getElementById("loginButton");
-        const modal2 = document.getElementById("customModal");
-        const closeModal = document.getElementById("closeModal");
-        const showSignUpForm = document.getElementById("showSignUpForm");
-        const showLoginForm = document.getElementById("showLoginForm");
-        const basicForm = document.getElementById("basicCustomForm");
-        const detailedForm = document.getElementById("detailedCustomForm");
-        const otpForm = document.getElementById("otpCustomForm");
-        const verifyOtpBtn = document.getElementById("verifyOtpBtn");
-        const loginBtn = document.getElementById("signUpBtn");
-        const sandotp = document.getElementById("sandotp");
-        // Open modal
-        function openModal() {
-            modal2.style.display = "flex";
+{{-- @if (!session()->has('user_id')) --}}
+{{-- @push('scripts') --}}
+<script>
+    //  const openModal = document.getElementById("loginButton");
+    const modal2 = document.getElementById("customModal");
+    const closeModal = document.getElementById("closeModal");
+    const showSignUpForm = document.getElementById("showSignUpForm");
+    const showLoginForm = document.getElementById("showLoginForm");
+    const basicForm = document.getElementById("basicCustomForm");
+    const detailedForm = document.getElementById("detailedCustomForm");
+    const otpForm = document.getElementById("otpCustomForm");
+    const verifyOtpBtn = document.getElementById("verifyOtpBtn");
+    const loginBtn = document.getElementById("signUpBtn2");
+    const sandotp = document.getElementById("sandotp");
+    // Open modal
+    function openModal() {
+        modal2.style.display = "flex";
+    }
+
+    function showOtpForm() {
+        detailedForm.style.display = "none";
+        basicForm.style.display = "none";
+        otpForm.style.display = "block";
+    }
+
+    // function toggleButtonLoader(buttonId, show) {
+    //     alert('hello');
+    // const buttonText = document.getElementById(buttonId + "Text");
+    // const buttonLoader = document.getElementById(buttonId + "Loader");
+
+    // if (show) {
+    //     buttonText.style.display = "none";
+    //     buttonLoader.style.display = "inline-block"; // Show loader
+    // } else {
+    //     buttonText.style.display = "inline-block"; // Show text
+    //     buttonLoader.style.display = "none"; // Hide loader
+    // }
+    // }
+
+    // sandotp.addEventListener("click", () => {
+    //     const email2 = document.getElementById("otp_email").value;
+    //     $.ajax({
+    //         url: "{{ route('login.process') }}",
+    //         type: 'POST',
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         data: JSON.stringify({
+    //             email: email2
+    //         }),
+    //         contentType: 'application/json',
+    //         success: function(response) {
+    //             // console.log('Success:', response);
+    //             toggleButtonLoader("sandotp", false);
+
+    //             showOtpForm();
+    //             // alert(response.message);
+    //         },
+    //         error: function(xhr, status, error) {
+    //             toggleButtonLoader("sandotp", false);
+    //             console.error('Error:', error);
+    //         }
+    //     });
+    // });
+    // loginBtn.addEventListener("click", () => {
+    //     const email2 = document.getElementById("email2").value;
+    //     const phone2 = document.getElementById("phone2").value;
+    //     const name2 = document.getElementById("name2").value;
+
+
+    //     // Basic validation
+    //     if (name2 === "" || email2 === "" || phone2 === "") {
+    //         alert("Please fill all fields.");
+    //         return;
+    //     }
+    //     $.ajax({
+    //         url: "{{ route('register.save') }}",
+    //         type: 'POST',
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         data: JSON.stringify({
+    //         email: email2,
+    //         mobileno: phone2,
+    //         name: name2,
+    //          }),
+    //         contentType: 'application/json',
+    //         success: function(response) {
+    //             // console.log('Success:', response);
+    //             showOtpForm();
+    //             toggleButtonLoader("signUpBtn2", false);
+    //             alert(response.message);
+    //         },
+    //         error: function(xhr, status, error) {
+    //             toggleButtonLoader("signUpBtn2", false);
+    //             console.error('Error:', error);
+    //         }
+    //     });
+    // });
+    sandotp.addEventListener("click", () => {
+    const email2 = document.getElementById("otp_email").value;
+    const sandotpText = document.getElementById("sandotpText");
+    const sandotpLoader = document.getElementById("sandotpLoader");
+
+    // Show loader while processing
+    sandotpText.style.display = "none";
+    sandotpLoader.style.display = "inline-block";
+
+    $.ajax({
+        url: "{{ route('login.process') }}",
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: JSON.stringify({
+            email: email2
+        }),
+        contentType: 'application/json',
+        success: function(response) {
+            // Hide loader when request is successful
+            sandotpText.style.display = "inline-block";
+            sandotpLoader.style.display = "none";
+            showOtpForm();
+        },
+        error: function(xhr, status, error) {
+            // Hide loader if there's an error
+            sandotpText.style.display = "inline-block";
+            sandotpLoader.style.display = "none";
+            console.error('Error:', error);
         }
+    });
+});
 
-        function showOtpForm() {
-            detailedForm.style.display = "none";
-            basicForm.style.display = "none";
-            otpForm.style.display = "block";
+loginBtn.addEventListener("click", () => {
+    const email2 = document.getElementById("email2").value;
+    const phone2 = document.getElementById("phone2").value;
+    const name2 = document.getElementById("name2").value;
+    const signUpBtnText = document.getElementById("signUpBtnText");
+    const signUpBtnLoader = document.getElementById("signUpBtnLoader");
+
+    // Basic validation
+    if (name2 === "" || email2 === "" || phone2 === "") {
+        alert("Please fill all fields.");
+        return;
+    }
+
+    // Show loader while processing
+    signUpBtnText.style.display = "none";
+    signUpBtnLoader.style.display = "inline-block";
+
+    $.ajax({
+        url: "{{ route('register.save') }}",
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: JSON.stringify({
+            email: email2,
+            mobileno: phone2,
+            name: name2,
+        }),
+        contentType: 'application/json',
+        success: function(response) {
+            // Hide loader when request is successful
+            signUpBtnText.style.display = "inline-block";
+            signUpBtnLoader.style.display = "none";
+            showOtpForm();
+            alert(response.message);
+        },
+        error: function(xhr, status, error) {
+            // Hide loader if there's an error
+            signUpBtnText.style.display = "inline-block";
+            signUpBtnLoader.style.display = "none";
+            console.error('Error:', error);
         }
+    });
+});
 
-        sandotp.addEventListener("click", () => {
-            const email = document.getElementById("otp_email").value;
+    // Close modal
+    closeModal.addEventListener("click", () => {
+        modal2.style.display = "none";
+    });
 
-            fetch('/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    body: JSON.stringify({
-                        email
-                    }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message) {
-                        alert(data.message);
-                        showOtpForm();
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        });
+    // Toggle forms
+    showSignUpForm.addEventListener("click", () => {
+        basicForm.style.display = "none";
+        detailedForm.style.display = "block";
+    });
 
-        // Close modal
-        closeModal.addEventListener("click", () => {
-            modal2.style.display = "none";
-        });
+    showLoginForm.addEventListener("click", () => {
+        detailedForm.style.display = "none";
+        basicForm.style.display = "block";
+    });
+</script>
 
-        // Toggle forms
-        showSignUpForm.addEventListener("click", () => {
-            basicForm.style.display = "none";
-            detailedForm.style.display = "block";
-        });
-
-        showLoginForm.addEventListener("click", () => {
-            detailedForm.style.display = "none";
-            basicForm.style.display = "block";
-        });
-    </script>
-
-    {{-- @endpush --}}
-    {{-- @endif --}}
+{{-- @endpush --}}
+{{-- @endif --}}
