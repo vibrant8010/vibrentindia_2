@@ -227,38 +227,7 @@
                     <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
                     <a href="#" class="modal-nav-view">Kitchenware</a>
                 </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
+
 
             </ul>
         </div>

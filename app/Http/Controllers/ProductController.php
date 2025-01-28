@@ -293,84 +293,84 @@ class ProductController extends Controller
         // Return the filtered products as JSON
         return response()->json(['products' => $products]);
     }
-    public function search(Request $request)
-    {
-        $searchTerm = $request->input('query');
-        $location = $request->input('location');
+    // public function search(Request $request)
+    // {
+    //     $searchTerm = $request->input('query');
+    //     $location = $request->input('location');
 
-        // Searching in Companies
-        $companyQuery = CompanyDetail::query();
+    //     // Searching in Companies
+    //     $companyQuery = CompanyDetail::query();
 
-        if (!empty($searchTerm)) {
-            $companyQuery->where(function ($query) use ($searchTerm) {
-                $query->where('name', 'like', "%{$searchTerm}%")
-                    ->orWhere('description', 'like', "%{$searchTerm}%");
-            });
-        }
+    //     if (!empty($searchTerm)) {
+    //         $companyQuery->where(function ($query) use ($searchTerm) {
+    //             $query->where('name', 'like', "%{$searchTerm}%")
+    //                 ->orWhere('description', 'like', "%{$searchTerm}%");
+    //         });
+    //     }
 
-        if (!empty($location)) {
-            $companyQuery->where(function ($query) use ($location) {
-                $query->where('city', 'like', "%{$location}%")
-                    ->orWhere('state', 'like', "%{$location}%")
-                    ->orWhere('pincode', 'like', "%{$location}%");
-            });
-        }
+    //     if (!empty($location)) {
+    //         $companyQuery->where(function ($query) use ($location) {
+    //             $query->where('city', 'like', "%{$location}%")
+    //                 ->orWhere('state', 'like', "%{$location}%")
+    //                 ->orWhere('pincode', 'like', "%{$location}%");
+    //         });
+    //     }
 
-        $companies = $companyQuery->get();
+    //     $companies = $companyQuery->get();
 
-        // Searching in Categories
-        $categories = Category::where('name', 'like', "%{$searchTerm}%")->get();
-        $categoryIds = $categories->pluck('id');
+    //     // Searching in Categories
+    //     $categories = Category::where('name', 'like', "%{$searchTerm}%")->get();
+    //     $categoryIds = $categories->pluck('id');
 
-        // Searching in Subcategories
-        $subCategories = SubCategory::where('name', 'like', "%{$searchTerm}%")
-            ->orWhereIn('category_id', $categoryIds)
-            ->get();
-        $subCategoryIds = $subCategories->pluck('id');
+    //     // Searching in Subcategories
+    //     $subCategories = SubCategory::where('name', 'like', "%{$searchTerm}%")
+    //         ->orWhereIn('category_id', $categoryIds)
+    //         ->get();
+    //     $subCategoryIds = $subCategories->pluck('id');
 
-        // Searching in Products
-        $productQuery = Product::with(['company', 'category', 'subcategory']);
+    //     // Searching in Products
+    //     $productQuery = Product::with(['company', 'category', 'subcategory']);
 
-        if ($companies->isNotEmpty()) {
-            $productQuery->whereIn('company_id', $companies->pluck('id'));
-        }
+    //     if ($companies->isNotEmpty()) {
+    //         $productQuery->whereIn('company_id', $companies->pluck('id'));
+    //     }
 
-        if ($subCategoryIds->isNotEmpty()) {
-            $productQuery->whereIn('subcategory_id', $subCategoryIds);
-        }
+    //     if ($subCategoryIds->isNotEmpty()) {
+    //         $productQuery->whereIn('subcategory_id', $subCategoryIds);
+    //     }
 
-        // if (empty($companies) && empty($categories) && empty($subCategories)) {
-        //     $productQuery->where(function ($query) use ($searchTerm) {
-        //         $query->where('name', 'like', "%{$searchTerm}%")
-        //               ->orWhere('description', 'like', "%{$searchTerm}%");
-        //     });
-        // }
+    //     // if (empty($companies) && empty($categories) && empty($subCategories)) {
+    //     //     $productQuery->where(function ($query) use ($searchTerm) {
+    //     //         $query->where('name', 'like', "%{$searchTerm}%")
+    //     //               ->orWhere('description', 'like', "%{$searchTerm}%");
+    //     //     });
+    //     // }
 
-        $products = $productQuery->get();
+    //     $products = $productQuery->get();
 
-        $subCategories2 = $products->pluck('subcategory_id');
-        $subCategories = SubCategory::where('name', 'like', "%{$searchTerm}%")
-            ->orWhereIn('category_id', $categoryIds)
-            ->orWhereIn('category_id', $subCategories2)
-            ->get();
-        $companies2 = $products->pluck('company_id');
-        $companies = CompanyDetail::where('name', 'like', "%{$searchTerm}%")
-            // ->orWhereIn('category_id', $categoryIds)
-            ->orWhereIn('id', $companies2)
-            ->get();
-        // echo '<pre>';
-        // print_r($products);die();
-        // print_r($subCategories);die();
-        // Combining results
-        $results = [
-            'products' => $products,
-            'categories' => $categories,
-            'companies' => $companies,
-            'subCategories' => $subCategories,
-        ];
-        // print_r($subCategories);die();
-        return view('searchresult2', compact('results', 'searchTerm'));
-    }
+    //     $subCategories2 = $products->pluck('subcategory_id');
+    //     $subCategories = SubCategory::where('name', 'like', "%{$searchTerm}%")
+    //         ->orWhereIn('category_id', $categoryIds)
+    //         ->orWhereIn('category_id', $subCategories2)
+    //         ->get();
+    //     $companies2 = $products->pluck('company_id');
+    //     $companies = CompanyDetail::where('name', 'like', "%{$searchTerm}%")
+    //         // ->orWhereIn('category_id', $categoryIds)
+    //         ->orWhereIn('id', $companies2)
+    //         ->get();
+    //     // echo '<pre>';
+    //     // print_r($products);die();
+    //     // print_r($subCategories);die();
+    //     // Combining results
+    //     $results = [
+    //         'products' => $products,
+    //         'categories' => $categories,
+    //         'companies' => $companies,
+    //         'subCategories' => $subCategories,
+    //     ];
+    //     // print_r($subCategories);die();
+    //     return view('searchresult2', compact('results', 'searchTerm'));
+    // }
 
 
     // public function search(Request $request)
@@ -464,72 +464,90 @@ class ProductController extends Controller
     //     return view('searchresult2', compact('results', 'searchTerm'));
     // }
 
-    // public function search(Request $request)
-    // {
-    //     $searchTerm = $request->input('query');
-    //     $location = $request->input('location'); // Get location from the form
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('query');
+        $location = $request->input('location'); // Get location from the form
 
-    //     // Initialize query builders
-    //     $categories = Category::where('name', 'like', "%{$searchTerm}%");
-    //     $companies = CompanyDetail::query();
-    //     $subCategories = SubCategory::where('name', 'like', "%{$searchTerm}%");
+        // Initialize query builders
+        $categories = Category::where('name', 'like', "%{$searchTerm}%");
+        $companies = CompanyDetail::query();
+        $subCategories = SubCategory::where('name', 'like', "%{$searchTerm}%");
 
-    //     // Filter companies by name or description and location
-    //     $companies->where(function ($query) use ($searchTerm) {
-    //         $query->where('name', 'like', "%{$searchTerm}%")
-    //               ->orWhere('description', 'like', "%{$searchTerm}%");
-    //     });
+        // Filter companies by name or description and location
+        $companies->where(function ($query) use ($searchTerm) {
+            $query->where('name', 'like', "%{$searchTerm}%")
+                  ->orWhere('description', 'like', "%{$searchTerm}%");
+        });
 
-    //     // Add location filter if location is provided
-    //     if (!empty($location)) {
-    //         $companies->where(function ($query) use ($location) {
-    //             $query->where('city', 'like', "%{$location}%")
-    //                   ->orWhere('state', 'like', "%{$location}%")
-    //                   ->orWhere('pincode', 'like', "%{$location}%");
-    //         });
-    //     }
+        // Add location filter if location is provided
+        if (!empty($location)) {
+            $companies->where(function ($query) use ($location) {
+                $query->where('city', 'like', "%{$location}%")
+                      ->orWhere('state', 'like', "%{$location}%")
+                      ->orWhere('pincode', 'like', "%{$location}%");
+            });
+        }
 
-    //     $companies = $companies->get();
-    //     dd($companies);
-    //     // Extract the IDs of companies, categories, and subcategories
-    //     $companyIds = $companies->pluck('id');
-    //     $categoryIds = $categories->pluck('id');
-    //     $categorieswith = SubCategory::whereIn('category_id', $categoryIds)->get();
+        $companies = $companies->get();
+        if ($companies->isEmpty()) {
+         $message = "No products or companies are available for the selected location.";
+        }
+        // dd($companies);
+        // Extract the IDs of companies, categories, and subcategories
+        $companyIds = $companies->pluck('id');
+        $categoryIds = $categories->pluck('id');
+        $categorieswith = SubCategory::whereIn('category_id', $categoryIds)->get();
 
-    //     $subCategoryIdswith = $categorieswith->pluck('id');
-    //     $subCategoryIds = $subCategories->pluck('id');
+        $subCategoryIdswith = $categorieswith->pluck('id');
+        $subCategoryIds = $subCategories->pluck('id');
 
-    //     // Prepare the query builder for products
-    //     $query = Product::with(['company', 'category', 'subcategory']);
+        // Prepare the query builder for products
+        $query = Product::with(['company', 'category', 'subcategory']);
 
-    //     // Apply filters for company, category, and subcategory if IDs are not empty
-    //     if ($companyIds->isNotEmpty()) {
-    //         $query->whereIn('company_id', $companyIds);
-    //     } elseif ($categoryIds->isNotEmpty()) {
-    //         $query->whereIn('subcategory_id', $subCategoryIdswith);
-    //     } elseif ($subCategoryIds->isNotEmpty()) {
-    //         $query->whereIn('subcategory_id', $subCategoryIds);
-    //     } else {
-    //         // Apply search filters
-    //         $query->where(function ($query) use ($searchTerm) {
-    //             $query->where('name', 'like', "%{$searchTerm}%")
-    //                   ->orWhere('description', 'like', "%{$searchTerm}%");
-    //         });
-    //     }
+        // Apply filters for company, category, and subcategory if IDs are not empty
+        if ($companyIds->isNotEmpty()) {
+            $query->whereIn('company_id', $companyIds);
+        } elseif ($categoryIds->isNotEmpty()) {
+            $query->whereIn('subcategory_id', $subCategoryIdswith);
+        } elseif ($subCategoryIds->isNotEmpty()) {
+            $query->whereIn('subcategory_id', $subCategoryIds);
+        }
+        else {
+            // Apply search filters
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('name', 'like', "%{$searchTerm}%")
+                      ->orWhere('description', 'like', "%{$searchTerm}%")
+                      ->orWhere('material', 'like', "%{$searchTerm}%")
+                      ->orWhere('size', 'like', "%{$searchTerm}%");
+            });
+        }
 
-    //     // Retrieve the products
-    //     $products = $query->get();
+        // Retrieve the products
+        $products = $query->get();
+        // $subCategories2 = $products->pluck('subcategory_id');
+        // $subCategories = SubCategory::Where('category_id', $subCategories2)
+        //     ->get();
+        // $companies2 = $products->pluck('company_id');
+        // $companies = CompanyDetail::where('name', 'like', "%{$searchTerm}%")
+        //     // ->orWhereIn('category_id', $categoryIds)
+        //     ->orWhereIn('id', $companies2)
+        //     ->get();
+        // echo '<pre>';
+        // print_r($products);die();
+        // print_r($subCategories);die();
+        // Combining results
+        $results = [
+            'products' => $products,
+            'categories' => $categories,
+            'companies' => $companies,
+            'subCategories' => $subCategories,
+            'message' => $message,
+        ];
+        // print_r($subCategories);die();
+        return view('searchresult2', compact('results', 'searchTerm'));
 
-    //     // Combine results into one collection
-    //     $results = collect([
-    //         'products' => $products,
-    //         'categories' => $categories,
-    //         'companies' => $companies,
-    //         'subCategories' => $subCategories,
-    //     ]);
-
-    //     return view('searchresult', compact('results', 'searchTerm', 'location'));
-    // }
+    }
 
     public function suggestions(Request $request)
     {
