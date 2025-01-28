@@ -210,7 +210,7 @@
                 <img src="{{ asset('logos/banner.jpg') }}" class="product-details-slides" alt="Slide 1" />
                 <img src="{{ asset('logos/banner2.jpg') }}" class="product-details-slides" alt="Slide 2" />
             </div>
-            <h1 class="product-detail-heading">Product from:</h1>
+            <h1 class="product-detail-heading">Product from: </h1>
             <div class="company-badges">
                 @foreach ($results['companies'] as $companyOption)
                     <span class="badge">{{ $companyOption->name }}</span>

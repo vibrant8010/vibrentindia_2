@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Yajra\DataTables\Facades\DataTables;
 use Symfony\Component\HttpKernel\Attribute\Cache;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -110,36 +111,21 @@ class UserController extends Controller
 
     public function store_location(Request $request)
     {
-        // print_r($request->all());die;
-        // Validate the incoming data
-        // $validated = $request->validate([
-        //     'latitude' => 'required|numeric',
-        //     'longitude' => 'required|numeric',
-        //     'timestamp' => 'nullable|date',
-        // ]);
-
-
         $state = $request['state'];
         $city = $request['city'];
         $postalCode = $request['postalCode'];
+        //  print_r($city);die();
+        // Store 'city' in the session
+        Session::put('city', $city);
 
-      
+        // Retrieve and print 'city' from the session
+        // print_r(session('city'));
+        // die;
 
-        // Fetch the place name using Google Maps API
-        // $placeName = $this->getPlaceName($latitude, $longitude);
-
-        // Optionally save data to the database
-        // You can create a "locations" table with place_name column if needed.
-
-        // return response()->json([
-        //     'message' => 'Location data received successfully.',
-        //     'data' => [
-        //         'latitude' => $latitude,
-        //         'longitude' => $longitude,
-        //         'place_name' => $placeName,
-        //         'timestamp' => $validated['timestamp'] ?? null,
-        //     ],
-        // ], 200);
+        return response()->json([
+            'message' => 'Location data received successfully.',
+            'data' => 'hello',
+        ], 200);
     }
     private function getPlaceName($latitude, $longitude)
     {

@@ -68,6 +68,138 @@
 #suggestions2 li:hover {
     background-color: #f0f0f0;
 }
+/* Modal Overlay */
+.custom-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Modal */
+        .custom-modal {
+            background: #fff;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Header */
+        .custom-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .custom-modal-logo img {
+            height: 40px;
+        }
+
+        .custom-modal-welcome {
+            font-size: 14px;
+            color: #333;
+            margin-left: 10px;
+        }
+
+        .custom-modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Body */
+        .custom-modal-body {
+            padding: 20px;
+        }
+
+        .custom-input-group {
+            margin-bottom: 15px;
+        }
+
+        .custom-label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .custom-link-text {
+            font-size: 12px;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        .custom-link {
+            color: #007bff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: underline;
+        }
+
+        .custom-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .custom-forgot {
+            font-size: 12px;
+            color: #007bff;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .custom-modal-footer {
+            padding: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .custom-btn {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 </style>
 <header id="header-model"
 tabindex="-1"
@@ -174,7 +306,10 @@ aria-hidden="true" class="header-scroll">
                       aria-label="City Auto-suggest"
                       placeholder="Enter City"
                       name="location"
-                      id="city-auto-sug">
+                      id="city-auto-sug"
+                      @if(session()->has('city'))
+                      value="{{session('city')}}"
+                      @endif>
                     {{-- <ul class="dropdown-list" role="listbox" id="suggestions">
 
                       <!-- Suggestions for Indian cities will be dynamically populated -->
@@ -253,13 +388,13 @@ aria-hidden="true" class="header-scroll">
                         @csrf
                     </form>
                 @else
-                    <a id="openlogin" data-bs-toggle="modal" data-bs-target="#loginModal" class="btn-links">
-                        <span class="lg-img">
+                    <a style="cursor: pointer" onclick="openModal()" class="btn-links">
+                        <span class="lg-img"    >
                             <img src="{{ asset('images/personicon.png') }}" alt="">
                         </span>
                         Sign in
                     </a>
-                    <a href="{{ route('business.register') }}" class="btn-links">
+                    <a href="{{ route('login') }}" class="btn-links">
                         <span class="lg-img">
                             <img src="{{ asset('images/registration.png') }}" alt="" style="height: 30px;width:30px;">
                         </span>
@@ -345,10 +480,67 @@ aria-hidden="true" class="header-scroll">
         </nav>
     </div>
 
+     <!-- Custom Modal -->
+     <div class="custom-modal-overlay" id="customModal" style="display: none;">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <div class="custom-modal-logo">
+                    <a href="#"><img src="./company-logo.webp" alt="Company Logo" /></a>
+                </div>
+                <div class="custom-modal-welcome">
+                    Welcome, <br />
+                    Login for a seamless experience
+                </div>
+                <button class="custom-modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="custom-modal-body">
+                <!-- Basic Form -->
+                <div id="basicCustomForm">
+                    <div class="custom-input-group">
+                        <label for="email" class="custom-label">Email</label>
+                        <input type="email" class="custom-input" id="email" placeholder="Enter your email" required />
+                    </div>
+                    <p class="custom-link-text">
+                        Don't have an account?
+                        <button type="button" class="custom-link" id="showSignUpForm">
+                            Sign Up
+                        </button>
+                    </p>
+                </div>
+                <!-- Detailed Form -->
+                <div id="detailedCustomForm" style="display: none;">
+                    <div class="custom-input-group">
+                        <label for="name" class="custom-label">Name</label>
+                        <input type="text" class="custom-input" id="name" placeholder="Enter your name" required />
+                    </div>
+                    <div class="custom-input-group">
+                        <label for="emailSignUp" class="custom-label">Email</label>
+                        <input type="email" class="custom-input" id="emailSignUp" placeholder="Enter your email"
+                            required />
+                    </div>
+                    <div class="custom-input-group">
+                        <label for="phone" class="custom-label">Phone Number</label>
+                        <input type="tel" class="custom-input" id="phone" placeholder="Enter your phone number"
+                            required />
+                    </div>
+                    <div class="custom-links">
+                        <a href="#" class="custom-forgot">Forgot Password?</a>
+                        <button type="button" class="custom-link" id="showLoginForm">
+                            Login?
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-modal-footer">
+                <button type="button" class="custom-btn" id="signUpBtn">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
     @if (session('alert'))
         <div class="alert alert-warning">
         {{ session('alert') }}
-        </div>
+    </div>
         {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {
 
@@ -361,107 +553,6 @@ aria-hidden="true" class="header-scroll">
             });
         </script> --}}
     @endif
-
-    <div
-      class="modal fade"
-      id="loginModal"
-      tabindex="-1"
-      aria-labelledby="loginModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header mt-2 login-header">
-            <div class="login-logo">
-              <a href="#"><img src="./company-logo.webp" alt="" /></a>
-            </div>
-            <div class="txt-header">
-              Wel Come, <br />
-              Login for a seamless experience
-            </div>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div id="basicForm">
-              <div class="login-type">
-                <span for="email" class="login-field-lable">Email</span>
-                <input
-                  type="email"
-                  class="login-input-box"
-                  id="email"
-                  placeholder="Enter your email"
-                  required
-                />
-                <span><i class="fa-solid fa-envelope input-icon"></i></span>
-              </div>
-              <span
-                >"Don't have an account? "
-                <a
-                  type="button"
-                  class="forgot-password mt-2"
-                  id="showDetailsForm"
-                >
-                  Sign UP
-                </a></span
-              >
-            </div>
-            <div id="detailedForm" style="display: none">
-              <div class="login-type">
-                <span for="name" class="login-field-lable">Name</span>
-                <input
-                  type="text"
-                  class="login-input-box"
-                  id="name"
-                  placeholder="Enter your name"
-                  required
-                />
-                <span><i class="fa-solid fa-user input-icon"></i></span>
-              </div>
-              <div class="login-type">
-                <span for="email" class="login-field-lable">Email</span>
-                <input
-                  type="email"
-                  class="login-input-box"
-                  id="email"
-                  placeholder="Enter your email"
-                  required
-                />
-                <span><i class="fa-solid fa-envelope input-icon"></i></span>
-              </div>
-              <div class="login-type">
-                <span for="phone" class="login-field-lable">Phone Number</span>
-                <input
-                  type="tel"
-                  class="login-input-box"
-                  id="phone"
-                  placeholder="Enter your phone number"
-                  required
-                />
-                <span><i class="fa-solid fa-phone input-icon"></i></span>
-              </div>
-              <div class="d-flex justify-content-between align-items-center">
-                <a href="#" class="forgot-password">Forgot Password?</a>
-                <a
-                  type="button"
-                  class="forgot-password mt-2"
-                  id="showBasicForm"
-                >
-                  Login?
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn login-btn w-100">Sign UP</button>
-          </div>
-        </div>
-      </div>
-    </div>
 </header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {{-- search-suggestions --}}
@@ -727,60 +818,162 @@ aria-hidden="true" class="header-scroll">
     // Initialize the default category
     selectDropdown("All");
 
-    // window.onload = function () {
-    //     setTimeout(function () {
-    //       var loginModal = new bootstrap.Modal(document.getElementById('header-model'));
-    //       loginModal.show();
-    //     }, 3000); // 3000 milliseconds = 3 seconds
-    //   };
+    window.onload = function () {
+        setTimeout(function () {
+          var loginModal = new bootstrap.Modal(document.getElementById('header-model'));
+          loginModal.show();
+        }, 3000); // 3000 milliseconds = 3 seconds
+      };
 
-    //   // Switch to detailed form
-    //   document.getElementById("showDetailsForm").addEventListener("click", function () {
-    //     document.getElementById("basicForm").style.display = "none";
-    //     document.getElementById("detailedForm").style.display = "block";
-    //   });
+      // Switch to detailed form
+      document.getElementById("showDetailsForm").addEventListener("click", function () {
+        document.getElementById("basicForm").style.display = "none";
+        document.getElementById("detailedForm").style.display = "block";
+      });
 
-    //   // Switch back to basic form
-    //   document.getElementById("showBasicForm").addEventListener("click", function () {
-    //     document.getElementById("basicForm").style.display = "block";
-    //     document.getElementById("detailedForm").style.display = "none";
-    //   });
+      // Switch back to basic form
+      document.getElementById("showBasicForm").addEventListener("click", function () {
+        document.getElementById("basicForm").style.display = "block";
+        document.getElementById("detailedForm").style.display = "none";
+      });
 
 </script>
+
+@if (!session()->has('city'))
+@push('scripts')
 <script>
-    // Open modal automatically after page loads
-    window.onload = function () {
-      setTimeout(function () {
-        var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-        loginModal.show();
-      }, 3000); // 3000 milliseconds = 3 seconds
-    };
+   // // get user location
 
+window.onload = () => {
+// Check if Geolocation is supported
+if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    });
+} else {
+    console.error('Geolocation is not supported by your browser.');
+}
+};
 
-              const modal = document.getElementById("loginModal");
-              const openModal = document.getElementById("loginButton");
-              const closeModal = document.getElementById("closeModal");
-              const showDetailsForm = document.getElementById("showDetailsForm");
-              const showBasicForm = document.getElementById("showBasicForm");
+function successCallback(position) {
+// const latitude = position.coords.latitude;
+// const longitude = position.coords.longitude;
 
-              openModal.addEventListener("click", () => {
-                modal.classList.add("active");
-              });
+// console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
-              closeModal.addEventListener("click", () => {
-                modal.classList.remove("active");
-              });
+// // Prepare data to send
+// const data = {
+//     latitude: latitude,
+//     longitude: longitude,
+//     timestamp: position.timestamp
+// };
 
-              showDetailsForm.addEventListener("click", (e) => {
-                e.preventDefault();
-                document.getElementById("basicForm").style.display = "none";
-                document.getElementById("detailedForm").style.display = "block";
-              });
+// // Send data to the backend
+// // sendLocationData(data);
+// console.log(data);
+const latitude = position.coords.latitude;
+const longitude = position.coords.longitude;
+const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
 
-              showBasicForm.addEventListener("click", (e) => {
-                e.preventDefault();
-                document.getElementById("basicForm").style.display = "block";
-                document.getElementById("detailedForm").style.display = "none";
-              });
+fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // const address = data.address || {};
+        // const state = address.state || '';
+        // const city = address.city || address.town || address.village || '';
+        // const postalCode = address.postcode || '';
+        const address = data.address || {};
+        const state = address.state || '';
+        const city = address.city || address.state_district || address.town || address.village || '';
+        const postalCode = address.postcode || '';
+        if (state && city && postalCode) {
+            // document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
+            document.getElementById('city-auto-sug').value =  address.city || address.state_district || address.town || address.village || '';
+            sendLocationData({ state, city, postalCode });
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching geolocation data:", error);
+    });
+}
 
-  </script>
+function errorCallback(error) {
+console.error('Error retrieving location:', error);
+switch (error.code) {
+    case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+    case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+    case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+    case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.");
+        break;
+}
+}
+function sendLocationData(data) {
+// console.log(data);
+$.ajax({
+    url: "/location",
+    type: 'POST',
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    data: JSON.stringify(data),
+    contentType: 'application/json',
+    success: function(response) {
+        console.log('Success:', response);
+    },
+    error: function(xhr, status, error) {
+        console.error('Error:', error);
+    }
+});
+}
+</script>
+@endif
+{{-- @if (!session()->has('user_id')) --}}
+{{-- @push('scripts') --}}
+<script>
+    alert('hello');
+    //  const openModal = document.getElementById("loginButton");
+    const modal2 = document.getElementById("customModal");
+    const closeModal = document.getElementById("closeModal");
+    const showSignUpForm = document.getElementById("showSignUpForm");
+    const showLoginForm = document.getElementById("showLoginForm");
+    const basicForm = document.getElementById("basicCustomForm");
+    const detailedForm = document.getElementById("detailedCustomForm");
+
+    // Open modal
+    function openModal() {
+        modal2.style.display = "flex";
+    }
+
+    // Close modal
+    closeModal.addEventListener("click", () => {
+        modal2.style.display = "none";
+    });
+
+    // Toggle forms
+    showSignUpForm.addEventListener("click", () => {
+        basicForm.style.display = "none";
+        detailedForm.style.display = "block";
+    });
+
+    showLoginForm.addEventListener("click", () => {
+        detailedForm.style.display = "none";
+        basicForm.style.display = "block";
+    });
+</script>
+
+{{-- @endpush --}}
+{{-- @endif --}}
