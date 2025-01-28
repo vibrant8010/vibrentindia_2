@@ -366,7 +366,7 @@
             <button class="trigger icon-mobile-view"><i class="fa-solid fa-magnifying-glass"
                     style="color: #000000;"></i></button>
             <div class="mobile-sigin-logo">
-                <a href="{{ route('login') }}"
+                <a style="cursor: pointer" onclick="openModal()"
                     class="d-block d-lg-none d-md-none d-sm-block d-xl-none icon-mobile-view">
                     <span class="lg-img">
                         {{-- <img src="{{ asset('images/personmobile.png') }}" alt=""> --}}
@@ -394,7 +394,7 @@
                         </span>
                         Sign in
                     </a>
-                    <a href="{{ route('login') }}" class="btn-links">
+                    <a href="{{ route('business.register') }}" class="btn-links">
                         <span class="lg-img">
                             <img src="{{ asset('images/registration.png') }}" alt=""
                                 style="height: 30px;width:30px;">
