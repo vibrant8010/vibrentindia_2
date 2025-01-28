@@ -169,121 +169,103 @@ popup.addEventListener('click', (e) => {
 });
 }
 
-// Show modal automatically after 5 seconds
-window.onload = function () {
-setTimeout(() => {
-    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-    loginModal.show();
-}, 5000); // 5000ms = 5 seconds
-};
-
-// Handle form submission
-document.getElementById('loginForm').addEventListener('submit', function (e) {
-e.preventDefault();
-const email = document.getElementById('email').value;
-const password = document.getElementById('password').value;
-
-// Example: Validate credentials or send to the server
-alert(`Email: ${email}\nPassword: ${password}`);
-});
-
 // // get user location
 
-window.onload = () => {
-// Check if Geolocation is supported
-if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-    });
-} else {
-    console.error('Geolocation is not supported by your browser.');
-}
-};
-
-function successCallback(position) {
-// const latitude = position.coords.latitude;
-// const longitude = position.coords.longitude;
-
-// console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-
-// // Prepare data to send
-// const data = {
-//     latitude: latitude,
-//     longitude: longitude,
-//     timestamp: position.timestamp
+// window.onload = () => {
+// // Check if Geolocation is supported
+// if ('geolocation' in navigator) {
+//     navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+//         enableHighAccuracy: true,
+//         timeout: 5000,
+//         maximumAge: 0
+//     });
+// } else {
+//     console.error('Geolocation is not supported by your browser.');
+// }
 // };
 
-// // Send data to the backend
-// // sendLocationData(data);
-// console.log(data);
-const latitude = position.coords.latitude;
-const longitude = position.coords.longitude;
-const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+// function successCallback(position) {
+// // const latitude = position.coords.latitude;
+// // const longitude = position.coords.longitude;
 
-fetch(url)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        // const address = data.address || {};
-        // const state = address.state || '';
-        // const city = address.city || address.town || address.village || '';
-        // const postalCode = address.postcode || '';
-        const address = data.address || {};
-        const state = address.state || '';
-        const city = address.city || address.state_district || address.town || address.village || '';
-        const postalCode = address.postcode || '';
-        if (state && city && postalCode) {
-            // document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
-            document.getElementById('city-auto-sug').value =  address.city || address.state_district || address.town || address.village || '';
-            sendLocationData({ state, city, postalCode });
-        }
-    })
-    .catch(error => {
-        console.error("Error fetching geolocation data:", error);
-    });
-}
+// // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
-function errorCallback(error) {
-console.error('Error retrieving location:', error);
-switch (error.code) {
-    case error.PERMISSION_DENIED:
-        alert("User denied the request for Geolocation.");
-        break;
-    case error.POSITION_UNAVAILABLE:
-        alert("Location information is unavailable.");
-        break;
-    case error.TIMEOUT:
-        alert("The request to get user location timed out.");
-        break;
-    case error.UNKNOWN_ERROR:
-        alert("An unknown error occurred.");
-        break;
-}
-}
-function sendLocationData(data) {
-// console.log(data);
-$.ajax({
-    url: "/location",
-    type: 'POST',
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-    data: JSON.stringify(data),
-    contentType: 'application/json',
-    success: function(response) {
-        console.log('Success:', response);
-    },
-    error: function(xhr, status, error) {
-        console.error('Error:', error);
-    }
-});
-}
+// // // Prepare data to send
+// // const data = {
+// //     latitude: latitude,
+// //     longitude: longitude,
+// //     timestamp: position.timestamp
+// // };
+
+// // // Send data to the backend
+// // // sendLocationData(data);
+// // console.log(data);
+// const latitude = position.coords.latitude;
+// const longitude = position.coords.longitude;
+// const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+
+// fetch(url)
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         // const address = data.address || {};
+//         // const state = address.state || '';
+//         // const city = address.city || address.town || address.village || '';
+//         // const postalCode = address.postcode || '';
+//         const address = data.address || {};
+//         const state = address.state || '';
+//         const city = address.city || address.state_district || address.town || address.village || '';
+//         const postalCode = address.postcode || '';
+//         if (state && city && postalCode) {
+//             // document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
+//             document.getElementById('city-auto-sug').value =  address.city || address.state_district || address.town || address.village || '';
+//             sendLocationData({ state, city, postalCode });
+//         }
+//     })
+//     .catch(error => {
+//         console.error("Error fetching geolocation data:", error);
+//     });
+// }
+
+// function errorCallback(error) {
+// console.error('Error retrieving location:', error);
+// switch (error.code) {
+//     case error.PERMISSION_DENIED:
+//         alert("User denied the request for Geolocation.");
+//         break;
+//     case error.POSITION_UNAVAILABLE:
+//         alert("Location information is unavailable.");
+//         break;
+//     case error.TIMEOUT:
+//         alert("The request to get user location timed out.");
+//         break;
+//     case error.UNKNOWN_ERROR:
+//         alert("An unknown error occurred.");
+//         break;
+// }
+// }
+// function sendLocationData(data) {
+// // console.log(data);
+// $.ajax({
+//     url: "/location",
+//     type: 'POST',
+//     headers: {
+//         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     },
+//     data: JSON.stringify(data),
+//     contentType: 'application/json',
+//     success: function(response) {
+//         console.log('Success:', response);
+//     },
+//     error: function(xhr, status, error) {
+//         console.error('Error:', error);
+//     }
+// });
+// }
 // function sendLocationData(data) {
 //     fetch('/api/location', { // Adjust the endpoint as needed
 //         method: 'POST',

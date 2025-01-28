@@ -120,7 +120,7 @@ class UserController extends Controller
 
         // Retrieve and print 'city' from the session
         // print_r(session('city'));
-        // die;
+        // die; 
 
         return response()->json([
             'message' => 'Location data received successfully.',

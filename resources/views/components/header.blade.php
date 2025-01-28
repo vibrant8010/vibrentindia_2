@@ -843,7 +843,7 @@ aria-hidden="true" class="header-scroll">
 @push('scripts')
 <script>
    // // get user location
-
+   alert('hello');
 window.onload = () => {
 // Check if Geolocation is supported
 if ('geolocation' in navigator) {
@@ -944,7 +944,7 @@ $.ajax({
 {{-- @if (!session()->has('user_id')) --}}
 {{-- @push('scripts') --}}
 <script>
-    alert('hello');
+
     //  const openModal = document.getElementById("loginButton");
     const modal2 = document.getElementById("customModal");
     const closeModal = document.getElementById("closeModal");
