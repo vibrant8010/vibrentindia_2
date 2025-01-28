@@ -1,285 +1,288 @@
 <style>
     #suggestions-box {
-    /* border: 1px solid #ccc;
+        /* border: 1px solid #ccc;
     max-height: 200px;
     overflow-y: auto;
     background-color: #fff;
     position: absolute;
     width: 100%;
     z-index: 10; */
-    list-style-type: none;
-    z-index: 99999;
-    overflow-y: scroll;
-    padding: 0;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    position: absolute;
-    top: 47px;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    display: none;
-    height: 300px;
-}
+        list-style-type: none;
+        z-index: 99999;
+        overflow-y: scroll;
+        padding: 0;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        position: absolute;
+        top: 47px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        display: none;
+        height: 300px;
+    }
 
-#suggestions-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+    #suggestions-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-#suggestions-list li {
-    padding: 10px;
-    cursor: pointer;
-}
+    #suggestions-list li {
+        padding: 10px;
+        cursor: pointer;
+    }
 
-#suggestions-list li:hover {
-    background-color: #f0f0f0;
-}
-#suggestions-box2 {
-    list-style-type: none;
-    z-index: 99999;
-    overflow-y: scroll;
-    padding: 0;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    position: absolute;
-    top: 47px;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    display: none;
-    height: 300px;
-}
+    #suggestions-list li:hover {
+        background-color: #f0f0f0;
+    }
 
-#suggestions2 {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+    #suggestions-box2 {
+        list-style-type: none;
+        z-index: 99999;
+        overflow-y: scroll;
+        padding: 0;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        position: absolute;
+        top: 47px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        display: none;
+        height: 300px;
+    }
 
-#suggestions2 li {
-    padding: 10px;
-    cursor: pointer;
-}
+    #suggestions2 {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-#suggestions2 li:hover {
-    background-color: #f0f0f0;
-}
-/* Modal Overlay */
-.custom-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+    #suggestions2 li {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #suggestions2 li:hover {
+        background-color: #f0f0f0;
+    }
+
+    /* Modal Overlay */
+    .custom-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    /* Modal */
+    .custom-modal {
+        background: #fff;
+        width: 90%;
+        max-width: 400px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.3s ease;
+    }
+
+    /* Header */
+    .custom-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .custom-modal-logo img {
+        height: 40px;
+    }
+
+    .custom-modal-welcome {
+        font-size: 14px;
+        color: #333;
+        margin-left: 10px;
+    }
+
+    .custom-modal-close {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: #333;
+    }
+
+    /* Body */
+    .custom-modal-body {
+        padding: 20px;
+    }
+
+    .custom-input-group {
+        margin-bottom: 15px;
+    }
+
+    .custom-label {
+        display: block;
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    .custom-input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .custom-link-text {
+        font-size: 12px;
+        color: #777;
+        margin-top: 10px;
+    }
+
+    .custom-link {
+        color: #007bff;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        text-decoration: underline;
+    }
+
+    .custom-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .custom-forgot {
+        font-size: 12px;
+        color: #007bff;
+        text-decoration: underline;
+    }
+
+    /* Footer */
+    .custom-modal-footer {
+        padding: 20px;
+        border-top: 1px solid #e9ecef;
+    }
+
+    .custom-btn {
+        width: 100%;
+        padding: 10px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
         }
 
-        /* Modal */
-        .custom-modal {
-            background: #fff;
-            width: 90%;
-            max-width: 400px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.3s ease;
+        to {
+            opacity: 1;
+            transform: scale(1);
         }
-
-        /* Header */
-        .custom-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .custom-modal-logo img {
-            height: 40px;
-        }
-
-        .custom-modal-welcome {
-            font-size: 14px;
-            color: #333;
-            margin-left: 10px;
-        }
-
-        .custom-modal-close {
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: #333;
-        }
-
-        /* Body */
-        .custom-modal-body {
-            padding: 20px;
-        }
-
-        .custom-input-group {
-            margin-bottom: 15px;
-        }
-
-        .custom-label {
-            display: block;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 5px;
-        }
-
-        .custom-input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .custom-link-text {
-            font-size: 12px;
-            color: #777;
-            margin-top: 10px;
-        }
-
-        .custom-link {
-            color: #007bff;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 12px;
-            text-decoration: underline;
-        }
-
-        .custom-links {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .custom-forgot {
-            font-size: 12px;
-            color: #007bff;
-            text-decoration: underline;
-        }
-
-        /* Footer */
-        .custom-modal-footer {
-            padding: 20px;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .custom-btn {
-            width: 100%;
-            padding: 10px;
-            background: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+    }
 </style>
-<header id="header-model"
-tabindex="-1"
-aria-labelledby="headerModelLabel"
-aria-hidden="true" class="header-scroll">
-{{-- /*searchpopu area*/ --}}
-<div class="modal">
-    {{-- <span class="close-button"><</span> --}}
-    {{-- <div class="modal-content">
+{{-- <header id="header-model" tabindex="-1" aria-labelledby="headerModelLabel" aria-hidden="true" class="header-scroll"> --}}
+<header aria-hidden="true" class="header-scroll">
+    {{-- /*searchpopu area*/ --}}
+    <div class="modal">
+        {{-- <span class="close-button"><</span> --}}
+        {{-- <div class="modal-content">
 
         <h1>Hello, I am a modal!</h1>
     </div> --}}
-    <div class="modal-content">
-    <h6 class="category-title">All Category</h6>
-    <ul class="modal-category">
-      <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li>
-      <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li>
-      <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li>
-      <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li>
-      <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li> <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li>
-      <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li> <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li>
-      <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li>
-      <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li>
-      <li class="modal-nav-item">
-        <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-         <a href="#" class="modal-nav-view">Kitchenware</a>
-      </li>
+        <div class="modal-content">
+            <h6 class="category-title">All Category</h6>
+            <ul class="modal-category">
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
+                <li class="modal-nav-item">
+                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
+                    <a href="#" class="modal-nav-view">Kitchenware</a>
+                </li>
 
-    </ul>
-</div>
-</div>
-  <span class="close-button"><</span>
-{{-- /*searchpopu area*/ --}}
-    <section class="header-top">
-        <button class="menu-btn d-lg-none d-sm-block d-md-none d-block" id="menu-btn" style="display: block;">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <!-- Left Part: Logo -->
-        <div class="left-part">
-            <div class="header-logo-container">
-                <a href="{{ route('user.home') }}">
-                    <img src="{{ asset('images/desktoplogo.png') }}" alt="company logo">
-                </a>
-            </div>
+            </ul>
         </div>
+    </div>
+    <span class="close-button"><i style='font-size:24px' class='fas'>&#xf104;</i></span>
 
-        <div class="d-flex aligin-items-center justify-content-center mobil-rightpart">
-        <!-- Center Part: Search and Dropdown (Desktop) -->
-        <div class="search-section">
-            {{-- <div class="search-location-box">
+            {{-- /*searchpopu area*/ --}}
+            <section class="header-top">
+                <button class="menu-btn d-lg-none d-sm-block d-md-none d-block" id="menu-btn" style="display: block;">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <!-- Left Part: Logo -->
+                <div class="left-part">
+                    <div class="header-logo-container">
+                        <a href="{{ route('user.home') }}">
+                            <img src="{{ asset('images/desktoplogo.png') }}" alt="company logo">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="d-flex aligin-items-center justify-content-center mobil-rightpart">
+                    <!-- Center Part: Search and Dropdown (Desktop) -->
+                    <div class="search-section">
+                        {{-- <div class="search-location-box">
                 <div class="inputgroup_location">
                   <div class="input_location_box">
                     <input type="text" autocomplete="off"
@@ -297,34 +300,29 @@ aria-hidden="true" class="header-scroll">
                   </div>
                 </div>
               </div> --}}
-              <div class="search-location-box">
-                <div class="inputgroup_location">
-                  <div class="input_location_box">
-                    <form method="GET" action="{{ route('search') }}">
-                    <input type="text" autocomplete="off"
-                      class="input_location"
-                      aria-label="City Auto-suggest"
-                      placeholder="Enter City"
-                      name="location"
-                      id="city-auto-sug"
-                      @if(session()->has('city'))
-                      value="{{session('city')}}"
-                      @endif>
-                    {{-- <ul class="dropdown-list" role="listbox" id="suggestions">
+                        <div class="search-location-box">
+                            <div class="inputgroup_location">
+                                <div class="input_location_box">
+                                    <form method="GET" action="{{ route('search') }}">
+                                        <input type="text" autocomplete="off" class="input_location"
+                                            aria-label="City Auto-suggest" placeholder="Enter City" name="location"
+                                            id="city-auto-sug"
+                                            @if (session()->has('city')) value="{{ session('city') }}" @endif>
+                                        {{-- <ul class="dropdown-list" role="listbox" id="suggestions">
 
                       <!-- Suggestions for Indian cities will be dynamically populated -->
                     </ul> --}}
-                    <div id="suggestions-box2" class="suggestions-box">
-                        <ul id="suggestions2"></ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                                        <div id="suggestions-box2" class="suggestions-box">
+                                            <ul id="suggestions2"></ul>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
 
 
 
-            <div class="search-container">
-                {{-- <div class="select-box">
+                        <div class="search-container">
+                            {{-- <div class="select-box">
                     <div class="dropdown" id="desktop-dropdown">
                         <div class="dropdown-button" id="dropdownButton">
                             Products
@@ -338,69 +336,74 @@ aria-hidden="true" class="header-scroll">
                     </div>
                 </div> --}}
 
-                <div class="search-input-box">
-                    {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}" onsubmit="performSearch(event)"> --}}
-                        {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}"> --}}
-                            <div id="search-form" class="search-box-section">
-                        {{-- <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ..."> --}}
-                        <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ...">
-                        <div id="suggestions-box" class="suggestions-box">
-                            <ul id="suggestions-list" class="pt-2"></ul>
-                        </div>
-                        <div class="search-btn-box">
-                            <button type="submit" class="search-btn">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-                    </div>
-                    </form>
+                            <div class="search-input-box">
+                                {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}" onsubmit="performSearch(event)"> --}}
+                                {{-- <form id="search-form" class="search-box-section" method="GET" action="{{ route('search') }}"> --}}
+                                <div id="search-form" class="search-box-section">
+                                    {{-- <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()" autocomplete="off" placeholder="Search here ..."> --}}
+                                    <input type="text" name="query" id="search-bar"
+                                        oninput="fetchSuggestions()" autocomplete="off"
+                                        placeholder="Search here ...">
+                                    <div id="suggestions-box" class="suggestions-box">
+                                        <ul id="suggestions-list" class="pt-2"></ul>
+                                    </div>
+                                    <div class="search-btn-box">
+                                        <button type="submit" class="search-btn">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                </form>
 
-                    {{-- <div id="suggestions" class="suggestions-box"></div>
+                                {{-- <div id="suggestions" class="suggestions-box"></div>
                     <div id="suggestions" class="suggestions-box"></div> --}}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <button class="trigger icon-mobile-view"><i class="fa-solid fa-magnifying-glass"
+                            style="color: #000000;"></i></button>
+                    <div class="mobile-sigin-logo">
+                        <a href="{{ route('login') }}"
+                            class="d-block d-lg-none d-md-none d-sm-block d-xl-none icon-mobile-view">
+                            <span class="lg-img">
+                                {{-- <img src="{{ asset('images/personmobile.png') }}" alt=""> --}}
+                                <i class="fa-regular fa-user" style="color: #000000;"></i>
+                            </span>
+                        </a>
+                    </div>
                 </div>
-
-            </div>
-
-        </div>
-
-
-        <button class="trigger icon-mobile-view"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i></button>
-         <div class="mobile-sigin-logo">
-        <a href="{{ route('login') }}" class="d-block d-lg-none d-md-none d-sm-block d-xl-none icon-mobile-view">
-            <span class="lg-img">
-                {{-- <img src="{{ asset('images/personmobile.png') }}" alt=""> --}}
-                <i class="fa-regular fa-user" style="color: #000000;"></i>
-            </span>
-        </a>
-    </div>
-    </div>
-        <!-- Right Part: Authentication & Contact (Desktop) -->
-        <div class="d-lg-block d-md-block d-none">
-            <div class="right-part">
-                @if (Auth::check())
-                    <a href="{{ route('logout') }}" class="primary-btn"
-                     id="loginButton"
-                     style="display: none"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                @else
-                    <a style="cursor: pointer" onclick="openModal()" class="btn-links">
-                        <span class="lg-img"    >
-                            <img src="{{ asset('images/personicon.png') }}" alt="">
-                        </span>
-                        Sign in
-                    </a>
-                    <a href="{{ route('login') }}" class="btn-links">
-                        <span class="lg-img">
-                            <img src="{{ asset('images/registration.png') }}" alt="" style="height: 30px;width:30px;">
-                        </span>
-                         Join Free
-                    </a>
-                    {{-- <a href="{{ route('login') }}" class="btn-links">
+                <!-- Right Part: Authentication & Contact (Desktop) -->
+                <div class="d-lg-block d-md-block d-none">
+                    <div class="right-part">
+                        @if (Auth::check())
+                            <a href="{{ route('logout') }}" class="primary-btn" id="loginButton"
+                                style="display: none"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
+                        @else
+                            <a style="cursor: pointer" onclick="openModal()" class="btn-links">
+                                <span class="lg-img">
+                                    <img src="{{ asset('images/personicon.png') }}" alt="">
+                                </span>
+                                Sign in
+                            </a>
+                            <a href="{{ route('login') }}" class="btn-links">
+                                <span class="lg-img">
+                                    <img src="{{ asset('images/registration.png') }}" alt=""
+                                        style="height: 30px;width:30px;">
+                                </span>
+                                Join Free
+                            </a>
+                            {{-- <a href="{{ route('login') }}" class="btn-links">
                         <span class="lg-img">
                             <img src="{{ asset('images/INQUIRY.png') }}" alt="">
                         </span>
@@ -409,58 +412,61 @@ aria-hidden="true" class="header-scroll">
                     <a href="https://wa.me/+918511684938" class="contact-cheap">
                         +91 8511 6849 38
                     </a> --}}
-                @endif
-            </div>
-        </div>
-    </section>
+                        @endif
+                    </div>
+                </div>
+            </section>
 
-    <!-- Header Bottom: Mobile Menu and Navigation -->
-    <div class="header-bottom">
-        {{-- <button class="menu-btn d-lg-none d-sm-block d-md-none" id="menu-btn">
+            <!-- Header Bottom: Mobile Menu and Navigation -->
+            <div class="header-bottom">
+                {{-- <button class="menu-btn d-lg-none d-sm-block d-md-none" id="menu-btn">
             <i class="fa-solid fa-bars"></i>
         </button> --}}
 
-        <nav class="nav-container">
-            <span class="close-btn" id="close-btn">&times;</span>
-            <ul class="menu d-lg-block d-xl-block d-md-block d-sm-none d-none">
-                <li class="dropdown menu-item">
-                    <a href="#"><span class="category-img mx-1 "><i class="fa-solid fa-list"></i></span>All
-                        Category</a>
-                    <ul class="submenu">
-                        @php
-                        $categories = App\Models\Category::all()->pluck('name');
-                    @endphp
+                <nav class="nav-container">
+                    <span class="close-btn" id="close-btn">&times;</span>
+                    <ul class="menu d-lg-block d-xl-block d-md-block d-sm-none d-none">
+                        <li class="dropdown menu-item">
+                            <a href="#"><span class="category-img mx-1 "><i
+                                        class="fa-solid fa-list"></i></span>All
+                                Category</a>
+                            <ul class="submenu">
+                                @php
+                                    $categories = App\Models\Category::all()->pluck('name');
+                                @endphp
 
-                    @foreach ($categories as $category)
-                        <li class="category-menu-item">
-                            <a href="#" class="category-menu-link">{{ $category }}</a>
-                        </li>
-                    @endforeach
+                                @foreach ($categories as $category)
+                                    <li class="category-menu-item">
+                                        <a href="#" class="category-menu-link">{{ $category }}</a>
+                                    </li>
+                                @endforeach
 
 
-                        {{-- <li class="category-menu-item"><a href="#" class="category-menu-link">Option 2</a></li>
+                                {{-- <li class="category-menu-item"><a href="#" class="category-menu-link">Option 2</a></li>
                         <li class="category-menu-item"><a href="#" class="category-menu-link">Option 3</a></li>
                         <li class="category-menu-item"><a href="#" class="category-menu-link">Option 4</a></li>
                         <li class="category-menu-item"><a href="#" class="category-menu-link">Option 5</a></li> --}}
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-            </ul>
-            <ul class="nav-view">
-                <li class="nav-item mobile-logo py-4 px-1 d-lg-none d-sm-block d-md-none">
-                    <div class="header-logo-container d-md-block d-sm-block d-lg-none">
-                        <a href="{{ route('user.home') }}">
-                            <img src="{{ asset('images/mobilelogo.png') }}" alt="company logo"
-                                style="height: 32px; width: 169px;">
-                        </a>
-                    </div>
-                    {{-- <span class="close-btn" id="close-btn" style="display: block;">×</span> --}}
-                </li>
-                <li class="nav-item"><a href="{{ route('innertopcategory') }}" class="nav-link">Top Category</a></li>
-                <li class="nav-item"><a href="{{ route('newarrival') }}" class="nav-link">New Arrival</a></li>
-                <li class="nav-item"><a href="{{ route('alltrendingcategory') }}" class="nav-link">Trending
-                        Products</a></li>
-                <li class="nav-item"><a href="#Blogs" class="nav-link">Blogs</a></li>
-                {{-- <li class="s-box d-lg-none d-md-none d-sm-block">
+                    <ul class="nav-view">
+                        <li class="nav-item mobile-logo py-4 px-1 d-lg-none d-sm-block d-md-none">
+                            <div class="header-logo-container d-md-block d-sm-block d-lg-none">
+                                <a href="{{ route('user.home') }}">
+                                    <img src="{{ asset('images/mobilelogo.png') }}" alt="company logo"
+                                        style="height: 32px; width: 169px;">
+                                </a>
+                            </div>
+                            {{-- <span class="close-btn" id="close-btn" style="display: block;">×</span> --}}
+                        </li>
+                        <li class="nav-item"><a href="{{ route('innertopcategory') }}" class="nav-link">Top
+                                Category</a></li>
+                        <li class="nav-item"><a href="{{ route('newarrival') }}" class="nav-link">New Arrival</a>
+                        </li>
+                        <li class="nav-item"><a href="{{ route('alltrendingcategory') }}" class="nav-link">Trending
+                                Products</a></li>
+                        <li class="nav-item"><a href="#Blogs" class="nav-link">Blogs</a></li>
+                        {{-- <li class="s-box d-lg-none d-md-none d-sm-block">
                     <div class="right-part mt-5">
                         <a href="{{ route('login') }}" class="btn-links">
                             <span class="lg-img">
@@ -476,72 +482,90 @@ aria-hidden="true" class="header-scroll">
                         </a>
                     </div>
                 </li> --}}
-            </ul>
-        </nav>
-    </div>
+                    </ul>
+                </nav>
+            </div>
 
-     <!-- Custom Modal -->
-     <div class="custom-modal-overlay" id="customModal" style="display: none;">
-        <div class="custom-modal">
-            <div class="custom-modal-header">
-                <div class="custom-modal-logo">
-                    <a href="#"><img src="./company-logo.webp" alt="Company Logo" /></a>
-                </div>
-                <div class="custom-modal-welcome">
-                    Welcome, <br />
-                    Login for a seamless experience
-                </div>
-                <button class="custom-modal-close" id="closeModal">&times;</button>
-            </div>
-            <div class="custom-modal-body">
-                <!-- Basic Form -->
-                <div id="basicCustomForm">
-                    <div class="custom-input-group">
-                        <label for="email" class="custom-label">Email</label>
-                        <input type="email" class="custom-input" id="email" placeholder="Enter your email" required />
+            <!-- Custom Modal -->
+            <div class="custom-modal-overlay" id="customModal" style="display: none;">
+                <div class="custom-modal">
+                    <div class="custom-modal-header">
+                        <div class="custom-modal-logo">
+                            <a href="#"><img src="./company-logo.webp" alt="Company Logo" /></a>
+                        </div>
+                        <div class="custom-modal-welcome">
+                            Welcome, <br />
+                            Login for a seamless experience
+                        </div>
+                        <button class="custom-modal-close" id="closeModal">&times;</button>
                     </div>
-                    <p class="custom-link-text">
-                        Don't have an account?
-                        <button type="button" class="custom-link" id="showSignUpForm">
-                            Sign Up
-                        </button>
-                    </p>
-                </div>
-                <!-- Detailed Form -->
-                <div id="detailedCustomForm" style="display: none;">
-                    <div class="custom-input-group">
-                        <label for="name" class="custom-label">Name</label>
-                        <input type="text" class="custom-input" id="name" placeholder="Enter your name" required />
-                    </div>
-                    <div class="custom-input-group">
-                        <label for="emailSignUp" class="custom-label">Email</label>
-                        <input type="email" class="custom-input" id="emailSignUp" placeholder="Enter your email"
-                            required />
-                    </div>
-                    <div class="custom-input-group">
-                        <label for="phone" class="custom-label">Phone Number</label>
-                        <input type="tel" class="custom-input" id="phone" placeholder="Enter your phone number"
-                            required />
-                    </div>
-                    <div class="custom-links">
-                        <a href="#" class="custom-forgot">Forgot Password?</a>
-                        <button type="button" class="custom-link" id="showLoginForm">
-                            Login?
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="custom-modal-footer">
-                <button type="button" class="custom-btn" id="signUpBtn">Sign Up</button>
-            </div>
-        </div>
-    </div>
+                    <div class="custom-modal-body">
+                        <!-- Basic Form -->
+                        <div id="basicCustomForm">
+                            <div class="custom-input-group">
+                                <label for="email" class="custom-label">Email</label>
+                                <input type="email" class="custom-input" id="otp_email"
+                                    placeholder="Enter your email" required />
+                            </div>
+                            <p class="custom-link-text">
+                                Don't have an account?
+                                <button type="button" class="custom-link" id="showSignUpForm">
+                                    Sign Up
+                                </button>
+                            </p>
+                            <div class="custom-modal-footer">
+                                <button type="button" class="custom-btn" id="sandotp">Sand otp</button>
+                            </div>
+                        </div>
+                        {{-- otp --}}
+                        <div id="otpCustomForm" style="display: none;">
+                            <div class="custom-input-group">
+                                <label for="otp" class="custom-label">Enter OTP</label>
+                                <input type="text" class="custom-input" id="otp"
+                                    placeholder="Enter the OTP" required />
+                            </div>
+                            <div class="custom-modal-footer">
+                                <button type="button" class="custom-btn" id="verifyOtpBtn">Verify OTP</button>
+                            </div>
+                        </div>
+                        <!-- Detailed Form -->
+                        <div id="detailedCustomForm" style="display: none;">
+                            <div class="custom-input-group">
+                                <label for="name" class="custom-label">Name</label>
+                                <input type="text" class="custom-input" id="name"
+                                    placeholder="Enter your name" required />
+                            </div>
+                            <div class="custom-input-group">
+                                <label for="emailSignUp" class="custom-label">Email</label>
+                                <input type="email" class="custom-input" id="emailSignUp"
+                                    placeholder="Enter your email" required />
+                            </div>
+                            <div class="custom-input-group">
+                                <label for="phone" class="custom-label">Phone Number</label>
+                                <input type="tel" class="custom-input" id="phone"
+                                    placeholder="Enter your phone number" required />
+                            </div>
+                            <div class="custom-links">
+                                <a href="#" class="custom-forgot">Forgot Password?</a>
+                                <button type="button" class="custom-link" id="showLoginForm">
+                                    Login?
+                                </button>
+                            </div>
+                            <div class="custom-modal-footer">
+                                <button type="button" class="custom-btn" id="signUpBtn2">Sign Up</button>
+                            </div>
+                        </div>
 
-    @if (session('alert'))
-        <div class="alert alert-warning">
-        {{ session('alert') }}
-    </div>
-        {{-- <script>
+                    </div>
+
+                </div>
+            </div>
+
+            @if (session('alert'))
+                <div class="alert alert-warning">
+                    {{ session('alert') }}
+                </div>
+                {{-- <script>
             document.addEventListener('DOMContentLoaded', function() {
 
                 var loginModal = new bootstrap.Modal(document.getElementById('loginModal'), {
@@ -552,69 +576,74 @@ aria-hidden="true" class="header-scroll">
 
             });
         </script> --}}
-    @endif
+            @endif
 </header>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {{-- search-suggestions --}}
 <script>
- $(document).ready(function () {
-    $('#search-bar').on('keyup', function () {
-        const query = $(this).val();
+    $(document).ready(function() {
+        $('#search-bar').on('keyup', function() {
+            const query = $(this).val();
 
-        if (query.length !== 0) {
-            $.ajax({
-                url: '/search-suggestions',
-                method: 'GET',
-                data: { query: query },
-                success: function (response) {
-                    let suggestionsHTML = '';
+            if (query.length !== 0) {
+                $.ajax({
+                    url: '/search-suggestions',
+                    method: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(response) {
+                        let suggestionsHTML = '';
 
-                    if (response.products.length > 0) {
-                        suggestionsHTML += '<strong class="globalnav-searchresults-header">Products:</strong>';
-                        response.products.forEach(product => {
-                            suggestionsHTML += `<li>${product.name}</li>`;
-                        });
-                    }
+                        if (response.products.length > 0) {
+                            suggestionsHTML +=
+                                '<strong class="globalnav-searchresults-header">Products:</strong>';
+                            response.products.forEach(product => {
+                                suggestionsHTML += `<li>${product.name}</li>`;
+                            });
+                        }
 
-                    if (response.categories.length > 0) {
-                        suggestionsHTML += '<strong class="globalnav-searchresults-header">Categories:</strong>';
-                        response.categories.forEach(category => {
-                            suggestionsHTML += `<li>${category.name}</li>`;
-                        });
-                    }
-                    if (response.subcategories.length > 0) {
-                        suggestionsHTML += '<strong class="globalnav-searchresults-header">Subcategories:</strong>';
-                        response.subcategories.forEach(subcategory => {
-                            suggestionsHTML += `<li>${subcategory.name}</li>`;
-                        });
-                    }
+                        if (response.categories.length > 0) {
+                            suggestionsHTML +=
+                                '<strong class="globalnav-searchresults-header">Categories:</strong>';
+                            response.categories.forEach(category => {
+                                suggestionsHTML += `<li>${category.name}</li>`;
+                            });
+                        }
+                        if (response.subcategories.length > 0) {
+                            suggestionsHTML +=
+                                '<strong class="globalnav-searchresults-header">Subcategories:</strong>';
+                            response.subcategories.forEach(subcategory => {
+                                suggestionsHTML += `<li>${subcategory.name}</li>`;
+                            });
+                        }
 
-                    if (response.companies.length > 0) {
-                        suggestionsHTML += '<strong class="globalnav-searchresults-header">Companies:</strong>';
-                        response.companies.forEach(company => {
-                            suggestionsHTML += `<li>${company.name}</li>`;
-                        });
-                    }
+                        if (response.companies.length > 0) {
+                            suggestionsHTML +=
+                                '<strong class="globalnav-searchresults-header">Companies:</strong>';
+                            response.companies.forEach(company => {
+                                suggestionsHTML += `<li>${company.name}</li>`;
+                            });
+                        }
 
-                    $('#suggestions-list').html(suggestionsHTML);
-                    $('#suggestions-box').show();
-                },
-                error: function () {
-                    $('#suggestions-box').hide();
-                },
-            });
-        } else {
+                        $('#suggestions-list').html(suggestionsHTML);
+                        $('#suggestions-box').show();
+                    },
+                    error: function() {
+                        $('#suggestions-box').hide();
+                    },
+                });
+            } else {
+                $('#suggestions-box').hide();
+            }
+        });
+
+        $(document).on('click', '#suggestions-list li:not(.globalnav-searchresults-header)', function() {
+            const selectedValue = $(this).text();
+            $('#search-bar').val(selectedValue);
             $('#suggestions-box').hide();
-        }
+        });
     });
-
-    $(document).on('click', '#suggestions-list li:not(.globalnav-searchresults-header)', function () {
-        const selectedValue = $(this).text();
-        $('#search-bar').val(selectedValue);
-        $('#suggestions-box').hide();
-    });
-});
-
 </script>
 <script>
     // Fetching categories from Blade (passed as JSON)
@@ -818,162 +847,199 @@ aria-hidden="true" class="header-scroll">
     // Initialize the default category
     selectDropdown("All");
 
-    window.onload = function () {
-        setTimeout(function () {
-          var loginModal = new bootstrap.Modal(document.getElementById('header-model'));
-          loginModal.show();
-        }, 3000); // 3000 milliseconds = 3 seconds
-      };
+    // window.onload = function() {
+    //     setTimeout(function() {
+    //         var loginModal = new bootstrap.Modal(document.getElementById('header-model'));
+    //         loginModal.show();
+    //     }, 3000); // 3000 milliseconds = 3 seconds
+    // };
 
-      // Switch to detailed form
-      document.getElementById("showDetailsForm").addEventListener("click", function () {
-        document.getElementById("basicForm").style.display = "none";
-        document.getElementById("detailedForm").style.display = "block";
-      });
+    // // Switch to detailed form
+    // document.getElementById("showDetailsForm").addEventListener("click", function() {
+    //     document.getElementById("basicForm").style.display = "none";
+    //     document.getElementById("detailedForm").style.display = "block";
+    // });
 
-      // Switch back to basic form
-      document.getElementById("showBasicForm").addEventListener("click", function () {
-        document.getElementById("basicForm").style.display = "block";
-        document.getElementById("detailedForm").style.display = "none";
-      });
-
+    // // Switch back to basic form
+    // document.getElementById("showBasicForm").addEventListener("click", function() {
+    //     document.getElementById("basicForm").style.display = "block";
+    //     document.getElementById("detailedForm").style.display = "none";
+    // });
 </script>
 
 @if (!session()->has('city'))
-@push('scripts')
-<script>
-   // // get user location
-   alert('hello');
-window.onload = () => {
-// Check if Geolocation is supported
-if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-    });
-} else {
-    console.error('Geolocation is not supported by your browser.');
-}
-};
+    @push('scripts')
+        <script>
+            // // get user location
+            alert('hello');
+            window.onload = () => {
+                // Check if Geolocation is supported
+                if ('geolocation' in navigator) {
+                    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 0
+                    });
+                } else {
+                    console.error('Geolocation is not supported by your browser.');
+                }
+            };
 
-function successCallback(position) {
-// const latitude = position.coords.latitude;
-// const longitude = position.coords.longitude;
+            function successCallback(position) {
+                // const latitude = position.coords.latitude;
+                // const longitude = position.coords.longitude;
 
-// console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
-// // Prepare data to send
-// const data = {
-//     latitude: latitude,
-//     longitude: longitude,
-//     timestamp: position.timestamp
-// };
+                // // Prepare data to send
+                // const data = {
+                //     latitude: latitude,
+                //     longitude: longitude,
+                //     timestamp: position.timestamp
+                // };
 
-// // Send data to the backend
-// // sendLocationData(data);
-// console.log(data);
-const latitude = position.coords.latitude;
-const longitude = position.coords.longitude;
-const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+                // // Send data to the backend
+                // // sendLocationData(data);
+                // console.log(data);
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
 
-fetch(url)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        // const address = data.address || {};
-        // const state = address.state || '';
-        // const city = address.city || address.town || address.village || '';
-        // const postalCode = address.postcode || '';
-        const address = data.address || {};
-        const state = address.state || '';
-        const city = address.city || address.state_district || address.town || address.village || '';
-        const postalCode = address.postcode || '';
-        if (state && city && postalCode) {
-            // document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
-            document.getElementById('city-auto-sug').value =  address.city || address.state_district || address.town || address.village || '';
-            sendLocationData({ state, city, postalCode });
-        }
-    })
-    .catch(error => {
-        console.error("Error fetching geolocation data:", error);
-    });
-}
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // const address = data.address || {};
+                        // const state = address.state || '';
+                        // const city = address.city || address.town || address.village || '';
+                        // const postalCode = address.postcode || '';
+                        const address = data.address || {};
+                        const state = address.state || '';
+                        const city = address.city || address.state_district || address.town || address.village || '';
+                        const postalCode = address.postcode || '';
+                        if (state && city && postalCode) {
+                            // document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
+                            document.getElementById('city-auto-sug').value = address.city || address.state_district ||
+                                address.town || address.village || '';
+                            sendLocationData({
+                                state,
+                                city,
+                                postalCode
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error fetching geolocation data:", error);
+                    });
+            }
 
-function errorCallback(error) {
-console.error('Error retrieving location:', error);
-switch (error.code) {
-    case error.PERMISSION_DENIED:
-        alert("User denied the request for Geolocation.");
-        break;
-    case error.POSITION_UNAVAILABLE:
-        alert("Location information is unavailable.");
-        break;
-    case error.TIMEOUT:
-        alert("The request to get user location timed out.");
-        break;
-    case error.UNKNOWN_ERROR:
-        alert("An unknown error occurred.");
-        break;
-}
-}
-function sendLocationData(data) {
-// console.log(data);
-$.ajax({
-    url: "/location",
-    type: 'POST',
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
-    data: JSON.stringify(data),
-    contentType: 'application/json',
-    success: function(response) {
-        console.log('Success:', response);
-    },
-    error: function(xhr, status, error) {
-        console.error('Error:', error);
-    }
-});
-}
-</script>
+            function errorCallback(error) {
+                console.error('Error retrieving location:', error);
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        alert("User denied the request for Geolocation.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        alert("Location information is unavailable.");
+                        break;
+                    case error.TIMEOUT:
+                        alert("The request to get user location timed out.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert("An unknown error occurred.");
+                        break;
+                }
+            }
+
+            function sendLocationData(data) {
+                // console.log(data);
+                $.ajax({
+                    url: "/location",
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        console.log('Success:', response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+        </script>
+    @endpush
 @endif
-{{-- @if (!session()->has('user_id')) --}}
-{{-- @push('scripts') --}}
-<script>
+    {{-- @if (!session()->has('user_id')) --}}
+    {{-- @push('scripts') --}}
+    <script>
+        //  const openModal = document.getElementById("loginButton");
+        const modal2 = document.getElementById("customModal");
+        const closeModal = document.getElementById("closeModal");
+        const showSignUpForm = document.getElementById("showSignUpForm");
+        const showLoginForm = document.getElementById("showLoginForm");
+        const basicForm = document.getElementById("basicCustomForm");
+        const detailedForm = document.getElementById("detailedCustomForm");
+        const otpForm = document.getElementById("otpCustomForm");
+        const verifyOtpBtn = document.getElementById("verifyOtpBtn");
+        const loginBtn = document.getElementById("signUpBtn");
+        const sandotp = document.getElementById("sandotp");
+        // Open modal
+        function openModal() {
+            modal2.style.display = "flex";
+        }
 
-    //  const openModal = document.getElementById("loginButton");
-    const modal2 = document.getElementById("customModal");
-    const closeModal = document.getElementById("closeModal");
-    const showSignUpForm = document.getElementById("showSignUpForm");
-    const showLoginForm = document.getElementById("showLoginForm");
-    const basicForm = document.getElementById("basicCustomForm");
-    const detailedForm = document.getElementById("detailedCustomForm");
+        function showOtpForm() {
+            detailedForm.style.display = "none";
+            basicForm.style.display = "none";
+            otpForm.style.display = "block";
+        }
 
-    // Open modal
-    function openModal() {
-        modal2.style.display = "flex";
-    }
+        sandotp.addEventListener("click", () => {
+            const email = document.getElementById("otp_email").value;
 
-    // Close modal
-    closeModal.addEventListener("click", () => {
-        modal2.style.display = "none";
-    });
+            fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    body: JSON.stringify({
+                        email
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                        showOtpForm();
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
 
-    // Toggle forms
-    showSignUpForm.addEventListener("click", () => {
-        basicForm.style.display = "none";
-        detailedForm.style.display = "block";
-    });
+        // Close modal
+        closeModal.addEventListener("click", () => {
+            modal2.style.display = "none";
+        });
 
-    showLoginForm.addEventListener("click", () => {
-        detailedForm.style.display = "none";
-        basicForm.style.display = "block";
-    });
-</script>
+        // Toggle forms
+        showSignUpForm.addEventListener("click", () => {
+            basicForm.style.display = "none";
+            detailedForm.style.display = "block";
+        });
 
-{{-- @endpush --}}
-{{-- @endif --}}
+        showLoginForm.addEventListener("click", () => {
+            detailedForm.style.display = "none";
+            basicForm.style.display = "block";
+        });
+    </script>
+
+    {{-- @endpush --}}
+    {{-- @endif --}}
