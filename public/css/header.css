@@ -71,6 +71,7 @@ header .btn-links {
     display: flex;
     align-items: center;
     gap: 4px;
+    text-decoration: none;
 }
 header .btn-links:hover{
    text-decoration: none;

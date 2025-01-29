@@ -42,10 +42,10 @@
                             <p class="card-description content-txt" id="description-{{ $product->id }}">
 
                                 <span class="visible-text">
-                                    {{ Str::limit($product->description, 40) }}
+                                    {{ Str::limit($product->description,60) }}
                                 </span>
                                 <span class="more-text">
-                                    {{ substr($product->description, 50) }}
+                                    {{ substr($product->description, 40) }}
                                 </span>
                             </p>
                             <div class="product-description-div">

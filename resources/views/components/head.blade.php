@@ -23,13 +23,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <title>{{ $title ?? 'Vibrant India' }}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('images/fabicon.png') }}">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Custom CSS -->
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <!--<link rel="stylesheet" href="{{ asset('css/styles.css') }}?v={{ time() }}">-->
     {{-- owl caresoule --}}

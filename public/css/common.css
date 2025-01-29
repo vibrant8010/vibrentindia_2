@@ -639,6 +639,7 @@ input[type="text"]::-webkit-search-cancel-button {
     border-radius: 20px;
     color: var(--dark-color);
     transition: 0.5s all ease-in-out;
+    text-decoration: none;
 }
 .inqury-btn:hover{
     background-color: var(--ternery-color);

@@ -126,7 +126,7 @@
                             <p class="card-description content-txt" id="description-{{ $product->id }}">
 
                                 <span class="visible-text">
-                                    {{ Str::limit($product->description, 30) }}
+                                    {{ Str::limit($product->description, 60) }}
                                 </span>
 
                             </p>
