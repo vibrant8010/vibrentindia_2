@@ -1007,8 +1007,8 @@ header .lg-img {
   /* Modal */
   .custom-modal {
     background: #fff;
-    width: 90%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 500px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -1024,23 +1024,36 @@ header .lg-img {
     background: #f8f9fa;
     border-bottom: 1px solid #e9ecef;
   }
-
+  .custom-modal-header .welcom-txt{
+    font-size: 23px;
+    color: var(--ternery-color);
+    font-weight: 700;
+  }
   .custom-modal-logo img {
     height: 40px;
   }
 
   .custom-modal-welcome {
-    font-size: 14px;
+    font-size: 15px;
     color: #333;
     margin-left: 10px;
+    border-left: 1px solid #dfdfdf;
+    padding-left: 17px;
+    font-weight: 500;
   }
 
   .custom-modal-close {
-    background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
-    color: #333;
+    color: #ffffff;
+    background: red;
+    border-radius: 40px;
+    height: 30px;
+    width: 37px;
+    top: -35px;
+    left: 9px;
+    position: relative;
   }
 
   /* Body */
@@ -1067,9 +1080,10 @@ header .lg-img {
   }
 
   .custom-link-text {
-    font-size: 12px;
-    color: #777;
+    font-size: 13px;
+    color: #000000;
     margin-top: 10px;
+    font-weight: 500;
   }
 
   .custom-link {
@@ -1139,4 +1153,24 @@ header .lg-img {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+
+/*login popup data*/
+.custom-input-group{
+    position: relative;
+    padding: 10px 0;
+}
+.custom-input-group .custom-input{
+    padding: 12px 10px;
+}
+.custom-input-group .custom-label{
+    color: #333333bd;
+    position: absolute;
+    left: 4%;
+    bottom: 54%;
+    background-color: #fff;
+    padding: 3px 5px;
+    font-size: 13px;
+    font-weight: 500;
 }

@@ -84,7 +84,8 @@
                                     <span>Inquiry</span>
                                 </a>
                             @else
-                                <a href="{{ route('login') }}" class="inqury-btn mt-2">
+                                {{-- <a href="{{ route('login') }}" class="inqury-btn mt-2"> --}}
+                                <a onclick="openModal()" style="cursor: pointer" class="inqury-btn mt-2">
                                     <span>Sign in to Inquire</span>
                                 </a>
                             @endauth

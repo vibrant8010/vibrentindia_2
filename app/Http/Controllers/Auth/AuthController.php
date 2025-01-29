@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;// Import the User model
 use Illuminate\Support\Facades\Mail;  // Import the Mail Facade
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -29,36 +30,51 @@ class AuthController extends Controller
 
     public function registerSave(Request $request)
     {
-        // Validate incoming request data
-        $validatedData = $request->validate([
-            'email' => 'required|email|unique:users,email',
-            'mobileno' => 'required|regex:/^[6-9][0-9]{9}$/',
-            'name' => 'required|string|max:255',
-        ], [
-            'email.unique' => 'The email ID already exists.',
-            'email.required' => 'The email field is required.',
-            'mobileno.regex' => 'The mobile number must start with 6, 7, 8, or 9 and contain 10 digits.',
-            'name.required' => 'The name field is required.',
-        ]);
+        try {
+            // Validate request data
+            $validatedData = $request->validate([
+                'email' => 'required|email|unique:users,email',
+                'mobileno' => 'required|regex:/^[6-9][0-9]{9}$/',
+                'name' => 'required|string|max:255',
+            ], [
+                'email.unique' => 'The email ID already exists.',
+                'email.required' => 'The email field is required.',
+                'mobileno.regex' => 'The mobile number must start with 6, 7, 8, or 9 and contain 10 digits.',
+                'name.required' => 'The name field is required.',
+            ]);
 
-        // Generate a 6-digit OTP and set an expiry time
-        $otp = rand(100000, 999999); // 6-digit OTP
-        $expiry = Carbon::now()->addMinutes(10)->timestamp; // OTP expires in 10 minutes
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->mobileno = $request->mobileno; // Corrected to match 'mobileno' from request
-        $user->role = 'user';
-        $user->otp = $otp;
-        $user->otp_expiry = $expiry;
-        $user->save();
+            // Generate OTP and expiry time
+            $otp = rand(100000, 999999);
+            $expiry = Carbon::now()->addMinutes(10)->timestamp;
 
-        Session::put('user_id', $user->id);
+            // Create and save new user
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->mobileno = $request->mobileno;
+            $user->role = 'user';
+            $user->otp = $otp;
+            $user->otp_expiry = $expiry;
+            $user->save();
 
-        // Send OTP email as a queued job
-        Mail::to($request->email)->send(new OtpEmail($otp));
+            // Store user ID in session
+            Session::put('user_id', $user->id);
 
-        return response()->json(['message' => 'Registration successful. OTP sent.']);
+            // Send OTP email
+            try {
+                Mail::to($request->email)->send(new OtpEmail($otp));
+            } catch (\Exception $e) {
+                return response()->json(['success' => false, 'message' => 'Failed to send OTP email. Please try again.'], 500);
+            }
+
+            return response()->json(['success' => true, 'message' => 'Registration successful. OTP sent.']);
+
+        } catch (ValidationException $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
+
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'An unexpected error occurred. Please try again.'], 500);
+        }
     }
 
     // public function otpValidate()
@@ -233,38 +249,84 @@ class AuthController extends Controller
         return view('Auth.login');
     }
 
+    // public function login(Request $request)
+    // {
+    //     // Validate the email field
+    //     $request->validate([
+    //         'email' => 'required|email',
+    //     ]);
+
+    //     // Check if user exists
+    //     $user = User::where('email', $request->email)->first();
+
+    //     if (!$user) {
+    //         return back()->with('error', 'User not found.');
+    //     }
+
+    //     $otp = rand(100000, 999999); // Generate a 6-digit OTP
+    //     $expiry = Carbon::now()->addMinutes(10)->timestamp; // OTP expires in 10 minutes
+    //     $user->otp = $otp;
+    //     $user->otp_expiry = $expiry;
+    //     $user->save();
+
+    //     // Send OTP via email (make sure your OtpEmail mailable is correctly configured)
+    //     Mail::to($request->email)->send(new OtpEmail($otp));  // Assuming OtpEmail is a Mailable class
+    //     // Send OTP via SMS if the phone number exists
+    //     if (!empty($user->phone)) {
+    //         $smsMessage = "Your OTP is {$otp}. It will expire in 10 minutes.";
+    //         $this->sendSmsViaEmail($user->phone, $smsMessage); // Use the email-to-SMS method
+    //     }
+
+    //     // Store the user ID in session for verification
+    //     Session::put('user_id', $user->id);
+
+    //     return response()->json(['message' => 'OTP sent to your email.']);
+    // }
     public function login(Request $request)
     {
-        // Validate the email field
-        $request->validate([
-            'email' => 'required|email',
-        ]);
+        try {
+            $request->validate([
+                'email' => 'required|email',
+            ]);
 
-        // Check if user exists
-        $user = User::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
 
-        if (!$user) {
-            return back()->with('error', 'User not found.');
+            if (!$user) {
+                return response()->json(['success' => false, 'message' => 'User not found please sign in .'], 404);
+            }
+
+            $otp = rand(100000, 999999);
+            $expiry = Carbon::now()->addMinutes(10)->timestamp;
+            $user->otp = $otp;
+            $user->otp_expiry = $expiry;
+            $user->save();
+            try {
+                Mail::to($request->email)->send(new OtpEmail($otp));
+            } catch (\Exception $e) {
+                return response()->json(['success' => false, 'message' => 'Failed to send OTP email. Please try again.'], 500);
+            }
+
+            // Send OTP via SMS (if phone exists)
+            // if (!empty($user->phone)) {
+            //     try {
+            //         $smsMessage = "Your OTP is {$otp}. It will expire in 10 minutes.";
+            //         $this->sendSmsViaEmail($user->phone, $smsMessage);
+            //     } catch (\Exception $e) {
+            //         return response()->json(['success' => false, 'message' => 'Failed to send OTP via SMS.'], 500);
+            //     }
+            // }
+
+            // Store user ID in session
+            Session::put('user_id', $user->id);
+
+            return response()->json(['success' => true, 'message' => 'OTP sent to your email.']);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['success' => false, 'message' => 'Invalid email format.'], 422);
+
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'An unexpected error occurred. Please try again.'], 500);
         }
-
-        $otp = rand(100000, 999999); // Generate a 6-digit OTP
-        $expiry = Carbon::now()->addMinutes(10)->timestamp; // OTP expires in 10 minutes
-        $user->otp = $otp;
-        $user->otp_expiry = $expiry;
-        $user->save();
-
-        // Send OTP via email (make sure your OtpEmail mailable is correctly configured)
-        Mail::to($request->email)->send(new OtpEmail($otp));  // Assuming OtpEmail is a Mailable class
-        // Send OTP via SMS if the phone number exists
-        if (!empty($user->phone)) {
-            $smsMessage = "Your OTP is {$otp}. It will expire in 10 minutes.";
-            $this->sendSmsViaEmail($user->phone, $smsMessage); // Use the email-to-SMS method
-        }
-
-        // Store the user ID in session for verification
-        Session::put('user_id', $user->id);
-
-        return response()->json(['message' => 'OTP sent to your email.']);
     }
 
 

@@ -116,11 +116,17 @@
     }
 
     .custom-modal-close {
-        background: none;
         border: none;
         font-size: 20px;
         cursor: pointer;
-        color: #333;
+        color: #ffffff;
+        background-color: #005353;
+        border-radius: 40px;
+        height: 30px;
+        width: 37px;
+        top: -35px;
+        left: 9px;
+        position: relative;
     }
 
     /* Body */
@@ -129,7 +135,7 @@
     }
 
     .custom-input-group {
-        margin-bottom: 15px;
+        margin-bottom: 6px;
     }
 
     .custom-label {
@@ -144,21 +150,25 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        font-size: 13px;
+        font-weight: 500;
     }
 
     .custom-link-text {
-        font-size: 12px;
-        color: #777;
+        font-size: 13px;
+        color: #000000;
         margin-top: 10px;
+        font-weight: 500;
     }
 
     .custom-link {
-        color: #007bff;
+        color: #005353;
         background: none;
         border: none;
         cursor: pointer;
         font-size: 12px;
-        text-decoration: underline;
+        font-weight: 600;
+
     }
 
     .custom-links {
@@ -182,7 +192,7 @@
     .custom-btn {
         width: 100%;
         padding: 10px;
-        background: #007bff;
+        background: #005353;
         color: #fff;
         border: none;
         border-radius: 5px;
@@ -457,10 +467,11 @@
         <div class="custom-modal">
             <div class="custom-modal-header">
                 <div class="custom-modal-logo">
-                    <a href="#"><img src="./company-logo.webp" alt="Company Logo" /></a>
+                    <a href="#"><img src="{{ asset('images/desktoplogo.png') }}" alt="Company Logo"
+                            style="height: 25px;width:132px;" /></a>
                 </div>
                 <div class="custom-modal-welcome">
-                    Welcome, <br />
+                    <span class="welcom-txt">Welcome,</span> <br />
                     Login for a seamless experience
                 </div>
                 <button class="custom-modal-close" id="closeModal">&times;</button>
@@ -469,7 +480,8 @@
                 <!-- Basic Form -->
                 <div id="basicCustomForm">
                     <div class="custom-input-group">
-                        <label for="email" class="custom-label">Email</label>
+                        <span class="custom-label">Email</span>
+                        {{-- <label for="email" class="custom-label">Email</label> --}}
                         <input type="email" class="custom-input" id="otp_email" placeholder="Enter your email"
                             required />
                     </div>
@@ -516,7 +528,8 @@
                             placeholder="Enter your phone number" />
                     </div>
                     <div class="custom-links">
-                        <a href="#" class="custom-forgot">Forgot Password?</a>
+                        {{-- <a href="#" class="custom-forgot">Forgot Password?</a> --}}
+                        <span class="custom-link-text">you have an account?</span>
                         <button type="button" class="custom-link" id="showLoginForm">
                             Login?
                         </button>
@@ -1049,83 +1062,106 @@
     //     });
     // });
     sandotp.addEventListener("click", () => {
-    const email2 = document.getElementById("otp_email").value;
-    const sandotpText = document.getElementById("sandotpText");
-    const sandotpLoader = document.getElementById("sandotpLoader");
+        const email2 = document.getElementById("otp_email").value;
+        const sandotpText = document.getElementById("sandotpText");
+        const sandotpLoader = document.getElementById("sandotpLoader");
 
-    // Show loader while processing
-    sandotpText.style.display = "none";
-    sandotpLoader.style.display = "inline-block";
+        // Show loader while processing
+        sandotpText.style.display = "none";
+        sandotpLoader.style.display = "inline-block";
 
-    $.ajax({
-        url: "{{ route('login.process') }}",
-        type: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: JSON.stringify({
-            email: email2
-        }),
-        contentType: 'application/json',
-        success: function(response) {
-            // Hide loader when request is successful
-            sandotpText.style.display = "inline-block";
-            sandotpLoader.style.display = "none";
-            showOtpForm();
-        },
-        error: function(xhr, status, error) {
-            // Hide loader if there's an error
-            sandotpText.style.display = "inline-block";
-            sandotpLoader.style.display = "none";
-            console.error('Error:', error);
-        }
+        $.ajax({
+            url: "{{ route('login.process') }}",
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: JSON.stringify({
+                email: email2
+            }),
+            contentType: 'application/json',
+            success: function(response) {
+                sandotpText.style.display = "inline-block";
+                sandotpLoader.style.display = "none";
+
+                if (response.success) {
+                    showOtpForm();
+                    alert(response.message);
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                sandotpText.style.display = "inline-block";
+                sandotpLoader.style.display = "none";
+
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    alert(xhr.responseJSON.message);
+                } else {
+                    alert("An unexpected error occurred. Please try again.");
+                }
+
+                console.error('Error:', error);
+            }
+        });
+
     });
-});
 
-loginBtn.addEventListener("click", () => {
-    const email2 = document.getElementById("email2").value;
-    const phone2 = document.getElementById("phone2").value;
-    const name2 = document.getElementById("name2").value;
-    const signUpBtnText = document.getElementById("signUpBtnText");
-    const signUpBtnLoader = document.getElementById("signUpBtnLoader");
+    loginBtn.addEventListener("click", () => {
+        const email2 = document.getElementById("email2").value.trim();
+        const phone2 = document.getElementById("phone2").value.trim();
+        const name2 = document.getElementById("name2").value.trim();
+        const signUpBtnText = document.getElementById("signUpBtnText");
+        const signUpBtnLoader = document.getElementById("signUpBtnLoader");
 
-    // Basic validation
-    if (name2 === "" || email2 === "" || phone2 === "") {
-        alert("Please fill all fields.");
-        return;
-    }
-
-    // Show loader while processing
-    signUpBtnText.style.display = "none";
-    signUpBtnLoader.style.display = "inline-block";
-
-    $.ajax({
-        url: "{{ route('register.save') }}",
-        type: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: JSON.stringify({
-            email: email2,
-            mobileno: phone2,
-            name: name2,
-        }),
-        contentType: 'application/json',
-        success: function(response) {
-            // Hide loader when request is successful
-            signUpBtnText.style.display = "inline-block";
-            signUpBtnLoader.style.display = "none";
-            showOtpForm();
-            alert(response.message);
-        },
-        error: function(xhr, status, error) {
-            // Hide loader if there's an error
-            signUpBtnText.style.display = "inline-block";
-            signUpBtnLoader.style.display = "none";
-            console.error('Error:', error);
+        // Basic validation
+        if (!name2 || !email2 || !phone2) {
+            alert("Please fill all fields.");
+            return;
         }
+
+        // Show loader while processing
+        signUpBtnText.style.display = "none";
+        signUpBtnLoader.style.display = "inline-block";
+
+        $.ajax({
+            url: "{{ route('register.save') }}",
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: JSON.stringify({
+                email: email2,
+                mobileno: phone2,
+                name: name2,
+            }),
+            contentType: 'application/json',
+            success: function(response) {
+                // Hide loader when request is successful
+                signUpBtnText.style.display = "inline-block";
+                signUpBtnLoader.style.display = "none";
+
+                if (response.success) {
+                    showOtpForm();
+                    alert(response.message);
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr) {
+                // Hide loader if there's an error
+                signUpBtnText.style.display = "inline-block";
+                signUpBtnLoader.style.display = "none";
+
+                let errorMessage = "An unexpected error occurred. Please try again.";
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMessage = xhr.responseJSON.message;
+                }
+                alert(errorMessage);
+                console.error('Error:', xhr);
+            }
+        });
     });
-});
 
     // Close modal
     closeModal.addEventListener("click", () => {
