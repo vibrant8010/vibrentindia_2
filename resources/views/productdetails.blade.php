@@ -102,7 +102,7 @@
                             $yearsSinceRegistration = $registrationDate->diffInYears($currentYear);
                             $registrationYear = $registrationDate->year;
                         @endphp
-                        <div class="col-lg-12 d-block d-lg-none d-sm-block">
+                        <div class="col-lg-12 d-block d-lg-none d-sm-block d-md-none">
                             <div class="company-personal-details sticky-top-new">
                                 <div class="product-details mt-3">
                                     <img src="{{ asset($product->company->logo_url) }}"
@@ -151,6 +151,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-lg-12 col-12 d-lg-block product-desc-section">
                             <ul class="nav nav-tabs" id="productDesc" role="tablist">
                                 <li class="nav-item" role="presentation">

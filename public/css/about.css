@@ -13,13 +13,6 @@ body{
     justify-content: center;
     /* align-items: center; */
 }
-.sidebar-all-pages{
-    padding: 35px;
-    border-top: 7px solid #DEE2E6;
-    border-right: 4px solid #DEE2E6;
-    position: sticky;
-    top: 0px;
-}
 .sidebar-page-link{
     text-decoration: none !important;
     color: #005353;
@@ -36,12 +29,11 @@ body{
 }
 .outer-about-title{
     width: 100%;
-    text-align: center;
 }
 .about-details-main-heading{
-    font-size: 43px;
+    font-size: 38px;
     line-height: 60px;
-    font-weight: 700;
+    font-weight: 500;
     color: #005353;
     position: relative;
     display: inline-block;
@@ -81,7 +73,7 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    
+
 }
 .about-image-main-box{
   width:100%;
@@ -99,15 +91,20 @@ body{
     border-radius: 3px;
 }
 .about-contact-details-section{
-    text-align: center;
-    background-color: #f7ffff;
+     text-align: center;
+     background-color: var(--primary-color);
+     /*background-color: #f7ffff; */
     padding:5px;
+    border-radius: 10px;
+}
+.about-middle-heading{
+    padding: 20px 10px;
+    font-size: 19px;
 }
 .about-middle-heading {
     font-size: 18px;
     font-weight: 700;
     text-align: center;
-    padding: 40px;
 }
 .ourproduct-details-btn{
     background-color: #005353;
@@ -134,7 +131,7 @@ body{
     .left-sidebar-sub-box{
         display: none;
     }
-    
+
     .about-ourmission-main-section{
         display: flex;
         justify-content: space-around;
@@ -161,7 +158,7 @@ body{
         padding: 20px;
     }
 }
-  
+
   /* Small Devices (481px to 768px) */
   @media (min-width: 481px) and (max-width: 768px) {
     .about-ourmission-main-section{
@@ -171,4 +168,3 @@ body{
         flex-wrap: wrap;
     }
     }
-  

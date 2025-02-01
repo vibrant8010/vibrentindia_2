@@ -96,8 +96,8 @@
     height: 100%;
     width: 100%;
   }
-  
- 
+
+
 /* ********** Whatsapp Btn ********** */
 .whatsapp-main-box {
   position: fixed;
@@ -126,5 +126,12 @@
 @media screen and (max-width:575px) {
     .footer-section .footer-main-social {
         padding: 24px 0;
+    }
+    .footer-section .footer-all-details {
+        padding: 0px 0;
+    }
+    .footer-section .footer-all-details .footer-text-link {
+        padding: 0px 9px;
+        font-size: 13px;
     }
 }

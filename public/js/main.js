@@ -621,6 +621,7 @@ tabs.forEach(tab => {
         // Add the 'active' class to the clicked tab
         tab.classList.add('active');
 
+
         // Get the target content's ID from the 'data-tab' attribute
         const targetId = tab.getAttribute('data-tab');
 
@@ -716,6 +717,11 @@ if (event.target === modal) {
 trigger.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
+
+
+
+
+
 
 
 

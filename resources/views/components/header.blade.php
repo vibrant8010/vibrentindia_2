@@ -117,16 +117,16 @@
 
     .custom-modal-close {
         border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #ffffff;
-    background-color:#005353;
-    border-radius: 40px;
-    height: 30px;
-    width: 37px;
-    top: -35px;
-    left: 9px;
-    position: relative;
+        font-size: 20px;
+        cursor: pointer;
+        color: #ffffff;
+        background-color: #005353;
+        border-radius: 40px;
+        height: 30px;
+        width: 37px;
+        top: -35px;
+        left: 9px;
+        position: relative;
     }
 
     /* Body */
@@ -156,18 +156,18 @@
 
     .custom-link-text {
         font-size: 13px;
-    color: #000000;
-    margin-top: 10px;
-    font-weight: 500;
+        color: #000000;
+        margin-top: 10px;
+        font-weight: 500;
     }
 
     .custom-link {
         color: #005353;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
 
     }
 
@@ -237,38 +237,7 @@
                     <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
                     <a href="#" class="modal-nav-view">Kitchenware</a>
                 </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
-                <li class="modal-nav-item">
-                    <span class="arrow-tend"><i class="fa-solid fa-arrow-trend-up" style="color: #ffffff;"></i></span>
-                    <a href="#" class="modal-nav-view">Kitchenware</a>
-                </li>
+
 
             </ul>
         </div>
@@ -376,7 +345,7 @@
             <button class="trigger icon-mobile-view"><i class="fa-solid fa-magnifying-glass"
                     style="color: #000000;"></i></button>
             <div class="mobile-sigin-logo">
-                <a href="{{ route('login') }}"
+                <a style="cursor: pointer" onclick="openModal()"
                     class="d-block d-lg-none d-md-none d-sm-block d-xl-none icon-mobile-view">
                     <span class="lg-img">
                         {{-- <img src="{{ asset('images/personmobile.png') }}" alt=""> --}}
@@ -404,7 +373,7 @@
                         </span>
                         Sign in
                     </a>
-                    <a href="{{ route('login') }}" class="btn-links">
+                    <a href="{{ route('business.register') }}" class="btn-links">
                         <span class="lg-img">
                             <img src="{{ asset('images/registration.png') }}" alt=""
                                 style="height: 30px;width:30px;">
@@ -498,7 +467,8 @@
         <div class="custom-modal">
             <div class="custom-modal-header">
                 <div class="custom-modal-logo">
-                    <a href="#"><img src="{{ asset('images/desktoplogo.png') }}" alt="Company Logo" style="height: 25px;width:132px;" /></a>
+                    <a href="#"><img src="{{ asset('images/desktoplogo.png') }}" alt="Company Logo"
+                            style="height: 25px;width:132px;" /></a>
                 </div>
                 <div class="custom-modal-welcome">
                     <span class="welcom-txt">Welcome,</span> <br />
@@ -1092,83 +1062,106 @@
     //     });
     // });
     sandotp.addEventListener("click", () => {
-    const email2 = document.getElementById("otp_email").value;
-    const sandotpText = document.getElementById("sandotpText");
-    const sandotpLoader = document.getElementById("sandotpLoader");
+        const email2 = document.getElementById("otp_email").value;
+        const sandotpText = document.getElementById("sandotpText");
+        const sandotpLoader = document.getElementById("sandotpLoader");
 
-    // Show loader while processing
-    sandotpText.style.display = "none";
-    sandotpLoader.style.display = "inline-block";
+        // Show loader while processing
+        sandotpText.style.display = "none";
+        sandotpLoader.style.display = "inline-block";
 
-    $.ajax({
-        url: "{{ route('login.process') }}",
-        type: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: JSON.stringify({
-            email: email2
-        }),
-        contentType: 'application/json',
-        success: function(response) {
-            // Hide loader when request is successful
-            sandotpText.style.display = "inline-block";
-            sandotpLoader.style.display = "none";
-            showOtpForm();
-        },
-        error: function(xhr, status, error) {
-            // Hide loader if there's an error
-            sandotpText.style.display = "inline-block";
-            sandotpLoader.style.display = "none";
-            console.error('Error:', error);
-        }
+        $.ajax({
+            url: "{{ route('login.process') }}",
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: JSON.stringify({
+                email: email2
+            }),
+            contentType: 'application/json',
+            success: function(response) {
+                sandotpText.style.display = "inline-block";
+                sandotpLoader.style.display = "none";
+
+                if (response.success) {
+                    showOtpForm();
+                    alert(response.message);
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                sandotpText.style.display = "inline-block";
+                sandotpLoader.style.display = "none";
+
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    alert(xhr.responseJSON.message);
+                } else {
+                    alert("An unexpected error occurred. Please try again.");
+                }
+
+                console.error('Error:', error);
+            }
+        });
+
     });
-});
 
-loginBtn.addEventListener("click", () => {
-    const email2 = document.getElementById("email2").value;
-    const phone2 = document.getElementById("phone2").value;
-    const name2 = document.getElementById("name2").value;
-    const signUpBtnText = document.getElementById("signUpBtnText");
-    const signUpBtnLoader = document.getElementById("signUpBtnLoader");
+    loginBtn.addEventListener("click", () => {
+        const email2 = document.getElementById("email2").value.trim();
+        const phone2 = document.getElementById("phone2").value.trim();
+        const name2 = document.getElementById("name2").value.trim();
+        const signUpBtnText = document.getElementById("signUpBtnText");
+        const signUpBtnLoader = document.getElementById("signUpBtnLoader");
 
-    // Basic validation
-    if (name2 === "" || email2 === "" || phone2 === "") {
-        alert("Please fill all fields.");
-        return;
-    }
-
-    // Show loader while processing
-    signUpBtnText.style.display = "none";
-    signUpBtnLoader.style.display = "inline-block";
-
-    $.ajax({
-        url: "{{ route('register.save') }}",
-        type: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        data: JSON.stringify({
-            email: email2,
-            mobileno: phone2,
-            name: name2,
-        }),
-        contentType: 'application/json',
-        success: function(response) {
-            // Hide loader when request is successful
-            signUpBtnText.style.display = "inline-block";
-            signUpBtnLoader.style.display = "none";
-            showOtpForm();
-            alert(response.message);
-        },
-        error: function(xhr, status, error) {
-            // Hide loader if there's an error
-            signUpBtnText.style.display = "inline-block";
-            signUpBtnLoader.style.display = "none";
-            console.error('Error:', error);
+        // Basic validation
+        if (!name2 || !email2 || !phone2) {
+            alert("Please fill all fields.");
+            return;
         }
+
+        // Show loader while processing
+        signUpBtnText.style.display = "none";
+        signUpBtnLoader.style.display = "inline-block";
+
+        $.ajax({
+            url: "{{ route('register.save') }}",
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: JSON.stringify({
+                email: email2,
+                mobileno: phone2,
+                name: name2,
+            }),
+            contentType: 'application/json',
+            success: function(response) {
+                // Hide loader when request is successful
+                signUpBtnText.style.display = "inline-block";
+                signUpBtnLoader.style.display = "none";
+
+                if (response.success) {
+                    showOtpForm();
+                    alert(response.message);
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function(xhr) {
+                // Hide loader if there's an error
+                signUpBtnText.style.display = "inline-block";
+                signUpBtnLoader.style.display = "none";
+
+                let errorMessage = "An unexpected error occurred. Please try again.";
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMessage = xhr.responseJSON.message;
+                }
+                alert(errorMessage);
+                console.error('Error:', xhr);
+            }
+        });
     });
-});
 
     // Close modal
     closeModal.addEventListener("click", () => {

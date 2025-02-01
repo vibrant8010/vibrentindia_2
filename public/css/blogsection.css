@@ -133,3 +133,18 @@
     height: 100%;
     width: 100%;
   }
+
+  @media screen and (max-width:575px) {
+    .blog-list {
+       padding-left: 0;
+    }
+    .blog-info .blog-title {
+        font-size: 12px;
+        margin-bottom: 1px;
+        font-weight: 400;
+    }
+    .blog-date {
+        font-size: 13px;
+        margin-bottom: 0;
+    }
+  }

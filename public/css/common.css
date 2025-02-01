@@ -474,7 +474,12 @@ input[type="text"]::-webkit-search-cancel-button {
         color: var(--primary-color);
         border-radius: 20px;
         font-size: 17px;
+}
 
+.primary-btn:hover {
+  border-radius: 20px;
+  color: var(--dark-color);
+  background-color: transparent;
 }
 .mobile-btn{
     margin: 10px 0;
@@ -919,7 +924,7 @@ input[type="text"]::-webkit-search-cancel-button {
     position: relative;
     border: 0;
     overflow-y: scroll;
-    top: 150px;
+    margin-top: 130px;
     text-align: center;
     /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
     /* width: 400px; */
@@ -1056,6 +1061,19 @@ header .lg-img {
     left: 9px;
     position: relative;
   }
+@media screen and (max-width:575px) {
+    .custom-modal-header .welcom-txt{
+        font-size: 18px;
+    }
+    .custom-modal-header {
+        padding: 12px 9px !important;
+        }
+        .custom-modal-logo{
+            height: 19px;
+    width: 113px;
+}
+
+}
 
   /* Body */
   .custom-modal-body {
@@ -1174,4 +1192,25 @@ header .lg-img {
     padding: 3px 5px;
     font-size: 13px;
     font-weight: 500;
+}
+
+
+/*inner page left sticky*/
+.sidebar-all-pages{
+    border: 4px solid var(--ternery-color);
+    position: sticky;
+    top: 180px;
+    box-shadow: 5px 6px 1px 0px var(--shade-color);
+    width: 180px;
+    padding: 14px 13px;
+}
+.sidebar-all-pages p{
+    margin-bottom: 8px;
+}
+.sidebar-page-link {
+    text-decoration: none;
+    color: #005353;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #e8e8e8;
 }

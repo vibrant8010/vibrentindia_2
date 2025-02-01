@@ -4,6 +4,9 @@
   .container {
     max-width: 1350px;
   }
+  .search-notfound-box{
+    width: 100% !important;
+  }
   .outer-box-search{
     display: flex;
     justify-content: space-between;
@@ -222,8 +225,12 @@
     .product-slideshow-container {
       height: 110px;
     }
+
     .prodoct-img-view {
       margin: 0 20px;
+    }
+    .search-notfound-box .prodoct-img-view{
+        margin: 0 !important;
     }
   }
   @media screen and (max-width: 430px) {
@@ -454,7 +461,7 @@ font-size: 14px;
 .not-found-content{
      color: var(--shade-color);
      font-weight: 300;
-     font-size: 18px;
+     font-size: 16px;
 }
 .not-fond-txt{
     color: var(--ternery-color);
