@@ -1133,6 +1133,10 @@ header .nav-container .nav-view .nav-item .nav-link:hover::before,
     .txt-header {
       display: none;
     }
+    .logo-container {
+        height: auto;
+    }
+
     .login-logo::before {
       display: none;
     }
@@ -1190,3 +1194,72 @@ header .nav-container .nav-view .nav-item .nav-link:hover::before,
     font-size: 14px;
 }
 
+
+
+
+
+    #suggestions-box {
+        list-style-type: none;
+        z-index: 99999;
+        overflow-y: scroll;
+        padding: 0;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        position: absolute;
+        top: 47px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        display: none;
+        height: 300px;
+    }
+
+    #suggestions-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #suggestions-list li {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #suggestions-list li:hover {
+        background-color: #f0f0f0;
+    }
+
+    #suggestions-box2 {
+        list-style-type: none;
+        z-index: 99999;
+        overflow-y: scroll;
+        padding: 0;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        position: absolute;
+        top: 47px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        display: none;
+        height: 300px;
+    }
+
+    #suggestions2 {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #suggestions2 li {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #suggestions2 li:hover {
+        background-color: #f0f0f0;
+    }
+
+  

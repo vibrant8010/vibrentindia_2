@@ -1,6 +1,3 @@
-<style>
-
-</style>
 
 <section class="top-category section-margin" id="TopCategory">
 
@@ -217,39 +214,11 @@
                 var moreText = description.querySelector('.more-text');
                 var readMoreBtn = description.parentNode.querySelector('.read-more');
 
-                // Only show the "Read More" link if additional text exists
+
                 if (!moreText.textContent.trim()) {
                     readMoreBtn.style.display = "none";
                 }
             });
         });
-
-        // var swiper = new Swiper(".mySwiper", {
-        //     pagination: {
-        //         el: ".swiper-pagination",
-        //         clickable: true,
-        //     },
-        //     navigation: {
-        //         nextEl: ".swiper-button-next",
-        //         prevEl: ".swiper-button-prev",
-        //     },
-        //     loop: true,
-        //     slidesPerView: 1,
-        //     spaceBetween: 10,
-        //     breakpoints: {
-        //         430: {
-        //             slidesPerView: 2,
-        //             spaceBetween: 10
-        //         },
-        //         768: {
-        //             slidesPerView: 3,
-        //             spaceBetween: 5
-        //         },
-        //         1024: {
-        //             slidesPerView: 4,
-        //             spaceBetween: 15
-        //         },
-        //     },
-        // });
     </script>
 </section>

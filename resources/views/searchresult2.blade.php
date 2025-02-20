@@ -212,9 +212,20 @@
     @endif
     @if ($results['products'] && $results['products']->isNotEmpty())
         <div class="container">
-            <div class="product-slideshow-container">
+            {{-- <div class="product-slideshow-container">
                 <img src="{{ asset('logos/banner.jpg') }}" class="product-details-slides" alt="Slide 1" />
-                <img src="{{ asset('logos/banner2.jpg') }}" class="product-details-slides" alt="Slide 2" />
+            </div> --}}
+            <div id="search-carousel" class="owl-carousel search-filter-container">
+                <div class="item">
+                    <div class="img-container">
+                      <img src="{{ asset('logos/banner.jpg') }}" class="" alt="Slide 1" />
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="img-container">
+                    <img src="{{ asset('logos/banner2.jpg') }}" class="" alt="Slide 2" />
+                    </div>
+                </div>
             </div>
             <h1 class="product-detail-heading">Product from: </h1>
             <div class="company-badges">
@@ -320,39 +331,68 @@
                         <div class="row g-4 gy-3 prodoct-img-view" id="product-list">
                             <!-- Products will be dynamically loaded here -->
                         </div>
-                        <div class="row g-4 gy-3 prodoct-img-view" id="product-list-2">
-                            @foreach ($results['products'] as $product)
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-3 p-1">
-                                    <div class="product-card">
-                                        <div class="product-main-box">
-                                            <div class="inner-box">
-                                                <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}"
-                                                    class="product-image" />
-                                            </div>
-                                        </div>
-                                        <div class="product-bottom-details">
-                                            <h3 class="product-detail-name product-detail-maintitle">
-                                                {{ $product->name }}</h3>
-                                            <h3 class="product-detail-name"><span class="lable-txt">Company :
-                                                </span>{{ $product->company->name }}</h3>
-                                            <h3 class="product-detail-name"><span class="lable-txt">Category :
-                                                </span>
-                                                {{ $product->category->name }}</h3>
+                       <div class="row g-4 gy-3 product-img-view" id="product-list-2">
+    @foreach ($results['products'] as $product)
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 mb-3 p-1">
+            <div class="product-card">
+                <div class="product-main-box">
+                    <div class="inner-box">
+                        <img src="{{ asset($product->image_url) }}"
+                             alt="{{ $product->name }}"
+                             class="product-image" />
+                    </div>
+                </div>
 
-                                            <h3 class="product-detail-name"><span class="lable-txt">SubCategory
-                                                    :
-                                                </span> {{ $product->subcategory->name }}</h3>
-                                            <p class="product-detail-description">
-                                                {{ Str::limit($product->description, 50) }}</p>
+                <div class="logo-container">
+                    @if (!empty($product->company) && !empty($product->company->logo_url))
+                        <img src="{{ asset($product->company->logo_url) }}"
+                             class="logo-image"
+                             alt="{{ $product->company->name }}">
+                    @else
+                        <span>No Logo</span>
+                    @endif
+                </div>
 
-                                            <a href="/product/{{ $product->id }}" class="product-link">View
-                                                Product</a>
+                <div class="product-bottom-details">
+                    <h3 c
+                    lass="product-detail-name product-detail-maintitle">
+                        {{ $product->name }}
+                    </h3>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                    @if (!empty($product->company) && !empty($product->company->name))
+                        <h3 class="product-detail-name">
+                            <span class="lable-txt">Company:</span>
+                            {{ $product->company->name }}
+                        </h3>
+                    @endif
+
+                    @if (!empty($product->category) && !empty($product->category->name))
+                        <h3 class="product-detail-name">
+                            <span class="lable-txt">Category:</span>
+                            {{ $product->category->name }}
+                        </h3>
+                    @endif
+
+                    @if (!empty($product->subcategory) && !empty($product->subcategory->name))
+                        <h3 class="product-detail-name">
+                            <span class="lable-txt">SubCategory:</span>
+                            {{ $product->subcategory->name }}
+                        </h3>
+                    @endif
+
+                    <p class="product-detail-description">
+                        {{ Str::limit($product->description, 50) }}
+                    </p>
+
+                    <a href="{{ url('/product/' . $product->id) }}" class="product-link">
+                        View Product
+                    </a>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
+
                     </div>
                 </div>
 
@@ -767,98 +807,126 @@
 
     <x-footer class="mt-4" />
 
-    <script>
-        // Get the button and filter box elements
-        let filterbox = document.querySelector('.filter-box');
-        let filterbtn = document.querySelector('.filter-btn');
 
-        // Add an event listener for the filter button click
-        filterbtn.addEventListener('click', () => {
-            filterbox.classList.toggle('active-box');
-        });
-
-        // Add a close button dynamically to the filter box
-        const closeButton = document.createElement('span');
-        closeButton.classList.add('filter-close');
-        closeButton.innerHTML = '&times;'; // Cross icon
-        filterbox.appendChild(closeButton);
-
-        // Add an event listener to the close button
-        closeButton.addEventListener('click', () => {
-            filterbox.classList.remove('active-box');
-        });
-
-        let currentSlide = 0;
-        const slides = document.querySelectorAll(".product-details-slides");
-
-        // Function to show the current slide
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.remove("active"); // Remove active class from all slides
-                if (i === index) {
-                    slide.classList.add("active"); // Add active class to the current slide
-                }
-            });
-        }
-
-        // Function to change the slide
-        function changeSlide(step) {
-            currentSlide = (currentSlide + step + slides.length) % slides.length;
-            showSlide(currentSlide);
-        }
-
-        // Initialize slideshow
-        showSlide(currentSlide);
-
-        // Automatic slide change every 5 seconds
-        setInterval(() => {
-            changeSlide(1);
-        }, 5000);
-
-        // Toggle filter content with arrow animation
-        const filterHeaders = document.querySelectorAll('.filter-header');
-
-        filterHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                const isActive = content.style.display === 'block';
-
-                // Toggle content visibility
-                content.style.display = isActive ? 'none' : 'block';
-
-                // Rotate arrow
-                const arrow = header.querySelector('span');
-                if (isActive) {
-                    arrow.classList.remove('rotate');
-                } else {
-                    arrow.classList.add('rotate');
-                }
-            });
-        });
-
-        // // Clear location checkboxes
-        // function clearLocation() {
-        //     const checkboxes = document.querySelectorAll('#location-list input[type="checkbox"]');
-        //     checkboxes.forEach(checkbox => checkbox.checked = false);
-        // }
-
-        // // Filter location list
-        // const locationSearch = document.getElementById('location-search');
-        // locationSearch.addEventListener('input', () => {
-        //     const filter = locationSearch.value.toLowerCase();
-        //     const locations = document.querySelectorAll('#location-list li');
-        //     locations.forEach(location => {
-        //         const text = location.textContent.toLowerCase();
-        //         location.style.display = text.includes(filter) ? 'flex' : 'none';
-        //     });
-        // });
-       
-
-
-// Close modal when clicking the close button (if required)
-    </script>
 
 <x-script />
+
+  <script>
+
+
+    const menuBtn = document.getElementById('menu-btn');
+const navMenu = document.querySelector('.nav-view');
+const closeBtn = document.getElementById('close-btn');
+
+// Toggle hamburger menu visibility
+menuBtn.addEventListener('click', () => {
+navMenu.classList.add('show');
+menuBtn.style.display = 'none';
+closeBtn.style.display = 'block';
+});
+
+// Close the menu when clicking the close button
+closeBtn.addEventListener('click', () => {
+navMenu.classList.remove('show');
+closeBtn.style.display = 'none';
+menuBtn.style.display = 'block';
+});
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+    /*** ================== MODAL FUNCTIONALITY ================== ***/
+    const modal = document.querySelector(".modal");
+    const trigger = document.querySelector(".trigger");
+    const closeButton = document.querySelector(".close-button");
+    const searchSection = document.querySelector(".search-section");
+
+    function toggleModal() {
+        modal.classList.toggle("show-modal");
+        searchSection.classList.toggle("show-searchbar");
+
+        // Show/hide close button based on modal state
+        if (modal.classList.contains("show-modal")) {
+            closeButton.classList.add("show-close-button");
+        } else {
+            closeButton.classList.remove("show-close-button");
+        }
+    }
+
+    function windowOnClick(event) {
+        if (event.target === modal) {
+            toggleModal();
+        }
+    }
+
+    // Event Listeners for Modal
+    trigger.addEventListener("click", toggleModal);
+    closeButton.addEventListener("click", toggleModal);
+    window.addEventListener("click", windowOnClick);
+
+    /*** ================== FILTER BOX FUNCTIONALITY ================== ***/
+    const filterBox = document.querySelector('.filter-box');
+    const filterBtn = document.querySelector('.filter-btn');
+
+    if (filterBox && filterBtn) {
+        // Create and append close button dynamically
+        const filterCloseButton = document.createElement('span');
+        filterCloseButton.classList.add('filter-close');
+        filterCloseButton.innerHTML = '&times;';
+        filterBox.appendChild(filterCloseButton);
+
+        // Toggle filter box visibility
+        filterBtn.addEventListener('click', () => {
+            filterBox.classList.toggle('active-box');
+        });
+
+        // Close filter box
+        filterCloseButton.addEventListener('click', () => {
+            filterBox.classList.remove('active-box');
+        });
+    }
+
+    /*** ================== SLIDESHOW FUNCTIONALITY ================== ***/
+    // let currentSlide = 0;
+    // const slides = document.querySelectorAll(".product-details-slides");
+
+    // function showSlide(index) {
+    //     slides.forEach((slide, i) => {
+    //         slide.classList.toggle("active", i === index);
+    //     });
+    // }
+
+    // function changeSlide(step) {
+    //     currentSlide = (currentSlide + step + slides.length) % slides.length;
+    //     showSlide(currentSlide);
+    // }
+
+    // showSlide(currentSlide);
+
+    // setInterval(() => {
+    //     changeSlide(1);
+    // }, 5000);
+
+    /*** ================== FILTER TOGGLE FUNCTIONALITY ================== ***/
+    const filterHeaders = document.querySelectorAll('.filter-header');
+
+    filterHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const isActive = content.style.display === 'block';
+
+            // Toggle content visibility
+            content.style.display = isActive ? 'none' : 'block';
+
+            // Rotate arrow animation
+            const arrow = header.querySelector('span');
+            arrow.classList.toggle('rotate', !isActive);
+        });
+    });
+});
+
+          </script>
+{{-- <x-script /> --}}
 
 </body>
 

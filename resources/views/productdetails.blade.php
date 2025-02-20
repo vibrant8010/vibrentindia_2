@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="info-item">
+                                {{-- <div class="info-item">
                                     <div class="bottom-btn my-3">
                                         @auth
                                             <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}"
@@ -79,7 +79,7 @@
 
 
                                     </div>
-                                </div>
+                                </div> --}}
 
 
                             </div>
@@ -146,9 +146,13 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="btn-area my-4">
-                                    <a href="#" class="inqury-btn d-block text-center">Inqury now</a>
-                                </div>
+                                @if (Auth::check())
+
+                @else
+                <div class="btn-area my-4">
+                    <a style="cursor: pointer" onclick="openInquiryModal()" class="inqury-btn d-block text-center">Inqury now</a>
+                </div>
+                @endif
                             </div>
                         </div>
 
@@ -572,9 +576,14 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="btn-area my-4">
-                            <a href="#" class="inqury-btn d-block text-center">Inqury now</a>
-                        </div>
+                        @if (Auth::check())
+
+                @else
+                <div class="btn-area my-4">
+                    <a style="cursor: pointer" onclick="openInquiryModal()" class="inqury-btn d-block text-center">Inqury now</a>
+                </div>
+                @endif
+
                     </div>
                 </div>
             </div>
@@ -618,6 +627,18 @@
             });
         </script>
     </section>
+
+
+
+    <script>
+        function openInquiryModal() {
+            document.getElementById("inquiryModal").style.display = "flex";
+        }
+
+        document.getElementById("closeInquiryModal").addEventListener("click", function() {
+            document.getElementById("inquiryModal").style.display = "none";
+        });
+    </script>
     <x-footer class="mb-0" />
     <x-script />
 </body>

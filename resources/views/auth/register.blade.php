@@ -32,44 +32,37 @@
                     data-bs-slide-to="1"
                     aria-label="Slide 2"
                   ></button>
-                  <button
+                  {{-- <button
                     type="button"
                     data-bs-target="#carouselExampleIndicators"
                     data-bs-slide-to="2"
                     aria-label="Slide 3"
-                  ></button>
+                  ></button> --}}
                 </div>
                 <div class="carousel-inner">
                   <div
                     class="carousel-item active vh-100"
                     style="background-color: #141416"
                   >
+                  <div class="img-main-cotainer">
                     <img
-                      src="./Registration_1-D.jpg"
+                      src="{{ asset('images/CHENNAI.png') }}"
                       class="d-block w-100 vh-100 custom_object_contain"
                       alt="..."
                     />
                   </div>
+                </div>
                   <div
                     class="carousel-item vh-100"
                     style="background-color: #ae2320"
                   >
                     <img
-                      src="./Registration_2-D.jpg"
-                      class="d-block w-100 vh-100 custom_object_contain"
+                    src="{{ asset('images/DELHI.png') }}"
+                    class="d-block w-100 vh-100 custom_object_contain"
                       alt="..."
                     />
                   </div>
-                  <div
-                    class="carousel-item vh-100"
-                    style="background-color: #ecd053"
-                  >
-                    <img
-                      src="./Registration_3-D.jpg"
-                      class="d-block w-100 vh-100 custom_object_contain"
-                      alt="..."
-                    />
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -79,16 +72,17 @@
           <div class="row m-0">
             <div class="col-xl-12 col-lg-12 col-12 py-4 d-flex justify-content-end">
                 <a class="navbar-brand" href="#">
-                  <img src="{{ asset('images/company-logo.png') }}" width="150px" height="auto" />
+                  <img src="
+                  {{ asset('images/company-logo.png') }}" width="150px" height="auto" />
                 </a>
             </div>
           </div>
           <div class="progressbar-main text-center py-2">
             <!-- progressbar -->
             <ul id="progressBar" class="progressbar">
-              <li class="progress-item active"></span>Verify Phone</li>
-              <li class="progress-item active">Upload Documents</li>
-              <li class="progress-item active">Security Questions</li>
+              <li class="progress-item active"></span>Create Account</li>
+              <li class="progress-item">OTP Verification</li>
+              <li class="progress-item">Gst No</li>
             </ul>
           </div>
           <div class="form-section mt-2">

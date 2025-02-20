@@ -75,7 +75,7 @@
                             <td>{{ $blog->subtitle2 }}</td>
                             <td>{{ $blog->textcontent2 }}</td>
                             <td>
-                                <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="btn btn-edit-blue">Edit</a>  
+                                <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="btn btn-edit-blue">Edit</a>
                            </td>
                            <td>
                             <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this inquiry?');">
