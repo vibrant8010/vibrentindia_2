@@ -10,7 +10,7 @@
         background-color:#4434a0; /* Blue */
         color: white;
     }
-   
+
 </style>
 
 <!-- Include DataTables CSS -->
@@ -38,21 +38,17 @@
     @endif
     <section class="top-products mt-5">
         <div class="d-flex flex-row justify-content-between align-items-center mb-2">
-       
             <!-- Search Bar -->
             <form action="{{ route('admin.users.index') }}" method="GET" class="input-group" style="max-width: 200px;">
                 @csrf
                 <input type="text" name="search" class="form-control border-primary" placeholder="Search Users" aria-label="Search Users" value="{{ request('search') }}" style="border-radius: 3px; box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);">
                 {{-- <button type="submit" class="btn btn-primary">Search</button> --}}
             </form>
-            
+
             <!-- Show Entries Dropdown -->
-            
             <!-- Create Users Button -->
             {{-- <button class="btn btn-success" >Create Users</button> --}}
-        
         </div>
-        
     <div class="table-wrapper">
         <table id="usersTable" class="table table-striped">
             <thead>
@@ -75,7 +71,7 @@
                         <td>
                             <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-edit-blue">Edit</a>
                         </td>
-                        
+
                         <td>
                             <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                 @csrf

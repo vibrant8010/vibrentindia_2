@@ -95,6 +95,7 @@
             </div>
 
             {{-- mobile view --}}
+            <div class="d-block d-sm-block d-md-block d-xl-none d-lg-none">
             <div id="trandingproductcaresoule" class="owl-carousel owl-theme">
                 @foreach ($trendingProducts as $product)
                 <div class="item product-col">
@@ -180,6 +181,7 @@
                     </div>
                 </div>
             @endforeach
+            </div>
             </div>
             <div class="d-flex justify-content-center">
                 <a href="{{ route('alltrendingcategory') }}" class="btn-view mobile-btn primary-btn d-lg-none d-xl-none d-sm-block d-block d-md-none text-center">View More</a>

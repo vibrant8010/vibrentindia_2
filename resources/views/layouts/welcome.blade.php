@@ -5,6 +5,7 @@
 <body>
     <x-header />
     <x-banner />
+
     <x-topcategoryy :topCategoryProducts="$topCategoryProducts" />
     <x-tranding-product :trendingProducts="$trendingCategoryProducts" />
     <x-new-arrival :newArrivalCategoryProducts="$newArrivalCategoryProducts" />

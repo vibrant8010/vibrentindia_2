@@ -736,19 +736,30 @@ window.addEventListener("click", windowOnClick);
 
 
         /*blog section caresoule */
-$('#blogsection').owlCarousel({
-  loop:true,
-  margin:20,
-  nav:true,
-  responsive:{
-      0:{
-          items:1
-      },
-      600:{
-          items:3
-      },
-      1000:{
-          items:3
-      }
-  }
-})
+        $(document).ready(function () {
+            $('#blogsection').slick({
+                infinite: true, // Enable infinite looping
+                autoplay: true, // Enable autoplay
+                autoplaySpeed: 0, // No delay between slides (continuous scrolling)
+                speed: 6000, // Speed of transitions (2 seconds)
+                cssEase: 'linear', // Smooth linear transition
+                arrows: false, // Hide navigation arrows
+                slidesToShow: 2, // Show 2 items at a time
+                slidesToScroll: 1, // Scroll 1 item at a time
+                autoplayHoverPause: true, // Pause autoplay immediately on hover
+                responsive: [
+                    {
+                        breakpoint: 1000,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        });

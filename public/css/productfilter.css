@@ -187,8 +187,12 @@
     margin-top: 26px;
     margin-bottom: 7px;
   }
-   .product-bottom-details{
-    height: 295px;
+    .product-bottom-details{
+        height: 295px;
+    }
+  .product-bottom-details .product-detail-name {
+    font-size: 14px;
+    text-align: left;
   }
   .filter-content .company-fliter{
         display: flex;

@@ -215,7 +215,7 @@
             {{-- <div class="product-slideshow-container">
                 <img src="{{ asset('logos/banner.jpg') }}" class="product-details-slides" alt="Slide 1" />
             </div> --}}
-            <div id="search-carousel" class="owl-carousel search-filter-container">
+            <div id="search-carousel" class="owl-carousel search-filter-container mt-5">
                 <div class="item">
                     <div class="img-container">
                       <img src="{{ asset('logos/banner.jpg') }}" class="" alt="Slide 1" />
@@ -354,8 +354,7 @@
                 </div>
 
                 <div class="product-bottom-details">
-                    <h3 c
-                    lass="product-detail-name product-detail-maintitle">
+                    <h3 class="product-detail-name product-detail-maintitle">
                         {{ $product->name }}
                     </h3>
 
