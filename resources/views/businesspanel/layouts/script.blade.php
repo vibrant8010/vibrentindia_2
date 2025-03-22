@@ -6,6 +6,8 @@
  <!-- jQuery Scrollbar -->
 <script src="{{ asset('business/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
+<!-- Slick Slider JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
  <!-- Chart JS -->
  <script src="{{ asset('business/assets/js/plugin/chart.js/chart.min.js') }}"></script>
 

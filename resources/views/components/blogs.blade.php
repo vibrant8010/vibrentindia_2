@@ -16,7 +16,7 @@
                       </div>
                         @else
                         <span>No Image</span>
-                    @endif
+                    @endif      
                     <div class="card-body">
 
                         <div class="blog-info">
@@ -33,4 +33,5 @@
 
         </div>
     </div>
+       
 </section>

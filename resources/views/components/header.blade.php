@@ -447,198 +447,194 @@
     
     {{-- search-suggestions --}}
     <script>
-    $(document).ready(function () {
-        const $searchBar = $('#search-bar');
-        const $suggestionsBox = $('#suggestions-box');
-        const $suggestionsList = $('#suggestions-list');
-        let searchTimeout = null;
-        let currentRequest = null;
-        let highlightedIndex = -1; // Track the currently highlighted suggestion
+        $(document).ready(function () {
+            const $searchBar = $('#search-bar');
+            const $suggestionsBox = $('#suggestions-box');
+            const $suggestionsList = $('#suggestions-list');
+            let searchTimeout = null;
+            let currentRequest = null;
+            let highlightedIndex = -1;
     
-        // Handle input and perform search
-        $searchBar.on('input', function () {
-            clearTimeout(searchTimeout);
-            const query = $(this).val().trim();
+            // Retrieve the user's location from the input field
+            const userCity = document.getElementById('city-auto-sug').value || '';
     
-            if (!query) {
-                $suggestionsBox.hide();
-                return;
-            }
+            // Handle input and perform search
+            $searchBar.on('input', function () {
+                clearTimeout(searchTimeout);
+                const query = $(this).val().trim();
     
-            // Show loading state
-            $suggestionsList.html('<li class="loading">Loading suggestions...</li>');
-            $suggestionsBox.show();
+                if (!query) {
+                    $suggestionsBox.hide();
+                    return;
+                }
     
-            // Debounce the AJAX request
-            searchTimeout = setTimeout(() => performSearch(query), 300);
-        });
+                // Show loading state
+                $suggestionsList.html('<li class="loading">Loading suggestions...</li>');
+                $suggestionsBox.show();
     
-        // Perform search based on the query
-        function performSearch(query) {
-            if (currentRequest) currentRequest.abort();
-    
-            currentRequest = $.ajax({
-                url: '/search-suggestions', // Replace with actual search endpoint
-                method: 'GET',
-                data: { query: query },
-                dataType: 'json',
-                success: response => handleSearchSuccess(response, query),
-                error: handleError,
-            });
-        }
-    
-        // Handle the search results
-        function handleSearchSuccess(response, query) {
-            $suggestionsList.empty();
-            if ($searchBar.val().trim() !== query) return; // Avoid showing stale suggestions
-    
-            const sections = [
-                { title: 'Products', items: response.products },
-                { title: 'Categories', items: response.categories },
-                { title: 'Subcategories', items: response.subcategories },
-                { title: 'Companies', items: response.companies },
-            ];
-    
-            let hasResults = false;
-    
-            sections.forEach(({ title, items }) => {
-                if (!items.length) return;
-                hasResults = true;
-    
-                const $section = createSearchSection(title, items, query);
-                $suggestionsList.append($section);
+                // Debounce the AJAX request
+                searchTimeout = setTimeout(() => performSearch(query), 300);
             });
     
-            if (!hasResults) {
-                $suggestionsList.html('<li class="no-results">No results found.</li>');
-            }
+            // Perform search based on the query
+            function performSearch(query) {
+                if (currentRequest) currentRequest.abort();
     
-            $suggestionsBox.show();
-        }
+                currentRequest = $.ajax({
+                    url: '/search-suggestions', // Replace with actual search endpoint
+                    method: 'GET',
+                    data: { query: query },
+                    dataType: 'json',
+                    success: response => handleSearchSuccess(response, query),
+                    error: handleError,
+                });
+      x      }
     
-        // Create section of suggestions
-        function createSearchSection(title, items, query) {
-            return $('<div>', { class: 'suggestion-section' })
-                .append($('<strong>', { class: 'globalnav-searchresults-header', text: title + ':' }))
-                .append(
-                    $('<ul>').append(
-                        items.map((item, index) => {
-                            const highlightedText = highlightMatch(item.name, query);
-                            return $('<li>')
-                                .html(highlightedText)
-                                .attr('data-index', index) // Store the index
-                                .on('click', function () {
-                                    // Trigger the search directly when a suggestion is clicked
-                                    window.location.href = '/search?query=' + encodeURIComponent(item.name);
-                                });
-                        })
-                    )
-                );
-        }
+            // Handle the search results
+            function handleSearchSuccess(response, query) {
+                $suggestionsList.empty();
+                if ($searchBar.val().trim() !== query) return;
     
-        // Highlight matching text in suggestions
-        function highlightMatch(text, query) {
-            const regex = new RegExp(`(${query})`, 'gi');
-            return text.replace(regex, '<span class="highlight">$1</span>');
-        }
+                const sections = [
+                    { title: 'Products', items: response.products },
+                    { title: 'Categories', items: response.categories },
+                    { title: 'Subcategories', items: response.subcategories },
+                    { title: 'Companies', items: response.companies },
+                ];
     
-        // Handle errors in the search request
-        function handleError(xhr, status, error) {
-            if (status !== 'abort') {
-                console.error('Error:', error);
-                $suggestionsList.html('<li class="no-results">Failed to load suggestions. Please try again.</li>');
+                let hasResults = false;
+    
+                sections.forEach(({ title, items }) => {
+                    if (!items.length) return;
+                    hasResults = true;
+    
+                    const $section = createSearchSection(title, items, query);
+                    $suggestionsList.append($section);
+                });
+    
+                if (!hasResults) {
+                    $suggestionsList.html('<li class="no-results">No results found.</li>');
+                }
+    
                 $suggestionsBox.show();
             }
-        }
     
-        // Handle keydown for arrow key navigation and Enter key selection
-        $searchBar.on('keydown', function (e) {
-            const $visibleItems = $suggestionsList.find('li:not(.loading, .no-results)');
-            const visibleItemsCount = $visibleItems.length;
-    
-            if (!$visibleItems.length || !$suggestionsBox.is(':visible')) return;
-    
-            switch (e.key) {
-                case 'ArrowDown':
-                    e.preventDefault();
-                    // Navigate down through the items
-                    if (highlightedIndex < visibleItemsCount - 1) {
-                        highlightedIndex++;
-                    } else {
-                        highlightedIndex = 0; // Loop to the first item if we're at the end
-                    }
-                    break;
-                case 'ArrowUp':
-                    e.preventDefault();
-                    // Navigate up through the items
-                    if (highlightedIndex > 0) {
-                        highlightedIndex--;
-                    } else {
-                        highlightedIndex = visibleItemsCount - 1; // Loop to the last item if we're at the top
-                    }
-                    break;
-                case 'Enter':
-                    e.preventDefault();
-                    // Trigger the search based on the highlighted item
-                    if (highlightedIndex >= 0 && highlightedIndex < visibleItemsCount) {
-                        const selectedItem = $visibleItems.eq(highlightedIndex);
-                        window.location.href = '/search?query=' + encodeURIComponent(selectedItem.text());
-                    }
-                    break;
-                case 'Escape':
-                    e.preventDefault();
-                    // Hide suggestions when Escape is pressed
-                    $suggestionsBox.hide();
-                    break;
-                default:
-                    return;
+            // Create section of suggestions
+            function createSearchSection(title, items, query) {
+                return $('<div>', { class: 'suggestion-section' })
+                    .append($('<strong>', { class: 'globalnav-searchresults-header', text: title + ':' }))
+                    .append(
+                        $('<ul>').append(
+                            items.map((item, index) => {
+                                const highlightedText = highlightMatch(item.name, query);
+                                return $('<li>')
+                                    .html(highlightedText)
+                                    .attr('data-index', index)
+                                    .on('click', function () {
+                                        const locationQuery = userCity ? `&location=${encodeURIComponent(userCity)}` : '';
+                                        window.location.href = `/search?query=${encodeURIComponent(item.name)}${locationQuery}`;
+                                    });
+                            })
+                        )
+                    );
             }
     
-            // Update the highlighted suggestion
-            $visibleItems.removeClass('highlighted');
-            if (highlightedIndex >= 0) {
-                const $highlightedItem = $visibleItems.eq(highlightedIndex);
-                $highlightedItem.addClass('highlighted');
-    
-                // Ensure the highlighted item is in view (scroll if necessary)
-                scrollToItem($highlightedItem);
+            // Highlight matching text in suggestions
+            function highlightMatch(text, query) {
+                const regex = new RegExp(`(${query})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
             }
-        });
     
-        // Scroll to the highlighted item (makes sure the item is visible in the viewport)
-        function scrollToItem($item) {
-            const container = $suggestionsBox[0];
-            const itemOffsetTop = $item[0].offsetTop;
-            const itemHeight = $item.outerHeight();
-            const containerHeight = $suggestionsBox.height();
-    
-            // Scroll the container to the highlighted item if it's out of view
-            if (itemOffsetTop < container.scrollTop) {
-                container.scrollTop = itemOffsetTop; // Scroll to the top of the item
-            } else if (itemOffsetTop + itemHeight > container.scrollTop + containerHeight) {
-                container.scrollTop = itemOffsetTop + itemHeight - containerHeight; // Scroll to the bottom of the item
-            }
-        }
-    
-        // Handle mouse hover and click for suggestions
-        $(document).on('mouseenter', '#suggestions-list li', function () {
-            const index = $(this).data('index');
-            highlightedIndex = index;
-            $(this).addClass('highlighted').siblings().removeClass('highlighted');
-        });
-    
-        // Handle form submission directly (for the "Enter" key if not navigating)
-        $searchBar.on('keypress', function (e) {
-            if (e.key === 'Enter' && highlightedIndex === -1) {
-                const query = $(this).val().trim();
-                if (query) {
-                    e.preventDefault();
-                    window.location.href = '/search?query=' + encodeURIComponent(query);
+            // Handle errors in the search request
+            function handleError(xhr, status, error) {
+                if (status !== 'abort') {
+                    console.error('Error:', error);
+                    $suggestionsList.html('<li class="no-results">Failed to load suggestions. Please try again.</li>');
+                    $suggestionsBox.show();
                 }
             }
-        });
-    });
     
+            // Handle keydown for arrow key navigation and Enter key selection
+            $searchBar.on('keydown', function (e) {
+                const $visibleItems = $suggestionsList.find('li:not(.loading, .no-results)');
+                const visibleItemsCount = $visibleItems.length;
+    
+                if (!$visibleItems.length || !$suggestionsBox.is(':visible')) return;
+    
+                switch (e.key) {
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        if (highlightedIndex < visibleItemsCount - 1) {
+                            highlightedIndex++;
+                        } else {
+                            highlightedIndex = 0;
+                        }
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        if (highlightedIndex > 0) {
+                            highlightedIndex--;
+                        } else {
+                            highlightedIndex = visibleItemsCount - 1;
+                        }
+                        break;
+                    case 'Enter':
+                        e.preventDefault();
+                        if (highlightedIndex >= 0 && highlightedIndex < visibleItemsCount) {
+                            const selectedItem = $visibleItems.eq(highlightedIndex);
+                            const locationQuery = userCity ? `&location=${encodeURIComponent(userCity)}` : '';
+                            window.location.href = `/search?query=${encodeURIComponent(selectedItem.text())}${locationQuery}`;
+                        }
+                        break;
+                    case 'Escape':
+                        e.preventDefault();
+                        $suggestionsBox.hide();
+                        break;
+                    default:
+                        return;
+                }
+    
+                $visibleItems.removeClass('highlighted');
+                if (highlightedIndex >= 0) {
+                    const $highlightedItem = $visibleItems.eq(highlightedIndex);
+                    $highlightedItem.addClass('highlighted');
+                    scrollToItem($highlightedItem);
+                }
+            });
+    
+            // Scroll to the highlighted item
+            function scrollToItem($item) {
+                const container = $suggestionsBox[0];
+                const itemOffsetTop = $item[0].offsetTop;
+                const itemHeight = $item.outerHeight();
+                const containerHeight = $suggestionsBox.height();
+    
+                if (itemOffsetTop < container.scrollTop) {
+                    container.scrollTop = itemOffsetTop;
+                } else if (itemOffsetTop + itemHeight > container.scrollTop + containerHeight) {
+                    container.scrollTop = itemOffsetTop + itemHeight - containerHeight;
+                }
+            }
+    
+            // Handle mouse hover and click for suggestions
+            $(document).on('mouseenter', '#suggestions-list li', function () {
+                const index = $(this).data('index');
+                highlightedIndex = index;
+                $(this).addClass('highlighted').siblings().removeClass('highlighted');
+            });
+    
+            // Handle form submission directly (for the "Enter" key if not navigating)
+            $searchBar.on('keypress', function (e) {
+                if (e.key === 'Enter' && highlightedIndex === -1) {
+                    const query = $(this).val().trim();
+                    if (query) {
+                        e.preventDefault();
+                        const locationQuery = userCity ? `&location=${encodeURIComponent(userCity)}` : '';
+                        window.location.href = `/search?query=${encodeURIComponent(query)}${locationQuery}`;
+                    }
+                }
+            });
+        });
 
         //old search suggestion code is below this comment
         // $(document).ready(function() {

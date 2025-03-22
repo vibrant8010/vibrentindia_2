@@ -282,7 +282,8 @@ class UserController extends Controller
 // }
 
 public function update(Request $request, $id)
-{   
+{
+    // Validate the request
     $request->validate([
         'username' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email,' . $id,
@@ -301,7 +302,7 @@ public function update(Request $request, $id)
         'pincode' => 'nullable|integer',
     ]);
 
-
+    // Find the user
     $user = User::findOrFail($id);
 
     // Update user details
@@ -313,6 +314,8 @@ public function update(Request $request, $id)
     ]);
 
     // Handle file upload for logo
+    $logoUrl = $user->companyDetails->logo_url ?? null; // Retain the old logo URL by default
+
     if ($request->hasFile('logo_upload')) {
         // Define the upload directory
         $uploadPath = public_path('images/company_logo');
@@ -323,12 +326,8 @@ public function update(Request $request, $id)
         }
 
         // Delete old logo if it exists
-        $companyDetails = CompanyDetail::where('business_id', $id)->first();
-        if ($companyDetails && $companyDetails->logo_url) {
-            $oldLogoPath = public_path($companyDetails->logo_url);
-            if (file_exists($oldLogoPath)) {
-                unlink($oldLogoPath);
-            }
+        if ($logoUrl && file_exists(public_path($logoUrl))) {
+            unlink(public_path($logoUrl));
         }
 
         // Generate a unique filename
@@ -340,8 +339,6 @@ public function update(Request $request, $id)
 
         // Save the file path to the database
         $logoUrl = 'images/company_logo/' . $fileName;
-    } else {
-        $logoUrl = $request->input('logo_url'); // Use existing logo URL if no new file is uploaded
     }
 
     // Update company details if the user has the "business" role
@@ -349,6 +346,7 @@ public function update(Request $request, $id)
         $companyDetails = CompanyDetail::where('business_id', $id)->first();
 
         if ($companyDetails === null) {
+            // Create new company details
             CompanyDetail::create([
                 'business_id' => $user->id,
                 'name' => $request->input('name'),
@@ -364,6 +362,7 @@ public function update(Request $request, $id)
                 'pincode' => $request->input('pincode'),
             ]);
         } else {
+            // Update existing company details
             $companyDetails->update([
                 'name' => $request->input('name'),
                 'logo_url' => $logoUrl,
@@ -382,6 +381,7 @@ public function update(Request $request, $id)
 
     return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
 }
+
 
     public function destroy($id)
     {
