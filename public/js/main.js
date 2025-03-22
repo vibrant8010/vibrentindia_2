@@ -607,40 +607,40 @@ fetch(url2)
 
 
 document.addEventListener('DOMContentLoaded', () => {
-const tabs = document.querySelectorAll('.nav-item .nav-link'); // Select all tabs
-const contents = document.querySelectorAll('.tab-content'); // Select all tab content sections
+    const tabs = document.querySelectorAll('.product-desc-section .nav-link'); // Select all tabs
+    const contents = document.querySelectorAll('.tab-content'); // Select all tab content sections
 
-tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        // Remove the 'active' class from all tabs
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove the 'active' class from all tabs
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Hide all content sections
+            contents.forEach(content => (content.style.display = 'none'));
+
+            // Add the 'active' class to the clicked tab
+            tab.classList.add('active');
+
+            // Get the target content's ID from the 'data-tab' attribute
+            const targetId = tab.getAttribute('data-tab');
+
+            // Display the corresponding content
+            const targetContent = document.getElementById(targetId);
+            if (targetContent) {
+                targetContent.style.display = 'block'; // Ensure only the targeted content is shown
+            }
+        });
+    });
+
+    // Initialize by showing only the first tab's content and marking the first tab as active
+    if (tabs.length > 0 && contents.length > 0) {
         tabs.forEach(tab => tab.classList.remove('active'));
-
-        // Hide all content sections
         contents.forEach(content => (content.style.display = 'none'));
 
-        // Add the 'active' class to the clicked tab
-        tab.classList.add('active');
-
-        // Get the target content's ID from the 'data-tab' attribute
-        const targetId = tab.getAttribute('data-tab');
-
-        // Display the corresponding content
-        const targetContent = document.getElementById(targetId);
-        if (targetContent) {
-            targetContent.style.display = 'block'; // Ensure only the targeted content is shown
-        }
+        tabs[0].classList.add('active'); // Mark the first tab as active
+        contents[0].style.display = 'block'; // Show the first tab's content
+    }
     });
-});
-
-// Initialize by showing only the first tab's content and marking the first tab as active
-if (tabs.length > 0 && contents.length > 0) {
-    tabs.forEach(tab => tab.classList.remove('active'));
-    contents.forEach(content => (content.style.display = 'none'));
-
-    tabs[0].classList.add('active'); // Mark the first tab as active
-    contents[0].style.display = 'block'; // Show the first tab's content
-}
-});
 
 
 /*card visibilty code */
@@ -733,22 +733,29 @@ window.addEventListener("click", windowOnClick);
                 }
             });
         });
-
-
-        /*blog section caresoule */
+  /*blog section caresoule */
 $('#blogsection').owlCarousel({
-  loop:true,
-  margin:20,
-  nav:true,
+    loop: true,            // Infinite loop
+    margin: 10,            // Space between items
+    nav: false,            // Hide navigation arrows
+    dots: false,           // Hide dots for continuous effect
+    autoplay: true,        // Enable autoplay
+    autoplayTimeout: 1,    // Set to minimum so it never stops
+    autoplaySpeed: 5000,   // Continuous smooth sliding
+    smartSpeed: 5000,      // Smooth manual transition
+    slideTransition: 'linear', // Linear smooth scrolling
+    items: 1,              // Show 1 item at a time
+    autoplayHoverPause: false, // Don't pause on hover
+    animateOut: 'none',
   responsive:{
       0:{
           items:1
       },
       600:{
-          items:3
+          items:2
       },
       1000:{
-          items:3
+          items:2
       }
   }
 })

@@ -159,16 +159,14 @@
                         <div class="col-lg-12 col-12 d-lg-block product-desc-section">
                             <ul class="nav nav-tabs" id="productDesc" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link fw-bold py-2 px-0 active" data-tab="about-info"
-                                        type="button" role="tab">
+                                    <a class="nav-link fw-bold py-2 px-0 active" data-tab="about-info" type="button" role="tab">
                                         <span class="tab-nav-link-text fw-bold">About Company</span>
-                                    </button>
+                                </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link fw-bold py-2 px-0" data-tab="more-product" type="button"
-                                        role="tab">
+                                    <a class="nav-link fw-bold py-2 px-0" data-tab="more-product" type="button" role="tab">
                                         <span class="tab-nav-link-text fw-bold">More Products</span>
-                                    </button>
+                                </a>
                                 </li>
                             </ul>
                         </div>
@@ -229,7 +227,7 @@
                                                 </div>
 
                                                 <div class="text-wrapper">
-                                                    <h6 class="tranding-product-name">
+                                                    <h6 class="tranding-product-name mt-3">
                                                         <span class="title">Product:</span>
                                                         <span
                                                             class="trnding-pro-name">{{ $reletaedProductes->name }}</span>
@@ -259,7 +257,6 @@
                                                             class="tranding-sz-name">{{ $reletaedProductes->size }}</span>
                                                     </h6>
                                                     <p class="card-description content-txt" id="description-92">
-
                                                         <span class="visible-text">
                                                             This Hammered Sauce...
                                                         </span>

@@ -29,7 +29,7 @@
 
                     <!-- Blog Date -->
                     <div class="blog-date d-flex text-center justify-content-center py-3">
-                        <span><i class="fa-solid fa-clock" style="color:#005353;"></i></span> 
+                        <span><i class="fa-solid fa-clock" style="color:#005353;"></i></span>
                         <p class="inner-blog-date mx-2">{{ $blog->created_at->format('d.F.Y') }}</p>
                     </div>
 
@@ -42,7 +42,7 @@
                     @foreach ($blog->sections as $section)
                         <div class="additional-content mb-4">
                             <div class="d-flex">
-                                <span class="me-2"><i class="fa-solid fa-hand-point-right fa-2x"></i></span>
+                                <span class="me-2"><i class="fa-solid fa-arrows-up-down-left-right"></i></span>
                                 <h4 class="subtitle mb-2">{{ $section->subtitle }}</h4>
                             </div>
                             <div class="text-content">

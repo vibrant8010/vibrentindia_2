@@ -29,6 +29,11 @@ margin-top: 0 !important;
 .prdoct-details-showbox{
     width: 100%;
 }
+.product-desc-section .nav-tabs .nav-link.active {
+    border-bottom: 2px solid #006969 !important;
+    border: 0;
+    color: var(--dark-color);
+}
   @media screen and (max-width:767px) {
     .product-detail-container .product-img{
       max-width:100%;
@@ -470,6 +475,7 @@ margin-top: 0 !important;
 }
 .product-desc-section .nav-item .nav-link{
     background-color: transparent;
+    color: var(--dark-color);
 }
 .product-desc-section .nav-item .nav-link.active {
   border-bottom: 2px solid var(--ternery-color) !important;
@@ -477,7 +483,9 @@ margin-top: 0 !important;
 .nav-tabs .nav-item{
     margin-right: 0;
 }
-
+a.no-link {
+    text-decoration: none;
+}
 .tab-nav-link-text {
     padding-right: 20px;
     padding-left: 20px;

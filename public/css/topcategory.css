@@ -14,7 +14,7 @@
 }
 
 .card-view.inner-card {
-    height: 555px;
+    height: 570px;
 }
 
 .product-col {
@@ -223,10 +223,18 @@
     font-weight: 500 !important;
     color: #060000;
     border-bottom: 1px solid #80808014;
-    padding: 8px 0;
-    border-top: 1px solid #8080800d;
+    padding: 9px 0;
+    height: 44px;
+    /* border-top: 1px solid #8080800d; */
 }
-
+.card-description.content-txt{
+    font-weight: 500 !important;
+    color: #060000;
+    border-bottom: 1px solid #80808014;
+    padding: 9px 0;
+    /* border-top: 1px solid #8080800d; */
+    height: 45px;
+}
 .card-bottom .product-name .title,
 .card-bottom .product-name .material-title,
 .card-bottom .product-name .size-title {

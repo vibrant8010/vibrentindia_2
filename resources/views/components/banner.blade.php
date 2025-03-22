@@ -16,7 +16,6 @@
             />
           </div>
         </div>
-
         <!-- Column 2 -->
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 p-1">
           <div class="slideshow" id="slideshow2">

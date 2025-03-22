@@ -265,7 +265,7 @@
                     </li>
                     <li class="nav-item"><a href="{{ route('alltrendingcategory') }}" class="nav-link">Trending
                             Products</a></li>
-                    <li class="nav-item"><a href="{{ route('blogsection',7) }}" class="nav-link">Blogs</a></li>
+                    <li class="nav-item"><a href="{{ route('bloglist') }}" class="nav-link">Blogs</a></li>
 
                 </ul>
             </nav>
@@ -452,8 +452,9 @@
             const $suggestionsList = $('#suggestions-list');
             let searchTimeout = null;
             let currentRequest = null;
+            let highlightedIndex = -1; // Track the currently highlighted suggestion
 
-            // Debounce AJAX requests and handle input
+            // Handle input and perform search
             $searchBar.on('input', function () {
                 clearTimeout(searchTimeout);
                 const query = $(this).val().trim();
@@ -471,69 +472,24 @@
                 searchTimeout = setTimeout(() => performSearch(query), 300);
             });
 
-            // Handle keyboard navigation
-            $searchBar.on('keydown', function (e) {
-                const $visibleItems = $suggestionsList.find('li:not(.globalnav-searchresults-header, .loading, .no-results)');
-                if (!$visibleItems.length || !$suggestionsBox.is(':visible')) return;
-
-                const key = e.key;
-                const $current = $visibleItems.filter('.highlighted');
-                let index = $visibleItems.index($current);
-
-                switch (key) {
-                    case 'ArrowDown':
-                        e.preventDefault();
-                        index = (index + 1) % $visibleItems.length;
-                        break;
-                    case 'ArrowUp':
-                        e.preventDefault();
-                        index = (index - 1 + $visibleItems.length) % $visibleItems.length;
-                        break;
-                    case 'Enter':
-                        e.preventDefault();
-                        if ($current.length) selectItem($current);
-                        return;
-                    case 'Escape':
-                        e.preventDefault();
-                        $suggestionsBox.hide();
-                        return;
-                    default:
-                        return;
-                }
-
-                $visibleItems.removeClass('highlighted');
-                $visibleItems.eq(index).addClass('highlighted');
-            });
-
-            // Handle item selection
-            $(document).on('click', '#suggestions-list li:not(.globalnav-searchresults-header, .loading, .no-results)', function () {
-                selectItem($(this));
-            });
-
-            // Hide suggestions when clicking outside
-            $(document).on('click', function (e) {
-                if (!$(e.target).closest('#search-bar, #suggestions-box').length) {
-                    $suggestionsBox.hide();
-                }
-            });
-
-            // Helper functions
+            // Perform search based on the query
             function performSearch(query) {
                 if (currentRequest) currentRequest.abort();
 
                 currentRequest = $.ajax({
-                    url: '/search-suggestions',
+                    url: '/search-suggestions', // Replace with actual search endpoint
                     method: 'GET',
                     data: { query: query },
                     dataType: 'json',
-                    success: response => handleSuccess(response, query),
+                    success: response => handleSearchSuccess(response, query),
                     error: handleError,
                 });
             }
 
-            function handleSuccess(response, query) {
+            // Handle the search results
+            function handleSearchSuccess(response, query) {
                 $suggestionsList.empty();
-                if ($searchBar.val().trim() !== query) return; // Handle stale responses
+                if ($searchBar.val().trim() !== query) return; // Avoid showing stale suggestions
 
                 const sections = [
                     { title: 'Products', items: response.products },
@@ -548,7 +504,7 @@
                     if (!items.length) return;
                     hasResults = true;
 
-                    const $section = createSection(title, items, query);
+                    const $section = createSearchSection(title, items, query);
                     $suggestionsList.append($section);
                 });
 
@@ -559,35 +515,33 @@
                 $suggestionsBox.show();
             }
 
-            function createSection(title, items, query) {
+            // Create section of suggestions
+            function createSearchSection(title, items, query) {
                 return $('<div>', { class: 'suggestion-section' })
-                    .append($('<strong>', {
-                        class: 'globalnav-searchresults-header',
-                        text: title + ':',
-                    }))
+                    .append($('<strong>', { class: 'globalnav-searchresults-header', text: title + ':' }))
                     .append(
                         $('<ul>').append(
-                            items.map(item => {
+                            items.map((item, index) => {
                                 const highlightedText = highlightMatch(item.name, query);
-                                return $('<li>').html(highlightedText);
+                                return $('<li>')
+                                    .html(highlightedText)
+                                    .attr('data-index', index) // Store the index
+                                    .on('click', function () {
+                                        // Trigger the search directly when a suggestion is clicked
+                                        window.location.href = '/search?query=' + encodeURIComponent(item.name);
+                                    });
                             })
                         )
                     );
             }
 
+            // Highlight matching text in suggestions
             function highlightMatch(text, query) {
                 const regex = new RegExp(`(${query})`, 'gi');
                 return text.replace(regex, '<span class="highlight">$1</span>');
             }
 
-            function selectItem($item) {
-                const selectedValue = $item.text();
-                $searchBar.val(selectedValue);
-                $suggestionsBox.hide();
-                // Optional: Trigger search
-                // $searchBar.closest('form').submit();
-            }
-
+            // Handle errors in the search request
             function handleError(xhr, status, error) {
                 if (status !== 'abort') {
                     console.error('Error:', error);
@@ -595,512 +549,597 @@
                     $suggestionsBox.show();
                 }
             }
+
+            // Handle keydown for arrow key navigation and Enter key selection
+            $searchBar.on('keydown', function (e) {
+                const $visibleItems = $suggestionsList.find('li:not(.loading, .no-results)');
+                const visibleItemsCount = $visibleItems.length;
+
+                if (!$visibleItems.length || !$suggestionsBox.is(':visible')) return;
+
+                switch (e.key) {
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        // Navigate down through the items
+                        if (highlightedIndex < visibleItemsCount - 1) {
+                            highlightedIndex++;
+                        } else {
+                            highlightedIndex = 0; // Loop to the first item if we're at the end
+                        }
+                        break;
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        // Navigate up through the items
+                        if (highlightedIndex > 0) {
+                            highlightedIndex--;
+                        } else {
+                            highlightedIndex = visibleItemsCount - 1; // Loop to the last item if we're at the top
+                        }
+                        break;
+                    case 'Enter':
+                        e.preventDefault();
+                        // Trigger the search based on the highlighted item
+                        if (highlightedIndex >= 0 && highlightedIndex < visibleItemsCount) {
+                            const selectedItem = $visibleItems.eq(highlightedIndex);
+                            window.location.href = '/search?query=' + encodeURIComponent(selectedItem.text());
+                        }
+                        break;
+                    case 'Escape':
+                        e.preventDefault();
+                        // Hide suggestions when Escape is pressed
+                        $suggestionsBox.hide();
+                        break;
+                    default:
+                        return;
+                }
+
+                // Update the highlighted suggestion
+                $visibleItems.removeClass('highlighted');
+                if (highlightedIndex >= 0) {
+                    const $highlightedItem = $visibleItems.eq(highlightedIndex);
+                    $highlightedItem.addClass('highlighted');
+
+                    // Ensure the highlighted item is in view (scroll if necessary)
+                    scrollToItem($highlightedItem);
+                }
+            });
+
+            // Scroll to the highlighted item (makes sure the item is visible in the viewport)
+            function scrollToItem($item) {
+                const container = $suggestionsBox[0];
+                const itemOffsetTop = $item[0].offsetTop;
+                const itemHeight = $item.outerHeight();
+                const containerHeight = $suggestionsBox.height();
+
+                // Scroll the container to the highlighted item if it's out of view
+                if (itemOffsetTop < container.scrollTop) {
+                    container.scrollTop = itemOffsetTop; // Scroll to the top of the item
+                } else if (itemOffsetTop + itemHeight > container.scrollTop + containerHeight) {
+                    container.scrollTop = itemOffsetTop + itemHeight - containerHeight; // Scroll to the bottom of the item
+                }
+            }
+
+            // Handle mouse hover and click for suggestions
+            $(document).on('mouseenter', '#suggestions-list li', function () {
+                const index = $(this).data('index');
+                highlightedIndex = index;
+                $(this).addClass('highlighted').siblings().removeClass('highlighted');
+            });
+
+            // Handle form submission directly (for the "Enter" key if not navigating)
+            $searchBar.on('keypress', function (e) {
+                if (e.key === 'Enter' && highlightedIndex === -1) {
+                    const query = $(this).val().trim();
+                    if (query) {
+                        e.preventDefault();
+                        window.location.href = '/search?query=' + encodeURIComponent(query);
+                    }
+                }
+            });
         });
 
-        //old search suggestion code is below this comment
-        // $(document).ready(function() {
-        //     $('#search-bar').on('keyup', function() {
-        //         const query = $(this).val();
 
-        //         if (query.length !== 0) {
-        //             $.ajax({
-        //                 url: '/search-suggestions',
-        //                 method: 'GET',
-        //                 data: {
-        //                     query: query
-        //                 },
-        //                 success: function(response) {
-        //                     let suggestionsHTML = '';
+            //old search suggestion code is below this comment
+            // $(document).ready(function() {
+            //     $('#search-bar').on('keyup', function() {
+            //         const query = $(this).val();
 
-        //                     if (response.products.length > 0) {
-        //                         suggestionsHTML +=
-        //                             '<strong class="globalnav-searchresults-header">Products:</strong>';
-        //                         response.products.forEach(product => {
-        //                             suggestionsHTML += `<li>${product.name}</li>`;
-        //                         });
-        //                     }
+            //         if (query.length !== 0) {
+            //             $.ajax({
+            //                 url: '/search-suggestions',
+            //                 method: 'GET',
+            //                 data: {
+            //                     query: query
+            //                 },
+            //                 success: function(response) {
+            //                     let suggestionsHTML = '';
 
-        //                     if (response.categories.length > 0) {
-        //                         suggestionsHTML +=
-        //                             '<strong class="globalnav-searchresults-header">Categories:</strong>';
-        //                         response.categories.forEach(category => {
-        //                             suggestionsHTML += `<li>${category.name}</li>`;
-        //                         });
-        //                     }
-        //                     if (response.subcategories.length > 0) {
-        //                         suggestionsHTML +=
-        //                             '<strong class="globalnav-searchresults-header">Subcategories:</strong>';
-        //                         response.subcategories.forEach(subcategory => {
-        //                             suggestionsHTML += `<li>${subcategory.name}</li>`;
-        //                         });
-        //                     }
+            //                     if (response.products.length > 0) {
+            //                         suggestionsHTML +=
+            //                             '<strong class="globalnav-searchresults-header">Products:</strong>';
+            //                         response.products.forEach(product => {
+            //                             suggestionsHTML += `<li>${product.name}</li>`;
+            //                         });
+            //                     }
 
-        //                     if (response.companies.length > 0) {
-        //                         suggestionsHTML +=
-        //                             '<strong class="globalnav-searchresults-header">Companies:</strong>';
-        //                         response.companies.forEach(company => {
-        //                             suggestionsHTML += `<li>${company.name}</li>`;
-        //                         });
-        //                     }
+            //                     if (response.categories.length > 0) {
+            //                         suggestionsHTML +=
+            //                             '<strong class="globalnav-searchresults-header">Categories:</strong>';
+            //                         response.categories.forEach(category => {
+            //                             suggestionsHTML += `<li>${category.name}</li>`;
+            //                         });
+            //                     }
+            //                     if (response.subcategories.length > 0) {
+            //                         suggestionsHTML +=
+            //                             '<strong class="globalnav-searchresults-header">Subcategories:</strong>';
+            //                         response.subcategories.forEach(subcategory => {
+            //                             suggestionsHTML += `<li>${subcategory.name}</li>`;
+            //                         });
+            //                     }
 
-        //                     $('#suggestions-list').html(suggestionsHTML);
-        //                     $('#suggestions-box').show();
-        //                 },
-        //                 error: function() {
-        //                     $('#suggestions-box').hide();
-        //                 },
-        //             });
-        //         } else {
-        //             $('#suggestions-box').hide();
-        //         }
-        //     });
+            //                     if (response.companies.length > 0) {
+            //                         suggestionsHTML +=
+            //                             '<strong class="globalnav-searchresults-header">Companies:</strong>';
+            //                         response.companies.forEach(company => {
+            //                             suggestionsHTML += `<li>${company.name}</li>`;
+            //                         });
+            //                     }
 
-        //     $(document).on('click', '#suggestions-list li:not(.globalnav-searchresults-header)', function() {
-        //         const selectedValue = $(this).text();
-        //         $('#search-bar').val(selectedValue);
-        //         $('#suggestions-box').hide();
-        //     });
-        // });
-    </script>
-    <script>
-        // Fetching categories from Blade (passed as JSON)
-        const categories = @json(App\Models\Category::all()->pluck('name'));
+            //                     $('#suggestions-list').html(suggestionsHTML);
+            //                     $('#suggestions-box').show();
+            //                 },
+            //                 error: function() {
+            //                     $('#suggestions-box').hide();
+            //                 },
+            //             });
+            //         } else {
+            //             $('#suggestions-box').hide();
+            //         }
+            //     });
 
-        let placeholderIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingSpeed = 100;
-        const deletingSpeed = 50;
-        const delayBetweenWords = 1500;
+            //     $(document).on('click', '#suggestions-list li:not(.globalnav-searchresults-header)', function() {
+            //         const selectedValue = $(this).text();
+            //         $('#search-bar').val(selectedValue);
+            //         $('#suggestions-box').hide();
+            //     });
+            // });
+        </script>
+        <script>
+            // Fetching categories from Blade (passed as JSON)
+            const categories = @json(App\Models\Category::all()->pluck('name'));
 
-        function animatePlaceholder() {
-            const currentPlaceholder = categories[placeholderIndex];
-            const searchInput = document.getElementById("search-bar");
-            const baseText = "Search for ";
+            let placeholderIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            const typingSpeed = 100;
+            const deletingSpeed = 50;
+            const delayBetweenWords = 1500;
 
-            if (!isDeleting && charIndex < currentPlaceholder.length) {
-                // Typing animation
-                searchInput.placeholder = baseText + currentPlaceholder.substring(0, charIndex + 1);
-                charIndex++;
-                setTimeout(animatePlaceholder, typingSpeed);
-            } else if (isDeleting && charIndex > 0) {
-                // Deleting animation
-                searchInput.placeholder = baseText + currentPlaceholder.substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(animatePlaceholder, deletingSpeed);
-            } else if (!isDeleting && charIndex === currentPlaceholder.length) {
-                // Pause before deleting
-                isDeleting = true;
-                setTimeout(animatePlaceholder, delayBetweenWords);
-            } else if (isDeleting && charIndex === 0) {
-                // Move to the next placeholder
-                isDeleting = false;
-                placeholderIndex = (placeholderIndex + 1) % categories.length;
-                setTimeout(animatePlaceholder, typingSpeed);
-            }
-        }
+            function animatePlaceholder() {
+                const currentPlaceholder = categories[placeholderIndex];
+                const searchInput = document.getElementById("search-bar");
+                const baseText = "Search for ";
 
-        // Start the animation
-        animatePlaceholder();
-    </script>
-
-    <script>
-        // Default category is 'Products'
-        let selectedCategory = "All";
-
-        // Update the dropdown button text
-        function updateDropdownButtonText(buttonId, text) {
-            document.getElementById(buttonId).textContent = text;
-        }
-
-        // Function to handle dropdown selection (desktop and mobile)
-        function selectDropdown(category) {
-            selectedCategory = category;
-            updateDropdownButtonText('dropdownButton', category);
-            document.getElementById('dropdownMenu').classList.remove('show');
-            clearSuggestions(); // Clear previous suggestions
-        }
-
-        function selectDropdownMobile(category) {
-            selectedCategory = category;
-            updateDropdownButtonText('dropdownButtonMobile', category);
-            document.getElementById('dropdownMenuMobile').classList.remove('show');
-            clearSuggestions(); // Clear previous suggestions
-        }
-
-        // Toggle dropdown visibility (desktop and mobile)
-        function toggleDropdown(menuId) {
-            document.getElementById(menuId).classList.toggle('show');
-        }
-
-        // Clear suggestions box
-        function clearSuggestions() {
-            const desktopSuggestions = document.getElementById("suggestions");
-            const mobileSuggestions = document.getElementById("suggestions-mobile");
-
-            desktopSuggestions.innerHTML = "";
-            desktopSuggestions.style.display = "none";
-
-            mobileSuggestions.innerHTML = "";
-            mobileSuggestions.style.display = "none";
-        }
-
-        // Display search suggestions
-        function displaySuggestions(suggestions, isMobile = false) {
-            const suggestionsBox = document.getElementById(isMobile ? "suggestions-mobile" : "suggestions");
-
-            // Clear the suggestions box content before appending new suggestions
-            suggestionsBox.style.display = "block";
-            suggestionsBox.innerHTML = ""; // Only clear the contents, not the event listeners
-
-            let hasResults = false;
-
-            // Create a container for the suggestions
-            const content = document.createElement('div');
-
-            // Display companies first if available
-            if (suggestions.companies && suggestions.companies.length > 0) {
-                hasResults = true;
-                const companiesHeader = document.createElement('div');
-                companiesHeader.className = 'suggestion-header';
-                companiesHeader.textContent = 'Companies';
-                content.appendChild(companiesHeader);
-
-                suggestions.companies.forEach((company) => {
-                    const suggestion = document.createElement('div');
-                    suggestion.className = "suggestion-item";
-                    suggestion.textContent = company.name;
-                    suggestion.onclick = () => {
-                        window.location.href = `/company/${company.id}/products`;
-                    };
-                    content.appendChild(suggestion);
-                });
-            }
-
-            // Display products second if available
-            if (suggestions.products && suggestions.products.length > 0) {
-                hasResults = true;
-                const productsHeader = document.createElement('div');
-                productsHeader.className = 'suggestion-header';
-                productsHeader.textContent = 'Products';
-                content.appendChild(productsHeader);
-
-                suggestions.products.forEach((product) => {
-                    const suggestion = document.createElement('div');
-                    suggestion.className = "suggestion-item";
-                    suggestion.textContent = product.name;
-                    suggestion.onclick = () => {
-                        window.location.href = `/product/${product.id}`;
-                    };
-                    content.appendChild(suggestion);
-                });
-            }
-
-            // No results found
-            if (!hasResults) {
-                const noResults = document.createElement('div');
-                noResults.className = 'suggestion-item';
-                noResults.textContent = 'No results found';
-                content.appendChild(noResults);
-            }
-
-            // Append the content to the suggestions box
-            suggestionsBox.appendChild(content);
-        }
-
-
-        // Fetch search suggestions from server
-        function fetchSuggestions(query, isMobile = false) {
-            if (query.length > 2) {
-                const endpoint = `/search-suggestions?query=${query}&category=${selectedCategory}`;
-
-                fetch(endpoint)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (selectedCategory === "All") {
-                            displaySuggestions({
-                                products: data.products || [],
-                                companies: data.companies || []
-                            }, isMobile);
-                        } else if (selectedCategory === "Products") {
-                            displaySuggestions({
-                                products: data.suggestions || []
-                            }, isMobile);
-                        } else if (selectedCategory === "Companies") {
-                            displaySuggestions({
-                                companies: data.suggestions || []
-                            }, isMobile);
-                        }
-                    })
-                    .catch(error => console.error("Error fetching suggestions:", error));
-            } else {
-                clearSuggestions();
-            }
-        }
-
-        // Perform search on form submission
-        function performSearch(event, isMobile = false) {
-            event.preventDefault();
-            const query = document.getElementById(isMobile ? "search-bar-mobile" : "search-bar").value.trim();
-            if (query !== "") {
-                window.location.href = `/search-results?query=${query}&category=${selectedCategory}`;
-            }
-        }
-
-        // Event listeners for desktop and mobile dropdowns
-        document.getElementById('dropdownButton').addEventListener('click', () => toggleDropdown('dropdownMenu'));
-        document.getElementById('dropdownButtonMobile').addEventListener('click', () => toggleDropdown(
-            'dropdownMenuMobile'));
-
-        // Event listeners for search input
-        document.getElementById('search-bar').addEventListener('input', (e) => fetchSuggestions(e.target.value));
-        document.getElementById('search-bar-mobile').addEventListener('input', (e) => fetchSuggestions(e.target.value,
-            true));
-
-        // Event listeners for form submission
-        document.getElementById('search-form').addEventListener('submit', (e) => performSearch(e));
-        document.getElementById('search-form-mobile').addEventListener('submit', (e) => performSearch(e, true));
-
-        // Initialize the default category
-        selectDropdown("All");
-
-
-    </script>
-
-    @if (!session()->has('city'))
-        @push('scripts')
-            <script>
-                // get user location
-
-                window.onload = () => {
-                    // Check if Geolocation is supported
-                    if ('geolocation' in navigator) {
-                        navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-                            enableHighAccuracy: true,
-                            timeout: 5000,
-                            maximumAge: 0
-                        });
-                    } else {
-                        console.error('Geolocation is not supported by your browser.');
-                    }
-                };
-
-                function successCallback(position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
-
-                    fetch(url)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error(`HTTP error! Status: ${response.status}`);
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            const address = data.address || {};
-                            const state = address.state || '';
-                            const city = address.city || address.state_district || address.town || address.village || '';
-                            const postalCode = address.postcode || '';
-                            if (state && city && postalCode) {
-                                // document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
-                                document.getElementById('city-auto-sug').value = address.city || address.state_district ||
-                                    address.town || address.village || '';
-                                sendLocationData({
-                                    state,
-                                    city,
-                                    postalCode
-                                });
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Error fetching geolocation data:", error);
-                        });
+                if (!isDeleting && charIndex < currentPlaceholder.length) {
+                    // Typing animation
+                    searchInput.placeholder = baseText + currentPlaceholder.substring(0, charIndex + 1);
+                    charIndex++;
+                    setTimeout(animatePlaceholder, typingSpeed);
+                } else if (isDeleting && charIndex > 0) {
+                    // Deleting animation
+                    searchInput.placeholder = baseText + currentPlaceholder.substring(0, charIndex - 1);
+                    charIndex--;
+                    setTimeout(animatePlaceholder, deletingSpeed);
+                } else if (!isDeleting && charIndex === currentPlaceholder.length) {
+                    // Pause before deleting
+                    isDeleting = true;
+                    setTimeout(animatePlaceholder, delayBetweenWords);
+                } else if (isDeleting && charIndex === 0) {
+                    // Move to the next placeholder
+                    isDeleting = false;
+                    placeholderIndex = (placeholderIndex + 1) % categories.length;
+                    setTimeout(animatePlaceholder, typingSpeed);
                 }
+            }
 
-                function errorCallback(error) {
-                    console.error('Error retrieving location:', error);
-                    switch (error.code) {
-                        case error.PERMISSION_DENIED:
-                            alert("User denied the request for Geolocation.");
-                            break;
-                        case error.POSITION_UNAVAILABLE:
-                            alert("Location information is unavailable.");
-                            break;
-                        case error.TIMEOUT:
-                            alert("The request to get user location timed out.");
-                            break;
-                        case error.UNKNOWN_ERROR:
-                            alert("An unknown error occurred.");
-                            break;
-                    }
-                }
+            // Start the animation
+            animatePlaceholder();
+        </script>
 
-                function sendLocationData(data) {
-                    // console.log(data);
-                    $.ajax({
-                        url: "/location",
-                        type: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: JSON.stringify(data),
-                        contentType: 'application/json',
-                        success: function (response) {
-                            console.log('Success:', response);
-                        },
-                        error: function (xhr, status, error) {
-                            console.error('Error:', error);
-                        }
+        <script>
+            // Default category is 'Products'
+            let selectedCategory = "All";
+
+            // Update the dropdown button text
+            function updateDropdownButtonText(buttonId, text) {
+                document.getElementById(buttonId).textContent = text;
+            }
+
+            // Function to handle dropdown selection (desktop and mobile)
+            function selectDropdown(category) {
+                selectedCategory = category;
+                updateDropdownButtonText('dropdownButton', category);
+                document.getElementById('dropdownMenu').classList.remove('show');
+                clearSuggestions(); // Clear previous suggestions
+            }
+
+            function selectDropdownMobile(category) {
+                selectedCategory = category;
+                updateDropdownButtonText('dropdownButtonMobile', category);
+                document.getElementById('dropdownMenuMobile').classList.remove('show');
+                clearSuggestions(); // Clear previous suggestions
+            }
+
+            // Toggle dropdown visibility (desktop and mobile)
+            function toggleDropdown(menuId) {
+                document.getElementById(menuId).classList.toggle('show');
+            }
+
+            // Clear suggestions box
+            function clearSuggestions() {
+                const desktopSuggestions = document.getElementById("suggestions");
+                const mobileSuggestions = document.getElementById("suggestions-mobile");
+
+                desktopSuggestions.innerHTML = "";
+                desktopSuggestions.style.display = "none";
+
+                mobileSuggestions.innerHTML = "";
+                mobileSuggestions.style.display = "none";
+            }
+
+            // Display search suggestions
+            function displaySuggestions(suggestions, isMobile = false) {
+                const suggestionsBox = document.getElementById(isMobile ? "suggestions-mobile" : "suggestions");
+
+                // Clear the suggestions box content before appending new suggestions
+                suggestionsBox.style.display = "block";
+                suggestionsBox.innerHTML = ""; // Only clear the contents, not the event listeners
+
+                let hasResults = false;
+
+                // Create a container for the suggestions
+                const content = document.createElement('div');
+
+                // Display companies first if available
+                if (suggestions.companies && suggestions.companies.length > 0) {
+                    hasResults = true;
+                    const companiesHeader = document.createElement('div');
+                    companiesHeader.className = 'suggestion-header';
+                    companiesHeader.textContent = 'Companies';
+                    content.appendChild(companiesHeader);
+
+                    suggestions.companies.forEach((company) => {
+                        const suggestion = document.createElement('div');
+                        suggestion.className = "suggestion-item";
+                        suggestion.textContent = company.name;
+                        suggestion.onclick = () => {
+                            window.location.href = `/company/${company.id}/products`;
+                        };
+                        content.appendChild(suggestion);
                     });
                 }
-            </script>
-        @endpush
-    @endif
-    {{-- @if (!session()->has('user_id')) --}}
-    {{-- @push('scripts') --}}
-    <script>
-        //  const openModal = document.getElementById("loginButton");
-        const modal2 = document.getElementById("customModal");
-        const closeModal = document.getElementById("closeModal");
-        const showSignUpForm = document.getElementById("showSignUpForm");
-        const showLoginForm = document.getElementById("showLoginForm");
-        const basicForm = document.getElementById("basicCustomForm");
-        const detailedForm = document.getElementById("detailedCustomForm");
-        const otpForm = document.getElementById("otpCustomForm");
-        const verifyOtpBtn = document.getElementById("verifyOtpBtn");
-        const loginBtn = document.getElementById("signUpBtn2");
-        const sandotp = document.getElementById("sandotp");
-        // Open modal
-        function openModal() {
-            modal2.style.display = "flex";
-        }
 
-        function showOtpForm() {
-            detailedForm.style.display = "none";
-            basicForm.style.display = "none";
-            otpForm.style.display = "block";
-        }
+                // Display products second if available
+                if (suggestions.products && suggestions.products.length > 0) {
+                    hasResults = true;
+                    const productsHeader = document.createElement('div');
+                    productsHeader.className = 'suggestion-header';
+                    productsHeader.textContent = 'Products';
+                    content.appendChild(productsHeader);
 
-
-        sandotp.addEventListener("click", () => {
-            const email2 = document.getElementById("otp_email").value;
-            const sandotpText = document.getElementById("sandotpText");
-            const sandotpLoader = document.getElementById("sandotpLoader");
-
-            // Show loader while processing
-            sandotpText.style.display = "none";
-            sandotpLoader.style.display = "inline-block";
-
-            $.ajax({
-                url: "{{ route('login.process') }}",
-                type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: JSON.stringify({
-                    email: email2
-                }),
-                contentType: 'application/json',
-                success: function (response) {
-                    sandotpText.style.display = "inline-block";
-                    sandotpLoader.style.display = "none";
-
-                    if (response.success) {
-                        showOtpForm();
-                        alert(response.message);
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    sandotpText.style.display = "inline-block";
-                    sandotpLoader.style.display = "none";
-
-                    if (xhr.responseJSON && xhr.responseJSON.message) {
-                        alert(xhr.responseJSON.message);
-                    } else {
-                        alert("An unexpected error occurred. Please try again.");
-                    }
-
-                    console.error('Error:', error);
+                    suggestions.products.forEach((product) => {
+                        const suggestion = document.createElement('div');
+                        suggestion.className = "suggestion-item";
+                        suggestion.textContent = product.name;
+                        suggestion.onclick = () => {
+                            window.location.href = `/product/${product.id}`;
+                        };
+                        content.appendChild(suggestion);
+                    });
                 }
-            });
 
-        });
+                // No results found
+                if (!hasResults) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'suggestion-item';
+                    noResults.textContent = 'No results found';
+                    content.appendChild(noResults);
+                }
 
-        loginBtn.addEventListener("click", () => {
-            const email2 = document.getElementById("email2").value.trim();
-            const phone2 = document.getElementById("phone2").value.trim();
-            const name2 = document.getElementById("name2").value.trim();
-            const signUpBtnText = document.getElementById("signUpBtnText");
-            const signUpBtnLoader = document.getElementById("signUpBtnLoader");
-
-            // Basic validation
-            if (!name2 || !email2 || !phone2) {
-                alert("Please fill all fields.");
-                return;
+                // Append the content to the suggestions box
+                suggestionsBox.appendChild(content);
             }
 
-            // Show loader while processing
-            signUpBtnText.style.display = "none";
-            signUpBtnLoader.style.display = "inline-block";
 
-            $.ajax({
-                url: "{{ route('register.save') }}",
-                type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: JSON.stringify({
-                    email: email2,
-                    mobileno: phone2,
-                    name: name2,
-                }),
-                contentType: 'application/json',
-                success: function (response) {
-                    // Hide loader when request is successful
-                    signUpBtnText.style.display = "inline-block";
-                    signUpBtnLoader.style.display = "none";
+            // Fetch search suggestions from server
+            function fetchSuggestions(query, isMobile = false) {
+                if (query.length > 2) {
+                    const endpoint = `/search-suggestions?query=${query}&category=${selectedCategory}`;
 
-                    if (response.success) {
-                        showOtpForm();
-                        alert(response.message);
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function (xhr) {
-                    // Hide loader if there's an error
-                    signUpBtnText.style.display = "inline-block";
-                    signUpBtnLoader.style.display = "none";
-
-                    let errorMessage = "An unexpected error occurred. Please try again.";
-                    if (xhr.responseJSON && xhr.responseJSON.message) {
-                        errorMessage = xhr.responseJSON.message;
-                    }
-                    alert(errorMessage);
-                    console.error('Error:', xhr);
+                    fetch(endpoint)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (selectedCategory === "All") {
+                                displaySuggestions({
+                                    products: data.products || [],
+                                    companies: data.companies || []
+                                }, isMobile);
+                            } else if (selectedCategory === "Products") {
+                                displaySuggestions({
+                                    products: data.suggestions || []
+                                }, isMobile);
+                            } else if (selectedCategory === "Companies") {
+                                displaySuggestions({
+                                    companies: data.suggestions || []
+                                }, isMobile);
+                            }
+                        })
+                        .catch(error => console.error("Error fetching suggestions:", error));
+                } else {
+                    clearSuggestions();
                 }
+            }
+
+            // Perform search on form submission
+            function performSearch(event, isMobile = false) {
+                event.preventDefault();
+                const query = document.getElementById(isMobile ? "search-bar-mobile" : "search-bar").value.trim();
+                if (query !== "") {
+                    window.location.href = `/search-results?query=${query}&category=${selectedCategory}`;
+                }
+            }
+
+            // Event listeners for desktop and mobile dropdowns
+            document.getElementById('dropdownButton').addEventListener('click', () => toggleDropdown('dropdownMenu'));
+            document.getElementById('dropdownButtonMobile').addEventListener('click', () => toggleDropdown(
+                'dropdownMenuMobile'));
+
+            // Event listeners for search input
+            document.getElementById('search-bar').addEventListener('input', (e) => fetchSuggestions(e.target.value));
+            document.getElementById('search-bar-mobile').addEventListener('input', (e) => fetchSuggestions(e.target.value,
+                true));
+
+            // Event listeners for form submission
+            document.getElementById('search-form').addEventListener('submit', (e) => performSearch(e));
+            document.getElementById('search-form-mobile').addEventListener('submit', (e) => performSearch(e, true));
+
+            // Initialize the default category
+            selectDropdown("All");
+
+
+        </script>
+
+        @if (!session()->has('city'))
+            @push('scripts')
+                <script>
+                    // get user location
+
+                    window.onload = () => {
+                        // Check if Geolocation is supported
+                        if ('geolocation' in navigator) {
+                            navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+                                enableHighAccuracy: true,
+                                timeout: 5000,
+                                maximumAge: 0
+                            });
+                        } else {
+                            console.error('Geolocation is not supported by your browser.');
+                        }
+                    };
+
+                    function successCallback(position) {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+
+                        fetch(url)
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! Status: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                const address = data.address || {};
+                                const state = address.state || '';
+                                const city = address.city || address.state_district || address.town || address.village || '';
+                                const postalCode = address.postcode || '';
+                                if (state && city && postalCode) {
+                                    // document.getElementById('city-auto-sug').value = `${city}, ${state}, ${postalCode}`;
+                                    document.getElementById('city-auto-sug').value = address.city || address.state_district ||
+                                        address.town || address.village || '';
+                                    sendLocationData({
+                                        state,
+                                        city,
+                                        postalCode
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error fetching geolocation data:", error);
+                            });
+                    }
+
+                    function errorCallback(error) {
+                        console.error('Error retrieving location:', error);
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                alert("User denied the request for Geolocation.");
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                alert("Location information is unavailable.");
+                                break;
+                            case error.TIMEOUT:
+                                alert("The request to get user location timed out.");
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                alert("An unknown error occurred.");
+                                break;
+                        }
+                    }
+
+                    function sendLocationData(data) {
+                        // console.log(data);
+                        $.ajax({
+                            url: "/location",
+                            type: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            data: JSON.stringify(data),
+                            contentType: 'application/json',
+                            success: function (response) {
+                                console.log('Success:', response);
+                            },
+                            error: function (xhr, status, error) {
+                                console.error('Error:', error);
+                            }
+                        });
+                    }
+                </script>
+            @endpush
+        @endif
+        {{-- @if (!session()->has('user_id')) --}}
+        {{-- @push('scripts') --}}
+        <script>
+            //  const openModal = document.getElementById("loginButton");
+            const modal2 = document.getElementById("customModal");
+            const closeModal = document.getElementById("closeModal");
+            const showSignUpForm = document.getElementById("showSignUpForm");
+            const showLoginForm = document.getElementById("showLoginForm");
+            const basicForm = document.getElementById("basicCustomForm");
+            const detailedForm = document.getElementById("detailedCustomForm");
+            const otpForm = document.getElementById("otpCustomForm");
+            const verifyOtpBtn = document.getElementById("verifyOtpBtn");
+            const loginBtn = document.getElementById("signUpBtn2");
+            const sandotp = document.getElementById("sandotp");
+            // Open modal
+            function openModal() {
+                modal2.style.display = "flex";
+            }
+
+            function showOtpForm() {
+                detailedForm.style.display = "none";
+                basicForm.style.display = "none";
+                otpForm.style.display = "block";
+            }
+
+
+            sandotp.addEventListener("click", () => {
+                const email2 = document.getElementById("otp_email").value;
+                const sandotpText = document.getElementById("sandotpText");
+                const sandotpLoader = document.getElementById("sandotpLoader");
+
+                // Show loader while processing
+                sandotpText.style.display = "none";
+                sandotpLoader.style.display = "inline-block";
+
+                $.ajax({
+                    url: "{{ route('login.process') }}",
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: JSON.stringify({
+                        email: email2
+                    }),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        sandotpText.style.display = "inline-block";
+                        sandotpLoader.style.display = "none";
+
+                        if (response.success) {
+                            showOtpForm();
+                            alert(response.message);
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        sandotpText.style.display = "inline-block";
+                        sandotpLoader.style.display = "none";
+
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            alert(xhr.responseJSON.message);
+                        } else {
+                            alert("An unexpected error occurred. Please try again.");
+                        }
+
+                        console.error('Error:', error);
+                    }
+                });
+
             });
-        });
 
-        // Close modal
-        closeModal.addEventListener("click", () => {
-            modal2.style.display = "none";
-        });
+            loginBtn.addEventListener("click", () => {
+                const email2 = document.getElementById("email2").value.trim();
+                const phone2 = document.getElementById("phone2").value.trim();
+                const name2 = document.getElementById("name2").value.trim();
+                const signUpBtnText = document.getElementById("signUpBtnText");
+                const signUpBtnLoader = document.getElementById("signUpBtnLoader");
 
-        // Toggle forms
-        showSignUpForm.addEventListener("click", () => {
-            basicForm.style.display = "none";
-            detailedForm.style.display = "block";
-        });
+                // Basic validation
+                if (!name2 || !email2 || !phone2) {
+                    alert("Please fill all fields.");
+                    return;
+                }
 
-        showLoginForm.addEventListener("click", () => {
-            detailedForm.style.display = "none";
-            basicForm.style.display = "block";
-        });
-    </script>
+                // Show loader while processing
+                signUpBtnText.style.display = "none";
+                signUpBtnLoader.style.display = "inline-block";
 
-    {{-- @endpush --}}
-    {{-- @endif --}}
+                $.ajax({
+                    url: "{{ route('register.save') }}",
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: JSON.stringify({
+                        email: email2,
+                        mobileno: phone2,
+                        name: name2,
+                    }),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        // Hide loader when request is successful
+                        signUpBtnText.style.display = "inline-block";
+                        signUpBtnLoader.style.display = "none";
+
+                        if (response.success) {
+                            showOtpForm();
+                            alert(response.message);
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function (xhr) {
+                        // Hide loader if there's an error
+                        signUpBtnText.style.display = "inline-block";
+                        signUpBtnLoader.style.display = "none";
+
+                        let errorMessage = "An unexpected error occurred. Please try again.";
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        }
+                        alert(errorMessage);
+                        console.error('Error:', xhr);
+                    }
+                });
+            });
+
+            // Close modal
+            closeModal.addEventListener("click", () => {
+                modal2.style.display = "none";
+            });
+
+            // Toggle forms
+            showSignUpForm.addEventListener("click", () => {
+                basicForm.style.display = "none";
+                detailedForm.style.display = "block";
+            });
+
+            showLoginForm.addEventListener("click", () => {
+                detailedForm.style.display = "none";
+                basicForm.style.display = "block";
+            });
+        </script>

@@ -4,8 +4,8 @@
 <script src="{{ asset('business/assets/js/core/bootstrap.min.js') }}"></script>
 
  <!-- jQuery Scrollbar -->
-<script src="{{ asset('business/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-
+{{-- <script src="{{ asset('business/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script> --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <!-- Chart JS -->
  <script src="{{ asset('business/assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
@@ -30,6 +30,7 @@
 
  <!-- Kaiadmin JS -->
  <script src="{{ asset('business/assets/js/kaiadmin.min.js') }}"></script>
+
 
  <!-- Kaiadmin DEMO methods, don't include it in your project! -->
  <script src="{{ asset('business/assets/js/setting-demo.js') }}"></script>
@@ -62,3 +63,4 @@
          fillColor: "rgba(255, 165, 52, .14)",
      });
  </script>
+
