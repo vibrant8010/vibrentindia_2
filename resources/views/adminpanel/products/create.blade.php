@@ -1,96 +1,169 @@
 @extends('adminpanel.adminlayout')
 
 @section('content')
-    <h1 class="form-title">Create Product</h1>
-
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Create Product</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Users</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Create Product</a>
+                </li>
             </ul>
         </div>
-    @endif
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-    <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data" class="product-form">
-        @csrf
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-        <div class="form-row">
-            <label for="name">Product Name:</label>
-            <input type="text" name="name" value="{{ old('name') }}" required>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">User details</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="name">Product Name:</label>
+                                        <input type="text" class="form-control" placeholder="Enter Product Name"
+                                            name="name" value="{{ old('name') }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="description">Description:</label>
+                                        <textarea name="description" class="border-0 w-100" required>{{ old('description') }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="material">Material:</label>
+                                        <input type="text" placeholder="Enter Material" class="form-control"
+                                            name="material" value="{{ old('material') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="size">Size:</label>
+                                        <input type="text" class="form-control" name="size"
+                                            value="{{ old('size') }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="category_id">Category:</label>
+                                        <select name="category_id" class="border-0 w-100" id="category_id" required>
+                                            <option value="" disabled selected>Select a Category</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}"
+                                                    {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="company_id">Company:</label>
+                                        <select name="company_id" id="company_id" class="border-0 w-100"  required>
+                                            <option value="" disabled selected>Select a Company</option>
+                                            @foreach ($companies as $company)
+                                                <option value="{{ $company->id }}"
+                                                    {{ old('company_id') == $company->id ? 'selected' : '' }}>
+                                                    {{ $company->name }}
+                                                </option> <!-- Changed to company name -->
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                <label for="category_type">Category Type:</label>
+                                <select name="category_type" class="border-0 w-100"  required>
+                                    <option value="" disabled selected>Select a Category Type</option>
+                                    <option value="Top" {{ old('category_type') == 'Top' ? 'selected' : '' }}>Top
+                                    </option>
+                                    <option value="Trending" {{ old('category_type') == 'Trending' ? 'selected' : '' }}>
+                                        Trending</option>
+                                    <option value="New Arrival"
+                                        {{ old('category_type') == 'New Arrival' ? 'selected' : '' }}>
+                                        New Arrival</option>
+                                </select>
+                                    </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group form-group-default">
+                                <label for="subcategory_id">Subcategory:</label>
+                                <select name="subcategory_id" class="border-0 w-100"  id="subcategory_id" required>
+                                    <option value="" disabled selected>Select a Subcategory</option>
+                                    @foreach ($subcategories as $subcategory)
+                                        <option value="{{ $subcategory->id }}"
+                                            {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>
+                                            {{ $subcategory->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                <label for="image_url">Image:</label>
+                                <input type="file" name="image_url" required>
+                            </div>
+                                </div>
+
+                            <div class="form-row">
+                                <button type="submit" class="btn-submit m-0">Add Product</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="form-row">
-            <label for="description">Description:</label>
-            <textarea name="description" required>{{ old('description') }}</textarea>
-        </div>
-
-        <div class="form-row">
-            <label for="material">Material:</label>
-            <input type="text" name="material" value="{{ old('material') }}">
-        </div>
-
-        <div class="form-row">
-            <label for="size">Size:</label>
-            <input type="text" name="size" value="{{ old('size') }}">
-        </div>
-
-        <div class="form-row">
-            <label for="category_id">Category:</label>
-            <select name="category_id" id="category_id" required>
-                <option value="" disabled selected>Select a Category</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="form-row">
-            <label for="company_id">Company:</label>
-            <select name="company_id" id="company_id" required>
-                <option value="" disabled selected>Select a Company</option>
-                @foreach($companies as $company)
-                    <option value="{{ $company->id }}" {{ old('company_id') == $company->id ? 'selected' : '' }}>{{ $company->name }}</option> <!-- Changed to company name -->
-                @endforeach
-            </select>
-        </div>
-
-        <div class="form-row">
-            <label for="category_type">Category Type:</label>
-            <select name="category_type" required>
-                <option value="" disabled selected>Select a Category Type</option>
-                <option value="Top" {{ old('category_type') == 'Top' ? 'selected' : '' }}>Top</option>
-                <option value="Trending" {{ old('category_type') == 'Trending' ? 'selected' : '' }}>Trending</option>
-                <option value="New Arrival" {{ old('category_type') == 'New Arrival' ? 'selected' : '' }}>New Arrival</option>
-            </select>
-        </div>
-
-        <div class="form-row">
-            <label for="subcategory_id">Subcategory:</label>
-            <select name="subcategory_id" id="subcategory_id" required>
-                <option value="" disabled selected>Select a Subcategory</option>
-                @foreach($subcategories as $subcategory)
-                    <option value="{{ $subcategory->id }}" {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>{{ $subcategory->name }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="form-row">
-            <label for="image_url">Image:</label>
-            <input type="file" name="image_url" required>
-        </div>
-
-        <div class="form-row">
-            <button type="submit" class="btn-submit">Add Product</button>
-        </div>
-    </form>
-
-    <a href="{{ route('admin.products.index') }}">Back to Product List</a>
+    <a href="{{ route('admin.products.index') }}" class="m-0">Back to Product List</a>
+    </div>
 
     <style>
         .form-title {
@@ -141,7 +214,8 @@
         }
 
         .btn-submit {
-            background-color: #28a745; /* Green for success */
+            background-color: #28a745;
+            /* Green for success */
             color: #fff;
             padding: 10px 15px;
             border: none;
@@ -149,7 +223,8 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
-            margin-left: 160px; /* Align with label width */
+            margin-left: 160px;
+            /* Align with label width */
         }
 
         .btn-submit:hover {
@@ -182,7 +257,8 @@
                 .then(response => response.json())
                 .then(data => {
                     var subcategorySelect = document.getElementById('subcategory_id');
-                    subcategorySelect.innerHTML = '<option value="" disabled selected>Select a Subcategory</option>';
+                    subcategorySelect.innerHTML =
+                        '<option value="" disabled selected>Select a Subcategory</option>';
                     data.subcategories.forEach(function(subcategory) {
                         var option = document.createElement('option');
                         option.value = subcategory.id;

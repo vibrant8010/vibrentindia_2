@@ -937,9 +937,8 @@
                 }
 
                 function sendLocationData(data) {
-                    // console.log(data);
                     $.ajax({
-                        url: "/location",
+                        url: "{{ route('location.store') }}",
                         type: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -947,6 +946,11 @@
                         data: JSON.stringify(data),
                         contentType: 'application/json',
                         success: function (response) {
+                            if(response.products) {
+                                $('#location_products').html(response.products);
+                                // alert('hello');
+                            }
+
                             console.log('Success:', response);
                         },
                         error: function (xhr, status, error) {

@@ -1,8 +1,36 @@
 @extends('adminpanel.adminlayout')
 
 @section('content')
-    <div class="container">
-        <h1>Edit Blog</h1>
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Edit BLog</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Users</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Edit Blog</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">blogs details</h4>
+                    </div>
+                    <div class="card-body">
         <form action="{{ route('admin.blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
             @method('PUT')
@@ -44,8 +72,10 @@
 
             <button type="submit" class="btn btn-primary">Update Blog</button>
         </form>
+                    </div>
+                </div></div></div>
     </div>
-
+        
     <!-- Include CKEditor 5 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use File;
 use App\Models\User;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\CompanyDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 use Symfony\Component\HttpKernel\Attribute\Cache;
-use Illuminate\Support\Facades\Session;
-use App\Models\CompanyDetail;
 
 class UserController extends Controller
 {
@@ -84,7 +87,7 @@ class UserController extends Controller
     // {
     //     // Debug the request data
     //     // dd($request->all());die();
-    
+
     //     // Validate the request
     //     $request->validate([
     //         'username' => 'required|string|max:255',
@@ -112,7 +115,7 @@ class UserController extends Controller
     //         'password' => bcrypt('password'),   // Set a default password or generate one
     //         'role' => $request->input('role'),
     //     ]);
-       
+
     //     // Create company details if the role is "business"
     //     if ($user->hasRole('business')) {
     //         CompanyDetail::create([
@@ -130,7 +133,7 @@ class UserController extends Controller
     //             'pincode' => $request->input('pincode'),
     //         ]);
     //     }
-    
+
     //     return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
     // }
 
@@ -218,15 +221,15 @@ class UserController extends Controller
 
     //     // Update the user with new data
     //     $user->update($validatedData);
-        
+
     //     return redirect()->route('admin.users.index')->with('success', 'User updated successfully!');
     // }
 
 //     public function update(Request $request, $id)
-// { 
+// {
 //     $user = User::findOrFail($id);
 //     // Debug the request data
-    
+
 
 //     // Update user details
 //     $user->update([
@@ -236,7 +239,7 @@ class UserController extends Controller
 //         'role' => $request->input('role'),
 //     ]);
 //     $user->save();
-//     // print_r($user);die();    
+//     // print_r($user);die();
 //     // Update company details if the user has the "business" role
 //     if ($user->hasRole('business')) {
 //         $companyDetails = CompanyDetail::where('business_id', $id)->first();
@@ -255,7 +258,7 @@ class UserController extends Controller
 //             'city' => $request->input('city'),
 //             'state' => $request->input('state'),
 //             'pincode' => $request->input('pincode'),
-//         ]); 
+//         ]);
 //        }
 //         if ($companyDetails) {
 //             // dd($companyDetails );
@@ -282,7 +285,8 @@ class UserController extends Controller
 // }
 
 public function update(Request $request, $id)
-{   
+{
+    //   print_r($id);die();
     $request->validate([
         'username' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email,' . $id,
@@ -401,10 +405,27 @@ public function update(Request $request, $id)
         //  print_r($city);die();
         // Store 'city' in the session
         Session::put('city', $city);
+         // Fetch companies based on name, description, and location
+         if (!empty($city)) {
+         $companies = CompanyDetail::query()
+                    ->where('city', 'like', "%{$city}%");
+         }
 
+        $companies = $companies->get(); // Get filtered companies
+
+        // Get company & category IDs
+        $companyIds = $companies->pluck('id');
+         // Fetch products related to those companies
+        $products = Product::whereIn('company_id', $companyIds)->get();
+        $html = view('partials.near_your_location_products', compact('products'))->render();
+    // Return the products data as JSON
+        return response()->json([
+        'message' => 'Location data received successfully.',
+        'products' => $html,
+         ], 200);
         // Retrieve and print 'city' from the session
         // print_r(session('city'));
-        // die; 
+        // die;
 
         return response()->json([
             'message' => 'Location data received successfully.',
@@ -432,5 +453,55 @@ public function update(Request $request, $id)
         // }
 
         // return 'Unable to fetch location';
+    }
+    public function showImages()
+    {
+        $directory = public_path('images');
+        $files = File::files($directory);
+
+        $images = [];
+
+        foreach ($files as $file) {
+            if (in_array(strtolower($file->getExtension()), ['jpg', 'jpeg', 'png', 'gif','webp'])) {
+                $images[] = [
+                    'name' => $file->getFilename(),
+                    'size' => round($file->getSize() / 1024, 2), // Size in KB
+                ];
+            }
+        }
+
+        return view('images.index', compact('images'));
+    }
+
+    // public function compressImages()
+    // {
+    //     $directory = public_path('images');
+    //     $compressedCount = 0;
+
+    //     if (File::exists($directory)) {
+    //         $files = File::allFiles($directory);
+
+    //         foreach ($files as $file) {
+    //             if (in_array(strtolower($file->getExtension()), ['jpg', 'jpeg', 'png','webp','webp'])) {
+    //                 $image = Image::make($file->getPathname())
+    //                     ->encode($file->getExtension(), 60) // Compress to 60% quality
+    //                     ->save($file->getPathname());
+
+    //                 $compressedCount++;
+    //             }
+    //         }
+    //     }
+
+    //     return redirect()->back()->with('success', "$compressedCount images have been compressed successfully.");
+    // }
+    public function compress($filename)
+    {
+        $path = public_path('images/' . $filename);
+        $img = Image::make($path);
+
+        // Compress and overwrite the image
+        $img->save($path, 20); // 60 is the compression quality (0 - 100)
+
+        return redirect()->back()->with('success', 'Image compressed successfully!');
     }
 }
