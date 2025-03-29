@@ -346,7 +346,7 @@ body {
 
 .main-panel {
   position: relative;
-  width: calc(100% - 265px);
+  width: calc(100% - 264px);
   height: 100vh;
   min-height: 100%;
   float: right;

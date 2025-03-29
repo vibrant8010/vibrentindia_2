@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce Form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 py-10">
+    <div class="max-w-3xl mx-auto bg-white p-8 shadow-lg rounded-lg">
+        <h1 class="text-2xl font-bold mb-6">Salesforce Form</h1>
+        <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D5g000002vHhY" method="POST" class="space-y-4">
+            <input type="hidden" name="oid" value="00D5g000002vHhY">
+            <input type="hidden" name="retURL" value="https://www.newedgerealty.in/">
+
+            <div>
+                <label class="block mb-1" for="first_name">First Name</label>
+                <input class="w-full p-2 border border-gray-300 rounded" type="text" id="first_name" name="first_name" maxlength="40">
+            </div>
+
+            <div>
+                <label class="block mb-1" for="last_name">Last Name</label>
+                <input class="w-full p-2 border border-gray-300 rounded" type="text" id="last_name" name="last_name" maxlength="80">
+            </div>
+
+            <div>
+                <label class="block mb-1" for="email">Email</label>
+                <input class="w-full p-2 border border-gray-300 rounded" type="email" id="email" name="email" maxlength="80">
+            </div>
+
+            <div>
+                <label class="block mb-1" for="mobile">Mobile</label>
+                <input class="w-full p-2 border border-gray-300 rounded" type="text" id="mobile" name="mobile" maxlength="40">
+            </div>
+
+            <div>
+                <label class="block mb-1" for="company">Company</label>
+                <input class="w-full p-2 border border-gray-300 rounded" type="text" id="company" name="company" maxlength="40">
+            </div>
+
+            <div>
+                <label class="block mb-1" for="city">City</label>
+                <input class="w-full p-2 border border-gray-300 rounded" type="text" id="city" name="city" maxlength="40">
+            </div>
+
+            <div>
+                <label class="block mb-1">For</label>
+                <select class="w-full p-2 border border-gray-300 rounded" name="00NS3000004UQ7g">
+                    <option value="">--None--</option>
+                    <option value="Buy">Buy</option>
+                    <option value="Rent">Rent</option>
+                    <option value="Buy/Rent">Buy/Rent</option>
+                    <option value="PG">PG</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block mb-1">Min. Budget</label>
+                <input class="w-full p-2 border border-gray-300 rounded" type="text" name="00NS3000004UQ8G">
+            </div>
+
+            <div>
+                <label class="block mb-1">Max. Budget</label>
+                <input class="w-full p-2 border border-gray-300 rounded" type="text" name="00NS3000004UQ8B">
+            </div>
+
+            <div>
+                <label class="block mb-1">Lead Record Type</label>
+                <select class="w-full p-2 border border-gray-300 rounded" name="recordType">
+                    <option value="">--None--</option>
+                    <option value="012S30000003Qlx">Commercial</option>
+                    <option value="012S30000003Qly">Farm House</option>
+                    <option value="012S30000003Qlz">Industrial</option>
+                    <option value="012S30000003Qm0">Land</option>
+                    <option value="012S30000003Qm1">Pre-leased Property</option>
+                    <option value="012S30000003Qm2">Residential</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block mb-1">Lead Source</label>
+                <select class="w-full p-2 border border-gray-300 rounded" name="lead_source">
+                    <option value="">--None--</option>
+                    <option value="Website">Website</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block mb-1">Detail Requirements</label>
+                <textarea class="w-full p-2 border border-gray-300 rounded" name="00NS3000004UQ80" rows="3"></textarea>
+            </div>
+
+            <div>
+                <label class="block mb-1">Remarks</label>
+                <textarea class="w-full p-2 border border-gray-300 rounded" name="00NS3000004UQ8R" rows="3"></textarea>
+            </div>
+
+            <div>
+                <button class="w-full p-3 bg-blue-500 text-white rounded" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

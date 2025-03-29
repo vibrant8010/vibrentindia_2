@@ -5,7 +5,9 @@
 <body>
     <x-header />
     <x-banner />
+    <section class="section-margin" id="location_products"></section>
     <x-topcategoryy :topCategoryProducts="$topCategoryProducts" />
+
     <x-tranding-product :trendingProducts="$trendingCategoryProducts" />
     <x-new-arrival :newArrivalCategoryProducts="$newArrivalCategoryProducts" />
 
@@ -22,9 +24,10 @@
     </button>
 
     @stack('scripts')
+
     <x-footer />
     <x-script />
-
+  
 
 </body>
 

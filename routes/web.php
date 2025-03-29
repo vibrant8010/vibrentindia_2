@@ -13,7 +13,7 @@ use App\Http\Controllers\Auth\AuthController as AuthController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 
 
-Route::post('/location', [UserController::class, 'store_location'])->name('location_store');
+Route::post('/location', [UserController::class, 'store_location'])->name('location.store');
 Route::get('/search-suggestions', [ProductController::class, 'getSuggestions']);
 Route::get('/company/{id}/products', [ProductController::class, 'companyProducts'])->name('company.products');
 Route::get('/search', [ProductController::class, 'search'])->name('search');
@@ -97,10 +97,10 @@ Route::get('/newarrivalcategory', [ProductController::class, 'newArrivalCategory
 Route::get('/inquiry', [InquiryController::class, 'create'])->name('inquiryform');
 Route::post('/inquiry', [InquiryController::class, 'store']);
 // Product Routes
-Route::post('/inquiry', [InquiryController::class, 'store']);  // Inquiry Form
-Route::get('/inqury', function () {
-    return view('inquiryform');
-})->name('inquiryform');
+// Route::post('/inquiry', [InquiryController::class, 'store']);  // Inquiry Form
+// Route::get('/inqury', function () {
+//     return view('inquiryform');
+// })->name('inquiryform');
 
 
 // Blog Routes
@@ -113,46 +113,46 @@ Route::get('/admin', [AdminAuthController::class, 'showLoginForm'])->name('admin
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-Route::middleware('auth:admin')->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+// Route::middleware('auth:admin')->group(function () {
+//     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
 
-    Route::resource('admin/categories', CategoryController::class); //Category Routes
+//     Route::resource('admin/categories', CategoryController::class); //Category Routes
 
-    Route::prefix('admin/products')->name('admin.products.')->group(function () {
-        Route::get('/', [ProductController::class, 'index'])->name('index');
-        Route::get('/create', [ProductController::class, 'create'])->name('create');
-        Route::post('/', [ProductController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [ProductController::class, 'update'])->name('update');
-        Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy');
-    });
+//     Route::prefix('admin/products')->name('admin.products.')->group(function () {
+//         Route::get('/', [ProductController::class, 'index'])->name('index');
+//         Route::get('/create', [ProductController::class, 'create'])->name('create');
+//         Route::post('/', [ProductController::class, 'store'])->name('store');
+//         Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('edit');
+//         Route::put('/{id}', [ProductController::class, 'update'])->name('update');
+//         Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy');
+//     });
 
-    Route::prefix('admin/users')->name('admin.users.')->group( function () {
-        Route::get('/', [UserController::class, 'index'])->name('index');
-        Route::get('/create', [UserController::class, 'create'])->name('create');
-        Route::post('/', [UserController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [UserController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [UserController::class, 'update'])->name('update');
-        Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
-    });
+//     Route::prefix('admin/users')->name('admin.users.')->group( function () {
+//         Route::get('/', [UserController::class, 'index'])->name('index');
+//         Route::get('/create', [UserController::class, 'create'])->name('create');
+//         Route::post('/', [UserController::class, 'store'])->name('store');
+//         Route::get('/{id}/edit', [UserController::class, 'edit'])->name('edit');
+//         Route::put('/{id}', [UserController::class, 'update'])->name('update');
+//         Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+//     });
 
-    Route::prefix('admin/inquiry')->name('admin.inquiry.')->group(function () {
-        Route::get('/', [InquiryController::class, 'index'])->name('index');
-        Route::get('/{id}/edit', [InquiryController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [InquiryController::class, 'update'])->name('update');
-        Route::delete('/{id}', [InquiryController::class, 'destroy'])->name('destroy');
-    });
+//     Route::prefix('admin/inquiry')->name('admin.inquiry.')->group(function () {
+//         Route::get('/', [InquiryController::class, 'index'])->name('index');
+//         Route::get('/{id}/edit', [InquiryController::class, 'edit'])->name('edit');
+//         Route::put('/{id}', [InquiryController::class, 'update'])->name('update');
+//         Route::delete('/{id}', [InquiryController::class, 'destroy'])->name('destroy');
+//     });
 
-    Route::prefix('admin/blogs')->name('admin.blogs.')->group(function () {
-        Route::get('/', [BlogController::class, 'index'])->name('index');
-        Route::get('/create', [BlogController::class, 'create'])->name('create');
-        Route::post('/', [BlogController::class, 'store'])->name('store');
-        Route::get('/{id}/edit', [BlogController::class, 'edit'])->name('edit');
-        Route::put('/{id}', [BlogController::class, 'update'])->name('update');
-        Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
-    });
-});
+//     Route::prefix('admin/blogs')->name('admin.blogs.')->group(function () {
+//         Route::get('/', [BlogController::class, 'index'])->name('index');
+//         Route::get('/create', [BlogController::class, 'create'])->name('create');
+//         Route::post('/', [BlogController::class, 'store'])->name('store');
+//         Route::get('/{id}/edit', [BlogController::class, 'edit'])->name('edit');
+//         Route::put('/{id}', [BlogController::class, 'update'])->name('update');
+//         Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
+//     });
+// });
 // business Routes
 Route::middleware(['role:business'])->group(function () {
     Route::get('/business/dashboard', [businessController::class, 'index'])->name('business.dashboard');
@@ -204,4 +204,8 @@ Route::middleware(['role:super_admin'])->group(function () {
         Route::put('/{id}', [BlogController::class, 'update'])->name('update');
         Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
     });
+
+    Route::get('admin/blogs/images', [UserController::class, 'showImages'])->name('images.index');
+    Route::get('/images/compress/{filename}', [UserController::class, 'compress'])->name('images.compress');
+    Route::post('/clear-cache', [AdminController::class, 'clear'])->name('cache.clear');
 });

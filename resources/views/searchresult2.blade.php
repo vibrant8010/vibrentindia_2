@@ -354,8 +354,7 @@
                 </div>
 
                 <div class="product-bottom-details">
-                    <h3 c
-                    lass="product-detail-name product-detail-maintitle">
+                    <h3 class="product-detail-name product-detail-maintitle">
                         {{ $product->name }}
                     </h3>
 
