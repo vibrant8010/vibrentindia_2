@@ -4,7 +4,7 @@
             <div class="main-heading">
                 Blog
             </div>
-          
+
         </div>
 
         <div class="row mt-5">
@@ -44,12 +44,12 @@
                             <div class="blog-info">
                                 <p class="blog-date">{{ $blog->created_at->format('d F Y') }}</p>
                                 <h3 class="blog-title">{{ $blog->heading }}</h3>
-                                <a href="{{ route('blogsection', $blog->id) }}" class="read-more">Read More</a>
+                                <a href="{{ route('blogsexction', $blog->id) }}" class="read-more">Read More</a>
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
-            
-        </div>  
+
+        </div>
 </section>

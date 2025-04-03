@@ -11,6 +11,9 @@
     <meta name="keywords" content="Vibrant India Trade is A Premimum B2B Inquiry-Based Model to approach to your business like Kitechenware, Kitchen, Complete Houseware, Houseware, Utensils, Buffing, Home and Decor.">
 
     <!--seo keywords end-->
+<!-- Slick Slider CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
 
     <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

@@ -1,14 +1,53 @@
+<!--this is trading product-->
+<section class="allcategory section-margin" id="TopCategory">
+     <div class="container">
+        <div class="all-category-container">
+            @php
+                $categories = App\Models\Category::all();
+                $categoryImages = [
+                    'kitchenware' => 'images/kitchenwares.png',
+                    'hotelware' => 'images/hotelware.png',
+                    'houseware' => 'images/houseware.png',
+                    'tube pipes' => 'images/tubpipes.png',
+                    'raw materials' => 'images/rowmaterials.png',
+                    'utensils' => 'images/Utils.png',
+                    'gift decore' => 'images/giftdecore.png',
+                    'plasticware'=>'images/plasticware.png',
+                    'tableware'=>'images/tableware.png',
+                    'stainless still'=>'images/stainlesssteel.png'
+                    ]
+            @endphp
 
+            @foreach ($categories as $category)
+                @php
+                    $categoryKey = strtolower(str_replace(['&', '-', '_'], ' ', $category->name)); // Normalize key
+                    $categoryKey = trim(preg_replace('/\s+/', ' ', $categoryKey)); // Remove extra spaces
+                    $imagePath = $categoryImages[$categoryKey] ?? 'images/default-category.png';
+                @endphp
+
+                <div class="Category-img">
+                    <div class="category-menu-item">
+                        <a href="{{ route('category', $category->name) }}" class="category-menu-link">
+                            <img src="{{ asset($imagePath) }}" alt="{{ $category->name }}" class="category-icon">
+                            <span class="category-txt mt-3">{{ $category->name }}</span>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+
+
+     </div>
+</section>
+<!--this is top category-->
 <section class="top-category section-margin" id="TopCategory">
-
     <div class="container">
         <div class="heading-section">
             <div class="main-heading">Top Categories</div>
             <a href="{{ route('innertopcategory') }}" class="btn-view primary-btn d-lg-block d-xl-block d-sm-none d-none d-md-block">View More</a>
         </div>
-
          <!--desktop view-->
-
         <div class="row g-1 desktop-grid">
             {{-- @if ($topCategoryProducts && $topCategoryProducts->isNotEmpty()) --}}
              @foreach ($topCategoryProducts as $product)
@@ -33,27 +72,17 @@
                                     <span>No Logo</span>
                                 @endif
                             </div>
-                            <div class="image_overlay view-arrow-btn hide">
-                                <i class="fas fa-arrow-circle-down"></i>
-                            </div>
+
+
+
                         </div>
                         <div class="card-body product-card-body">
-                            <p class="card-description content-txt" id="description-{{ $product->id }}">
-
-                                <span class="visible-text">
-                                    {{ Str::limit($product->description,60) }}
-                                </span>
-                                <span class="more-text">
-                                    {{ substr($product->description, 40) }}
-                                </span>
-                            </p>
-                            <div class="product-description-div">
-                                <div class="text-wrapper">
-                                    <h6 class="product-name text-product">
+                            <h6 class="product-name text-product">
                                         {{-- <span class="title">Product: </span> --}}
                                          <span class="pro-name">{{ $product->name }}</span>
                                     </h6>
-                                </div>
+                            <div class="product-description-div">
+
                                 <h6 class="company-name">
                                     <span class="title">Company: </span>
                                     <span class="pro-company">{{ $product->company->name ?? 'N/A' }}</span>
@@ -62,8 +91,6 @@
                                     <span class="title">Category: </span>
                                     <span class="pro-name">{{ $product->category->name ?? 'N/A' }}</span>
                                 </h6>
-
-
                                 <h6 class="material-name">
                                     <span class="material-title">Material: </span>
                                     <span class="mt-name">{{ $product->material }}</span>
@@ -72,15 +99,24 @@
                                     <span class="size-title">Size: </span>
                                     <span class="sz-name">{{ $product->size }}</span>
                                 </h6>
+                                <div class="text-wrapper">
+                                    <p class="card-description content-txt" id="description-{{ $product->id }}">
 
+                               <span class="visible-text">
+                                   {{ Str::limit($product->description, 60) }}
+                               </span>
+                               <span class="more-text">
+                                   {{ substr($product->description, 40) }}
+                               </span>
+                           </p>
+                               </div>
                                 <a href="javascript:void(0)" class="read-more"
                                     onclick="toggleReadMore({{ $product->id }})"></a>
-
-
-
                             </div>
                             <!-- CTA button within the card -->
-                            <div class="d-flex justify-content-start mx-2 bottom-btn">
+                            <div class="d-flex justify-content-between w-100 align-items-center">
+
+                            <div class="d-flex justify-content-start bottom-btn">
                                 @auth
                                     <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}"
                                         class="inqury-btn">
@@ -93,6 +129,12 @@
                                     </a>
                                 @endauth
                             </div>
+                            <a class="image_overlay view-arrow-btn detail-btn">
+                              View Detils</a>
+
+
+                        </div>
+
                         </div>
 
                     </div>
@@ -160,7 +202,7 @@
                                 <span class="material-title">Material: </span>
                                 <span class="mt-name">{{ $product->material }}</span>
                             </h6>
-                            <h6 class="product-size">
+                            <h6 class="product-size tranding-product-size">
                                 <span class="size-title">Size: </span>
                                 <span class="sz-name">{{ $product->size }}</span>
                             </h6>

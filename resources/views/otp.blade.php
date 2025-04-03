@@ -7,12 +7,12 @@
 <body>
     <div class="form-outer admin-login">
         <section class="form-container">
-  
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="login-container login-container mx-lg-3 mx-0 reset-box">
-              
+
         <h1 class="register-header">VERIFY EMAIL</h1>
 
         @if(Session::has('success'))
@@ -60,3 +60,4 @@
     </div>
 </body>
 </html>
+

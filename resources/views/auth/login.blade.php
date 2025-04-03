@@ -239,10 +239,9 @@
                 <a href="#" class="forgot-password">Forgot Password?</a>
                 <a
                   type="button"
-                  class="forgot-password mt-2"
-                  id="showBasicForm"
-                >
-                  Login?
+                  class="forgot-password mt-2 form-btn"
+                  id="showBasicForm">
+                  Login
                 </a>
               </div>
             </div>

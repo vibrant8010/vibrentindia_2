@@ -45,8 +45,11 @@
     width: calc(100% / 3);
     float: left;
     text-align: center;
+    justify-content: center;
     position: relative;
     font: 500 13px / 1 "Roboto", sans-serif;
+    align-items: center;
+    gap: 10px;
   }
 
   .progressbar .progress-item.active {
@@ -57,7 +60,7 @@
     background-color: #004f43;
     color: white;
   }
-
+/*
   .progressbar .progress-item::before {
     content: "";
     font: normal normal normal 30px / 50px Ionicons;
@@ -69,8 +72,17 @@
     margin: 0 auto 10px auto;
     position: relative;
     z-index: 99;
+  } */
+  .progressbar .progress-item .registation-icon{
+    width: 55px;
+    height: 55px;
+    z-index: 9;
+    border-radius: 40px;
+    background-color: var(--ternery-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-
   .progressbar .progress-item::after {
     content: "";
     width: 100%;
@@ -81,81 +93,52 @@
     top: 21px;
     z-index: 0;
   }
-
+  .progressbar .progress-item:nth-child(1)::after {
+    width: 0;
+    content: "";
+}
   .progressbar .progress-item.active::after {
     background: #004f43;
     color: white;
   }
 
-  .progressbar .progress-item:nth-child(1):after {
+  /* .progressbar .progress-item:nth-child(1):after {
     content: "";
     display: none;
-  }
-  .progressbar .progress-item::before{
+  } */
+  /* .progressbar .progress-item::before{
     border: 1px solid var(--ternery-color);
     font-size: 22px;
     background-color: #004f43;
     font-weight: 500;
-
-  }
-  .progressbar .progress-item:nth-child(1)::before {
-    content: "\f007";
     font-family: "Font Awesome 6 Free";
-    background-repeat: no-repeat;
     border: 1px solid var(--ternery-color);
     background-position: center;
-  }
-
-  .progressbar .progress-item:nth-child(2)::before {
-    font-family: "Font Awesome 6 Free"; /* Font Awesome font-family */
-    content: "\f11c"; /* Unicode for the fa-keyboard icon */
     background-repeat: no-repeat;
-    background-position: center;
+   content: "";
+   display: block;
+   width: 50px;
+   height: 50px;
+} */
+
+  /* .progressbar .progress-item:nth-child(1)::before {
+    content: "\f007";
   }
+  .progressbar .progress-item:nth-child(2)::before {
+
+    background-image: url(../images/verify.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
 
   .progressbar .progress-item:nth-child(3)::before {
-    font-family: "Font Awesome 6 Free"; /* Font Awesome or your library's font-family */
      background-image: url(../images/paperbill.png);
-    background-repeat: no-repeat;
-    content: "";
-    padding: 10px;
-    background-position: center;
-  }
+  } */
 
     .img-main-cotainer{
     object-fit: initial;
     filter: none !important;
   }
-   /* .img-main-cotainer{
-    padding-bottom:738px;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-  }
-   .img-main-cotainer .img-sub-container{
-    margin: 0;
-    display: block;
-    padding: 0;
-    border: none;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    background: 0 0;
-}
- .img-main-cotainer .img-sub-container img{
-    display: block;
-    height: auto;
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    position: absolute;
-} */
-
   .registration-step-area {
     background-color: transparent !important;
     color: #fff;
@@ -185,23 +168,14 @@
     background-color: var(--light-color);
     border: 1px solid var(--ternery-color);
   }
-
-  /* .carousel-indicators [data-bs-target] .active{
-    background-color: var(--ternery-color);
-    border: 1px solid var(--light-color);
-  } */
-
-
   .registration-form .form-btn-box {
     display: flex;
     justify-content: space-between;
     padding: 15px 0;
   }
-
   .sign-link-btn {
     text-decoration: none;
   }
-
   .custom-btn {
     background-color: rgb(45, 116, 107);
     border: none;

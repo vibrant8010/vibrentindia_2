@@ -644,43 +644,53 @@ if (tabs.length > 0 && contents.length > 0) {
 
 
 /*card visibilty code */
-$(".card-view").hover(function() {
-$(this).find(".view-arrow-btn").removeClass("hide");
-}, function() {
-$(this).find(".view-arrow-btn").addClass("hide");
-});
+document.addEventListener("DOMContentLoaded", function () {
+    // Hover effect to show/hide button
+    document.querySelectorAll(".card-view").forEach(function (card) {
+        card.addEventListener("mouseenter", function () {
+            let button = this.querySelector(".view-arrow-btn");
+            if (button) button.classList.remove("hide");
+        });
 
-$("body").on("click", ".view-arrow-btn", function() {
-var currentCard = $(this).closest(".product-col");  // Get the clicked card's column (product-col)
+        card.addEventListener("mouseleave", function () {
+            let button = this.querySelector(".view-arrow-btn");
+            if (button) button.classList.add("hide");
+        });
+    });
 
-// Toggle arrow icon between up and down
-var currentToggleClass = $(this).find("i");
-$(currentToggleClass).toggleClass("fa-arrow-circle-down fa-arrow-circle-up");
+    // Click event for toggling description visibility
+    document.body.addEventListener("click", function (event) {
+        let button = event.target.closest(".view-arrow-btn");
+        if (!button) return; // If the clicked element is not the button, do nothing
 
+        let currentCard = button.closest(".product-col"); // Get the card container
 
-// Slide up or down the product description for the clicked card only
-currentCard.find(".product-description-div").stop().slideToggle();
-});
+        // Toggle the arrow icon
+        let icon = button.querySelector("i");
+        if (icon) {
+            icon.classList.toggle("fa-arrow-circle-down");
+            icon.classList.toggle("fa-arrow-circle-up");
+        }
 
+        // Toggle visibility of the product description
+        let description = currentCard.querySelector(".product-description-div");
+        if (description) {
+            description.classList.toggle("show-description");
 
-document.addEventListener("DOMContentLoaded", () => {
-const menuItem = document.querySelector(".menu-item");
-const dropdown = document.querySelector(".submenu");
+            // ✅ Change the button text
+            if (description.classList.contains("show-description")) {
+                button.textContent = "Hide Details"; // Change to Hide when expanded
+            } else {
+                button.textContent = "View Details"; // Change to View when collapsed
+            }
+        }
+    });
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) {
+          dropdown.classList.remove("show-dropdown");// Reset for desktop
+        }
+      });
 
-// Toggle dropdown on click for mobile
-menuItem.addEventListener("click", (e) => {
-  if (window.innerWidth <= 768) { // Mobile screen size check
-    e.preventDefault(); // Prevent default link behavior
-    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-  }
-});
-
-// Reset dropdown visibility on window resize
-window.addEventListener("resize", () => {
-  if (window.innerWidth > 768) {
-    dropdown.style.display = ""; // Reset for desktop
-  }
-});
 });
 
 
@@ -735,7 +745,7 @@ window.addEventListener("click", windowOnClick);
         });
 
 
-        /*blog section caresoule */
+        /*blog secttion*/
         $(document).ready(function () {
             $('#blogsection').slick({
                 infinite: true, // Enable infinite looping
@@ -763,3 +773,49 @@ window.addEventListener("click", windowOnClick);
                 ]
             });
         });
+$('#blogsection').owlCarousel({
+  loop:true,
+  margin:20,
+  nav:true,
+  responsive:{
+      0:{
+          items:1
+      },
+      600:{
+          items:3
+      },
+      1000:{
+          items:3
+      }
+  }
+})
+
+/*banner section*/
+
+
+$(document).ready(function(){
+  $('.my-slider').slick({
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: true,
+    dots: true,
+    speed: 300,
+    infinite: true,
+    autoplaySpeed: 5000,
+    autoplay: true,
+    responsive: [
+  {
+    breakpoint: 991,
+    settings: {
+      slidesToShow: 3,
+    }
+  },
+  {
+    breakpoint: 767,
+    settings: {
+      slidesToShow: 1,
+    }
+  }
+]
+  });
+});

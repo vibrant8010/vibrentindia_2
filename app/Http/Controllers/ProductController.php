@@ -146,6 +146,7 @@ class ProductController extends Controller
 
     public function userHomePage()
     {
+        $allCategoryProducts = Product::where('category_type', 'Top')->get();
         $topCategoryProducts = Product::where('category_type', 'Top')->take(4)->get();
         $trendingCategoryProducts = Product::where('category_type', 'Trending')->take(4)->get();
         $newArrivalCategoryProducts = Product::where('category_type', 'New Arrival')
@@ -220,7 +221,7 @@ class ProductController extends Controller
         ->get();
 
         return view('innercategory',['products' => $products,'subcatrgory'=>$subcatrgory]);
-    } 
+    }
 
     public function productDetail($id)
     {

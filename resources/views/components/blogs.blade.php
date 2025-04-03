@@ -5,7 +5,8 @@
                 Blog Section
             </div>
         </div>
-        <div id="blogsection" class="slick-slider">
+
+        <div id="blogsections" class="owl-carousel owl-theme">
             @if (!$blogs->isEmpty())
                 @foreach ($blogs as $blog)
                     <div class="item">
@@ -16,31 +17,35 @@
                                 </div>
                                 <div class="blog-date-container">
                                     <p class="blog-date">{{ $blog->created_at->format('d - F - Y') }}</p>
-                                </div>
+                                   </div>
                             </div>
                         @else
                             <span>No Image</span>
                         @endif
                         <div class="card-body">
                             <div class="blog-info">
-                                <div class="blog-container-title">
+
+                                 <div class="blog-container-title">
                                     <h3 class="blog-title">{{ $blog->heading }}</h3>
                                 </div>
                                 <div class="w-100 d-flex justify-content-center">
-                                    <div class="title-bottom-border"></div>
+                                 <div class="title-bottom-border" style=" height: 1px;
+    width: 190px;
+    background-color: var(--ternery-color);
+    left: 38%;"></div>
                                 </div>
                                 {{-- Truncated Content --}}
                                 <div class="description-area">
-                                    <p class="truncatedContent">
-                                        <span id="content-{{ $blog->id }}">{!! Str::limit($blog->detail_subcontent, 120, '...') !!}</span>
-                                    </p>
-                                    {{-- Full Content (Hidden by default) --}}
-                                    <div id="fullContent-{{ $blog->id }}" class="fullContent" style="display: none;">
-                                        {!! $blog->detail_subcontent !!}
-                                    </div>
-                                    <a href="{{ route('blogsection', $blog->id) }}" class="read-more">View Full Blog</a>
+                                <p class="truncatedContent">
+                                    <span id="content-{{ $blog->id }}">{!! Str::limit($blog->detail_subcontent, 120, '...') !!}</span>
+                                </p>
+                                {{-- Full Content (Hidden by default) --}}
+                                <div id="fullContent-{{ $blog->id }}" class="fullContent" style="display: none;">
+                                    {!! $blog->detail_subcontent !!}
                                 </div>
+                                <a href="{{ route('blogsection', $blog->id) }}" class="read-more">View Full Blog</a>
                             </div>
+                        </div>
                         </div>
                     </div>
                 @endforeach
@@ -49,6 +54,7 @@
     </div>
 </section>
 <script>
+
     document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('.readMore').forEach(function (button) {
         button.addEventListener('click', function (event) {
@@ -68,5 +74,34 @@
             }
         });
     });
+})
+
+/*blog section caresoule */
+$(document).ready(function () {
+$('#blogsections').owlCarousel({
+            loop: true,            // Infinite loop
+            margin: 10,            // Space between items
+            nav: false,            // Hide navigation arrows
+            dots: true,            // Show dots
+            autoplay: true,        // Enable autoplay
+            autoplayTimeout: 6000, // Auto slide every 3 seconds
+            autoplaySpeed: 1200,   // Smooth autoplay transition
+            smartSpeed: 1200,      // Smooth manual transition
+            autoplayHoverPause: true, // Pause on hover
+            slideTransition: 'ease-in-out', // Smooth slide effect
+            items: 1,
+  responsive:{
+      0:{
+          items:1
+      },
+      600:{
+          items:2
+      },
+      991:{
+          items:2
+      }
+  }
 });
+});
+
 </script>

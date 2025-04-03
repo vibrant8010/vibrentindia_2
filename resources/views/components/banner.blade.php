@@ -1,6 +1,6 @@
-<section class="banner-section mx-lg-4 mx-sm-2 mx-1 mt-3">
-  <div class="container-fluid">
-      <div class="row">
+<section class="banner-section">
+  <div class="container-fluid p-0">
+      {{-- <div class="row">
         <!-- Column 1 -->
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6 p-1">
           <div class="slideshow" id="slideshow1">
@@ -64,7 +64,42 @@
             />
           </div>
         </div>
-      </div>
+      </div> --}}
+      <section class="banner-section">
+          <div id="bannersection" class="owl-carousel owl-theme">
+            <div class="item">
+              <img src="{{ asset('images/Houseware_Banner.png') }}" />
+            </div>
+            <div class="item"><h4>2</h4></div>
+            <div class="item"><h4>3</h4></div>
+            <div class="item"><h4>4</h4></div>
+            <div class="item"><h4>5</h4></div>
+          </div>
+      </section>
   </div>
   </section>
 
+  <script>
+   $(document).ready(function () {
+    $("#bannersection").owlCarousel({
+        loop: true,
+        margin: 0,
+        nav: false,
+        dots: true,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 1 // Show 1 item on mobile
+            },
+            600: {
+                items: 1 // Show 2 items on tablets
+            },
+            1000: {
+                items: 1 // Show 3 items on larger screens
+            }
+        }
+    });
+});
+
+
+  </script>

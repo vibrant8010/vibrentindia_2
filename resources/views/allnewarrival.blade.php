@@ -80,6 +80,9 @@
                                             <span>Sign in to Inquire</span>
                                         </a>
                                     </div>
+                                    <div class="image_overlay view-arrow-btn">
+                                        <a>View Detils</a>
+                                    </div>
                                     @endauth
                                 </div>
                             </div>

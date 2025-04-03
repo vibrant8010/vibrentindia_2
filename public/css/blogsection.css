@@ -1,4 +1,5 @@
 
+
   /* Custom Scrollbar */
   .blog-list::-webkit-scrollbar {
     width: 8px;
@@ -40,7 +41,7 @@
     border: 0;
   }
   .blog-section .main-container{
-    padding-bottom: 360px;
+    padding-bottom: 400px;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -61,6 +62,7 @@
 }
 .blog-section .item{
     position: relative;
+    border: 1px solid var(--ternery-color);
 }
 .blog-section .main-container img{
     display: block;
@@ -75,32 +77,12 @@
     margin: auto;
     position: absolute;
 }
-/* .blog-section .main-container.bg_fix{
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
-} */
+
 .blog-section .main-container img{
  height: 100%;
  width: 100%;
 }
 
-/* .blog-section .blog-container-date{
-    position: absolute;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, .08);
-    background-color: var(--ternery-color);
-    color: #666;
-    text-transform: uppercase;
-    padding: 10px;
-    transform: rotate(270deg);
-    display: flex;
-    height: 35px;
-    top: 40%;
-    right: -67px;
-    z-index: 1;
-    align-items: center;
-    justify-content: center;
-} */
 .blog-section .blog-container-date .blog-date{
     height: 10px;
     color: var(--ternery-color);
@@ -114,9 +96,10 @@
 }
 .blog-section .card-body .blog-info .blog-title{
     color: var(--ternery-color);
-    font-size: 16px;
+    font-size: 20px;
     padding: 10px 0;
-   width: 100%;
+    width: 100%;
+    font-weight: 600;
 }
 /* Style for truncated content */
 .truncatedContent {
@@ -147,19 +130,17 @@
 .blog-section .description-area h5,
 .blog-section .description-area p
 {
-    color:var(--shade-color);
-    font-size: 16px;
-    line-height: 23px;
+color: var(--primary-color);
+font-size: 18px;
+line-height: 23px;
+font-weight: 400;
 }
-
-
-
-
 .blog-section .card-body .read-more{
     padding: 8px 17px;
     color: var(--light-color);
     font-size: 16px;
     font-weight: 400;
+    border-radius: 5px;
       cursor: pointer;
     text-decoration: none !important;
     background:  var(--ternery-color);
@@ -175,7 +156,6 @@
     width: 100%;
    display: flex;
    justify-content: center;
-   padding: 10px 0;
 }
  .title-bottom-border{
     height: 1px;
