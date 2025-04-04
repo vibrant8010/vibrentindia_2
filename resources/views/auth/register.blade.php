@@ -663,13 +663,14 @@
                     <!-- progressbar -->
                     <ul id="progressBar" class="progressbar">
                         <li class="progress-item d-flex flex-column active">
+                            <span>
+                                Create Account
+                              </span>
                             <span class="registation-icon">
                                 {{-- <img src="{{ asset('images/verify.png') }}" width="30px" height="30px" /> --}}
                                 <i class="fa-regular fa-user fa-2x" style="color: #ffffff;"></i>
                             </span>
-                            <span>
-                              Create Account
-                            </span>
+
                         </li>
                         <li class="progress-item d-flex flex-column">
                             <span class="registation-icon">

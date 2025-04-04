@@ -1,4 +1,4 @@
-<header aria-hidden="true" class="header-scroll">
+<header aria-hidden="true" class="header-scroll" id="header">
     {{-- /*all category dropdown*/ --}}
     <div class="modal">
         <div class="modal-content">
@@ -157,9 +157,12 @@
                         </span>
                         Sign in
                     </a>
-                    <a href="{{ route('business.register') }}" class="btn-links join-btn">
-                        Join Free
+                    {{-- href="{{ route('business.register') }}" --}}
+                    {{-- id="openPopup" --}}
+                    <a style="cursor: pointer" id="openPopup" onclick="openModal3()" class="btn-links join-btn">
+                      Free Join
                     </a>
+
                 @endif
             </div>
         </div>
@@ -214,7 +217,8 @@
 
         <!--mobile view in show sticky not-->
         <div class="nav-item nav-item d-sm-block d-block d-lg-none d-md-none m-0 sticky-note">
-            <a href="{{ route('business.register') }}" class="btn-links py-3">
+            {{-- href="{{ route('business.register') }}" --}}
+            <a style="cursor: pointer" onclick="openModal3()" class="btn-links py-3">
                 Join Free
             </a>
         </div>

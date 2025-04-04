@@ -819,3 +819,63 @@ $(document).ready(function(){
 ]
   });
 });
+
+// const openPopup = document.getElementById("openPopup");
+// const closePopup = document.getElementById("close-icon");
+// const popup2 = document.getElementById("popup");
+// const overlay = document.getElementById("overlay");
+// const body = document.body;
+// const header = document.getElementById("header");
+
+// openPopup.addEventListener("click", function() {
+//     popup2.classList.add("show");
+//     overlay.classList.add("show");
+//     body.classList.add("no-scroll");
+//     header.classList.add("active");
+// });
+
+// closePopup.addEventListener("click", function() {
+//     popup2.classList.remove("show");
+//     overlay.classList.remove("show");
+//     body.classList.remove("no-scroll");
+//     header.classList.remove("active");
+// });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const modal3view = document.getElementById("customModal3");
+    const overlay = document.getElementById("overlay");
+    const closeModal = document.getElementById("closeModal3"); // Corrected ID
+    const header = document.getElementById("header");
+
+    if (!modal3view || !overlay || !closeModal) {
+        console.error("Error: Modal, overlay, or close button not found! Check HTML IDs.");
+
+        return;
+    }
+
+    function openModal3() {
+        modal3view.style.display = "block";
+        overlay.style.display = "block";
+        header.classList.add("active");
+
+        // Disable clicks outside the modal
+        document.body.style.pointerEvents = "none";
+        modal3view.style.pointerEvents = "auto"; // Allow clicks inside modal
+    }
+
+    function closeModal3() {
+        modal3view.style.display = "none";
+        overlay.style.display = "none";
+        document.body.style.pointerEvents = "auto"; // Enable clicks again
+        header.classList.remove("active");
+    }
+
+    // Close modal when clicking the close button
+    closeModal.addEventListener("click", closeModal3);
+
+    // Close modal when clicking outside the modal (on overlay)
+    overlay.addEventListener("click", closeModal3);
+
+    // Make function globally available
+    window.openModal3 = openModal3;
+});
