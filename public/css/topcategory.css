@@ -78,7 +78,21 @@
     max-height: 262px;
     padding: 20px 14px
 }
-
+.close-description-btn{
+    position: absolute;
+    top: 10px;
+    height: 18px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 17px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .product-description-div .title,
 .product-name .title,

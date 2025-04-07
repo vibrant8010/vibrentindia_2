@@ -35,10 +35,6 @@ submenuItems.forEach((item, index) => {
 });
 });
 
-
-
-
-
 // On DOM Content Loaded, handle descriptions and show/hide "read more" link
 document.addEventListener("DOMContentLoaded", function () {
 const descriptions = document.querySelectorAll('.card-description');
@@ -644,59 +640,111 @@ if (tabs.length > 0 && contents.length > 0) {
 
 
 /*card visibilty code */
-document.addEventListener("DOMContentLoaded", function () {
-    // Hover effect to show/hide button
-    document.querySelectorAll(".card-view").forEach(function (card) {
-        card.addEventListener("mouseenter", function () {
-            let button = this.querySelector(".view-arrow-btn");
-            if (button) button.classList.remove("hide");
-        });
+// document.addEventListener("DOMContentLoaded", function () {
+//     // Hover effect to show/hide button
+//     document.querySelectorAll(".card-view").forEach(function (card) {
+//         card.addEventListener("mouseenter", function () {
+//             let button = this.querySelector(".view-arrow-btn");
+//             if (button) button.classList.remove("hide");
+//         });
 
-        card.addEventListener("mouseleave", function () {
-            let button = this.querySelector(".view-arrow-btn");
-            if (button) button.classList.add("hide");
-        });
-    });
+//         card.addEventListener("mouseleave", function () {
+//             let button = this.querySelector(".view-arrow-btn");
+//             if (button) button.classList.add("hide");
+//         });
+//     });
 
-    // Click event for toggling description visibility
-    document.body.addEventListener("click", function (event) {
-        let button = event.target.closest(".view-arrow-btn");
-        if (!button) return; // If the clicked element is not the button, do nothing
+//     // Click event for toggling description visibility
+//     document.body.addEventListener("click", function (event) {
+//         let button = event.target.closest(".view-arrow-btn");
+//         if (!button) return; // If the clicked element is not the button, do nothing
 
-        let currentCard = button.closest(".product-col"); // Get the card container
+//         let currentCard = button.closest(".product-col"); // Get the card container
 
-        // Toggle the arrow icon
-        let icon = button.querySelector("i");
-        if (icon) {
-            icon.classList.toggle("fa-arrow-circle-down");
-            icon.classList.toggle("fa-arrow-circle-up");
-        }
+//         // Toggle the arrow icon
+//         let icon = button.querySelector("i");
+//         if (icon) {
+//             icon.classList.toggle("fa-arrow-circle-down");
+//             icon.classList.toggle("fa-arrow-circle-up");
+//         }
 
-        // Toggle visibility of the product description
-        let description = currentCard.querySelector(".product-description-div");
-        if (description) {
-            description.classList.toggle("show-description");
+//         // Toggle visibility of the product description
+//         let description = currentCard.querySelector(".product-description-div");
+//         if (description) {
+//             description.classList.toggle("show-description");
 
-            // ✅ Change the button text
-            if (description.classList.contains("show-description")) {
-                button.textContent = "Hide Details"; // Change to Hide when expanded
-            } else {
-                button.textContent = "View Details"; // Change to View when collapsed
-            }
-        }
-    });
-    window.addEventListener("resize", () => {
-        if (window.innerWidth > 768) {
-          dropdown.classList.remove("show-dropdown");// Reset for desktop
-        }
-      });
+//             // ✅ Change the button text
+//             if (description.classList.contains("show-description")) {
+//                 button.textContent = "Hide Details"; // Change to Hide when expanded
+//             } else {
+//                 button.textContent = "View Details"; // Change to View when collapsed
+//             }
+//         }
+//     });
+//     window.addEventListener("resize", () => {
+//         if (window.innerWidth > 768) {
+//           dropdown.classList.remove("show-dropdown");// Reset for desktop
+//         }
+//       });
 
-});
+// });
 
 
 //   var changeClass = function(name){
 //     $('#search, #nav ul').removeAttr('class').addClass(name);
 //   }
+
+
+/*second time adding*/
+document.addEventListener("DOMContentLoaded", function () {
+    document.body.addEventListener("click", function (event) {
+        const viewBtn = event.target.closest(".view-arrow-btn");
+        const closeBtn = event.target.closest(".close-description-btn");
+
+        // ✅ "View Details" button clicked
+        if (viewBtn) {
+            const card = viewBtn.closest(".product-col");
+            const desc = card.querySelector(".product-description-div");
+            const icon = viewBtn.querySelector("i");
+            const text = viewBtn.querySelector("span");
+
+            const isOpen = desc.classList.contains("show-description");
+            desc.classList.toggle("show-description", !isOpen);
+            card.classList.toggle("description-active", !isOpen); // For z-index if needed
+
+            if (icon) {
+                icon.classList.toggle("fa-arrow-circle-up", !isOpen);
+                icon.classList.toggle("fa-arrow-circle-down", isOpen);
+            }
+
+            // if (text) text.textContent = isOpen ? "View Details" : "Hide Details";
+
+            return;
+        }
+
+        // ❌ Close button clicked
+        if (closeBtn) {
+            const card = closeBtn.closest(".product-col");
+            const desc = card.querySelector(".product-description-div");
+            const viewButton = card.querySelector(".view-arrow-btn");
+            const icon = viewButton.querySelector("i");
+            const text = viewButton.querySelector("span");
+
+            desc.classList.remove("show-description");
+            card.classList.remove("description-active");
+
+            if (icon) {
+                icon.classList.remove("fa-arrow-circle-up");
+                icon.classList.add("fa-arrow-circle-down");
+            }
+
+            if (text) text.textContent = "View Details";
+
+            return;
+        }
+    });
+});
+
 
 /*search toggle */
 var modal = document.querySelector(".modal");

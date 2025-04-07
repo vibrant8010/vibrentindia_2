@@ -42,6 +42,7 @@
                                 <span class="trnding-pro-name">{{ $product->name }}</span>
                             </h6>
                             <div class="product-description-div">
+                                <button class="close-description-btn">×</button>
                                 <div class="card-bottom">
 
                                     <h6 class="tranding-product-name">

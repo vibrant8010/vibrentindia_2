@@ -41,6 +41,9 @@
                                 </h6>
 
                         <div class="product-description-div">
+                            <button class="close-description-btn"
+                            >&times;</button>
+
                             <div class="card-bottom">
                                 <h6 class="tranding-product-name">
                                     <span class="title">Company:</span>

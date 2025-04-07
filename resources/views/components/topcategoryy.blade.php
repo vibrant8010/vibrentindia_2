@@ -77,11 +77,14 @@
 
                         </div>
                         <div class="card-body product-card-body">
+
                             <h6 class="product-name text-product">
                                         {{-- <span class="title">Product: </span> --}}
                                          <span class="pro-name">{{ $product->name }}</span>
                                     </h6>
                             <div class="product-description-div">
+                                <button class="close-description-btn"
+                                >&times;</button>
 
                                 <h6 class="company-name">
                                     <span class="title">Company: </span>
@@ -129,9 +132,11 @@
                                     </a>
                                 @endauth
                             </div>
-                            <a class="image_overlay view-arrow-btn detail-btn">
-                              View Detils</a>
-
+                            {{-- <a class="image_overlay view-arrow-btn detail-btn">
+                              View Detils</a> --}}
+                              <a class="image_overlay view-arrow-btn detail-btn">
+                                <span>View Details</span>
+                            </a>
 
                         </div>
 
@@ -172,6 +177,7 @@
                         </div>
                     </div>
                     <div class="card-body product-card-body">
+
                         <p class="card-description content-txt" id="description-{{ $product->id }}">
 
                             <span class="visible-text">

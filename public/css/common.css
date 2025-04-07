@@ -13,6 +13,10 @@ body {
 .trigger {
     display: none;
 }
+.product-col.description-active .card-link {
+    z-index: 0 !important;
+    pointer-events: none; /* Optional: Disable interaction completely */
+}
 
 /*common color*/
 :root {
