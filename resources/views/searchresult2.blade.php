@@ -172,10 +172,83 @@
                 </div>
 
 
-                <button class="filter-btn" style="background-color:transparent;border:0;">
+                {{-- <button class="filter-btn" style="background-color:transparent;border:0;">
                     <i class="fa-solid fa-filter"></i>
-                </button>
+                </button> --}}
+
                 <div class="outer-box-search" style="margin-bottom: 110px;">
+                    <div class="d-lg-none d-md-none d-sm-block d-block">
+                    <div class="d-flex aligin-items-center justify-content-center mobil-rightpart">
+                        <div class="search-section search-page-mb">
+                            <div class="search-location-box">
+                                <div class="inputgroup_location">
+                                    <div class="input_location_box">
+                                        <div class="location-img">
+                                            <img src="{{ asset('images/mapicon.png') }}" alt="location img">
+                                        </div>
+                                        <form method="GET" action="{{ route('search') }}">
+                                            <input type="text" autocomplete="off" class="input_location"
+                                                aria-label="City Auto-suggest" placeholder="Enter City" name="location"
+                                                id="city-auto-sug"
+                                                @if (session()->has('city')) value="{{ session('city') }}" @endif>
+
+                                            <div id="suggestions-box2" class="suggestions-box input_location_box">
+                                                <ul id="suggestions2"></ul>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search-container">
+                                <div class="search-input-box">
+
+                                    <div id="search-form" class="search-box-section">
+                                        <div class="search-btn-box">
+                                            <button type="submit" class="search-btn">
+                                                <img src="{{ asset('images/searchicon.png') }}" alt="location img">
+                                            </button>
+                                        </div>
+                                        <input type="text" name="query" id="search-bar" oninput="fetchSuggestions()"
+                                            autocomplete="off" placeholder="Search here ...">
+                                        <div id="suggestions-box" class="suggestions-box">
+                                            <ul id="suggestions-list" class="pt-2"></ul>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-block d-lg-none d-md-none d-sm-block d-xl-none">
+                            @if (Auth::check())
+                                @auth
+                                    <div class="dropdown logout-dropdown">
+                                        <button class="dropdown-btn">
+                                            <span><i class="fa-regular fa-user" style="color: #000000;"></i></span>
+                                            {{-- {{ Auth::user()->name }} --}}
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                {{ Auth::user()->name }}
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('logout') }}" class="logout-btn"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                    Logout
+                                                </a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                @endauth
+                            @else
+
+                            @endif
+                        </div>
+                    </div>
+                </div>
                     <div class="filter-box">
 
                         <div class="filter-container">
@@ -419,10 +492,7 @@
             });
         </script>
     @else
-        {{-- <div class="product-slideshow-container">
-            <img src="{{ asset('logos/banner.jpg') }}" class="product-details-slides" alt="Slide 1" />
-            <img src="{{ asset('logos/banner2.jpg') }}" class="product-details-slides" alt="Slide 2" />
-        </div> --}}
+
         <div class="container px-2 m-0 py-1">
             <h6 class="not-found-content">No Result found for <span class="not-fond-txt">{{ $searchTerm }}</span>.
                 Showing result for <span class="not-fond-txt">{{ $searchTerm }}</span> insted.</h6>

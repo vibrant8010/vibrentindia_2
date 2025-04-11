@@ -83,8 +83,11 @@
             </div>
 
 
-            <button class="trigger icon-mobile-view"><i class="fa-solid fa-magnifying-glass"
-                    style="color: #000000;"></i></button>
+            <button class="trigger icon-mobile-view">
+                <span class="lg-img">
+                    <img src="{{ asset('images/mobilesearch.png') }}" alt="usericon" height="30px" width="30px">
+                </span>
+            </button>
 
             <div class="d-block d-lg-none d-md-none d-sm-block d-xl-none">
                 @if (Auth::check())
@@ -115,8 +118,8 @@
                 @else
                     <a style="cursor: pointer" onclick="openModal()" class="btn-links icon-mobile-view">
                         <span class="lg-img">
-                            <i class="fa-regular fa-user" style="color: #010409;"></i>
-                        </span>
+                                <img src="{{ asset('images/mobileuser.png') }}" alt="usericon" height="30px" width="30px">
+                            </span>
                         <span class="d-xl-block d-lg-block d-sm-none d-none d-md-block"> Sign in </span>
                     </a>
                 @endif

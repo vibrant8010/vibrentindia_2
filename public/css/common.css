@@ -21,7 +21,8 @@ body {
 /*common color*/
 :root {
     --primary-color: #5F404D;
-    --light-background: #EDE4E8;
+    /* --light-background: #EDE4E8; */
+    --light-background: #E3D5DB;
     --dark-color: #000000e5;
     --light-color: #fff;
     --light-border: #dee2e6;
@@ -895,23 +896,14 @@ option:hover {
 
 .trigger {
     border: none;
-    /* border-radius: 30px;
-    background-color: transparent;
-    cursor: pointer;
-    box-shadow: 0px 0px 2px #8080806e;
-    height: 31px;
-    width: 30px;
-    font-size: 14px; */
 }
 
 .icon-mobile-view {
     border-radius: 30px;
     background-color: transparent;
     cursor: pointer;
-    box-shadow: 0px 0px 2px #8080806e;
     height: 31px;
     width: 30px;
-    font-size: 14px;
     margin-right: 9px;
 }
 

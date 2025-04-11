@@ -637,64 +637,6 @@ if (tabs.length > 0 && contents.length > 0) {
     contents[0].style.display = 'block'; // Show the first tab's content
 }
 });
-
-
-/*card visibilty code */
-// document.addEventListener("DOMContentLoaded", function () {
-//     // Hover effect to show/hide button
-//     document.querySelectorAll(".card-view").forEach(function (card) {
-//         card.addEventListener("mouseenter", function () {
-//             let button = this.querySelector(".view-arrow-btn");
-//             if (button) button.classList.remove("hide");
-//         });
-
-//         card.addEventListener("mouseleave", function () {
-//             let button = this.querySelector(".view-arrow-btn");
-//             if (button) button.classList.add("hide");
-//         });
-//     });
-
-//     // Click event for toggling description visibility
-//     document.body.addEventListener("click", function (event) {
-//         let button = event.target.closest(".view-arrow-btn");
-//         if (!button) return; // If the clicked element is not the button, do nothing
-
-//         let currentCard = button.closest(".product-col"); // Get the card container
-
-//         // Toggle the arrow icon
-//         let icon = button.querySelector("i");
-//         if (icon) {
-//             icon.classList.toggle("fa-arrow-circle-down");
-//             icon.classList.toggle("fa-arrow-circle-up");
-//         }
-
-//         // Toggle visibility of the product description
-//         let description = currentCard.querySelector(".product-description-div");
-//         if (description) {
-//             description.classList.toggle("show-description");
-
-//             // ✅ Change the button text
-//             if (description.classList.contains("show-description")) {
-//                 button.textContent = "Hide Details"; // Change to Hide when expanded
-//             } else {
-//                 button.textContent = "View Details"; // Change to View when collapsed
-//             }
-//         }
-//     });
-//     window.addEventListener("resize", () => {
-//         if (window.innerWidth > 768) {
-//           dropdown.classList.remove("show-dropdown");// Reset for desktop
-//         }
-//       });
-
-// });
-
-
-//   var changeClass = function(name){
-//     $('#search, #nav ul').removeAttr('class').addClass(name);
-//   }
-
-
 /*second time adding*/
 document.addEventListener("DOMContentLoaded", function () {
     document.body.addEventListener("click", function (event) {
@@ -716,9 +658,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 icon.classList.toggle("fa-arrow-circle-up", !isOpen);
                 icon.classList.toggle("fa-arrow-circle-down", isOpen);
             }
-
-            // if (text) text.textContent = isOpen ? "View Details" : "Hide Details";
-
             return;
         }
 
@@ -867,27 +806,6 @@ $(document).ready(function(){
 ]
   });
 });
-
-// const openPopup = document.getElementById("openPopup");
-// const closePopup = document.getElementById("close-icon");
-// const popup2 = document.getElementById("popup");
-// const overlay = document.getElementById("overlay");
-// const body = document.body;
-// const header = document.getElementById("header");
-
-// openPopup.addEventListener("click", function() {
-//     popup2.classList.add("show");
-//     overlay.classList.add("show");
-//     body.classList.add("no-scroll");
-//     header.classList.add("active");
-// });
-
-// closePopup.addEventListener("click", function() {
-//     popup2.classList.remove("show");
-//     overlay.classList.remove("show");
-//     body.classList.remove("no-scroll");
-//     header.classList.remove("active");
-// });
 
 document.addEventListener("DOMContentLoaded", function () {
     const modal3view = document.getElementById("customModal3");

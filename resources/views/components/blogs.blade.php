@@ -16,7 +16,7 @@
                                     <img src="{{ asset($blog->image_url) }}" alt="blog img">
                                 </div>
                                 <div class="blog-date-container">
-                                    <p class="blog-date">{{ $blog->created_at->format('d - F - Y') }}</p>
+                                    <p class="blog-date-view">{{ $blog->created_at->format('d - F - Y') }}</p>
                                    </div>
                             </div>
                         @else

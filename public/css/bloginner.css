@@ -12,47 +12,69 @@
     top: 180px;
     max-height: 100vh;
     overflow-y: auto;
-   
+
     padding: 20px 10px;
  }
 
  .blog-inner-section .item {
     margin-bottom: 20px; /* Add spacing between blog items */
     padding: 10px 5px; /* Add padding inside each blog item */
-    background-color: #fff; /* Add a white background for each blog item */
+    background-color: var(--light-color); /* Add a white background for each blog item */
     border: 1px solid #eee; /* Add a border for each blog item */
     border-radius: 8px; /* Add rounded corners */
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-  
 
+.blog-inner-section .title-section-container{
+    position: absolute;
+    background: var(--light-background);
+    top: 50%;
+    z-index: 9;
+    transform: rotate(90deg);
+    left: -97px;
+    padding: 10px 13px;
+    border-radius: 10px 10px 0 0;
+}
+.blog-date-view{
+    font-size: 18px;
+}
 .blog-inner-section .title{
-    font-size: 24px;
-    font-weight: 500;
+    font-size: 22px;
+    font-weight: 700;
     color: var(--ternery-color);
-    position: relative;
     text-align: center;
     }
-    /* .blog-inner-section .title::after{
-     content: "";
-     height: 3px;
-     width: 120px;
-     display: block;
-     background-color: #289171e5;
+     .blog-date{
+        height: 53px;
+     }
+     .blog-inner-section .date-content{
+        padding: 10px 0;
+     }
+    .blog-inner-section .date-section-container{
+        position: absolute;
+        background: var(--light-background);
+        top: 50%;
+        z-index: 9;
+        transform: rotate(90deg);
+        right: -101px;
+        padding: 0 13px;
+        border-radius: 0 0 10px 10px;
     }
-    .blog-inner-section .title::before{
-        content: "";
-        height: 3px;
-        width: 40px;
-        bottom: -12px;
-        display: block;
-        background-color: #289171e5;
-        position: absolute;  } */
-
+    .oter-text  .inner-blog-date{
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .blog-inner-section  .data-line{
+        display: inline-block;
+        font-size: 44px;
+        font-weight: 200;
+    }
         .blog-inner-section .img-container{
             margin: auto;
             margin-top: 40px;
             margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
         }
 
         .blog-inner-section .img-container img{
@@ -67,14 +89,30 @@
             line-height: 24px;
         }
         .blog-inner-section .text-content{
-            color: #464c4d;
+            color:var(--light-background);
+        }
+        .blog-inner-section .text-content .dot{
+            height: 5px;
+            width: 5px;
+            background-color: var(--dark-color);
+             display: inline-block;
+             margin-left: 20px;
+             border-radius: 10px;
+             margin-top: 13px;
         }
         .blog-inner-section .inner-blog-date{
             color: var(--primary-color);
             text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+        }
+        .blog-inner-section .read-more{
+           color: var(--ternery-color);
         }
  .blog-inner-section .thumbnail_container{
-    padding-bottom: 500px;
+    padding-bottom: 580px;
     display: block;
     position: relative;
     width: 100%;
@@ -94,8 +132,8 @@
     margin: auto;
  }
  .blog-inner-section .subtitle{
-    font-size: 16px;
-    color: #003939;
+    font-size: 20px;
+    color: var(--primary-color);
     line-height: 24px;
     font-weight: 600;
  }
@@ -109,7 +147,9 @@
  .blog-inner-section p{
     font-size: 14px;
     font-weight: 400;
-    color: var(--dark-color);
+    color: #525252;
+    margin: 0;
+    padding: 6px 0;
  }
  .blog-inner-section .thumbnail_container .thumbnail img{
     display: block;
@@ -137,7 +177,7 @@
     font-size: 14px;
     padding: 0;
     margin: 0;
-    font-weight: 600;   
+    font-weight: 600;
     color: var(--shade-color);
  }
  .right-part .blog-inner-title{

@@ -70,10 +70,7 @@
             <div class="item">
               <img src="{{ asset('images/Houseware_Banner.png') }}" />
             </div>
-            <div class="item"><h4>2</h4></div>
-            <div class="item"><h4>3</h4></div>
-            <div class="item"><h4>4</h4></div>
-            <div class="item"><h4>5</h4></div>
+
           </div>
       </section>
   </div>
