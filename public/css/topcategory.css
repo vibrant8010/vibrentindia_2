@@ -36,7 +36,7 @@
     width: 100%;
     left: 0;
     right: 0;
-    background-color:var(--light-background);
+    background-color: var(--light-background);
     box-shadow: 0px 6px 7px rgb(0 0 0 / 7%) !important;
     z-index: 2;
     border-top: 1px solid var(--ternery-color);
@@ -54,17 +54,19 @@
     text-decoration: none;
     cursor: pointer;
 }
+
 .detail-btn:hover {
     background-color: var(--ternery-color);
     text-decoration: none;
     color: var(--light-color);
 }
+
 .product-description-div {
     opacity: 0;
     max-height: 0;
     overflow: hidden;
     position: absolute;
-    bottom: 131px;
+    bottom: 119px;
     background: var(--light-background);
     width: 100%;
     left: 0px;
@@ -78,7 +80,8 @@
     max-height: 262px;
     padding: 20px 14px
 }
-.close-description-btn{
+
+.close-description-btn {
     position: absolute;
     top: 10px;
     height: 18px;
@@ -120,56 +123,6 @@
     }
 }
 
-@media screen and (max-width:575px) {
-    .card-view {
-        padding: 16px 12px;
-        margin: 20px 10px;
-    }
-
-    .card-view {
-        padding: 14px 20px;
-    }
-
-    .product-card-body {
-        padding: 0;
-    }
-
-    .card-view .text-wrapper {
-        margin-top: 3px;
-    }
-
-    .product-name,
-    .company-name,
-    .material-name,
-    .product-size,
-    .tranding-product-name,
-    .tranding-material-name,
-    .tranding-product-size,
-    .card-bottom .material-name,
-    .tranding-product-name .trnding-pro-name,
-    .card-bottom .product-size {
-        margin-bottom: 8px !important;
-    }
-
-    .product-name,
-    .company-name,
-    .material-name,
-    .product-size,
-    .tranding-product-name,
-    .tranding-material-name,
-    .tranding-product-size,
-    .card-bottom .material-name,
-    .tranding-product-name .trnding-pro-name,
-    .card-bottom .product-size {
-        font-size: 13px !important;
-    }
-
-    .product-card-body {
-        position: relative;
-        height: auto;
-    }
-
-}
 
 .card-view .img-container {
     position: relative;
@@ -242,7 +195,9 @@
     display: flex;
     gap: 6px;
     margin-bottom: 18px;
+    line-height: 25px;
 }
+
 .main-logo-container .logo-container {
     max-width: 80px;
     position: absolute;
@@ -251,10 +206,12 @@
     padding: 2px 3px;
     left: 15px;
 }
+
 .logo-container img {
     height: 100%;
     width: 100%;
 }
+
 .text-product {
     font-weight: 500 !important;
     color: #060000;
@@ -263,9 +220,10 @@
     padding: 9px 0;
     /* border-top: 1px solid #8080800d; */
 }
-.card-description.content-txt{
+
+.card-description.content-txt {
     font-weight: 500 !important;
-    color:#6F6F6F;
+    color: #6F6F6F;
     border-top: 1px solid #80808014;
     padding: 9px 0;
     display: block;
@@ -273,6 +231,7 @@
     font-size: 16px;
     line-height: 26px;
 }
+
 .card-bottom .product-name .title,
 .card-bottom .product-name .material-title,
 .card-bottom .product-name .size-title {
@@ -450,8 +409,8 @@ figure.zoom img {
 
 @media screen and (max-width:991px) {
     .product-col {
-        margin-bottom: 106px;
-        height: 300px;
+        margin-bottom: 0;
+        height: 100%;
         min-height: 100%;
     }
 
@@ -461,51 +420,133 @@ figure.zoom img {
         box-shadow: none !important;
         z-index: 999;
     }
-}
-.owl-carousel {
-    display: none !important;
-}
 
-@media screen and (max-width: 991px) {
-    .desktop-grid {
-        display: none;
+    .owl-carousel {
+        display: none !important;
     }
+
 
     .owl-carousel {
         display: block !important;
     }
 
-    /* .image_overlay {
-        display: none;
-    } */
-
     .owl-theme .owl-nav {
         display: none;
     }
+
+    .main-logo-container {
+        padding: 5px 2px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .show-description .product-name,
+    .company-name,
+    .material-name,
+    .product-size,
+    .tranding-product-name,
+    .tranding-material-name,
+    .tranding-product-size,
+    .card-bottom .material-name,
+    .tranding-product-name .trnding-pro-name,
+    .card-bottom .product-size {
+        padding: 2px 4px;
+        gap: 5px;
+        margin-bottom: 10px;
+        line-height: 22px;
+        border-bottom: 2px dotted var(--shade-color);
+    }
+    .tranding-product-name.text-product,
+    .trnding-pro-name{
+      border-bottom: 0 !important;
+    }
+    .show-description {
+      padding: 12px 13px;
+    }
+    .card-description.content-txt {
+      border-top: 0;
+    }
+    .card-view .text-wrapper {
+       padding-bottom: 0;
+     }
 }
 
 @media screen and (max-width:575px) {
+    .card-view {
+        padding: 16px 12px;
+        margin: 20px 10px;
+    }
+    .product-description-div {
+        bottom: 93px;
+    }
+
+    .product-card-body {
+        padding: 0;
+    }
+
+    .card-view .text-wrapper {
+        margin-top: 3px;
+    }
+
+    .main-logo-container .logo-container {
+        left: 27px;
+    }
+
+    .product-name,
+    .company-name,
+    .material-name,
+    .product-size,
+    .tranding-product-name,
+    .tranding-material-name,
+    .tranding-product-size,
+    .card-bottom .material-name,
+    .tranding-product-name .trnding-pro-name,
+    .card-bottom .product-size {
+        margin-bottom: 8px !important;
+    }
+
+    .product-name,
+    .company-name,
+    .material-name,
+    .product-size,
+    .tranding-product-name,
+    .tranding-material-name,
+    .tranding-product-size,
+    .card-bottom .material-name,
+    .tranding-product-name .trnding-pro-name,
+    .card-bottom .product-size {
+        font-size: 13px !important;
+    }
+
+    .product-card-body {
+        position: relative;
+        height: auto;
+    }
+
     .product-col .image-container {
         padding: 0 15px;
     }
 
     .product-col {
-        margin: 15px 19px;
+        margin: 5px;
+        padding: 0;
     }
+
     .product-name,
-    .company-name,
+    .show-description .company-name,
     .tranding-product-name,
     .tranding-material-name,
     .tranding-product-size,
     .material-name,
     .card-bottom .material-name,
     .card-bottom .product-size {
-        border-bottom: 1px solid #d4d4d45e;
+        border-bottom: 1px dotted var(--shade-color);
         padding-bottom: 3px;
-        display: flex;
-        flex-direction: column;
     }
-    .card-view .card-description, .card-view .arrival-card-description, .card-view .tranding-card-description,
+
+    .card-view .card-description,
+    .card-view .arrival-card-description,
+    .card-view .tranding-card-description,
     .tranding-product-name .trnding-pro-name {
         font-size: 13px;
     }
@@ -522,9 +563,6 @@ figure.zoom img {
     .card-view.inner-card {
         height: auto;
     }
-}
-.main-logo-container {
-    padding: 5px 2px;
 }
 
 @media screen and (max-width: 340px) {

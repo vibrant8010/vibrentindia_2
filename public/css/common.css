@@ -327,11 +327,7 @@ option:hover {
     color: var(--dark-color) !important;
 }
 
-@media screen and (max-width:767px) {
-    .cta:before {
-        width: 100% !important;
-    }
-}
+
 
 .search-box:hover input {
     display: block;
@@ -386,7 +382,7 @@ option:hover {
     .main-heading {
         font-size: 26px;
     }
-
+x`
     .main-heading::before {
         top: 41%;
     }
@@ -396,44 +392,6 @@ option:hover {
 .heading-section {
     display: flex;
     justify-content: space-between;
-}
-
-@media screen and (max-width:575px) {
-    .main-heading {
-        font-size: 24px;
-    }
-    .heading-section {
-        display: block;
-    }
-
-    .main-heading::before {
-        display: none;
-    }
-
-    .primary-btn {
-        padding: 6px 10px;
-        color: var(--primary-color);
-        border-radius: 20px;
-        font-size: 17px;
-    }
-
-    .primary-btn:hover {
-        border-radius: 20px;
-        color: var(--dark-color);
-        background-color: transparent;
-    }
-
-    .mobile-btn {
-        margin: 10px 0;
-        padding: 6px 15px;
-        font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 440px) {
-    .main-heading {
-        font-size: 20px;
-    }
 }
 
 .inqury-cheap {
@@ -494,14 +452,6 @@ option:hover {
     position: absolute;
     margin: auto;
 }
-
-@media screen and (max-width:575px) {
-    .card-view .image-container .thumbnail_container {
-        /* padding-bottom: 65%; */
-        padding-bottom: 80%;
-    }
-}
-
 /*common popup*/
 .popup-overlay {
     display: none;
@@ -589,6 +539,7 @@ option:hover {
     padding: 4px 10px;
     font-size: 14px;
     border-radius: 20px;
+    margin-top: 0 !important;
     color: var(--light-color);
     transition: 0.5s all ease-in-out;
     text-decoration: none;
@@ -938,6 +889,16 @@ option:hover {
 }
 
 @media screen and (max-width:767px) {
+.primary-btn {
+    border-radius: 30px;
+}
+.detail-btn,
+.inqury-btn{
+   font-size: 12px;
+}
+   .cta:before {
+        width: 100%;
+    }
 .custom-modal {
     width: 90% !important;
 }
@@ -1288,3 +1249,51 @@ option:hover {
         transform: scale(1);
     }
 }
+@media screen and (max-width:575px) {
+    .card-view .image-container .thumbnail_container {
+        padding-bottom: 100%;
+    }
+    .main-heading {
+        font-size: 24px;
+    }
+    .heading-section {
+        display: block;
+    }
+
+    .main-heading::before {
+        display: none;
+    }
+    .inqury-btn {
+        padding: 4px 6px;
+        font-size: 12px;
+     }
+     .detail-btn {
+        padding: 4px 6px;
+        font-size: 12px;
+     }
+    .primary-btn {
+        padding: 6px 10px;
+        color: var(--primary-color);
+        border-radius: 20px;
+        font-size: 17px;
+    }
+
+    .primary-btn:hover {
+        border-radius: 20px;
+        color: var(--dark-color);
+        background-color: transparent;
+    }
+
+    .mobile-btn {
+        margin: 10px 0;
+        padding: 6px 15px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .main-heading {
+        font-size: 20px;
+    }
+}
+

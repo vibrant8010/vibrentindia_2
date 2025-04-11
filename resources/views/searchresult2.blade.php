@@ -532,19 +532,19 @@
                                                         <span>No Logo</span>
                                                     @endif
                                                 </div>
-                                                <div class="image_overlay view-arrow-btn hide">
+                                                {{-- <div class="image_overlay view-arrow-btn hide">
                                                     <i class="fas fa-arrow-circle-down"></i>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <div class="card-body product-card-body">
                                                 <p class="card-description content-txt"
                                                     id="description-{{ $product->id }}">
 
                                                     <span class="visible-text">
-                                                        {{ Str::limit($product->description, 70) }}
+                                                        {{ Str::limit($product->description, 45) }}
                                                     </span>
                                                     <span class="more-text">
-                                                        {{ substr($product->description, 70) }}
+                                                        {{ substr($product->description, 45) }}
                                                     </span>
                                                 </p>
                                                 <div class="product-description-div">
@@ -582,7 +582,9 @@
 
                                                 </div>
                                                 <!-- CTA button within the card -->
-                                                <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                                <div class="d-flex justify-content-between w-100 align-items-center">
+
+                                                <div class="d-flex justify-content-between bottom-btn w-100">
                                                     @auth
                                                         <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}"
                                                             class="inqury-btn">
@@ -595,6 +597,11 @@
                                                             <span>Sign in to Inquire</span>
                                                         </a>
                                                     @endauth
+
+                                                    <a class="image_overlay view-arrow-btn detail-btn">
+                                                        <span>View Details</span>
+                                                    </a>
+                                                </div>
                                                 </div>
                                             </div>
 
