@@ -13,8 +13,8 @@
             </div>
             <div class="row g-1">
                 @foreach($newArrivalCategoryProducts as $product)
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                        <div class="card-view inner-card">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 product-col">
+                        <div class="card-view">
                             <a href="{{ route('product.show', $product->id) }}" class="card-link"></a>
                             <div class="image-container">
                                 <div class="thumbnail_container">
@@ -23,6 +23,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="main-logo-container">
                             <div class="logo-container" >
                                 @if ($product->company && $product->company->logo_url)
                                 <img src="{{ asset($product->company->logo_url) }}"  class="logo-image" alt="{{ $product->company->name }}">
@@ -30,19 +31,25 @@
                                 <span>No Logo</span>
                             @endif
                             </div>
+                        </div>
 
-                            <div class="text-wrapper">
-                                 <h6 class="tranding-product-name">
-                                    {{-- <span class="title">Product:</span> --}}
-                                    <span class="trnding-pro-name">{{ $product->name }}</span>
-                                </h6>
 
-                            </div>
-                            <div class="card-bottom">
-                                <h6 class="tranding-product-name">
-                                    <span class="title">Company:</span>
-                                    <span class="tranding-pro-name">{{ $product->company->name }}</span>
-                                </h6>
+                            <div class="card-body product-card-body">
+                                <div class="text-wrapper">
+                                    <h6 class="tranding-product-name">
+                                       {{-- <span class="title">Product:</span> --}}
+                                       <span class="trnding-pro-name">{{ $product->name }}</span>
+                                   </h6>
+
+                               </div>
+                                <div class="product-description-div">
+                                    <button class="close-description-btn">&times;</button>
+                                    <h6 class="tranding-product-name">
+
+                                        <span class="title">Company:</span>
+                                        <span class="tranding-pro-name">{{ $product->company->name }}</span>
+                                    </h6>
+
                                 <h6 class="tranding-product-name">
                                     <span class="title">Category:</span>
                                     <span class="tranding-pro-name">{{ $product->category->name }}</span>
@@ -67,6 +74,7 @@
 
                                     </p>
 
+                                </div>
                                 <div class="d-flex justify-content-start mx-2 bottom-btn">
                                     @auth
                                     <div class="d-flex justify-content-start mx-2 bottom-btn">
@@ -75,13 +83,18 @@
                                         </a>
                                     </div>
                                     @else
-                                    <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                    <div class="d-flex justify-content-between w-100 align-items-center mt-2">
+
+                                    <div class="d-flex justify-content-start bottom-btn">
                                         <a href="{{ route('login') }}" class="inqury-btn mt-1">
                                             <span>Sign in to Inquire</span>
                                         </a>
                                     </div>
-                                    <div class="image_overlay view-arrow-btn">
-                                        <a>View Detils</a>
+                                    <div>
+                                        <a class="image_overlay view-arrow-btn detail-btn">
+                                            <span>View Details</span>
+                                        </a>
+                                        </div>
                                     </div>
                                     @endauth
                                 </div>

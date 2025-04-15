@@ -7,7 +7,7 @@
     <section class="content product-detail-container">
         <div class="product-container container-fluid">
             <div class="row">
-                <div class="col-xl-8 col-lg-7 col-md-8 col-sm-12">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
                     <div class="row">
                         <div class="col-lg-5 col-md-6 col-sm-12">
                             <article class="demo-area">
@@ -17,6 +17,9 @@
                                     </a>
                                 </div>
                             </article>
+
+
+
                         </div>
                         <div class="p-0 col-lg-7 col-md-6 col-sm-12">
                             <div class="detail">
@@ -139,7 +142,7 @@
                                                 <a target="_blank" rel="noopener noreferrer" role="button"
                                                     title="Whats App Chat" aria-label="Whats app chat" class="no-link">
                                                     <span class="whatus-icon"><i class="fa-brands fa-whatsapp"
-                                                            style="color: #2aa81a;"></i></span>
+                                                            style="color: #ffffff;"></i></span>
                                                     <span class="whatsup-link">WhatsApp</span>
                                                 </a>
                                             </div>
@@ -156,19 +159,62 @@
                             </div>
                         </div>
 
+                        <div class="col-lg-12">
+                            <div class="sub-product-section">
+                                <div class="owl-carousel owl-theme" id="subproduct">
+                                    <div class="item">
+                                        <div class="sub-img-box">
+                                            <img src="{{ asset('images/1732685990_tierBox.jpg') }}" alt="company logo"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="sub-img-box">
+                                            <img src="{{ asset('images/1732784112_premium_tasla.webp') }}" alt="company logo"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="sub-img-box">
+                                            <img src="{{ asset('images/1732685990_tierBox.jpg') }}" alt="company logo"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="sub-img-box">
+                                            <img src="{{ asset('images/1732784112_premium_tasla.webp') }}" alt="company logo"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="sub-img-box">
+                                            <img src="{{ asset('images/1732685990_tierBox.jpg') }}" alt="company logo"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="sub-img-box">
+                                            <img src="{{ asset('images/1732784112_premium_tasla.webp') }}" alt="company logo"
+                                            >
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-lg-12 col-12 d-lg-block product-desc-section">
                             <ul class="nav nav-tabs" id="productDesc" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link fw-bold py-2 px-0 active" data-tab="about-info"
+                                    <a class="nav-link fw-bold py-2 px-0 active" data-tab="about-info"
                                         type="button" role="tab">
                                         <span class="tab-nav-link-text fw-bold">About Company</span>
-                                    </button>
+                                </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link fw-bold py-2 px-0" data-tab="more-product" type="button"
+                                    <a class="nav-link fw-bold py-2 px-0" data-tab="more-product" type="button"
                                         role="tab">
                                         <span class="tab-nav-link-text fw-bold">More Products</span>
-                                    </button>
+                                </a>
                                 </li>
                             </ul>
                         </div>
@@ -186,7 +232,6 @@
                                                 <p class="description-title">Legal Status: <span
                                                         class="description-txt">{{ $product->company->legal_status }}</span>
                                                 </p>
-
                                             </div>
                                         </div>
                                         <p class="description-title">Nature of Business: <span
@@ -209,7 +254,7 @@
                                         // print_r($categories2);
                                     @endphp
                                     @forelse ($categories2 as $reletaedProductes)
-                                        <div class="col-xl-4 col-lg-3 col-md-4 col-sm-6">
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
                                             <div class="card-view inner-card">
                                                 <a href="/product/{{ $reletaedProductes->id }}"
                                                     class="card-link"></a>
@@ -509,30 +554,7 @@
                         </div>
 
                     </div>
-
-
-                    <!--company details section for bottom -->
-
-                    <!-- <div class="product-container">
-                        <h4 class="main-heading my-4" style="display: block;">About the Company</h4>
-                    </div>
-                    <div class="productdetail-container container">
-                        <div class="company-details mx-2">
-                            <div class="row">
-                                <div class="col-lg-12 d-flex justify-content-between">
-                                    <p class="description-title">GST Registration Date: <span class="description-txt">{{ $product->company->gst_registration_date }}</span></p>
-                                    <p class="description-title">Legal Status: <span class="description-txt">{{ $product->company->legal_status }}</span></p>
-
-                                </div>
-                            </div>
-                            <p class="description-title">Nature of Business: <span class="description-txt">{{ $product->company->nature_of_business }}</span></p>
-                            <h4 class="description-titletxt">Description</h4>
-                            {{-- <p>{{ $product->company->description }}</p> --}}
-
-
-                        </div>
-                    </div> -->
-                </div>
+                  </div>
 
                 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 d-lg-block d-sm-none d-md-block d-sm-none d-none">
                     <div class="company-personal-details sticky-top-new">
@@ -543,14 +565,14 @@
                         </div>
                         <h6 class="company-product-title detail-text">{{ $product->name }}</h6>
                         <h6 class="detail-text company-address">{{ $fullAddress }}</h6>
-                        <div class="company-start-date"><span class="title">since:</span> <span class="title-ans">
+                        <div class="company-start-date"><span class="title">since</span> <div class="title-ans">
                                 {{-- {{ $product->company->gst_registration_date }}2011 --}}
-                                <p>Registration Year: {{ $registrationYear }}</p>
-                                <p>Years Since Registration: {{ $yearsSinceRegistration }} years</p>
-                            </span></div>
-                        <div class="company-business-category"><span class="title">Business Category :</span> <span
+                                <p class="p-0 m-0 title-ans">Registration Year: {{ $registrationYear }}</p>
+                                <p class="p-0 m-0 title-ans">Years Since Registration: {{ $yearsSinceRegistration }} years</p>
+                        </div></div>
+                        <div class="company-business-category"><span class="title">Business Category</span> <span
                                 class="title-ans">{{ $product->company->nature_of_business ?? '' }}</span></div>
-                        <div class="company-product-count"><span class="title">Number of Product :</span> <span
+                        <div class="company-product-count"><span class="title">Number of Product</span> <span
                                 class="title-ans"> {{ $product->company->products->count() ?? '0' }}</span></div>
                         <div class="mobile-no-content">
                             <ul class="mobile-no-data">
@@ -569,7 +591,7 @@
                                         <a target="_blank" rel="noopener noreferrer" role="button"
                                             title="Whats App Chat" aria-label="Whats app chat" class="no-link">
                                             <span class="whatus-icon"><i class="fa-brands fa-whatsapp"
-                                                    style="color: #2aa81a;"></i></span>
+                                                    style="color: #ffffff;"></i></span>
                                             <span class="whatsup-link">WhatsApp</span>
                                         </a>
                                     </div>

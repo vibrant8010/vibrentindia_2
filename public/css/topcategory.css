@@ -20,13 +20,20 @@
 .product-col {
     position: relative;
     min-height: 441px;
-    margin-bottom: 17px;
+    margin-bottom: 21px;
 }
 
 .product-col .image-container {
     position: relative;
 }
-
+.tranding-product-name {
+    height: 32px;
+    overflow-y: scroll;
+    overflow-x:hidden;
+}
+.tranding-product-name::-webkit-scrollbar{
+    width: 0;
+}
 .product-card-body {
     padding: 15px;
     position: absolute;
@@ -83,9 +90,9 @@
 
 .close-description-btn {
     position: absolute;
-    top: 10px;
+    top: 4px;
     height: 18px;
-    right: 10px;
+    right: 5px;
     border: none;
     background: transparent;
     font-size: 17px;
@@ -194,7 +201,7 @@
     font-weight: 500 !important;
     display: flex;
     gap: 6px;
-    margin-bottom: 18px;
+    margin-bottom: 8px;
     line-height: 25px;
 }
 
@@ -215,7 +222,7 @@
 .text-product {
     font-weight: 500 !important;
     color: #060000;
-    height: 45px;
+    height: 62px;
     /*border-bottom: 1px solid #80808014;*/
     padding: 9px 0;
     /* border-top: 1px solid #8080800d; */
@@ -370,7 +377,16 @@ figure.zoom img {
     text-decoration: underline;
     font-size: 12px;
 }
-
+.show-description {
+    opacity: 1;
+    max-height: 262px;
+    padding: 20px 14px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.show-description::-webkit-scrollbar{
+    width: 0;
+}
 
 /*desktop view*/
 @media screen and (max-width:1199px) {
@@ -398,7 +414,7 @@ figure.zoom img {
     .pro-name,
     .card-bottom .material-name,
     .card-bottom .product-size {
-        font-size: 14px;
+        font-size: 16px;
 
     }
 
@@ -413,7 +429,9 @@ figure.zoom img {
         height: 100%;
         min-height: 100%;
     }
-
+  #topcategorycaresoule .owl-dots{
+    display: none;
+}
     .product-card-body {
         position: relative;
         height: auto;
@@ -453,15 +471,16 @@ figure.zoom img {
         padding: 2px 4px;
         gap: 5px;
         margin-bottom: 10px;
-        line-height: 22px;
+        line-height: 15px;
         border-bottom: 2px dotted var(--shade-color);
     }
     .tranding-product-name.text-product,
     .trnding-pro-name{
       border-bottom: 0 !important;
+      height: 46px;
     }
     .show-description {
-      padding: 12px 13px;
+      padding: 16px 13px;
     }
     .card-description.content-txt {
       border-top: 0;
@@ -469,6 +488,11 @@ figure.zoom img {
     .card-view .text-wrapper {
        padding-bottom: 0;
      }
+     #newarrivalcaresoule .product-description-div {
+        bottom: 106px;
+        height: 240px;
+        overflow: scroll;
+    }
 }
 
 @media screen and (max-width:575px) {
@@ -476,8 +500,11 @@ figure.zoom img {
         padding: 16px 12px;
         margin: 20px 10px;
     }
+    .card-description.content-txt {
+        padding: 0;
+    }
     .product-description-div {
-        bottom: 93px;
+        bottom: 100px;
     }
 
     .product-card-body {
@@ -502,7 +529,7 @@ figure.zoom img {
     .card-bottom .material-name,
     .tranding-product-name .trnding-pro-name,
     .card-bottom .product-size {
-        margin-bottom: 8px !important;
+        margin-bottom: 20px !important;
     }
 
     .product-name,
@@ -515,9 +542,14 @@ figure.zoom img {
     .card-bottom .material-name,
     .tranding-product-name .trnding-pro-name,
     .card-bottom .product-size {
-        font-size: 13px !important;
+        font-size: 14px !important;
+        padding-top: 0;
+        overflow: hidden;
     }
 
+    .product-name, .company-name, .tranding-product-name, .tranding-material-name, .tranding-product-size, .pro-name, .card-bottom .material-name, .card-bottom .product-size {
+        font-size: 14px;
+    }
     .product-card-body {
         position: relative;
         height: auto;
@@ -532,23 +564,13 @@ figure.zoom img {
         padding: 0;
     }
 
-    .product-name,
-    .show-description .company-name,
-    .tranding-product-name,
-    .tranding-material-name,
-    .tranding-product-size,
-    .material-name,
-    .card-bottom .material-name,
-    .card-bottom .product-size {
-        border-bottom: 1px dotted var(--shade-color);
-        padding-bottom: 3px;
-    }
-
     .card-view .card-description,
     .card-view .arrival-card-description,
     .card-view .tranding-card-description,
     .tranding-product-name .trnding-pro-name {
-        font-size: 13px;
+        font-size: 14px;
+        line-height: 19px;
+        height: 50px;
     }
 
     .product-description-div .title,
@@ -557,7 +579,7 @@ figure.zoom img {
     .tranding-material-title,
     .tranding-size-title,
     .material-name .material-title {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .card-view.inner-card {

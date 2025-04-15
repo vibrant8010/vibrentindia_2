@@ -77,10 +77,7 @@
             <div class="col-lg-7 text-white">
                 <div class="d-flex justify-content-center flex-column align-items-center">
                     <div class="d-flex justify-content-end flex-column">
-                        <div>
-                            <h4 class="text-white">Our Newsletter</h4>
-                        </div>
-                        <div class="mt-4 mb-4 d-flex ">
+                        <div class="mt-4 mb-4 d-flex social-link-container">
                             <div class="footer-main-social">
                                 <div class="footer-social-icon">
                                     <a class="footer-icon-link" href="#"><i

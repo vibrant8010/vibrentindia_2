@@ -25,6 +25,7 @@ body {
     --light-background: #E3D5DB;
     --dark-color: #000000e5;
     --light-color: #fff;
+    --secondery-color:#A37387;
     --light-border: #dee2e6;
     --ternery-color: #291d21c2;
     --shade-color: #ABABAB;
@@ -382,7 +383,6 @@ option:hover {
     .main-heading {
         font-size: 26px;
     }
-x`
     .main-heading::before {
         top: 41%;
     }

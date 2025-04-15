@@ -603,7 +603,7 @@ fetch(url2)
 
 
 document.addEventListener('DOMContentLoaded', () => {
-const tabs = document.querySelectorAll('.nav-item .nav-link'); // Select all tabs
+const tabs = document.querySelectorAll('.nav-tabs .nav-item .nav-link'); // Select all tabs
 const contents = document.querySelectorAll('.tab-content'); // Select all tab content sections
 
 tabs.forEach(tab => {
@@ -844,4 +844,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Make function globally available
     window.openModal3 = openModal3;
+});
+
+
+
+/*sub product caresolue*/
+$('#subproduct').owlCarousel({
+    loop:true,
+    margin:5,
+    autoplay:true,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:4
+        }
+    }
 });

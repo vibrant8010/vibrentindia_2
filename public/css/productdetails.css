@@ -48,17 +48,17 @@ margin-top: 0 !important;
   }
 
   .product-detail-container .product-title{
-    color: var(--dark-color);
+    color: var(--primary-color);
     padding: 5px 0;
-    font-weight: 500;
-    border-top: 1px solid #ededed;
-    border-bottom: 1px solid #ededed;
+    font-weight: 600;
+    /* border-top: 1px solid #ededed;
+    border-bottom: 1px solid #ededed; */
     margin: 8px 0;
-    font-size: 20px;
+    font-size: 28px;
   }
   .product-detail-container .product-subtitle{
-    font-size: 15px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 300;
     line-height: 22px;
     color: #3a4040;
     margin: 11px 0;
@@ -75,17 +75,15 @@ margin-top: 0 !important;
   .product-detail-container .product-info {
          background-color:transparent;
          padding: 0;
-         box-shadow: 1px 1px 2px 1px #00000040;
+         /* box-shadow: 1px 1px 2px 1px #00000040; */
          padding: 11px 11px 10px 5px;
-        /* padding: 17px 0; */
         border-radius: 0;
-        /* margin-bottom: 20px; */
         }
 
        .product-detail-container .info-item {
        display: flex;
        justify-content: space-between;
-       border-bottom: 1px dotted #80808054;
+       border-bottom: 1px solid var(--primary-color);
        padding: 4px 0;
     }
 
@@ -97,16 +95,16 @@ margin-top: 0 !important;
 
       .product-detail-container .info-label {
         font-weight: 500;
-      color: #5b5252;
-      font-size: 15px;
+      color:var(--secondery-color);
+      font-size: 16px;
      }
 
       .product-detail-container .info-value {
         padding: 5px 10px;
         border-radius: 4px;
         font-weight: 500;
-        color: var(--dark-color);
-        font-size: 14px;
+        color: var(--secondery-color);
+        font-size: 16px;
     }
 
 
@@ -213,14 +211,14 @@ margin-top: 0 !important;
     .mobile-no-content .mobile-no-data .action_button_filled{
         background: #058a07;
         padding: 6px 10px;
-        border-radius: 10px;
-        border: solid 1px#006e02;
+        border-radius: 5px;
     }
     .mobile-no-content .mobile-no-data .whatsup-content .action_whatsup_filled{
-        background: var(--light-color);
+        background: #058a07;
         padding: 6px 10px;
-        border-radius: 10px;
-        border: solid 1px#006e02;
+        border-radius: 5px;
+        color: var(--light-color);
+        text-decoration: none;
     }
 
     .mobile-no-content .mobile-no-data .company-no,
@@ -233,9 +231,12 @@ margin-top: 0 !important;
     font-size: 16px;
 }
 .mobile-no-content .mobile-no-data .whatsup-link{
-    color: var(--dark-color);
     font-weight: 600;
     font-size: 15px;
+    color: var(--light-color);
+    text-decoration: none;
+}
+.no-link{
     text-decoration: none;
 }
 .mobile-no-content .mobile-no-data .whatsup-icon,
@@ -415,20 +416,23 @@ margin-top: 0 !important;
    border: 1px solid var(--dark-color);
    margin: 0 12px;
    border-radius:13px;
+   background-color: #FDF9FB;
    box-shadow: rgba(0, 0, 0, 0.078) 1px 2px 12px !important;
+   text-align: center;
 }
 .company-personal-details .detail-text{
-    font-size: 13px;
+    font-size: 16px;
+    color: var(--primary-color);
     padding: 0 0;
+    font-weight: 500;
 }
-.company-personal-details .company-product-title{
-    color: var(--dark-color);
-}
+
 .company-personal-details .company-address{
-    color: #544848;
+    color: var(--primary-color);
     font-weight: 400;
+    font-size: 16px;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--dark-color);
+    border-bottom: 1px solid var(--secondery-color);
 }
 .company-personal-details .company-start-date,
 .company-personal-details .company-business-category,
@@ -440,13 +444,14 @@ margin-top: 0 !important;
     display: block;
     font-size: 14px;
     letter-spacing: 1px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .company-personal-details .title-ans{
     display: block;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
+    color: var(--primary-color);
 }
 
 .lum-close-button {
@@ -472,7 +477,9 @@ margin-top: 0 !important;
     background-color: transparent;
 }
 .product-desc-section .nav-item .nav-link.active {
-  border-bottom: 2px solid var(--ternery-color) !important;
+  border: 1px solid var(--ternery-color) !important;
+  background-color: var(--primary-color);
+  color: var(--light-color);
 }
 .nav-tabs .nav-item{
     margin-right: 0;
@@ -482,14 +489,9 @@ margin-top: 0 !important;
     padding-right: 20px;
     padding-left: 20px;
     font-size: 14px;
-    border-right: 1px solid #000 !important;
 }
 .tab-nav-link-text:nth-child(n+2) {
     border-right: 0 !important;
-}
-.product-desc-section .nav-tabs .nav-link.active {
-    border-bottom: 3px solid #006969 !important;
-    border: 0;
 }
 .productdetail-container .company-details{
     border: 1px solid rgb(167, 167, 167);
@@ -500,5 +502,38 @@ margin-top: 0 !important;
     .product-detail-container .description-txt {
         font-size: 13px;
     }
-}
+ }
 
+/*sub product caresoule*/
+.sub-product-section{
+max-width: 440px;
+margin: 40px 0;
+}
+.sub-product-section .sub-img-box{
+    max-width: 80px;
+    background-color: var(--light-background);
+}
+.sub-product-section .sub-img-box{
+height: 100%;
+padding: 5px;
+width: 100%;
+border: 1px solid var(--primary-color);
+border-radius: 10px;
+}
+.sub-product-section .owl-nav
+{
+    display: none;
+    }
+    .product-desc-section .nav-link{
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    font-weight: 500;
+}
+.product-desc-section .nav-link:hover{
+background-color: var(--primary-color);
+color: var(--light-color);
+}
+.product-desc-section .nav-link .active{
+font-weight: 700;
+border: 1px solid var(--primary-color);
+}

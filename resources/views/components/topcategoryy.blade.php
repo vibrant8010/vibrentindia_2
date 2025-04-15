@@ -65,7 +65,6 @@
                                 </div>
                             </div>
                             <div class="main-logo-container">
-
                                 <div class="logo-container">
                                     @if ($product->company && $product->company->logo_url)
                                         <img src="{{ asset($product->company->logo_url) }}" class="logo-image"
@@ -74,19 +73,14 @@
                                         <span>No Logo</span>
                                     @endif
                                 </div>
-
-
-
                             </div>
                             <div class="card-body product-card-body">
-
                                 <h6 class="product-name text-product">
                                     {{-- <span class="title">Product: </span> --}}
                                     <span class="pro-name">{{ $product->name }}</span>
                                 </h6>
                                 <div class="product-description-div">
                                     <button class="close-description-btn">&times;</button>
-
                                     <h6 class="company-name">
                                         <span class="title">Company: </span>
                                         <span class="pro-company">{{ $product->company->name ?? 'N/A' }}</span>

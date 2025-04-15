@@ -8,7 +8,8 @@
                 class="btn-view primary-btn d-lg-block d-xl-block d-sm-none d-none d-md-block">View More</a>
 
         </div>
-
+          {{-- desktop view --}}
+        <div class="d-none d-sm-none d-md-block d-xl-block d-lg-block">
         <div class="row g-1 gy-3 desktop-grid">
             @foreach ($newArrivalCategoryProducts as $product)
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 product-col">
@@ -91,7 +92,7 @@
                                         </a>
                                     @endauth
                                 </div>
-                                <a class="detail-btn image_overlay view-arrow-btn hide">
+                                <a class="image_overlay view-arrow-btn detail-btn">
                                  View Detils</a>
 
                             </div>
@@ -100,7 +101,8 @@
                 </div>
             @endforeach
         </div>
-
+        </div>
+         {{-- mobile view --}}
         <div class="d-block d-sm-block d-md-block d-xl-none d-lg-none">
             <div id="newarrivalcaresoule" class="owl-carousel owl-theme">
                 @foreach ($newArrivalCategoryProducts as $product)
@@ -124,25 +126,19 @@
                                         <span>No Logo</span>
                                     @endif
                                 </div>
-                                {{-- <div class="image_overlay view-arrow-btn hide">
-                        <i class="fas fa-arrow-circle-down"></i>
-                    </div> --}}
                             </div>
                             <div class="card-body product-card-body">
-                                <p class="card-description content-txt" id="description-{{ $product->id }}">
-                                    <span class="visible-text">
-                                        {{ Str::limit($product->description, 20) }}
-                                    </span>
-                                </p>
+                                <div class="text-wrapper">
+                                    <h6 class="tranding-product-name text-product">
+                                        {{-- <span class="title">Product:</span> --}}
+                                        <span class="trnding-pro-name">{{ $product->name }}</span>
+                                    </h6>
+
+                                </div>
+
                                 <div class="product-description-div">
+                                    <button class="close-description-btn">×</button>
 
-                                    <div class="text-wrapper">
-                                        <h6 class="tranding-product-name text-product">
-                                            {{-- <span class="title">Product:</span> --}}
-                                            <span class="trnding-pro-name">{{ $product->name }}</span>
-                                        </h6>
-
-                                    </div>
                                     <div class="card-bottom">
 
                                         <h6 class="tranding-product-name">
@@ -153,10 +149,10 @@
                                             <span class="title">Category:</span>
                                             <span class="tranding-pro-name">{{ $product->category->name }}</span>
                                         </h6>
-                                        <h6 class="tranding-product-name">
+                                        {{-- <h6 class="tranding-product-name">
                                             <span class="title">Product:</span>
                                             <span class="trnding-pro-name">{{ $product->name }}</span>
-                                        </h6>
+                                        </h6> --}}
 
                                         <h6 class="tranding-material-name">
                                             <span class="tranding-material-title">Material:</span>
@@ -166,10 +162,15 @@
                                             <span class="tranding-size-title">Size:</span>
                                             <span class="tranding-sz-name">{{ $product->size }}</span>
                                         </h6>
-
+                                        <p class="card-description content-txt" id="description-{{ $product->id }}">
+                                            <span class="visible-text">
+                                                {{ Str::limit($product->description, 20) }}
+                                            </span>
+                                        </p>
 
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-between w-100 align-items-center">
                                 <div class="d-flex justify-content-start mx-2 bottom-btn">
                                     @auth
                                         <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}"
@@ -183,8 +184,9 @@
                                     @endauth
                                 </div>
 
-                                <div class="image_overlay view-arrow-btn">
+                                <div class="image_overlay view-arrow-btn detail-btn">
                                     <a>View Detils</a>
+                                </div>
                                 </div>
 
                             </div>

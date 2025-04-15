@@ -33,7 +33,8 @@
         <div class="left-part">
             <div class="header-logo-container">
                 <a href="{{ route('user.home') }}">
-                    <img src="{{ asset('images/desktoplogo.png') }}" alt="company logo">
+        <img src="{{ asset('images/vibrentlogo.png') }}" alt="company logo"
+                                style="height: 27px; width: 150px;">
                 </a>
             </div>
         </div>
@@ -200,7 +201,7 @@
                 <li class="nav-item mobile-logo py-4 px-1 d-lg-none d-sm-block d-md-none">
                     <div class="header-logo-container d-md-block d-sm-block d-lg-none">
                         <a href="{{ route('user.home') }}">
-                            <img src="{{ asset('images/mobilelogo.png') }}" alt="company logo"
+                            <img src="{{ asset('images/vibrentlogo.png') }}" alt="company logo"
                                 style="height: 32px; width: 169px;">
                         </a>
                     </div>
