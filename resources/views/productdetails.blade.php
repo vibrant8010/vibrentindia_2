@@ -7,6 +7,7 @@
     <section class="content product-detail-container">
         <div class="product-container container-fluid">
             <div class="row">
+
                 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
                     <div class="row">
                         <div class="col-lg-5 col-md-6 col-sm-12">
@@ -17,9 +18,45 @@
                                     </a>
                                 </div>
                             </article>
+                        </div>
+                        <div class="sub-product-section d-lg-none d-md-none d-sm-block d-block">
+                            <div class="owl-carousel owl-theme" id="subproduct">
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732685990_tierBox.jpg') }}" alt="company logo">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732784112_premium_tasla.webp') }}"
+                                            alt="company logo">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732685990_tierBox.jpg') }}" alt="company logo">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732784112_premium_tasla.webp') }}"
+                                            alt="company logo">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732685990_tierBox.jpg') }}"
+                                            alt="company logo">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732784112_premium_tasla.webp') }}"
+                                            alt="company logo">
+                                    </div>
+                                </div>
 
-
-
+                            </div>
                         </div>
                         <div class="p-0 col-lg-7 col-md-6 col-sm-12">
                             <div class="detail">
@@ -150,71 +187,69 @@
                                     </ul>
                                 </div>
                                 @if (Auth::check())
-
-                @else
-                <div class="btn-area my-4">
-                    <a style="cursor: pointer" onclick="openInquiryModal()" class="inqury-btn d-block text-center">Inqury now</a>
-                </div>
-                @endif
+                                @else
+                                    <div class="btn-area my-4">
+                                        <a style="cursor: pointer" onclick="openInquiryModal()"
+                                            class="inqury-btn d-block text-center">Inqury now</a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
+                        <div class="sub-product-section d-lg-block d-md-block d-sm-none d-none">
                         <div class="col-lg-12">
-                            <div class="sub-product-section">
-                                <div class="owl-carousel owl-theme" id="subproduct">
-                                    <div class="item">
-                                        <div class="sub-img-box">
-                                            <img src="{{ asset('images/1732685990_tierBox.jpg') }}" alt="company logo"
-                                            >
-                                        </div>
+                            <div class="owl-carousel owl-theme" id="subproduct2">
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732685990_tierBox.jpg') }}" alt="company logo">
                                     </div>
-                                    <div class="item">
-                                        <div class="sub-img-box">
-                                            <img src="{{ asset('images/1732784112_premium_tasla.webp') }}" alt="company logo"
-                                            >
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="sub-img-box">
-                                            <img src="{{ asset('images/1732685990_tierBox.jpg') }}" alt="company logo"
-                                            >
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="sub-img-box">
-                                            <img src="{{ asset('images/1732784112_premium_tasla.webp') }}" alt="company logo"
-                                            >
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="sub-img-box">
-                                            <img src="{{ asset('images/1732685990_tierBox.jpg') }}" alt="company logo"
-                                            >
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="sub-img-box">
-                                            <img src="{{ asset('images/1732784112_premium_tasla.webp') }}" alt="company logo"
-                                            >
-                                        </div>
-                                    </div>
-
                                 </div>
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732784112_premium_tasla.webp') }}"
+                                            alt="company logo">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732685990_tierBox.jpg') }}" alt="company logo">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732784112_premium_tasla.webp') }}"
+                                            alt="company logo">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732685990_tierBox.jpg') }}"
+                                            alt="company logo">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="sub-img-box">
+                                        <img src="{{ asset('images/1732784112_premium_tasla.webp') }}"
+                                            alt="company logo">
+                                    </div>
+                                </div>
+
+                            </div>
                             </div>
                         </div>
                         <div class="col-lg-12 col-12 d-lg-block product-desc-section">
                             <ul class="nav nav-tabs" id="productDesc" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link fw-bold py-2 px-0 active" data-tab="about-info"
-                                        type="button" role="tab">
+                                    <a class="nav-link fw-bold py-2 px-0 active" data-tab="about-info" type="button"
+                                        role="tab">
                                         <span class="tab-nav-link-text fw-bold">About Company</span>
-                                </a>
+                                    </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link fw-bold py-2 px-0" data-tab="more-product" type="button"
                                         role="tab">
                                         <span class="tab-nav-link-text fw-bold">More Products</span>
-                                </a>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -225,20 +260,23 @@
                                 <div class="productdetail-container container p-0">
                                     <div class="company-details">
                                         <div class="row">
-                                            <div class="col-lg-12 d-flex justify-content-between">
+                                            <div class="col-lg-9 detail-border">
+                                                <h4 class="description-titletxt">Company Description</h4>
+                                                <p class="description-txt">{{ $product->company->description }}</p>
+                                            </div>
+                                            <div class="col-lg-3">
+
                                                 <p class="description-title">GST Registration Date: <span
                                                         class="description-txt">{{ $product->company->gst_registration_date }}</span>
                                                 </p>
                                                 <p class="description-title">Legal Status: <span
                                                         class="description-txt">{{ $product->company->legal_status }}</span>
                                                 </p>
+                                                <p class="description-title">Nature of Business: <span
+                                                        class="description-txt">{{ $product->company->nature_of_business }}</span>
+                                                </p>
                                             </div>
                                         </div>
-                                        <p class="description-title">Nature of Business: <span
-                                                class="description-txt">{{ $product->company->nature_of_business }}</span>
-                                        </p>
-                                        <h4 class="description-titletxt">Company Description</h4>
-                                        <p class="description-txt">{{ $product->company->description }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -254,8 +292,8 @@
                                         // print_r($categories2);
                                     @endphp
                                     @forelse ($categories2 as $reletaedProductes)
-                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
-                                            <div class="card-view inner-card">
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12  product-col">
+                                            <div class="card-view ">
                                                 <a href="/product/{{ $reletaedProductes->id }}"
                                                     class="card-link"></a>
                                                 <div class="image-container">
@@ -268,55 +306,71 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="logo-container" style="">
-                                                    <img src="{{ asset($reletaedProductes->company->logo_url) }}"
-                                                        class="logo-image" alt="{{ $reletaedProductes->name }}">
+                                                <div class="main-logo-container">
+                                                    <div class="logo-container" style="">
+                                                        <img src="{{ asset($reletaedProductes->company->logo_url) }}"
+                                                            class="logo-image" alt="{{ $reletaedProductes->name }}">
+                                                    </div>
                                                 </div>
 
-                                                <div class="text-wrapper">
-                                                    <h6 class="tranding-product-name">
-                                                        <span class="title">Product:</span>
-                                                        <span
-                                                            class="trnding-pro-name">{{ $reletaedProductes->name }}</span>
-                                                    </h6>
 
-                                                </div>
-                                                <div class="card-bottom">
-                                                    <h6 class="tranding-product-name">
-                                                        <span class="title">Company Name:</span>
-                                                        <span
-                                                            class="tranding-pro-name">{{ $reletaedProductes->company->name }}</span>
-                                                    </h6>
-                                                    <h6 class="tranding-product-name">
-                                                        <span class="title">Category:</span>
-                                                        <span
-                                                            class="tranding-pro-name">{{ $reletaedProductes->category->name }}</span>
-                                                    </h6>
+                                                <div class="card-body product-card-body">
+                                                    <div class="text-wrapper">
+                                                        <h6 class="tranding-product-name trending-text">
+                                                            {{-- <span class="title">Product:</span> --}}
+                                                            <span
+                                                                class="trnding-pro-name">{{ $reletaedProductes->name }}</span>
+                                                        </h6>
 
-                                                    <h6 class="tranding-material-name">
-                                                        <span class="tranding-material-title">Material:</span>
-                                                        <span
-                                                            class="mt-name tranding-mt-name">{{ $reletaedProductes->material }}</span>
-                                                    </h6>
-                                                    <h6 class="tranding-product-size">
-                                                        <span class="tranding-size-title">Size:</span>
-                                                        <span
-                                                            class="tranding-sz-name">{{ $reletaedProductes->size }}</span>
-                                                    </h6>
-                                                    <p class="card-description content-txt" id="description-92">
+                                                    </div>
+                                                    <div class="product-description-div">
+                                                        <button class="close-description-btn">×</button>
 
-                                                        <span class="visible-text">
-                                                            This Hammered Sauce...
-                                                        </span>
+                                                        <h6 class="tranding-product-name">
+                                                            <span class="title">Company Name:</span>
+                                                            <span
+                                                                class="tranding-pro-name">{{ $reletaedProductes->company->name }}</span>
+                                                        </h6>
+                                                        <h6 class="tranding-product-name">
+                                                            <span class="title">Category:</span>
+                                                            <span
+                                                                class="tranding-pro-name">{{ $reletaedProductes->category->name }}</span>
+                                                        </h6>
 
-                                                    </p>
-                                                    <a href="javascript:void(0)" class="read-more"
-                                                        onclick="toggleReadMore(92)"></a>
+                                                        <h6 class="tranding-material-name">
+                                                            <span class="tranding-material-title">Material:</span>
+                                                            <span
+                                                                class="mt-name tranding-mt-name">{{ $reletaedProductes->material }}</span>
+                                                        </h6>
+                                                        <h6 class="tranding-product-size">
+                                                            <span class="tranding-size-title">Size:</span>
+                                                            <span
+                                                                class="tranding-sz-name">{{ $reletaedProductes->size }}</span>
+                                                        </h6>
+                                                        <p class="card-description content-txt" id="description-92">
 
-                                                    <div class="d-flex justify-content-start mx-2 bottom-btn">
-                                                        <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
-                                                            <span>Sign in to Inquire</span>
-                                                        </a>
+                                                            <span class="visible-text">
+                                                                This Hammered Sauce...
+                                                            </span>
+
+                                                        </p>
+                                                        <a href="javascript:void(0)" class="read-more"
+                                                            onclick="toggleReadMore(92)"></a>
+                                                    </div>
+
+                                                    <div
+                                                        class="d-flex justify-content-between w-100 align-items-center">
+                                                        <div class="d-flex justify-content-start bottom-btn">
+                                                            <a href="http://127.0.0.1:8000/login"
+                                                                class="inqury-btn mt-2">
+                                                                <span>Sign in to Inquire</span>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <a class="image_overlay view-arrow-btn detail-btn">
+                                                                <span>View Details</span>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -554,7 +608,7 @@
                         </div>
 
                     </div>
-                  </div>
+                </div>
 
                 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-12 d-lg-block d-sm-none d-md-block d-sm-none d-none">
                     <div class="company-personal-details sticky-top-new">
@@ -565,11 +619,14 @@
                         </div>
                         <h6 class="company-product-title detail-text">{{ $product->name }}</h6>
                         <h6 class="detail-text company-address">{{ $fullAddress }}</h6>
-                        <div class="company-start-date"><span class="title">since</span> <div class="title-ans">
+                        <div class="company-start-date"><span class="title">since</span>
+                            <div class="title-ans">
                                 {{-- {{ $product->company->gst_registration_date }}2011 --}}
                                 <p class="p-0 m-0 title-ans">Registration Year: {{ $registrationYear }}</p>
-                                <p class="p-0 m-0 title-ans">Years Since Registration: {{ $yearsSinceRegistration }} years</p>
-                        </div></div>
+                                <p class="p-0 m-0 title-ans">Years Since Registration: {{ $yearsSinceRegistration }}
+                                    years</p>
+                            </div>
+                        </div>
                         <div class="company-business-category"><span class="title">Business Category</span> <span
                                 class="title-ans">{{ $product->company->nature_of_business ?? '' }}</span></div>
                         <div class="company-product-count"><span class="title">Number of Product</span> <span
@@ -599,12 +656,12 @@
                             </ul>
                         </div>
                         @if (Auth::check())
-
-                @else
-                <div class="btn-area my-4">
-                    <a style="cursor: pointer" onclick="openInquiryModal()" class="inqury-btn d-block text-center">Inqury now</a>
-                </div>
-                @endif
+                        @else
+                            <div class="btn-area my-4">
+                                <a style="cursor: pointer" onclick="openInquiryModal()"
+                                    class="inqury-btn d-block text-center">Inqury now</a>
+                            </div>
+                        @endif
 
                     </div>
                 </div>

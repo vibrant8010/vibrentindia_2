@@ -1073,10 +1073,14 @@ header .nav-container .nav-view .nav-item .nav-link:hover::before,
     .search-section .input_location_box {
         padding: 5px 20px !important;
         height: 37px !important;
+            width: 160px;
     }
 
     .search-container input[type="text"] {
-        padding: 6px 9px;
+        padding: 0 5px 0 39px;
+    }
+    header .nav-container .nav-view .nav-item .nav-link, .category-menu-link{
+        font-size: 14px;
     }
 
     header .nav-container .nav-view {
@@ -1209,7 +1213,7 @@ header .nav-container .nav-view .nav-item .nav-link:hover::before,
     }
 
     header .nav-container .nav-view .nav-item {
-        border-bottom: 1px solid #2a5453;
+        border-bottom: 1px solid var(--light-color);
         display: block;
         width: 100%;
         padding: 0 30px;

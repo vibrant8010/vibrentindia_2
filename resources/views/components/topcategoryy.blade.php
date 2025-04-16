@@ -24,7 +24,6 @@
                     $categoryKey = trim(preg_replace('/\s+/', ' ', $categoryKey)); // Remove extra spaces
                     $imagePath = $categoryImages[$categoryKey] ?? 'images/default-category.png';
                 @endphp
-
                 <div class="Category-img">
                     <div class="category-menu-item">
                         <a href="{{ route('category', $category->name) }}" class="category-menu-link">
@@ -34,6 +33,7 @@
                     </div>
                 </div>
             @endforeach
+
         </div>
 
 
@@ -53,6 +53,7 @@
             <div class="row g-1 desktop-grid">
                 {{-- @if ($topCategoryProducts && $topCategoryProducts->isNotEmpty()) --}}
                 @foreach ($topCategoryProducts as $product)
+                <div class="d-none d-sm-none d-md-block d-xl-block d-lg-block">
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 product-col">
                         <div class="card-view">
                             <a href="{{ route('product.show', $product->id) }}" class="card-link"></a>
@@ -137,7 +138,103 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
+
+            <div class="d-block d-sm-block d-md-block d-xl-none d-lg-none">
+                <div class="owl-carousel owl-theme" id="categoryislider">
+                    @foreach ($topCategoryProducts as $product)
+                        <div class="item">
+                            <div class="card-view">
+                                <a href="{{ route('product.show', $product->id) }}" class="card-link"></a>
+
+                                <div class="image-container">
+                                    <div class="thumbnail_container">
+                                        <div class="thumbnail">
+                                            <img src="{{ asset($product->image_url) }}" class="product-image swiper-img"
+                                                 alt="{{ $product->name }}" onclick="openPopup(this)">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="main-logo-container">
+                                    <div class="logo-container">
+                                        @if ($product->company && $product->company->logo_url)
+                                            <img src="{{ asset($product->company->logo_url) }}" class="logo-image"
+                                                 alt="{{ $product->company->name }}">
+                                        @else
+                                            <span>No Logo</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="card-body product-card-body">
+                                    <h6 class="product-name text-product">
+                                        <span class="pro-name">{{ $product->name }}</span>
+                                    </h6>
+
+                                    <div class="product-description-div">
+                                        <button class="close-description-btn">&times;</button>
+                                        <h6 class="company-name">
+                                            <span class="title">Company: </span>
+                                            <span class="pro-company">{{ $product->company->name ?? 'N/A' }}</span>
+                                        </h6>
+                                        <h6 class="product-name">
+                                            <span class="title">Category: </span>
+                                            <span class="pro-name">{{ $product->category->name ?? 'N/A' }}</span>
+                                        </h6>
+                                        <h6 class="material-name">
+                                            <span class="material-title">Material: </span>
+                                            <span class="mt-name">{{ $product->material }}</span>
+                                        </h6>
+                                        <h6 class="product-size">
+                                            <span class="size-title">Size: </span>
+                                            <span class="sz-name">{{ $product->size }}</span>
+                                        </h6>
+
+                                        <div class="text-wrapper">
+                                            <p class="card-description content-txt" id="description-{{ $product->id }}">
+                                                <span class="visible-text">
+                                                    {{ Str::limit($product->description, 60) }}
+                                                </span>
+                                                <span class="more-text" style="display: none;">
+                                                    {{ substr($product->description, 60) }}
+                                                </span>
+                                            </p>
+                                        </div>
+
+                                        <a href="javascript:void(0)" class="read-more" onclick="toggleReadMore({{ $product->id }})">
+                                            Read More
+                                        </a>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between w-100 align-items-center mt-2">
+                                        <div class="d-flex justify-content-start bottom-btn">
+                                            @auth
+                                                <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}"
+                                                   class="inqury-btn">
+                                                    <span>Inquiry</span>
+                                                </a>
+                                            @else
+                                                <a onclick="openModal()" style="cursor: pointer" class="inqury-btn">
+                                                    <span>Sign in to Inquire</span>
+                                                </a>
+                                            @endauth
+                                        </div>
+
+                                        <div>
+                                            <a class="image_overlay view-arrow-btn detail-btn">
+                                                <span>View Details</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
             </div>
         </div>
         <!--mobile view-->

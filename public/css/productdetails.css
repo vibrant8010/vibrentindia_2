@@ -67,7 +67,7 @@ margin-top: 0 !important;
     max-width: 100%;
   }
 
-  .product-detail-container .detail {
+  .product-detail-container .detail  {
     position: relative;
     margin-left: 5%;
     min-height: 240px;
@@ -152,6 +152,8 @@ margin-top: 0 !important;
         color: var(--dark-color);
         font-weight: 600;
         font-size: 14px;
+        margin-bottom: 25px;
+        text-align: center;
       }
       .description-txt{
         color:var(--ternery-color);
@@ -446,7 +448,9 @@ margin-top: 0 !important;
     letter-spacing: 1px;
     font-weight: 500;
 }
-
+.detail-border{
+  border-right: 2px dotted var(--primary-color);
+}
 .company-personal-details .title-ans{
     display: block;
     font-size: 14px;
@@ -497,17 +501,41 @@ margin-top: 0 !important;
     border: 1px solid rgb(167, 167, 167);
     padding: 20px 15px;
 }
-
+@media screen and (max-width:1199px) {
+    .product-detail-container .inqury-btn,
+    .product-detail-container .detail-btn  {
+       font-size: 10px;
+    }
+}
 @media screen and (max-width:575px) {
     .product-detail-container .description-txt {
         font-size: 13px;
     }
+    .product-detail-container .info-value {
+        font-size: 12px;
+    }
+    .sub-product-section{
+        max-width: 300px !important;
+    }
+    .detail-border {
+        border-right: 0;
+        margin: 20px 0;
+        border-bottom: 2px dotted var(--primary-color);
+    }
+    .product-detail-container .product-description-div {
+        bottom: 88px;
+    }
+    .trending-text{
+        padding: 5px 0;
+        border-bottom: 0;
+    }
+
  }
 
 /*sub product caresoule*/
 .sub-product-section{
 max-width: 440px;
-margin: 40px 0;
+margin: 20px 0;
 }
 .sub-product-section .sub-img-box{
     max-width: 80px;
@@ -519,6 +547,10 @@ padding: 5px;
 width: 100%;
 border: 1px solid var(--primary-color);
 border-radius: 10px;
+}
+.sub-product-section .sub-img-box img{
+   height:100%;
+   width: 100%;
 }
 .sub-product-section .owl-nav
 {

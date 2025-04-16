@@ -34,7 +34,7 @@ max-width: 250px;
     height: 100%;
     width: 100%;
 }
-.allcategory .category-menu-item:before{
+/* .allcategory .category-menu-item:before{
     content: "";
     content: "";
     height: 229px;
@@ -48,7 +48,7 @@ max-width: 250px;
     top: 7px;
     z-index: 7;
     opacity: 0;
-}
+} */
 .allcategory .category-menu-item:hover::before {
     opacity: 1;
 }

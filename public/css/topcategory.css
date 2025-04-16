@@ -19,6 +19,7 @@
 
 .product-col {
     position: relative;
+    padding: 0;
     min-height: 441px;
     margin-bottom: 21px;
 }
@@ -471,8 +472,9 @@ figure.zoom img {
         padding: 2px 4px;
         gap: 5px;
         margin-bottom: 10px;
-        line-height: 15px;
+        line-height: 21px;
         border-bottom: 2px dotted var(--shade-color);
+        font-size: 14px !important;
     }
     .tranding-product-name.text-product,
     .trnding-pro-name{
@@ -545,6 +547,7 @@ figure.zoom img {
         font-size: 14px !important;
         padding-top: 0;
         overflow: hidden;
+        border-bottom: 0;
     }
 
     .product-name, .company-name, .tranding-product-name, .tranding-material-name, .tranding-product-size, .pro-name, .card-bottom .material-name, .card-bottom .product-size {
