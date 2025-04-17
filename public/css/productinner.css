@@ -1,8 +1,12 @@
    /* product sert */
    .inner-product-container .product-img {
     display: grid;
+<<<<<<< HEAD
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
+=======
+      gap: 20px;
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
     max-width: 1200px;
     margin: 0 auto;
     position: relative;

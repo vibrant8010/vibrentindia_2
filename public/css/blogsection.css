@@ -1,5 +1,6 @@
 
   /* Custom Scrollbar */
+  /* hello */
   .blog-list::-webkit-scrollbar {
     width: 8px;
   }
@@ -114,9 +115,15 @@
 }
 .blog-section .card-body .blog-info .blog-title{
     color: var(--ternery-color);
+<<<<<<< HEAD
     font-size: 16px;
     padding: 10px 0;
    width: 100%;
+=======
+    font-size: 18px;
+    width: 100%;
+       text-transform: capitalize;
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 }
 /* Style for truncated content */
 .truncatedContent {
@@ -147,11 +154,21 @@
 .blog-section .description-area h5,
 .blog-section .description-area p
 {
+<<<<<<< HEAD
     color:var(--shade-color);
+=======
+    color:#070101;
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
     font-size: 16px;
     line-height: 23px;
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 .blog-section .card-body .read-more{
     padding: 8px 17px;
     color: var(--light-color);
@@ -203,8 +220,24 @@
     padding: 10px; /* Add padding for spacing */
     box-sizing: border-box; /* Include padding in width calculation */
 }
+<<<<<<< HEAD
 
 
+=======
+ .title-bottom-border{
+    height: 1px;
+    width: 190px;
+    background-color: var(--ternery-color);
+    left: 38%;
+}
+
+
+/* Hide default Slick Carousel arrows */
+.slick-prev,
+.slick-next {
+    display: none !important;
+}
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 
 /* Ensure the carousel container doesn't overflow */
 #blogsection {
@@ -220,5 +253,8 @@
         padding-bottom: 210px;
     }
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125

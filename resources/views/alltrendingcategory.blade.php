@@ -42,6 +42,7 @@
 
                                 <div class="card-body product-card-body">
                                     <h6 class="tranding-product-name text-product">
+<<<<<<< HEAD
                                         {{-- <span class="title">Product:</span> --}}
                                         <span class="trnding-pro-name">{{ $product->name }}</span>
                                     </h6>
@@ -56,6 +57,22 @@
 
                                         </p>
 
+=======
+                                            {{-- <span class="title">Product:</span> --}}
+                                            <span class="trnding-pro-name">{{ $product->name }}</span>
+                                        </h6>
+                                <div class="product-description-div">
+
+                                    <div class="text-wrapper">
+                                      
+                                          <p class="card-description content-txt" id="description-{{ $product->id }}">
+
+                                        <span class="visible-text">
+                                            {{ Str::limit($product->description, 60) }}
+                                        </span>
+
+                                    </p>
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 
                                     </div>
 
@@ -82,6 +99,7 @@
 
                                     </div>
                                 </div>
+<<<<<<< HEAD
                                 <div class="d-flex justify-content-start mx-2 bottom-btn">
                                     @auth
                                         <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}"
@@ -93,6 +111,21 @@
                                             <span>Sign in to Inquire</span>
                                         </a>
                                     @endauth
+=======
+                               <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                @auth
+                                    <a href="{{ route('product.show', $product->id) }}"
+                                        class="inqury-btn">
+                                        <span>Inquiry</span>
+                                    </a>
+                                @else
+                                    {{-- <a href="{{ route('login') }}" class="inqury-btn"> --}}
+                                     <a onclick="openModal()" style="cursor: pointer" class="inqury-btn">
+                                        <span>Sign in to Inquire</span>
+                                    </a>
+                                @endauth
+                            </div>
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                                 </div>
                                 </div>
                             </div>

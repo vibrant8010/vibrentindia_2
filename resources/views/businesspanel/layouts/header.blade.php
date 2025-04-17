@@ -3,7 +3,7 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="{{ Auth::user()->role = 'business' ? route('admin.dashboard') : route('business.dashboard')}} " class="logo">
+            <a href="{{ Auth::user()->role = 'business' ? route('dashboard') : route('business.dashboard')}} " class="logo">
               <img
                 src="{{ asset('/images/company-logo.png') }}"
                 alt="navbar brand"
@@ -31,7 +31,7 @@
               <li class="nav-item active">
                 <a
                   data-bs-toggle="collapse"
-                  href="{{ Auth::user()->role = 'business' ? route('admin.dashboard') : route('business.dashboard')}}"
+                  href="{{ Auth::user()->role = 'business' ? route('dashboard') : route('business.dashboard')}}"
                   class="collapsed"
                   aria-expanded="false"
                 >
@@ -78,7 +78,7 @@
               <li class="nav-item">
                 <a
                   {{-- data-bs-toggle="collapse" --}}
-                  href="{{ Auth::user()->role = 'business' ? route('admin.users') : route('business.users')}}"
+                  href="{{ Auth::user()->role = 'business' ? route('admin.users.index') : route('business.users')}}"
                   {{-- class="collapsed" --}}
                   {{-- aria-expanded="false" --}}
                 >

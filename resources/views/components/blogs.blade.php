@@ -6,7 +6,11 @@
             </div>
         </div>
 
+<<<<<<< HEAD
         <div id="blogsection" class="owl-carousel owl-theme">
+=======
+        <div id="blogsections" class="owl-carousel owl-theme">
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
             @if (!$blogs->isEmpty())
                 @foreach ($blogs as $blog)
                     <div class="item">
@@ -15,7 +19,11 @@
                                 <div class="inner-container">
                                     <img src="{{ asset($blog->image_url) }}" alt="blog img">
                                 </div>
+<<<<<<< HEAD
                                 <div class="blog-da te-container">
+=======
+                                <div class="blog-date-container">
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                                     <p class="blog-date">{{ $blog->created_at->format('d - F - Y') }}</p>
                                    </div>
                             </div>
@@ -54,6 +62,10 @@
     </div>
 </section>
 <script>
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
     document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('.readMore').forEach(function (button) {
         button.addEventListener('click', function (event) {
@@ -73,6 +85,37 @@
             }
         });
     });
+<<<<<<< HEAD
+=======
+})
+
+/*blog section caresoule */
+$(document).ready(function () {
+$('#blogsections').owlCarousel({
+            loop: true,            // Infinite loop
+            margin: 10,            // Space between items
+            nav: false,            // Hide navigation arrows
+            dots: true,            // Show dots
+            autoplay: true,        // Enable autoplay
+            autoplayTimeout: 6000, // Auto slide every 3 seconds
+            autoplaySpeed: 1200,   // Smooth autoplay transition
+            smartSpeed: 1200,      // Smooth manual transition
+            autoplayHoverPause: true, // Pause on hover
+            slideTransition: 'ease-in-out', // Smooth slide effect
+            items: 1,    
+  responsive:{
+      0:{
+          items:1
+      },
+      600:{
+          items:2
+      },
+      991:{
+          items:2
+      }
+  }
+});
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 });
 
 </script>

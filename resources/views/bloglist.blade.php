@@ -6,8 +6,13 @@
 <body>
     <x-header />
     {{-- <x-blogs :blogs='$blogs' /> --}}
+<<<<<<< HEAD
     <a href="{{ route('user.home') }}">Home</a>
     <section class="blog-section section-margin mt-4" id="BlogCarousel">
+=======
+    <section class="blog-section section-margin mt-4" id="BlogCarousel">
+
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
         <div class="container">
             <div class="row g-5">
             @if (!$blogs->isEmpty())

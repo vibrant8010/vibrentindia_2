@@ -238,7 +238,7 @@ class AuthController extends Controller
                 return redirect()->route('dashboard')->with('success', 'Login successful!');
             }
 
-            return redirect()->route('user.home')->with('success', 'Login successful!');
+           return redirect()->back();
         } else {
             // Invalid OTP or OTP expired
             return back()->with('error', 'Invalid OTP or OTP expired.');
@@ -304,6 +304,7 @@ class AuthController extends Controller
             try {
                 Mail::to($request->email)->send(new OtpEmail($otp));
             } catch (\Exception $e) {
+                // print_r($e);die();
                 return response()->json(['success' => false, 'message' => 'Failed to send OTP email. Please try again.'], 500);
             }
 

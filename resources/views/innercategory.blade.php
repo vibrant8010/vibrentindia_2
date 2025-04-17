@@ -4,6 +4,12 @@
     <x-head />
 
   <style>
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
   </style>
 
   <body>
@@ -46,6 +52,7 @@
                             {{-- <span class="title">Product:</span> --}}
                             <span class="trnding-pro-name">{{ $product->name }}</span>
                         </h6>
+<<<<<<< HEAD
 
 
                     <div class="product-description-div">
@@ -57,6 +64,17 @@
                             </span>
                         </p>
 
+=======
+                 
+                    <div class="product-description-div">
+
+                    <div class="text-wrapper">
+                           <p class="card-description content-txt" id="description-{{ $product->id }}">
+                        <span class="visible-text">
+                            {{ Str::limit($product->description, 50) }}
+                        </span>
+                    </p>
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                     </div>
                     <div class="card-bottom">
 
@@ -85,6 +103,7 @@
 
                     </div>
                     </div>
+<<<<<<< HEAD
                     <div class="d-flex justify-content-start mx-2 bottom-btn">
                         @auth
                             <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}" class="inqury-btn mt-2">
@@ -96,6 +115,21 @@
                             </a>
                         @endauth
                     </div>
+=======
+                     <div class="d-flex justify-content-start mx-2 bottom-btn">
+                                @auth
+                                    <a href="{{ route('product.show', $product->id) }}"
+                                        class="inqury-btn">
+                                        <span>Inquiry</span>
+                                    </a>
+                                @else
+                                    {{-- <a href="{{ route('login') }}" class="inqury-btn"> --}}
+                                     <a onclick="openModal()" style="cursor: pointer" class="inqury-btn">
+                                        <span>Sign in to Inquire</span>
+                                    </a>
+                                @endauth
+                            </div>
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                 </div>
                 </div>
             </div>

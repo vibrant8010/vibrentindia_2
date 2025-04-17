@@ -281,6 +281,7 @@ class UserController extends Controller
 //     return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
 // }
 
+<<<<<<< HEAD
 public function update(Request $request, $id)
 {   
     $request->validate([
@@ -383,6 +384,206 @@ public function update(Request $request, $id)
     return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
 }
 
+=======
+// public function update(Request $request, $id)
+// {   
+//     $request->validate([
+//         'username' => 'required|string|max:255',
+//         'email' => 'required|email|unique:users,email,' . $id,
+//         'mobileno' => 'required|min:10|max:10',
+//         'role' => 'required|in:user,business',
+//         'name' => 'nullable|string|max:255',
+//         'logo_upload' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+//         'description' => 'nullable|string',
+//         'gst_registration_date' => 'nullable|date',
+//         'gst_no' => 'nullable|string',
+//         'legal_status' => 'nullable|string',
+//         'nature_of_business' => 'nullable|string',
+//         'alternate_names' => 'nullable|string',
+//         'city' => 'nullable|string',
+//         'state' => 'nullable|string',
+//         'pincode' => 'nullable|integer',
+//     ]);
+
+
+//     $user = User::findOrFail($id);
+
+//     // Update user details
+//     $user->update([
+//         'name' => $request->input('username'),
+//         'email' => $request->input('email'),
+//         'mobileno' => $request->input('mobileno'),
+//         'role' => $request->input('role'),
+//     ]);
+
+//     // Handle file upload for logo
+//     if ($request->hasFile('logo_upload')) {
+//         // Define the upload directory
+//         $uploadPath = public_path('images/company_logo');
+
+//         // Ensure the directory exists
+//         if (!file_exists($uploadPath)) {
+//             mkdir($uploadPath, 0777, true);
+//         }
+
+//         // Delete old logo if it exists
+//         $companyDetails = CompanyDetail::where('business_id', $id)->first();
+//         if ($companyDetails && $companyDetails->logo_url) {
+//             $oldLogoPath = public_path($companyDetails->logo_url);
+//             if (file_exists($oldLogoPath)) {
+//                 unlink($oldLogoPath);
+//             }
+//         }
+
+//         // Generate a unique filename
+//         $file = $request->file('logo_upload');
+//         $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+
+//         // Move the file to the desired directory
+//         $file->move($uploadPath, $fileName);
+
+//         // Save the file path to the database
+//         $logoUrl = 'images/company_logo/' . $fileName;
+//     } else {
+//         $logoUrl = $request->input('logo_url_old', null);// Use existing logo URL if no new file is uploaded
+//     }
+
+//     // Update company details if the user has the "business" role
+//     if ($user->role === 'business') {
+//         $companyDetails = CompanyDetail::where('business_id', $id)->first();
+
+//         if ($companyDetails === null) {
+//             CompanyDetail::create([
+//                 'business_id' => $user->id,
+//                 'name' => $request->input('name'),
+//                 'logo_url' => $logoUrl,
+//                 'description' => $request->input('description'),
+//                 'gst_registration_date' => $request->input('gst_registration_date'),
+//                 'gst_no' => $request->input('gst_no'),
+//                 'legal_status' => $request->input('legal_status'),
+//                 'nature_of_business' => $request->input('nature_of_business'),
+//                 'alternate_names' => $request->input('alternate_names'),
+//                 'city' => $request->input('city'),
+//                 'state' => $request->input('state'),
+//                 'pincode' => $request->input('pincode'),
+//             ]);
+//         } else {
+//             $companyDetails->update([
+//                 'name' => $request->input('name'),
+//                 'logo_url' => $logoUrl,
+//                 'description' => $request->input('description'),
+//                 'gst_registration_date' => $request->input('gst_registration_date'),
+//                 'gst_no' => $request->input('gst_no'),
+//                 'legal_status' => $request->input('legal_status'),
+//                 'nature_of_business' => $request->input('nature_of_business'),
+//                 'alternate_names' => $request->input('alternate_names'),
+//                 'city' => $request->input('city'),
+//                 'state' => $request->input('state'),
+//                 'pincode' => $request->input('pincode'),
+//             ]);
+//         }
+//     }
+
+//     return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
+// }
+    public function update(Request $request, $id)
+    {   
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'mobileno' => 'required|min:10|max:10',
+            'role' => 'required|in:user,business',
+            'name' => 'nullable|string|max:255',
+            'logo_upload' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'description' => 'nullable|string',
+            'gst_registration_date' => 'nullable|date',
+            'gst_no' => 'nullable|string',
+            'legal_status' => 'nullable|string',
+            'nature_of_business' => 'nullable|string',
+            'alternate_names' => 'nullable|string',
+            'city' => 'nullable|string',
+            'state' => 'nullable|string',
+            'pincode' => 'nullable|integer',
+        ]);
+    
+        $user = User::findOrFail($id);
+    
+        // Update user details
+        $user->update([
+            'name' => $request->input('username'),
+            'email' => $request->input('email'),
+            'mobileno' => $request->input('mobileno'),
+            'role' => $request->input('role'),
+        ]);
+    
+        // Handle file upload for logo
+        if ($request->hasFile('logo_upload')) {
+            // Define the upload directory
+            $uploadPath = public_path('images/company_logo');
+    
+            // Ensure the directory exists
+            if (!file_exists($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+    
+            // Generate a unique filename
+            $file = $request->file('logo_upload');
+            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move($uploadPath, $fileName);
+    
+            // Save the file path to the database
+            $logoUrl = 'images/company_logo/' . $fileName;
+    
+            // Delete the old logo if it exists
+            $companyDetails = CompanyDetail::where('business_id', $id)->first();
+            if ($companyDetails && $companyDetails->logo_url && file_exists(public_path($companyDetails->logo_url))) {
+                unlink(public_path($companyDetails->logo_url));
+            }
+        } else {
+            // Use existing logo URL if no new file is uploaded
+            $logoUrl = $request->input('logo_url_old', null);
+        }
+    
+        // Update company details if the user has the "business" role
+        if ($user->role === 'business') {
+            $companyDetails = CompanyDetail::where('business_id', $id)->first();
+    
+            if ($companyDetails === null) {
+                CompanyDetail::create([
+                    'business_id' => $user->id,
+                    'name' => $request->input('name'),
+                    'logo_url' => $logoUrl,
+                    'description' => $request->input('description'),
+                    'gst_registration_date' => $request->input('gst_registration_date'),
+                    'gst_no' => $request->input('gst_no'),
+                    'legal_status' => $request->input('legal_status'),
+                    'nature_of_business' => $request->input('nature_of_business'),
+                    'alternate_names' => $request->input('alternate_names'),
+                    'city' => $request->input('city'),
+                    'state' => $request->input('state'),
+                    'pincode' => $request->input('pincode'),
+                ]);
+            } else {
+                $companyDetails->update([
+                    'name' => $request->input('name'),
+                    'logo_url' => $logoUrl,
+                    'description' => $request->input('description'),
+                    'gst_registration_date' => $request->input('gst_registration_date'),
+                    'gst_no' => $request->input('gst_no'),
+                    'legal_status' => $request->input('legal_status'),
+                    'nature_of_business' => $request->input('nature_of_business'),
+                    'alternate_names' => $request->input('alternate_names'),
+                    'city' => $request->input('city'),
+                    'state' => $request->input('state'),
+                    'pincode' => $request->input('pincode'),
+                ]);
+            }
+        }
+    
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
+    }
+    
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
     public function destroy($id)
     {
         $user = User::findOrFail($id);

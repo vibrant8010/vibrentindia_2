@@ -428,7 +428,7 @@ input[type="text"]::-webkit-search-cancel-button {
 .main-heading{
     /*font-family: monospace;*/
     text-transform: uppercase;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 500;
     color: var(--ternery-color);
     position: relative;
@@ -1158,7 +1158,9 @@ header .lg-img {
     right: 40px;
     top: 2px;
 }
-
+.mycustom{
+ margin: 70px 0 !important;   
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -1182,6 +1184,10 @@ header .lg-img {
     padding: 3px 5px;
     font-size: 13px;
     font-weight: 500;
+}
+
+.custom-textarea-lable{
+    bottom: 72% !important;
 }
 
 

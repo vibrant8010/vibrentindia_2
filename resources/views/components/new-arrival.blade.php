@@ -9,7 +9,7 @@
 
         </div>
 
-        <div class="row g-1 desktop-grid">
+        <div class="row g-1 gy-3 desktop-grid">
             @foreach($newArrivalCategoryProducts as $product)
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 product-col">
                     <div class="card-view">
@@ -35,6 +35,7 @@
                         </div>
 
                         <div class="card-body product-card-body">
+<<<<<<< HEAD
                             <h6 class="tranding-product-name text-product">
                                 {{-- <span class="title">Product:</span> --}}
                                 <span class="trnding-pro-name">{{ $product->name }}</span>
@@ -48,6 +49,20 @@
                                     {{ Str::limit($product->description, 60) }}
                                 </span>
                             </p>
+=======
+                             <h6 class="tranding-product-name text-product">
+                                {{-- <span class="title">Product:</span> --}}
+                                <span class="trnding-pro-name">{{ $product->name }}</span>
+                            </h6>
+                        <div class="product-description-div">
+
+                        <div class="text-wrapper">
+                        <p class="card-description content-txt" id="description-{{ $product->id }}">
+                            <span class="visible-text">
+                                {{ Str::limit($product->description, 60) }}
+                            </span>
+                        </p>
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                         </div>
                         <div class="card-bottom">
 
@@ -78,11 +93,12 @@
                         </div>
                         </div>
                         <div class="d-flex justify-content-start mx-2 bottom-btn">
-                            @auth
-                                <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}" class="inqury-btn mt-2">
-                                    <span>Inquiry</span>
-                                </a>
-                            @else
+                                @auth
+                                    <a href="{{ route('product.show', $product->id) }}"
+                                        class="inqury-btn">
+                                        <span>Inquiry</span>
+                                    </a>
+                                @else
                                 {{-- <a href="{{ route('login') }}" class="inqury-btn mt-2"> --}}
                                 <a onclick="openModal()" style="cursor: pointer" class="inqury-btn mt-2">
                                     <span>Sign in to Inquire</span>
@@ -95,6 +111,7 @@
             @endforeach
         </div>
 
+   <div class="d-block d-sm-block d-md-block d-xl-none d-lg-none">
         <div id="newarrivalcaresoule" class="owl-carousel owl-theme">
             @foreach($newArrivalCategoryProducts as $product)
             <div class="item product-col">
@@ -182,5 +199,6 @@
         <div class="d-flex justify-content-center">
             <a href="{{ route('newarrival') }}"  class="btn-view mobile-btn primary-btn d-lg-none d-xl-none d-sm-block d-block d-md-none text-center">View More</a>
         </div>
+    </div>
     </div>
 </section>

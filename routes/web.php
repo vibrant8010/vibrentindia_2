@@ -12,6 +12,8 @@ use App\Http\Controllers\business\businessController;
 use App\Http\Controllers\Auth\AuthController as AuthController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 
+use Illuminate\Support\Facades\Mail;
+
 
 Route::post('/location', [UserController::class, 'store_location'])->name('location_store');
 Route::get('/search-suggestions', [ProductController::class, 'getSuggestions']);
@@ -97,27 +99,88 @@ Route::get('/newarrivalcategory', [ProductController::class, 'newArrivalCategory
 Route::get('/inquiry', [InquiryController::class, 'create'])->name('inquiryform');
 Route::post('/inquiry', [InquiryController::class, 'store']);
 // Product Routes
-Route::post('/inquiry', [InquiryController::class, 'store']);  // Inquiry Form
-Route::get('/inqury', function () {
-    return view('inquiryform');
-})->name('inquiryform');
+// Route::post('/inquiry', [InquiryController::class, 'store']);  // Inquiry Form
+// Route::get('/inqury', function () {
+//     return view('inquiryform');
+// })->name('inquiryform');
+
 
 
 // Blog Routes
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blogsection');
 Route::get('/blog', [BlogController::class, 'bloglist'])->name('bloglist');
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 
 // Admin Routes
 Route::get('/admin', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
-Route::middleware('auth:admin')->group(function () {
+// Route::middleware('auth:admin')->group(function () {
+//     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    
+//     Route::resource('admin/categories', CategoryController::class); //Category Routes
+
+//     Route::prefix('admin/products')->name('admin.products.')->group(function () {
+//         Route::get('/', [ProductController::class, 'index'])->name('index');
+//         Route::get('/create', [ProductController::class, 'create'])->name('create');
+//         Route::post('/', [ProductController::class, 'store'])->name('store');
+//         Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('edit');
+//         Route::put('/{id}', [ProductController::class, 'update'])->name('update');
+//         Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy');
+//     });
+
+//     Route::prefix('admin/users')->name('admin.users.')->group( function () {
+//         Route::get('/', [UserController::class, 'index'])->name('index');
+//         Route::get('/create', [UserController::class, 'create'])->name('create');
+//         Route::post('/', [UserController::class, 'store'])->name('store');
+//         Route::get('/{id}/edit', [UserController::class, 'edit'])->name('edit');
+//         Route::put('/{id}', [UserController::class, 'update'])->name('update');
+//         Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+//     });
+
+//     Route::prefix('admin/inquiry')->name('admin.inquiry.')->group(function () {
+//         Route::get('/', [InquiryController::class, 'index'])->name('index');
+//         Route::get('/{id}/edit', [InquiryController::class, 'edit'])->name('edit');
+//         Route::put('/{id}', [InquiryController::class, 'update'])->name('update');
+//         Route::delete('/{id}', [InquiryController::class, 'destroy'])->name('destroy');
+//     });
+
+//     Route::prefix('admin/blogs')->name('admin.blogs.')->group(function () {
+//         Route::get('/', [BlogController::class, 'index'])->name('index');
+//         Route::get('/create', [BlogController::class, 'create'])->name('create');
+//         Route::post('/', [BlogController::class, 'store'])->name('store');
+//         Route::get('/{id}/edit', [BlogController::class, 'edit'])->name('edit');
+//         Route::put('/{id}', [BlogController::class, 'update'])->name('update');
+//         Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
+//     });
+// });
+// business Routes
+Route::middleware(['role:business'])->group(function () {
+    Route::get('/business/dashboard', [businessController::class, 'index'])->name('business.dashboard');
+    Route::get('/business/users', [businessController::class, 'index'])->name('business.users');
+});
+// super admin Routes
+Route::middleware(['role:super_admin'])->group(function () {
+    // Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    // Route::prefix('users')->group(function () {
+    //    Route::get('/', [UserController::class, 'show'])->name('admin.users');
+    //    Route::get('/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    // });
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
+<<<<<<< HEAD
 
     Route::resource('admin/categories', CategoryController::class); //Category Routes
+=======
+    
+    Route::resource('admin/categories', CategoryController::class); //Category Routes
+    Route::get('/get-subcategories/{categoryId}', [CategoryController::class, 'getSubcategories']);//to get sub category when click on category
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 
     Route::prefix('admin/products')->name('admin.products.')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -152,7 +215,9 @@ Route::middleware('auth:admin')->group(function () {
         Route::put('/{id}', [BlogController::class, 'update'])->name('update');
         Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
     });
+      Route::post('/clear-cache', [AdminController::class, 'clear'])->name('cache.clear');
 });
+<<<<<<< HEAD
 // business Routes
 Route::middleware(['role:business'])->group(function () {
     Route::get('/business/dashboard', [businessController::class, 'index'])->name('business.dashboard');
@@ -205,3 +270,5 @@ Route::middleware(['role:super_admin'])->group(function () {
         Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
     });
 });
+=======
+>>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125

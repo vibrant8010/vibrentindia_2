@@ -11,6 +11,7 @@ class InquiryController extends Controller
     // Method to handle the inquiry form submission
     public function store(Request $request)
     {
+        // print_r($request->all());die();
         // Validate the form data
         $validated = $request->validate([
             'product_id' => 'required|string',
@@ -22,7 +23,7 @@ class InquiryController extends Controller
             'quantity' => 'required|integer|min:1',
             'message' => 'nullable|string',
         ]);
-
+        
         // Store the validated data in the database
         $inquiry = new Inquiry();
         $inquiry->product_code = $request->input('product_id');
@@ -36,17 +37,22 @@ class InquiryController extends Controller
 
         // Save the inquiry to the database
         $inquiry->save();
-         Mail::to('info@vibrantindiatrade.in')->send(new InquiryMail($validated));
-
+         Mail::to('info@vibrantindiatech.com')->send(new InquiryMail($validated));
+        //  Mail::to('dipbmcoder@gmail.com')->send(new InquiryMail($validated));
+         
+        //   return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Inquiry submitted successfully!'
+        // ]);
         // Redirect back with a success message
-        return redirect()->route('user.home')->with('success', 'INQUIRY SUBMIT  successful!');
+        return redirect()->back()->with('success', 'INQUIRY SUBMIT  successful!');
     }
 
     // Index method to display all inquiries
     public function index()
     {
-        $inquiries = Inquiry::all();
-        return view('adminpanel.inquiry.index', compact('inquiries'));
+      $inquiries = Inquiry::latest()->get();
+    return view('adminpanel.inquiry.index', compact('inquiries'));
     }
 
     // Edit method to show a form for editing a specific inquiry

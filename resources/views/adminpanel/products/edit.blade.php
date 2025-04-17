@@ -1,101 +1,167 @@
 @extends('adminpanel.adminlayout')
 
 @section('content')
-    <h1 class="form-title">Edit Product</h1>
-
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Edit Product</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Users</a>
+                </li>
+                <li class="separator">
+                    <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">Edit Product</a>
+                </li>
             </ul>
         </div>
-    @endif
 
-    <form action="{{ route('admin.products.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="product-form">
-        @csrf
-        @method('PUT')
-
-        <div class="form-row">
-            <label for="name">Product Name:</label>
-            <input type="text" name="name" value="{{ old('name', $product->name) }}" required>
-        </div>
-        
-       
-
-
-        <div class="form-row">
-            <label for="description">Description:</label>
-            <textarea name="description" required>{{ old('description', $product->description) }}</textarea>
-        </div>
-
-        <div class="form-row">
-            <label for="material">Material:</label>
-            <input type="text" name="material" step="0.01" value="{{ old('material', $product->material) }}" required>
-        </div>
-
-        <div class="form-row">
-            <label for="size">Size:</label>
-            <input type="text" name="size" value="{{ old('size', $product->size) }}" required>
-        </div>
-
-        <div class="form-row">
-            <label for="category_id">Category:</label>
-            <select name="category_id" id="category_id" required>
-                <option value="" disabled>Select a Category</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>
-                        {{ $category->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="form-row">
-            <label>Category Type:</label>
-            <select name="category_type" required>
-                <option value="Top" {{ $product->category_type == 'Top' ? 'selected' : '' }}>Top</option>
-                <option value="Trending" {{ $product->category_type == 'Trending' ? 'selected' : '' }}>Trending</option>
-                <option value="New Arrival" {{ $product->category_type == 'New Arrival' ? 'selected' : '' }}>New Arrival</option>
-            </select>
-        </div>
-
-        <div class="form-row">
-            <label for="subcategory_id">Subcategory:</label>
-            <select name="subcategory_id" id="subcategory_id" required>
-                <option value="">Select a Subcategory</option>
-                @foreach($subcategories as $subcategory)
-                    <option value="{{ $subcategory->id }}" {{ $product->subcategory_id == $subcategory->id ? 'selected' : '' }}>
-                        {{ $subcategory->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="form-row">
-            <label for="image_url">Image:</label>
-            <input type="file" name="image_url" accept="image/*">
-            @if($product->image_url)
-            <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}" style="width: 150px; height: auto;">
-        @else
-            <span>No Image</span>
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
         @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Product Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('admin.products.update', $product->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="name">Product Name:</label>
+                                        <input type="text" name="name" class="form-control"
+                                            value="{{ old('name', $product->name) }}" placeholder="Enter Product Name"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="description">Description:</label>
+                                        <textarea name="description" class="border-0 w-100" required>{{ old('description', $product->description) }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="material">Material:</label>
+                                        <input type="text" class="form-control" name="material" step="0.01"
+                                            value="{{ old('material', $product->material) }}" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="size">Size:</label>
+                                        <input type="text" class="form-control" name="size"
+                                            value="{{ old('size', $product->size) }}" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="category_id">Category:</label>
+                                        <select name="category_id" class="form-select" id="category_id" required>
+                                            <option value="" disabled>Select a Category</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}"
+                                                    {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label>Category Type:</label>
+                                        <select name="category_type" class="form-select" required>
+                                            <option value="Top"
+                                                {{ $product->category_type == 'Top' ? 'selected' : '' }}>Top
+                                            </option>
+                                            <option value="Trending"
+                                                {{ $product->category_type == 'Trending' ? 'selected' : '' }}>
+                                                Trending</option>
+                                            <option value="New Arrival"
+                                                {{ $product->category_type == 'New Arrival' ? 'selected' : '' }}>New
+                                                Arrival
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-default">
+                                        <label for="subcategory_id">Subcategory:</label>
+                                        <select class="form-select" name="subcategory_id" id="subcategory_id" required>
+                                            <option value="">Select a Subcategory</option>
+                                            @foreach ($subcategories as $subcategory)
+                                                <option value="{{ $subcategory->id }}"
+                                                    {{ $product->subcategory_id == $subcategory->id ? 'selected' : '' }}>
+                                                    {{ $subcategory->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group form-group-default">
+                                            <label for="image_url">Image:</label>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <input type="file" name="image_url" accept="image/*">
+                                            @if ($product->image_url)
+                                                <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}"
+                                                    style="width: 70px; height: 70px; border:4px solid #424141;border-radius:10px">
+                                            @else
+                                                <span>No Image</span>
+                                            @endif
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row w-100 m-0 d-flex align-items-start justify-content-start">
+                                    <button type="submit" class="btn-submit m-0">Update Product</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="form-row">
-            <button type="submit" class="btn-submit">Update Product</button>
-        </div>
-    </form>
+        <a href="{{ route('admin.products.index') }}">Back to Product List</a>
 
-    <a href="{{ route('admin.products.index') }}">Back to Product List</a>
-
-
-       <style>
+    </div>
+    <style>
         .form-title {
             font-size: 24px;
             font-weight: bold;
@@ -144,7 +210,8 @@
         }
 
         .btn-submit {
-            background-color: #28a745; /* Green for success */
+            background-color: #28a745;
+            /* Green for success */
             color: #fff;
             padding: 10px 15px;
             border: none;
@@ -152,7 +219,8 @@
             cursor: pointer;
             font-size: 16px;
             transition: background-color 0.3s;
-            margin-left: 160px; /* Align with label width */
+            margin-left: 160px;
+            /* Align with label width */
         }
 
         .btn-submit:hover {
@@ -182,10 +250,10 @@
             padding-left: 20px;
         }
     </style>
- 
+
 
     <script>
-        document.getElementById('category_id').addEventListener('change', function () {
+        document.getElementById('category_id').addEventListener('change', function() {
             let categoryId = this.value;
 
             fetch(`/get-subcategories/${categoryId}`)
