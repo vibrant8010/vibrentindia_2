@@ -42,13 +42,7 @@
                     @foreach ($blog->sections as $section)
                         <div class="additional-content mb-4">
                             <div class="d-flex">
-<<<<<<< HEAD
                                 <span class="me-2"><i class="fa-solid fa-arrows-up-down-left-right"></i></span>
-=======
-                                <span class="me-2">
-                                 <i class="fa-solid fa-arrows-up-down-left-right"></i>
-                                </span>
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                                 <h4 class="subtitle mb-2">{{ $section->subtitle }}</h4>
                             </div>
                             <div class="text-content">
@@ -87,11 +81,6 @@
 
                                                 <!-- Blog Heading -->
                                                 <h3 class="blog-inner-title">{{ $singleBlog->heading }}</h3>
-<<<<<<< HEAD
-
-=======
-                                                <h3 class="blog-inner-title">{{ $singleBlog->description }}</h3>
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                                                 <!-- Read More Link -->
                                                 <a href="{{ route('blogsection', $singleBlog->id) }}" class="read-more">Read More</a>
                                             </div>

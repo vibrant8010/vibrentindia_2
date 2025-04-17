@@ -222,7 +222,6 @@
 .text-product {
     font-weight: 500 !important;
     color: #060000;
-<<<<<<< HEAD
     border-bottom: 1px solid #80808014;
     padding: 9px 0;
     height: 44px;
@@ -235,22 +234,6 @@
     padding: 9px 0;
     /* border-top: 1px solid #8080800d; */
     height: 45px;
-=======
-    height: 45px;
-    /*border-bottom: 1px solid #80808014;*/
-    padding: 9px 0;
-    /* border-top: 1px solid #8080800d; */
-}
-.card-description.content-txt{
-        font-weight: 500 !important;
-    color: #060000;
-    border-bottom: 1px solid #80808014;
-    border-top: 1px solid #80808014;
-    padding: 9px 0;
-    /* border-top: 1px solid #8080800d; */
-    display: block;
-   margin: 0;
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 }
 .card-bottom .product-name .title,
 .card-bottom .product-name .material-title,
@@ -493,7 +476,7 @@ figure.zoom img {
     .tranding-product-name .trnding-pro-name {
         font-size: 13px;
     }
-  
+
     .product-description-div .title,
     .product-name .title,
     .product-size .size-title,

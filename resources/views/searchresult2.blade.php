@@ -419,7 +419,6 @@
                             {{-- <span class="title">Product:</span> --}}
                             <span class="trnding-pro-name">{{ $product->name }}</span>
                         </h6>
-<<<<<<< HEAD
 
                     <div class="product-description-div">
 
@@ -429,19 +428,6 @@
                                 {{ Str::limit($product->description, 50) }}
                             </span>
                         </p>
-=======
-                   
-                    <div class="product-description-div">
-
-                    <div class="text-wrapper">
-                         <p class="card-description content-txt" id="description-{{ $product->id }}">
-                        <span class="visible-text">
-                            {{ Str::limit($product->description, 50) }}
-                        </span>
-                    </p>
-                         
-
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                     </div>
                     <div class="card-bottom">
 
@@ -453,17 +439,10 @@
                             <span class="title">Category:</span>
                             <span class="tranding-pro-name">{{ $product->category->name }}</span>
                         </h6>
-<<<<<<< HEAD
                         {{-- <h6 class="tranding-product-name">
                             <span class="title">Product:</span>
                             <span class="trnding-pro-name">{{ $product->name }}</span>
                         </h6> --}}
-=======
-                        <!--<h6 class="tranding-product-name">-->
-                        <!--    <span class="title">Product:</span>-->
-                        <!--    <span class="trnding-pro-name">{{ $product->name }}</span>-->
-                        <!--</h6>-->
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 
                         <h6 class="tranding-material-name">
                             <span class="tranding-material-title">Material:</span>
@@ -871,11 +850,7 @@
                         <div class="container">
                         <div class="row g-4 gy-3 prodoct-img-view" id="product-list-2">
                             @foreach ($allProducts as $product)
-<<<<<<< HEAD
                             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 product-col">
-=======
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 product-col">
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                                 <div class="card-view">
                                     <a href="{{ route('product.show', $product->id) }}" class="card-link"></a>
                                     <div class="image-container">

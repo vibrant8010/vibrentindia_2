@@ -627,7 +627,6 @@ fetch(url2)
 //   });
 
 
-<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', () => {
     const tabs = document.querySelectorAll('.product-desc-section .nav-link'); // Select all tabs
     const contents = document.querySelectorAll('.tab-content'); // Select all tab content sections
@@ -663,8 +662,6 @@ document.addEventListener('DOMContentLoaded', () => {
         contents[0].style.display = 'block'; // Show the first tab's content
     }
     });
-=======
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 
 
 /*card visibilty code */
@@ -757,7 +754,6 @@ window.addEventListener("click", windowOnClick);
                 }
             });
         });
-<<<<<<< HEAD
   /*blog section caresoule */
 $('#blogsection').owlCarousel({
     loop: true,            // Infinite loop
@@ -784,8 +780,3 @@ $('#blogsection').owlCarousel({
       }
   }
 })
-=======
-
-
-
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125

@@ -1,41 +1,8 @@
 @extends('adminpanel.adminlayout')
 
 @section('content')
-<<<<<<< HEAD
     <div class="container">
         <h1>Create New Blog</h1>
-=======
-<div class="page-inner">
-    <div class="page-header">
-        <h3 class="fw-bold mb-3">Create Blogs</h3>
-        <ul class="breadcrumbs mb-3">
-            <li class="nav-home">
-                <a href="#">
-                    <i class="icon-home"></i>
-                </a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">Users</a>
-            </li>
-            <li class="separator">
-                <i class="icon-arrow-right"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#">Create Blogs</a>
-            </li>
-        </ul>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Blogs details</h4>
-                </div>
-                <div class="card-body">
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
         <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
 
@@ -71,13 +38,6 @@
 
             <button type="submit" class="btn btn-primary">Create Blog</button>
         </form>
-<<<<<<< HEAD
-=======
-        </div>
-        </div>
-        </div>
-    </div>
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
     </div>
 
     <!-- Include CKEditor 5 -->
@@ -142,8 +102,4 @@
             }
         });
     </script>
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125

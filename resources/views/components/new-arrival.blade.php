@@ -35,7 +35,6 @@
                         </div>
 
                         <div class="card-body product-card-body">
-<<<<<<< HEAD
                             <h6 class="tranding-product-name text-product">
                                 {{-- <span class="title">Product:</span> --}}
                                 <span class="trnding-pro-name">{{ $product->name }}</span>
@@ -49,20 +48,6 @@
                                     {{ Str::limit($product->description, 60) }}
                                 </span>
                             </p>
-=======
-                             <h6 class="tranding-product-name text-product">
-                                {{-- <span class="title">Product:</span> --}}
-                                <span class="trnding-pro-name">{{ $product->name }}</span>
-                            </h6>
-                        <div class="product-description-div">
-
-                        <div class="text-wrapper">
-                        <p class="card-description content-txt" id="description-{{ $product->id }}">
-                            <span class="visible-text">
-                                {{ Str::limit($product->description, 60) }}
-                            </span>
-                        </p>
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                         </div>
                         <div class="card-bottom">
 

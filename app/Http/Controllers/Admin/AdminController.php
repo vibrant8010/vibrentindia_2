@@ -13,15 +13,8 @@ class AdminController extends Controller
     //
     public function dashboard()
     {
-<<<<<<< HEAD
         // Logic for displaying the admin dashboard
         return view('adminpanel.dashboard'); // Ensure this view exists
-=======
-        $cacheSize = $this->getCacheSize();
-        // return view('cache.index');
-        // Logic for displaying the admin dashboard
-        return view('adminpanel.dashboard', compact('cacheSize')); // Ensure this view exists
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
     }
 
     public function users()
@@ -38,37 +31,4 @@ class AdminController extends Controller
     //     // Logic for displaying the users list
     //     return view('adminpanel.users'); // Ensure this view exists
     // }
-<<<<<<< HEAD
-=======
-    // public function cacheRmover()
-    // {
-
-    // }
-
-    public function clear()
-    {
-        Artisan::call('cache:clear');
-        // Artisan::call('route:clear');
-        Artisan::call('config:clear');
-        Artisan::call('view:clear');
-
-        return redirect()->back()->with('success', 'Cache cleared successfully.');
-    }
-
-    private function getCacheSize()
-    {
-        $cachePath = storage_path('framework');
-        $size = $this->folderSize($cachePath);
-        return round($size / 1024 / 1024, 2); // Size in MB
-    }
-
-    private function folderSize($path)
-    {
-        $size = 0;
-        foreach (File::allFiles($path) as $file) {
-            $size += $file->getSize();
-        }
-        return $size;
-    }
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 }

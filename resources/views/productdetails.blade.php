@@ -157,7 +157,7 @@
                                 </div>
                                @if (Auth::check())
                   <div class="btn-area my-4">
-                        <a href="javascript:void(0);" 
+                        <a href="javascript:void(0);"
                            class="inqury-btn d-block text-center"
                            data-id="{{ $product->id }}"
                            data-name="{{ $product->name }}"
@@ -177,7 +177,7 @@
                                                                 transition: 0.5s all ease-in-out;
                                                                 text-decoration: none;cursor: pointer;" class="inqury-btn2 d-block text-center">
                                                                 <span>Sign in to Inquire</span>
-                                                            </a> 
+                                                            </a>
                 @endif
                             </div>
                         </div>
@@ -307,8 +307,8 @@
                                         <!--                onclick="toggleReadMore(92)"></a>-->
 
                                         <!--            <div class="d-flex justify-content-start mx-2 bottom-btn">-->
-                                                        
-                                                       
+
+
                                         <!--                 @if (Auth::check())-->
                                         <!--                    <a href="javascript:void(0);" -->
                                         <!--                       class="inqury-btn d-block text-center"-->
@@ -331,7 +331,7 @@
                                         <!--                        <span>Sign in to Inquire</span>-->
                                         <!--                    </a>-->
                                         <!--                @endif-->
-                                                    
+
                                         <!--            </div>-->
                                         <!--        </div>-->
                                         <!--    </div>-->
@@ -356,14 +356,14 @@
                                             <!--        <i class="fas fa-arrow-circle-down"></i>-->
                                             <!--    </div>-->
                                             <!--    </div>-->
-                        
+
                                             <!--    <div class="card-body product-card-body">-->
                                             <!--         <h6 class="tranding-product-name text-product">-->
                                             <!--            {{-- <span class="title">Product:</span> --}}-->
                                             <!--            <span class="trnding-pro-name">{{ $reletaedProductes->name }}</span>-->
                                             <!--        </h6>-->
                                             <!--    <div class="product-description-div">-->
-                        
+
                                             <!--    <div class="text-wrapper">-->
                                             <!--    <p class="card-description content-txt" id="description-{{ $reletaedProductes->id }}">-->
                                             <!--        <span class="visible-text">-->
@@ -372,10 +372,10 @@
                                             <!--    </p>-->
                                             <!--    </div>-->
                                             <!--    <div class="card-bottom">-->
-                        
+
                                             <!--        <h6 class="tranding-product-name">-->
                                             <!--            <span class="title">Company:</span>-->
-                        
+
                                             <!--            <span class="tranding-pro-name">{{ $reletaedProductes->company->name }}</span>-->
                                             <!--        </h6>-->
                                             <!--        <h6 class="tranding-product-name">-->
@@ -386,7 +386,7 @@
                                             <!--            <span class="title">Product:</span>-->
                                             <!--            <span class="trnding-pro-name">{{ $reletaedProductes->name }}</span>-->
                                             <!--        </h6> --}}-->
-                        
+
                                             <!--        <h6 class="tranding-material-name">-->
                                             <!--            <span class="tranding-material-title">Material:</span>-->
                                             <!--            <span class="mt-name tranding-mt-name">{{ $reletaedProductes->material }}</span>-->
@@ -395,8 +395,8 @@
                                             <!--            <span class="tranding-size-title">Size:</span>-->
                                             <!--            <span class="tranding-sz-name">{{ $product->size }}</span>-->
                                             <!--        </h6>-->
-                        
-                        
+
+
                                             <!--    </div>-->
                                             <!--    </div>-->
                                             <!--    <div class="d-flex justify-content-start mx-2 bottom-btn">-->
@@ -428,7 +428,6 @@
                                                 </div>
                                                 <div class="main-logo-container">
 
-<<<<<<< HEAD
                                                 <div class="text-wrapper">
                                                     <h6 class="tranding-product-name mt-3">
                                                         <span class="title">Product:</span>
@@ -472,18 +471,6 @@
                                                         <a href="http://127.0.0.1:8000/login" class="inqury-btn mt-2">
                                                             <span>Sign in to Inquire</span>
                                                         </a>
-=======
-                                                    <div class="logo-container">
-                                                        @if ($reletaedProductes->company && $reletaedProductes->company->logo_url)
-                                                            <img src="{{ asset($reletaedProductes->company->logo_url) }}" class="logo-image"
-                                                                alt="{{ $reletaedProductes->company->name }}">
-                                                        @else
-                                                            <span>No Logo</span>
-                                                        @endif
-                                                    </div>
-                                                    <div class="image_overlay view-arrow-btn hide">
-                                                        <i class="fas fa-arrow-circle-down"></i>
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
                                                     </div>
                                                 </div>
                                                 <div class="card-body product-card-body">
@@ -531,7 +518,7 @@
                                                     <!-- CTA button within the card -->
                                                     <div class="d-flex justify-content-start mx-2 bottom-btn">
                                                         @if (Auth::check())
-                                                            <a href="javascript:void(0);" 
+                                                            <a href="javascript:void(0);"
                                                                class="inqury-btn d-block text-center"
                                                                data-id="{{ $reletaedProductes->id }}"
                                                                data-name="{{ $reletaedProductes->name }}"
@@ -560,7 +547,7 @@
                                     @empty
                                         <li>No products found.</li>
                                     @endforelse
-                                   
+
                                 </div>
 
                             </div>
@@ -645,7 +632,7 @@
                         </div>
                        @if (Auth::check())
                     <div class="btn-area my-4">
-                        <a href="javascript:void(0);" 
+                        <a href="javascript:void(0);"
                            class="inqury-btn d-block text-center"
                            data-id="{{ $product->id }}"
                            data-name="{{ $product->name }}"
@@ -656,7 +643,7 @@
                            Inquiry now
                         </a>
                     </div>
-               
+
                      @else
                           <a onclick="openModal()" style="border: 1px solid var(--primary-color);
                                                                 padding: 4px 10px;
@@ -666,7 +653,7 @@
                                                                 transition: 0.5s all ease-in-out;
                                                                 text-decoration: none;cursor: pointer;" class="inqury-btn2 d-block text-center">
                                                                 <span>Sign in to Inquire</span>
-                                                            </a>                                                                         
+                                                            </a>
                 @endif
 
                     </div>
@@ -686,12 +673,12 @@
         function encodeText(text) {
             return encodeURIComponent(text);
         }
-    
+
         function getWhatsAppShareURL(productName, productDescription, productURL) {
             const phoneNumber = '918511684938'; // Your business WhatsApp number
             const message = `I'm interested in the product: ${productName}\nDescription: ${productDescription}\nYou can view it here: ${productURL}`;
             const encodedMessage = encodeText(message);
-    
+
             // Detect if the user is on mobile or desktop
             if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
@@ -699,20 +686,20 @@
                 return `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
             }
         }
-    
+
         document.addEventListener('DOMContentLoaded', function () {
             // Select all buttons with the class 'whatsapp-share-button'
             const whatsappButtons = document.querySelectorAll('.whatsapp-share-button');
-            
+
             // Loop through each button and add the event listener
             whatsappButtons.forEach(function(button) {
                 button.addEventListener('click', function(event) {
                     event.preventDefault();
-                    
+
                     const productName = '{{ $product->name }}';
                     const productDescription = '{{ $product->description }}';
                     const productURL = window.location.href;
-                    
+
                     // Open WhatsApp share URL in a new tab
                     window.open(getWhatsAppShareURL(productName, productDescription, productURL), '_blank');
                 });
@@ -763,7 +750,7 @@
         // document.getElementById("closeInquiryModal").addEventListener("click", function() {
         //     document.getElementById("inquiryModal").style.display = "none";
         // });
-        
+
 document.addEventListener('DOMContentLoaded', () => {
     const tabs = document.querySelectorAll('.product-desc-section .nav-link'); // Select all tabs
     const contents = document.querySelectorAll('.tab-content'); // Select all tab content sections

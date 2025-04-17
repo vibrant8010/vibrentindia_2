@@ -4,7 +4,6 @@
 
 
 @section('content')
-<<<<<<< HEAD
 
 <style>
     .top-products table{
@@ -14,7 +13,7 @@
         background-color:#4434a0; /* Blue */
         color: white;
     }
-   
+
 </style>
 
 <!-- Include DataTables CSS -->
@@ -42,21 +41,21 @@
     @endif
     <section class="top-products mt-5">
         <div class="d-flex flex-row justify-content-between align-items-center mb-2">
-       
+
             <!-- Search Bar -->
             <form action="{{ route('admin.users.index') }}" method="GET" class="input-group" style="max-width: 200px;">
                 @csrf
                 <input type="text" name="search" class="form-control border-primary" placeholder="Search Users" aria-label="Search Users" value="{{ request('search') }}" style="border-radius: 3px; box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);">
                 {{-- <button type="submit" class="btn btn-primary">Search</button> --}}
             </form>
-            
+
             <!-- Show Entries Dropdown -->
-            
+
             <!-- Create Users Button -->
             {{-- <button class="btn btn-success" >Create Users</button> --}}
-        
+
         </div>
-        
+
     <div class="table-wrapper">
         <table id="usersTable" class="table table-striped">
             <thead>
@@ -79,7 +78,7 @@
                         <td>
                             <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-edit-blue">Edit</a>
                         </td>
-                        
+
                         <td>
                             <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                 @csrf
@@ -121,97 +120,6 @@
         });
     });
 </script>
-=======
-    @if (session('success'))
-        <div class="alert alert-success" id="success-alert">
-            {{ session('success') }}
-        </div>
-
-
-        <script>
-
-            setTimeout(function() {
-                document.getElementById('success-alert').style.display = 'none';
-            }, 2000); // Change this value to 10000 for 10 seconds
-        </script>
-
-    @endif
-    <div class="page-inner">
-        <div class="page-header">
-            <h3 class="fw-bold mb-3">User List</h3>
-            <ul class="breadcrumbs mb-3">
-                <li class="nav-home">
-                    <a href="{{ route('dashboard') }}">
-                        <i class="icon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.users.index') }}">Users</a>
-                </li>
-                {{-- <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Datatables</a>
-                </li> --}}
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex align-items-center">
-                        <h4 class="card-title">Add Row</h4>
-                        <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.users.create') }}">
-                            <i class="fa fa-plus"></i>
-                            Create Users
-                        </a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="multi-filter-select" class="display table table-striped table-hover dataTable">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($users as $user)
-                                        <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->role }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>
-                                                <a href="{{ route('admin.users.edit', $user->id)  }}" class="btn btn-sm btn-primary">Edit</a>
-                                                {{-- <a href="{{ route('admin.users.destroy', $user->id)  }}" class="btn btn-sm btn-danger">Delete</a> --}}
-                                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger"
-                                                        onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
-                                                </form>
-
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
 
 @endsection
 

@@ -1,7 +1,6 @@
 @extends('adminpanel.adminlayout')
 
 @section('content')
-<<<<<<< HEAD
     <div class="container">
         <h1>Edit Blog</h1>
         <form action="{{ route('admin.blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data" novalidate>
@@ -47,83 +46,6 @@
         </form>
     </div>
 
-=======
-    <div class="page-inner">
-        <div class="page-header">
-            <h3 class="fw-bold mb-3">Edit BLog</h3>
-            <ul class="breadcrumbs mb-3">
-                <li class="nav-home">
-                    <a href="#">
-                        <i class="icon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Users</a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Edit Blog</a>
-                </li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">blogs details</h4>
-                    </div>
-                    <div class="card-body">
-        <form action="{{ route('admin.blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data" novalidate>
-            @csrf
-            @method('PUT')
-
-            <div class="form-group">
-                <label for="heading">Heading</label>
-                <input type="text" class="form-control" name="heading" value="{{ $blog->heading }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="detail_subcontent">Detail Subcontent</label>
-                <textarea class="form-control ckeditor5" name="detail_subcontent" id="detail_subcontent" required>{{ $blog->detail_subcontent }}</textarea>
-            </div>
-
-            <!-- Dynamic Subtitle and Paragraph Fields -->
-            <div id="dynamic-fields">
-                @foreach ($blog->sections as $index => $section)
-                    <div class="form-group">
-                        <label for="subtitle{{ $index + 1 }}">Subtitle {{ $index + 1 }}</label>
-                        <input type="text" class="form-control" name="subtitles[]" value="{{ $section->subtitle }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="textcontent{{ $index + 1 }}">Text Content {{ $index + 1 }}</label>
-                        <textarea class="form-control ckeditor5" name="textcontents[]" id="textcontent{{ $index + 1 }}" required>{{ $section->textcontent }}</textarea>
-                    </div>
-                @endforeach
-            </div>
-
-            <!-- Button to Add More Fields -->
-            <button type="button" id="add-field" class="btn btn-secondary mb-3">Add More Content</button>
-
-            <div class="form-group">
-                <label for="image_url">Blog Image</label>
-                <input type="file" class="form-control" name="image_url">
-                @if ($blog->image_url)
-                    <img src="{{ asset($blog->image_url) }}" alt="Blog Image" width="100" class="mt-2">
-                @endif
-            </div>
-
-            <button type="submit" class="btn btn-primary">Update Blog</button>
-        </form>
-                    </div>
-                </div></div></div>
-    </div>
-        
->>>>>>> 4913e25a9bea5c0867863dfd8d5bda8a9053b125
     <!-- Include CKEditor 5 -->
     <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
