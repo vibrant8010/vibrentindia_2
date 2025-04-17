@@ -30,7 +30,7 @@ header .header-logo-container img {
 header .right-part {
     display: flex !important;
     align-items: center;
-    gap: 50px;
+    gap:25px;
 }
 header .header-bottom {
     display: flex;
