@@ -3,109 +3,140 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\BlogSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
+    // Show the form for creating a new blog
     public function create()
     {
         return view('adminpanel.blogs.create');
     }
 
-  public function store(Request $request)
-{
-    $request->validate([
-        'heading' => 'required|string|max:255',
-        'detail_subcontent' => 'required|string',
-        'subtitle1' => 'required|string|max:255',
-        'textcontent1' => 'required|string',
-        'subtitle2' => 'nullable|string|max:255',
-        'textcontent2' => 'nullable|string',
-        'image_url' => 'nullable|file|image|max:10240',
-    ]);
+    // Store a newly created blog in the database
+    public function store(Request $request)
+    {   
+        // print_r($request->all());
+        // Validate the request
+        $request->validate([
+            'heading' => 'required|string|max:255',
+            'detail_subcontent' => 'required|string|max:5000',
+            'subtitles' => 'required|array|min:1',
+            'subtitles.*' => 'required|string|max:255',
+            'textcontents' => 'required|array|min:1',
+            'textcontents.*' => 'required|string|max:5000',
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
+        ]);
+     
+        // Handle image upload
+        $imagePath = null;
+        if ($request->hasFile('image_url')) {
+            $image = $request->file('image_url');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $imagePath = 'images/' . $imageName;
+        }
 
-    $imagePath = null;
+        // Create the blog
+        $blog = Blog::create([
+            'heading' => $request->heading,
+            'detail_subcontent' => $request->detail_subcontent,
+            'image_url' => $imagePath,
+        ]);
+     
+        // Save subtitles and text contents
+        foreach ($request->subtitles as $index => $subtitle) {
+            BlogSection::create([
+                'blog_id' => $blog->id,
+                'subtitle' => $subtitle,
+                'textcontent' => $request->textcontents[$index],
+            ]);
+        }
 
-    if ($request->hasFile('image_url')) {
-        $image = $request->file('image_url');
-        $imageName = time() . '_' . $image->getClientOriginalName(); // Unique filename
-        $image->move(public_path('images'), $imageName); // Save to public/images
-        $imagePath = 'images/' . $imageName; // Save the relative path in the database
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog created successfully');
     }
 
-    Blog::create(array_merge($request->all(), ['image_url' => $imagePath]));
-
-    return redirect()->route('admin.blogs.index')->with('success', 'Blog created successfully');
-}
-
-
     public function index()
-    {
-        $blogs = Blog::all();
+    {   
+        $blogs = Blog::with('sections')->get();
         return view('adminpanel.blogs.index', compact('blogs'));
     }
 
     public function edit($id)
     {
-        $blog = Blog::findOrFail($id);
+        $blog = Blog::with('sections')->findOrFail($id);
         return view('adminpanel.blogs.edit', compact('blog'));
     }
 
- public function update(Request $request, $id)
-{
-    $blog = Blog::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $blog = Blog::findOrFail($id);
 
-    $request->validate([
-        'heading' => 'required|string|max:255',
-        'detail_subcontent' => 'required|string',
-        'subtitle1' => 'required|string|max:255',
-        'textcontent1' => 'required|string',
-        'subtitle2' => 'nullable|string|max:255',
-        'textcontent2' => 'nullable|string',
-        'image_url' => 'nullable|file|image|max:10240',
-    ]);
+        $request->validate([
+            'heading' => 'required|string|max:255',
+            'detail_subcontent' => 'required|string|max:5000',
+            'subtitles' => 'required|array|min:1',
+            'subtitles.*' => 'required|string|max:255',
+            'textcontents' => 'required|array|min:1',
+            'textcontents.*' => 'required|string|max:5000',
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
+        ]);
 
-    $updateData = $request->except('image_url');
+        $updateData = [
+            'heading' => $request->heading,
+            'detail_subcontent' => $request->detail_subcontent,
+        ];
 
-    if ($request->hasFile('image_url')) {
-        // Delete old image if it exists
-        if ($blog->image_url && file_exists(public_path($blog->image_url))) {
-            unlink(public_path($blog->image_url));
+        if ($request->hasFile('image_url')) {
+            if ($blog->image_url && file_exists(public_path($blog->image_url))) {
+                unlink(public_path($blog->image_url));
+            }
+
+            $image = $request->file('image_url');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+            $updateData['image_url'] = 'images/' . $imageName;
         }
 
-        $image = $request->file('image_url');
-        $imageName = time() . '_' . $image->getClientOriginalName(); // Unique filename
-        $image->move(public_path('images'), $imageName); // Save to public/images
-        $updateData['image_url'] = 'images/' . $imageName; // Save relative path in the database
+        $blog->update($updateData);
+        $blog->sections()->delete();
+        foreach ($request->subtitles as $index => $subtitle) {
+            BlogSection::create([
+                'blog_id' => $blog->id,
+                'subtitle' => $subtitle,
+                'textcontent' => $request->textcontents[$index],
+            ]);
+        }
+
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog updated successfully');
     }
-
-    $blog->update($updateData);
-
-    return redirect()->route('admin.blogs.index')->with('success', 'Blog updated successfully');
-}
-
 
     public function destroy($id)
     {
         $blog = Blog::findOrFail($id);
 
-        // Delete the image if it exists
-        if ($blog->image_url) {
-            Storage::delete('public/' . $blog->image_url);
+        if ($blog->image_url && file_exists(public_path($blog->image_url))) {
+            unlink(public_path($blog->image_url));
         }
 
+        $blog->sections()->delete();
         $blog->delete();
+
         return redirect()->route('admin.blogs.index')->with('success', 'Blog deleted successfully');
     }
-    
-   public function show($id){
-    $blog = Blog::findOrFail($id);
 
-    // Pass the blog details to the view
-    return view('blogsection', compact('blog'));
-   }
-  
-    
+    public function show($id)
+    {
+        $blog = Blog::with('sections')->findOrFail($id);
+        $allBlogs = Blog::where('id', '!=', $id)->latest()->get();
 
+        return view('blogsection', compact('blog', 'allBlogs'));
+    }
+    
+      public function bloglist(){
+        $blogs = Blog::all();
+        return view('bloglist', compact('blogs'));
+    }
 }

@@ -1,119 +1,6 @@
-/* Featured Blog Post (Left) */
-.featured-blog {
-    flex: 2;
-    background-color: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .featured-image {
-    width: 100%;
-    height: auto;
-  }
-
-  .featured-content {
-    padding: 20px;
-  }
-
-
-  .blog-title {
-    font-size: 24px;
-    margin: 10px 0;
-    color: #333;
-    position: relative;
-  }
-
-
-  .blog-description {
-    margin: 10px 0 20px;
-    color: #666;
-    line-height: 25px;
-  }
-  .blog-title-underline{
-    height: 3px;
-    width: 200px;
-    margin-top: 20px;
-    background-color: var(--ternery-color);
-   position: relative;
-}
-  .blog-title-underline::before{
-    height: 10px;
-    width: 10px;
-    background-color: #0d0202;
-    content: "";
-    display: block;
-    position: absolute;
-    right: -19px;
-    border-radius: 40px;
-    bottom: -3px;
-  }
-  .blog-date {
-    color: #888;
-    font-size: 14px;
-  }
-
-  .read-more {
-    font-weight: bold;
-    color: #007bff;
-    transition: color 0.3s;
-  }
-
-  .read-more:hover {
-    color: #0056b3;
-  }
-
-  /* Blog List (Right) */
-  .blog-list {
-    flex: 1;
-    max-height: 420px;
-    overflow-y: auto;
-    padding-left: 20px;
-  }
-
-  .blog-item {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    margin: 20px 10px;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
-  }
-
-  .blog-item:hover {
-    transform: scale(1.02);
-  }
-
-  .blog-thumbnail {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-
-  .blog-info {
-    margin-left: 15px;
-  }
-
-  .blog-info .blog-title {
-    font-size: 17px;
-    margin-bottom: 5px;
-    color: #333;
-  }
-
-  .blog-info .read-more {
-    font-size: 14px;
-    color: #007bff;
-    font-weight: bold;
-  }
-
-  .blog-info .read-more:hover {
-    color: #0056b3;
-  }
 
   /* Custom Scrollbar */
+  /* hello */
   .blog-list::-webkit-scrollbar {
     width: 8px;
   }
@@ -147,4 +34,204 @@
         font-size: 13px;
         margin-bottom: 0;
     }
+  } */
+  /*seconnd time create*/
+  .blog-section{
+    background-color: transparent;
+    border: 0;
   }
+  .blog-section .main-container{
+    padding-bottom: 360px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.blog-section .main-container .inner-container{
+    margin: 0;
+    display: block;
+    padding: 0;
+    border: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: 0 0;
+}
+.blog-section h4{
+    font-size: 14px;
+    color:var(--shade-color);
+}
+.blog-section .item{
+    position: relative;
+}
+.blog-section .main-container img{
+    display: block;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+}
+/* .blog-section .main-container.bg_fix{
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+} */
+.blog-section .main-container img{
+ height: 100%;
+ width: 100%;
+}
+
+/* .blog-section .blog-container-date{
+    position: absolute;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .08);
+    background-color: var(--ternery-color);
+    color: #666;
+    text-transform: uppercase;
+    padding: 10px;
+    transform: rotate(270deg);
+    display: flex;
+    height: 35px;
+    top: 40%;
+    right: -67px;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+} */
+.blog-section .blog-container-date .blog-date{
+    height: 10px;
+    color: var(--ternery-color);
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+.blog-section .card-body{
+    text-align: center;
+    padding: 10px 0;
+}
+.blog-section .card-body .blog-info .blog-title{
+    color: var(--ternery-color);
+    font-size: 18px;
+    width: 100%;
+       text-transform: capitalize;
+}
+/* Style for truncated content */
+.truncatedContent {
+    position: relative;
+    line-height: 1.5;
+    overflow: hidden;
+}
+
+/* Style for the "Read More" link */
+.readMore {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* Style for full content */
+.fullContent {
+    display: none;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+.blog-section .description-area h1,
+.blog-section .description-area h2,
+.blog-section .description-area h3,
+.blog-section .description-area h4,
+.blog-section .description-area h5,
+.blog-section .description-area p
+{
+    color:#070101;
+    font-size: 16px;
+    line-height: 23px;
+}
+
+
+
+
+.blog-section .card-body .read-more{
+    padding: 8px 17px;
+    color: var(--light-color);
+    font-size: 16px;
+    font-weight: 400;
+      cursor: pointer;
+    text-decoration: none !important;
+    background:  var(--ternery-color);
+    transition: 0.5s all ease-in-out;
+}
+.blog-section .card-body .read-more:hover{
+  background-color: var(--primary-color);
+}
+.blog-section .owl-dots{
+    display: block !important;
+}
+.blog-container-title {
+    width: 100%;
+   display: flex;
+   justify-content: center;
+   padding: 10px 0;
+}
+ .title-bottom-border{
+    height: 1px;
+    width: 190px;
+    background-color: var(--ternery-color);
+    left: 38%;
+}
+
+.blog-section .blog-date-container{
+    position: absolute;
+    /* box-shadow: 0 3px 10px rgba(0, 0, 0, .08); */
+    background-color:var(--ternery-color);
+    color: var(--light-color);
+    text-transform: uppercase;
+    padding: 5px 10px;
+    transform: rotate(270deg);
+    display: flex;
+    height: 54px;
+    top: 40%;
+    right: -66px;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+}
+/* Ensure all carousel items have the same width */
+#blogsection .item {
+    width: 100%;
+    padding: 10px; /* Add padding for spacing */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+ .title-bottom-border{
+    height: 1px;
+    width: 190px;
+    background-color: var(--ternery-color);
+    left: 38%;
+}
+
+
+/* Hide default Slick Carousel arrows */
+.slick-prev,
+.slick-next {
+    display: none !important;
+}
+
+/* Ensure the carousel container doesn't overflow */
+#blogsection {
+    overflow: hidden;
+}
+
+@media screen and (max-width:575px) {
+    .blog-section .blog-date-container {
+        right: -52px;
+        height: 34px;
+    }
+    .blog-section .main-container {
+        padding-bottom: 210px;
+    }
+}

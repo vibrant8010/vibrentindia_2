@@ -31,8 +31,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
      <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <!--<link rel="stylesheet" href="{{ asset('css/styles.css') }}?v={{ time() }}">-->
+    <!--<link rel="stylesheet" href="{{ asset('css/styles123.css') }}">-->
+        <link rel="stylesheet" href="{{ asset('css/common.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/header.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/banner.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/signup.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/login.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/topcategory.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/blogsection.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/adminlogin.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/footer.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/productdetails.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/bloginner.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/about.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/privacy&policy.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/terms&condition.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/productfilter.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/newArrival.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/bussinessregister.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/productinner.css') }}?v={{ time() }}">
+
+<!--<link rel="stylesheet" href="{{ asset('css/styles.css') }}?v=@php echo time(); @endphp">-->
     {{-- owl caresoule --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 

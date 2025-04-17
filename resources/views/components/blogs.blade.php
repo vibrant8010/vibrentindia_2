@@ -1,58 +1,107 @@
-<section class="blog-section" id="Blogs">
+<section class="blog-section section-margin mt-4" id="BlogCarousel">
     <div class="container">
-        <div class="heading-section">
+        <div class="heading-section mb-4">
             <div class="main-heading">
-                Blog
+                Blog Section
             </div>
-           
         </div>
 
-        <div class="row mt-5">
-            <div class="col-lg-7">
-                <div class="featured-blog">
-                    <div class="featured-content">
-                        <h2 class="blog-title">Introducing Our New Product</h2>
-                        <div class="blog-title-underline"></div>
-                        <p class="blog-description mt-4">
-                            To enhance your website's blog section with business advertisement-related content, focus on
-                            defining your target audience and selecting relevant topics like digital marketing trends
-                            and social media strategies. Create engaging posts that are optimized for search engines,
-                            incorporating catchy headlines, visuals, and clear call-to-actions. Promote your content
-                            across social media to reach a broader audience and foster engagement by responding to
-                            comments.
-                        </p>
-                        <p class="blog-description">
-                            Additionally, use analytics tools to monitor performance, ensuring your blog resonates with
-                            readers and drives meaningful interactions. By implementing these strategies, you can
-                            effectively communicate valuable insights on advertising and attract more visitors to your
-                            website.
-                        </p>
-                        <div class="header-logo-container mt-4">
-                            <a href="#">
-                                <img src="images/company-logo.png" alt="company logo">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-lg-5 mt-sm-5 mt-lg-0 mt-0">
-                <div class="blog-list">
-                    @foreach ($blogs as $blog)
-                        <div class="blog-item">
-                            @if($blog->image_url) 
-                                <img src="{{ asset($blog->image_url) }}" alt="Blog Thumbnail" class="blog-thumbnail" >
-                            @else
-                                <span>No Image</span>
-                            @endif
+        <div id="blogsections" class="owl-carousel owl-theme">
+            @if (!$blogs->isEmpty())
+                @foreach ($blogs as $blog)
+                    <div class="item">
+                        @if($blog->image_url)
+                            <div class="main-container bg_fix">
+                                <div class="inner-container">
+                                    <img src="{{ asset($blog->image_url) }}" alt="blog img">
+                                </div>
+                                <div class="blog-date-container">
+                                    <p class="blog-date">{{ $blog->created_at->format('d - F - Y') }}</p>
+                                   </div>
+                            </div>
+                        @else
+                            <span>No Image</span>
+                        @endif
+                        <div class="card-body">
                             <div class="blog-info">
-                                <p class="blog-date">{{ $blog->created_at->format('d F Y') }}</p>
-                                <h3 class="blog-title">{{ $blog->heading }}</h3>
-                                <a href="{{ route('blogsection', $blog->id) }}" class="read-more">Read More</a>
+
+                                 <div class="blog-container-title">
+                                    <h3 class="blog-title">{{ $blog->heading }}</h3>
+                                </div>
+                                <div class="w-100 d-flex justify-content-center">
+                                 <div class="title-bottom-border" style=" height: 1px;
+    width: 190px;
+    background-color: var(--ternery-color);
+    left: 38%;"></div>
+                                </div>
+                                {{-- Truncated Content --}}
+                                <div class="description-area">
+                                <p class="truncatedContent">
+                                    <span id="content-{{ $blog->id }}">{!! Str::limit($blog->detail_subcontent, 120, '...') !!}</span>
+                                </p>
+                                {{-- Full Content (Hidden by default) --}}
+                                <div id="fullContent-{{ $blog->id }}" class="fullContent" style="display: none;">
+                                    {!! $blog->detail_subcontent !!}
+                                </div>
+                                <a href="{{ route('blogsection', $blog->id) }}" class="read-more">View Full Blog</a>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-                
-            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
 </section>
+<script>
+  
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.readMore').forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            let blogId = this.getAttribute('data-id');
+            let fullContent = document.getElementById(`fullContent-${blogId}`);
+            let truncatedContent = document.getElementById(`content-${blogId}`);
+
+            if (fullContent.style.display === 'none') {
+                fullContent.style.display = 'block';
+                truncatedContent.style.display = 'none';
+                this.textContent = 'Read Less';
+            } else {
+                fullContent.style.display = 'none';
+                truncatedContent.style.display = 'block';
+                this.textContent = 'Read More';
+            }
+        });
+    });
+})
+
+/*blog section caresoule */
+$(document).ready(function () {
+$('#blogsections').owlCarousel({
+            loop: true,            // Infinite loop
+            margin: 10,            // Space between items
+            nav: false,            // Hide navigation arrows
+            dots: true,            // Show dots
+            autoplay: true,        // Enable autoplay
+            autoplayTimeout: 6000, // Auto slide every 3 seconds
+            autoplaySpeed: 1200,   // Smooth autoplay transition
+            smartSpeed: 1200,      // Smooth manual transition
+            autoplayHoverPause: true, // Pause on hover
+            slideTransition: 'ease-in-out', // Smooth slide effect
+            items: 1,    
+  responsive:{
+      0:{
+          items:1
+      },
+      600:{
+          items:2
+      },
+      991:{
+          items:2
+      }
+  }
+});
+});
+
+</script>

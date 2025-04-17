@@ -1,94 +1,99 @@
 @extends('adminpanel.adminlayout')
 
 @section('content')
-<style>
-    .top-products table {
-        color: #f1f1f1;
-    }
-    .btn-edit-blue {
-        background-color:#4434a0; /* Blue */
-        color: white;
-    }
-    img {
-        width: 150px; /* Adjust width as needed */
-        height: auto; /* Maintain aspect ratio */
-    }
-</style>
-
-<div class="container">
-    <div class="heading-section">
-        <div class="main-heading text-white">
-            Blogs
+    <div class="page-inner">
+        {{-- <h1>Blogs</h1>
+       --}}
+       <div class="page-header mt-4 d-flex justify-content-between">
+        <div>
+       <h3 class="fw-bold mb-3 d-inline-block">Blogs</h3>
+        <ul class="breadcrumbs mb-3">
+            <li class="nav-home">
+                <a href="{{ route('dashboard') }}">
+                    <i class="icon-home"></i>
+                </a>
+            </li>
+            <li class="separator">
+                <i class="icon-arrow-right"></i>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.blogs.index') }}">Blogs</a>
+            </li>
+            {{-- <li class="separator">
+                <i class="icon-arrow-right"></i>
+            </li>
+            <li class="nav-item">
+                <a href="#">Datatables</a>
+            </li> --}}
+        </ul>
         </div>
-        <div class="btn-view primary-btn">
-            <a href="{{ route('admin.blogs.create') }}" class="btn text-white">Create Blog</a>
-        </div>
-    </div>
+        {{-- <a href="{{ route('admin.blogs.create') }}" class="btn btn-primary mb-3">Create New Blog</a> --}}
+       </div>
 
-    @if (session('success'))
-        <div class="alert alert-success" id="success-alert">
-            {{ session('success') }}
-        </div>
-        <script>
-            setTimeout(function() {
-                document.getElementById('success-alert').style.display = 'none';
-            }, 2000);
-        </script>
-    @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
-    <section class="top-products mt-5">
-        <form action="{{ route('admin.blogs.index') }}" method="GET" class="input-group" style="max-width: 200px;">
-            <input type="text" name="search" class="form-control border-primary" placeholder="Search Blog" aria-label="Search Blog" value="{{ request('search') }}" style="border-radius: 3px; box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);">
-        </form>
-
-        <div class="table-wrapper">
-            <table class="table table-striped">
-                <thead>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                        <h4 class="card-title">Add Row</h4>
+                        {{-- <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.products.create') }}">
+                            <i class="fa fa-plus"></i>
+                            Add Products
+                        </a> --}}
+                        <a class="btn btn-primary btn-round ms-auto" href="{{ route('admin.blogs.create') }}">
+                            <i class="fa fa-plus"></i>
+                            Add Blogs
+                        </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                    <div class="table-responsive">
+        <table class="table table-hover table-bordered dataTable" id="multi-filter-inquiry">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Heading</th>
+                    <th>Detail Subcontent</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($blogs as $blog)
                     <tr>
-                        <th>Heading</th>
-                        <th>Created At</th>
-                        <th>Image</th>
-                        <th>Subcontent</th>
-                        <th>Subtitle1</th>
-                        <th>Textcontent1</th>
-                        <th>Subtitle2</th>
-                        <th>Textcontent2</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($blogs as $blog)
-                        <tr>
-                            <td>{{ $blog->heading }}</td>
-                            <td>{{ $blog->created_at }}</td>
-                            <td>
-                                @if($blog->image_url)
-                                    <img src="{{ asset($blog->image_url) }}" alt="{{ $blog->heading }}" style="width: 150px; height: auto;">
-                                @else
-                                    <span>No Image</span>
-                                @endif
-                            </td>
-                            <td>{{ $blog->detail_subcontent }}</td>
-                            <td>{{ $blog->subtitle1 }}</td>
-                            <td>{{ $blog->textcontent1 }}</td>
-                            <td>{{ $blog->subtitle2 }}</td>
-                            <td>{{ $blog->textcontent2 }}</td>
-                            <td>
-                                <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="btn btn-edit-blue">Edit</a>
-                           </td>
-                           <td>
-                            <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this inquiry?');">
+                        <td>{{ $blog->id }}</td>
+                        <td>
+                            @if ($blog->image_url)
+                                <img src="{{ asset($blog->image_url) }}" alt="Blog Image" class="img-thumbnail" style="max-width: 50px; max-height: 50px;">
+                            @else
+                                No Image
+                            @endif
+                        </td>
+                        <td>{{ $blog->heading }}</td>
+                        <td>{!! Str::limit($blog->detail_subcontent, 50) !!}</td>
+
+
+                        <td class="btn-group" role="group">
+                             <a href="{{ route('admin.blogs.edit', $blog->id) }}" class="btn btn-sm btn-info"> <i class="fas fa-edit"></i></a>
+                            <form action="{{ route('admin.blogs.destroy', $blog->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+                    </div>
+    </div></div>
         </div>
-    </section>
-</div>
+    </div>
 @endsection

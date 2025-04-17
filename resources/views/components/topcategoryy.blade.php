@@ -6,10 +6,12 @@
             <div class="main-heading">Top Categories</div>
             <a href="{{ route('innertopcategory') }}" class="btn-view primary-btn d-lg-block d-xl-block d-sm-none d-none d-md-block">View More</a>
         </div>
-        <!--desktop view-->
+
+         <!--desktop view-->
+
         <div class="row g-1 desktop-grid">
             {{-- @if ($topCategoryProducts && $topCategoryProducts->isNotEmpty()) --}}
-            @foreach ($topCategoryProducts as $product)
+             @foreach ($topCategoryProducts as $product)
                 <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 product-col">
                     <div class="card-view">
                         <a href="{{ route('product.show', $product->id) }}" class="card-link"></a>
@@ -36,7 +38,13 @@
                             </div>
                         </div>
                         <div class="card-body product-card-body">
-                            <p class="card-description content-txt" id="description-{{ $product->id }}">
+                            <h6 class="product-name text-product">
+                                        {{-- <span class="title">Product: </span> --}}
+                                         <span class="pro-name">{{ $product->name }}</span>
+                                    </h6>
+                            <div class="product-description-div">
+                                <div class="text-wrapper">
+                                     <p class="card-description content-txt" id="description-{{ $product->id }}">
 
                                 <span class="visible-text">
                                     {{ Str::limit($product->description,60) }}
@@ -45,12 +53,7 @@
                                     {{ substr($product->description, 40) }}
                                 </span>
                             </p>
-                            <div class="product-description-div">
-                                <div class="text-wrapper">
-                                    <h6 class="product-name text-product">
-                                        {{-- <span class="title">Product: </span> --}}
-                                        <span class="pro-name">{{ $product->name }}</span>
-                                    </h6>
+                                   
                                 </div>
                                 <h6 class="company-name">
                                     <span class="title">Company: </span>
@@ -80,13 +83,13 @@
                             <!-- CTA button within the card -->
                             <div class="d-flex justify-content-start mx-2 bottom-btn">
                                 @auth
-                                    <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}"
+                                    <a href="{{ route('product.show', $product->id) }}"
                                         class="inqury-btn">
                                         <span>Inquiry</span>
                                     </a>
                                 @else
                                     {{-- <a href="{{ route('login') }}" class="inqury-btn"> --}}
-                                    <a onclick="openModal()" style="cursor: pointer" class="inqury-btn">
+                                     <a onclick="openModal()" style="cursor: pointer" class="inqury-btn">
                                         <span>Sign in to Inquire</span>
                                     </a>
                                 @endauth
@@ -99,6 +102,7 @@
         </div>
 
         <!--mobile view-->
+        <div class="d-block d-sm-block d-md-block d-xl-none d-lg-none">
         <div id="topcategorycaresoule" class="owl-carousel owl-theme">
             @foreach ($topCategoryProducts as $product)
             <div class="item product-col">
@@ -187,6 +191,7 @@
             </div>
         @endforeach
           </div>
+        </div>
           <div class="d-flex justify-content-center">
           <a href="{{ route('innertopcategory') }}" class="btn-view mobile-btn primary-btn d-lg-none d-xl-none d-sm-block d-block d-md-none text-center">View More</a>
         </div>

@@ -22,7 +22,7 @@ class SendAdminNotification
      */
     public function handle(ProductClicked $event)
     {
-        $adminEmail = 'dipbmcoder@gmail.com';
+        $adminEmail = ['info@vibrantindiatech.com'];
         $htmlContent = "
         <html>
         <body>

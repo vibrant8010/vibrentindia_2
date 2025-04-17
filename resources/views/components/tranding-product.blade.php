@@ -35,20 +35,21 @@
                             </div>
 
                             <div class="card-body product-card-body">
-                                <p class="card-description content-txt" id="description-{{ $product->id }}">
-
-                                    <span class="visible-text">
-                                        {{ Str::limit($product->description, 30) }}
-                                    </span>
-
-                                </p>
-                            <div class="product-description-div">
-
-                                <div class="text-wrapper">
-                                    <h6 class="tranding-product-name text-product">
+                                <h6 class="tranding-product-name text-product">
                                         {{-- <span class="title">Product:</span> --}}
                                         <span class="trnding-pro-name">{{ $product->name }}</span>
                                     </h6>
+                             
+                            <div class="product-description-div">
+
+                                <div class="text-wrapper">
+                                       <p class="card-description content-txt" id="description-{{ $product->id }}">
+
+                                    <span class="visible-text">
+                                        {{ Str::limit($product->description, 60) }}
+                                    </span>
+
+                                </p>
 
                                 </div>
 
@@ -77,8 +78,8 @@
                             </div>
                             <div class="d-flex justify-content-start mx-2 bottom-btn">
                                 @auth
-                                    <a href="{{ route('inquiryform', ['product_id' => $product->id, 'product_name' => $product->name]) }}"
-                                        class="inqury-btn mt-2 me-0">
+                                    <a href="{{ route('product.show', $product->id) }}"
+                                        class="inqury-btn">
                                         <span>Inquiry</span>
                                     </a>
                                 @else
@@ -95,6 +96,7 @@
             </div>
 
             {{-- mobile view --}}
+               <div class="d-block d-sm-block d-md-block d-xl-none d-lg-none">
             <div id="trandingproductcaresoule" class="owl-carousel owl-theme">
                 @foreach ($trendingProducts as $product)
                 <div class="item product-col">
@@ -183,7 +185,7 @@
             </div>
             <div class="d-flex justify-content-center">
                 <a href="{{ route('alltrendingcategory') }}" class="btn-view mobile-btn primary-btn d-lg-none d-xl-none d-sm-block d-block d-md-none text-center">View More</a>
-
+            </div>
             </div>
         </div>
     </section>

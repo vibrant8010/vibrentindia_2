@@ -1,3 +1,4 @@
+
 /* Header view */
 document.getElementById('menu-btn').addEventListener('click', function() {
     document.querySelector('.nav-container').classList.add('open');
@@ -70,6 +71,26 @@ descriptions.forEach(function (description) {
 //         1024: { slidesPerView: 4, spaceBetween: 15 },
 //     },
 // });
+
+/*blog section caresoule */
+$(document).ready(function () {
+$('#blogsections').owlCarousel({
+  loop:true,
+  margin:20,
+  nav:true,
+  responsive:{
+      0:{
+          items:1
+      },
+      600:{
+          items:2
+      },
+      991:{
+          items:2
+      }
+  }
+});
+});
 
 $(document).ready(function () {
 $("#topcategorycaresoule").owlCarousel({
@@ -606,41 +627,6 @@ fetch(url2)
 //   });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-const tabs = document.querySelectorAll('.nav-item .nav-link'); // Select all tabs
-const contents = document.querySelectorAll('.tab-content'); // Select all tab content sections
-
-tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        // Remove the 'active' class from all tabs
-        tabs.forEach(tab => tab.classList.remove('active'));
-
-        // Hide all content sections
-        contents.forEach(content => (content.style.display = 'none'));
-
-        // Add the 'active' class to the clicked tab
-        tab.classList.add('active');
-
-        // Get the target content's ID from the 'data-tab' attribute
-        const targetId = tab.getAttribute('data-tab');
-
-        // Display the corresponding content
-        const targetContent = document.getElementById(targetId);
-        if (targetContent) {
-            targetContent.style.display = 'block'; // Ensure only the targeted content is shown
-        }
-    });
-});
-
-// Initialize by showing only the first tab's content and marking the first tab as active
-if (tabs.length > 0 && contents.length > 0) {
-    tabs.forEach(tab => tab.classList.remove('active'));
-    contents.forEach(content => (content.style.display = 'none'));
-
-    tabs[0].classList.add('active'); // Mark the first tab as active
-    contents[0].style.display = 'block'; // Show the first tab's content
-}
-});
 
 
 /*card visibilty code */
@@ -733,3 +719,6 @@ window.addEventListener("click", windowOnClick);
                 }
             });
         });
+
+
+

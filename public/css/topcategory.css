@@ -14,7 +14,7 @@
 }
 
 .card-view.inner-card {
-    height: 555px;
+    height: 570px;
 }
 
 .product-col {
@@ -39,6 +39,7 @@
     background-color: #fff;
     box-shadow: 0px 6px 7px rgb(0 0 0 / 7%) !important;
     z-index: 2;
+    border-top: 1px solid #8080800f;
 }
 
 .image_overlay {
@@ -70,8 +71,8 @@
 .tranding-size-title,
 .tranding-product-name .title,
 .material-name .material-title {
-    color: #010101c4;
-    font-size: 15px;
+    color: #340303a1;
+    font-size: 14px;
     font-weight: 400;
     /* width: 76px; */
 }
@@ -161,11 +162,13 @@
 .card-view .tranding-card-description {
     color: #000000e5;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
     margin-bottom: 7px;
     line-height: 22px;
-    margin-top: 11px;
+    margin: 11px 0;
     padding: 0 4px;
+    font-weight: 600;
+    font-family: inherit;
 }
 
 .card-view .open-bar {
@@ -213,15 +216,27 @@
     font-weight: 500 !important;
     display: flex;
     gap: 6px;
-    margin-bottom: 7px;
+    margin-bottom: 11px;
 }
 
 .text-product {
-    font-weight: 600 !important;
-    font-size: 17px;
-    color: #060000d4;
+    font-weight: 500 !important;
+    color: #060000;
+    height: 45px;
+    /*border-bottom: 1px solid #80808014;*/
+    padding: 9px 0;
+    /* border-top: 1px solid #8080800d; */
 }
-
+.card-description.content-txt{
+        font-weight: 500 !important;
+    color: #060000;
+    border-bottom: 1px solid #80808014;
+    border-top: 1px solid #80808014;
+    padding: 9px 0;
+    /* border-top: 1px solid #8080800d; */
+    display: block;
+   margin: 0;
+}
 .card-bottom .product-name .title,
 .card-bottom .product-name .material-title,
 .card-bottom .product-name .size-title {
@@ -327,9 +342,9 @@
 }
 
 .card-view .text-wrapper {
-    margin-top: 8px;
     position: relative;
     z-index: 999999;
+    padding-bottom: 10px;
 }
 
 figure.zoom img {
@@ -463,7 +478,7 @@ figure.zoom img {
     .tranding-product-name .trnding-pro-name {
         font-size: 13px;
     }
-
+  
     .product-description-div .title,
     .product-name .title,
     .product-size .size-title,

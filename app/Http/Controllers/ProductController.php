@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Models\CompanyDetail;
 use App\Events\ProductClicked;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller
 {
@@ -65,12 +66,55 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
-
-        return view('adminpanel.products.index', compact('products'));
+        if ($request->ajax()) {
+            $products = Product::with(['subcategory', 'company']);
+    
+            return DataTables::of($products)
+                ->addColumn('image', function ($product) {
+                    if ($product->image_url) {
+                        return '<img src="' . asset($product->image_url) . '" class="img-thumbnail" style="max-width: 50px; max-height: 50px;">';
+                    }
+                    return '<span class="badge bg-secondary">No Image</span>';
+                })
+                ->addColumn('subcategory', function ($product) {
+                    return $product->subcategory->name ?? 'N/A';
+                })
+                ->addColumn('company_name', function ($product) {
+                    return $product->company->name ?? 'N/A';
+                })
+                ->addColumn('category_type', function ($product) {
+                    switch ($product->category_type) {
+                        case 'Top':
+                            return '<span class="badge bg-success">Top</span>';
+                        case 'Trending':
+                            return '<span class="badge bg-info">Trending</span>';
+                        case 'New Arrival':
+                            return '<span class="badge bg-primary">New Arrival</span>';
+                        default:
+                            return 'N/A';
+                    }
+                })
+                ->addColumn('created_at', function ($product) {
+                    return $product->created_at ? $product->created_at->format('d M Y') : 'N/A';
+                })
+                ->addColumn('actions', function ($row) {
+                    $edit = '<a href="' . route('admin.products.edit', $row->id) . '" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>';
+                    $delete = '
+                        <form action="' . route('admin.products.destroy', $row->id) . '" method="POST" class="d-inline" onsubmit="return confirm(\'Are you sure?\');">
+                            ' . csrf_field() . method_field('DELETE') . '
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                        </form>';
+                    return $edit . ' ' . $delete;
+                })
+                ->rawColumns(['image', 'category_type', 'actions'])
+                ->make(true);
+        }
+    
+        return view('adminpanel.products.index');
     }
+
 
     public function edit($id)
     {
@@ -92,7 +136,7 @@ class ProductController extends Controller
             'category_type' => 'required|in:Top,Trending,New Arrival',
             'material' => 'nullable|string',
             'size' => 'nullable|string',
-            'companyname' => 'required|string|max:255', // Add validation for company name
+            'companyname' => 'string|max:255', // Add validation for company name
             'logo_url' => 'nullable|file|image|max:10240', // Add validation for logo
             'image_url' => 'nullable|file|image|max:10240', // Image is optional during update
         ]);
@@ -200,6 +244,26 @@ class ProductController extends Controller
     // Pass the product details to the view
     //  return redirect()->route('user.home')->with('alert', 'Please log in to view product details.');
     //  }
+
+ public function categoryDetails($name){
+        $category = Category::with(['products', 'category'])
+        ->where('name', $name)
+        ->pluck('id');
+
+        $subcatrgory = Subcategory::with(['products', 'category'])
+        ->wherein('category_id', $category) // Filter by category ID
+        ->get();
+
+        $subcatrgoryid = Subcategory::with(['products', 'category'])
+        ->wherein('category_id', $category) // Filter by category ID
+        ->pluck('id');
+
+        $products = Product::with(['company', 'category', 'subcategory'])
+        ->whereIn('subcategory_id', $subcatrgoryid) // Filter by category ID
+        ->get();
+
+        return view('innercategory',['products' => $products,'subcatrgory'=>$subcatrgory]);
+    } 
 
     public function productDetail($id)
     {
@@ -377,17 +441,19 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $searchTerm = $request->input('query');
-        $location = $request->input('location');
+        $location = '';
 
         // Fetch categories & subcategories matching search term
         $categories = Category::where('name', 'like', "%{$searchTerm}%")->get();
+        // $categories = '';
+        // $subCategories = '';
         $subCategories = SubCategory::where('name', 'like', "%{$searchTerm}%")->get();
 
         // Fetch companies based on name, description, and location
         $companies = CompanyDetail::query()
             ->where(function ($query) use ($searchTerm) {
-                $query->where('name', 'like', "%{$searchTerm}%")
-                    ->orWhere('description', 'like', "%{$searchTerm}%");
+                $query->where('name', 'like', "%{$searchTerm}%");
+                    // ->orWhere('description', 'like', "%{$searchTerm}%");
             });
 
         // Apply location filter to companies (optional)
@@ -417,16 +483,16 @@ class ProductController extends Controller
             $query->whereIn('company_id', $companyIds);
         }
 
-        if ($subCategoryIds->isNotEmpty()) {
-            $query->whereIn('subcategory_id', $subCategoryIds);
-        }
+        // if ($subCategoryIds->isNotEmpty()) {
+        //     $query->whereIn('subcategory_id', $subCategoryIds);
+        // }
 
         // Apply a global search on product name, description, material, size
         $query->orWhere(function ($query) use ($searchTerm) {
-            $query->where('name', 'like', "%{$searchTerm}%")
-                ->orWhere('description', 'like', "%{$searchTerm}%")
-                ->orWhere('material', 'like', "%{$searchTerm}%")
-                ->orWhere('size', 'like', "%{$searchTerm}%");
+            $query->where('name', 'like', "%{$searchTerm}%");
+                // ->orWhere('description', 'like', "%{$searchTerm}%")
+                // ->orWhere('material', 'like', "%{$searchTerm}%")
+                // ->orWhere('size', 'like', "%{$searchTerm}%");
         });
 
         // Apply location filter if required
@@ -443,10 +509,10 @@ class ProductController extends Controller
         if ($products->isEmpty()) {
             $products = Product::with(['company', 'category', 'subcategory'])
                 ->where(function ($query) use ($searchTerm) {
-                    $query->where('name', 'like', "%{$searchTerm}%")
-                        ->orWhere('description', 'like', "%{$searchTerm}%")
-                        ->orWhere('material', 'like', "%{$searchTerm}%")
-                        ->orWhere('size', 'like', "%{$searchTerm}%");
+                    $query->where('name', 'like', "%{$searchTerm}%");
+                        // ->orWhere('description', 'like', "%{$searchTerm}%")
+                        // ->orWhere('material', 'like', "%{$searchTerm}%")
+                        // ->orWhere('size', 'like', "%{$searchTerm}%");
                 })
                 ->get();
 
